@@ -19,7 +19,7 @@ concurrency:
 jobs:
   retrieve:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 180
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -41,7 +41,7 @@ jobs:
       - name: Retrieve hydrometric and HRDPA data
         run: |
           rm -rf sturgeon_pipeline_output output/latest
-          python sturgeon_pipeline.py --start-date 2026-07-01 --contact stevester-codes@users.noreply.github.com
+          python sturgeon_pipeline.py --start-date 2026-06-01 --contact stevester-codes@users.noreply.github.com
       - name: Generate compact summaries
         run: python summarize_output.py
       - name: Calibrate rainfall-runoff events
