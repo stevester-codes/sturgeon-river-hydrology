@@ -30,8 +30,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: grid_cache
-          key: sturgeon-grid-cache-v2-${{ runner.os }}
+          key: sturgeon-grid-cache-v3-${{ runner.os }}
           restore-keys: |
+            sturgeon-grid-cache-v3-${{ runner.os }}
             sturgeon-grid-cache-v2-${{ runner.os }}
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -45,13 +46,20 @@ jobs:
         run: python summarize_output.py
       - name: Calibrate rainfall-runoff events
         run: python calibrate_events.py
-      - name: Process full-grid rainfall and QPF
+      - name: Process historical full-grid rainfall
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           set -o pipefail
           python spatial_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/spatial_qpf.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/spatial_qpf.exitcode
+      - name: Retrieve corrected deterministic and ensemble QPF
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python qpf_forecast_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/qpf_forecast_v2.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/qpf_forecast_v2.exitcode
       - name: Translate QPF into river impacts
         continue-on-error: true
         run: |
