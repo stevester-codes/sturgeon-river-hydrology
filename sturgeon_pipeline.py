@@ -7,7 +7,7 @@ import requests,shapefile
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
-STATIONS=['05EA002','05EA005','05EA006','05EA004','05EA010','05EA011','05EA012']
+STATIONS=['05EA002','05EA005','05EA006','05EA004','05EA010','05EA011','05EA012','05EA001']
 WO='https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline'
 HOSTS=['dd.weather.gc.ca','dd.meteo.gc.ca']
 FNAME=re.compile(r'CMC_HRDPA_WATERSHED-(?P<accum>\d{3})-(?P<cutoff>\d{4})cutoff_SFC_0_ps2\.5km_(?P<valid>\d{10})_000_(?P<group>\d{2})\.dbf')
