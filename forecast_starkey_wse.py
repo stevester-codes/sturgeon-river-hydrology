@@ -101,8 +101,6 @@ def choose_current_limb(hourly: list[tuple[datetime, float, float]], falling: bo
         same_limb = stage_change <= 0.003 if falling else stage_change >= -0.003
         if same_limb:
             selected.append(row)
-    # Prefer the last 96 hours so an old loop does not dominate, but retain
-    # enough stage range for a stable fit.
     latest = recent[-1][0]
     short = [row for row in selected if row[0] >= latest - timedelta(hours=96)]
     if len(short) >= 24 and max(x[1] for x in short) - min(x[1] for x in short) >= 0.04:
@@ -148,6 +146,24 @@ def stage_from_q(discharge: float, fit: dict) -> float:
 
 def starkey_wse(discharge: float, transfer: dict) -> float:
     equation = transfer["transfer"]
+    equation_type = str(equation.get("type", "linear"))
+    if equation_type == "quadratic_lagrange_in_ln_discharge":
+        points = equation.get("points", [])
+        if len(points) != 3:
+            raise RuntimeError("RS18883 transfer requires exactly three site points")
+        q = max(0.05, float(discharge))
+        x = math.log(q)
+        result = 0.0
+        for i, point_i in enumerate(points):
+            xi = math.log(float(point_i["discharge_m3s"]))
+            term = float(point_i["wse_m"])
+            for j, point_j in enumerate(points):
+                if i == j:
+                    continue
+                xj = math.log(float(point_j["discharge_m3s"]))
+                term *= (x - xj) / (xi - xj)
+            result += term
+        return result
     return equation["intercept_m"] + equation["slope_m_per_m3s"] * discharge
 
 
@@ -211,6 +227,7 @@ def main() -> None:
                     "day": day,
                     "stage_05EA002_m": stage,
                     "estimated_discharge_m3s": discharge,
+                    "estimated_project_wse_m": wse,
                     "estimated_starkey_wse_m": wse,
                     "depth_over_main_floodplain_m": wse - MAIN_FLOODPLAIN_WSE,
                 }
@@ -224,9 +241,11 @@ def main() -> None:
         }
 
     current_wse = starkey_wse(observed_current_q, transfer)
+    project_location = transfer.get("project_location", {})
     output = {
         "generated_utc": generated.isoformat(),
-        "method": "current_event_stage_discharge_fit_then_empirical_discharge_to_starkey_wse",
+        "method": "current_event_stage_discharge_fit_then_rs18883_site_specific_wse_curve",
+        "project_location": project_location,
         "hydrograph_limb": limb,
         "current_event_rating_fit": fit,
         "current": {
@@ -234,6 +253,7 @@ def main() -> None:
             "observed_discharge_05EA002_m3s": observed_current_q,
             "fit_discharge_05EA002_m3s": current_q_fit,
             "estimated_starkey_wse_m": current_wse,
+            "estimated_project_wse_m": current_wse,
             "estimated_starkey_wse_range_m": [
                 current_wse - transfer_uncertainty,
                 current_wse + transfer_uncertainty,
@@ -245,7 +265,7 @@ def main() -> None:
             "main_floodplain_wse_m": MAIN_FLOODPLAIN_WSE,
             "calibrated_target_discharge_m3s": FIELD_TARGET_Q,
             "equivalent_05EA002_stage_on_current_limb_m": target_stage_current_limb,
-            "interpretation": "The current-event falling-limb stage corresponding to the field-calibrated Starkey exposure discharge is preferred over a universal 1.70 m stage threshold.",
+            "interpretation": "The current-event stage corresponding to the field-calibrated RS18883 exposure discharge is preferred over a universal 1.70 m stage threshold.",
         },
         "scenarios": scenarios,
         "uncertainty": {
@@ -256,12 +276,13 @@ def main() -> None:
         "low_pocket": {
             "elevation_m": LOW_POCKET_WSE,
             "status": "not reliably represented by river-stage transfer",
-            "interpretation": "At 649.60 m the pocket is below the empirical positive-flow intercept and may be controlled by local ponding/drainage. Raising it toward 650.20 m removes this separate low-point constraint.",
+            "interpretation": "The 649.60 m pocket may be controlled by local ponding/drainage. Raising it toward 650.20 m removes this separate low-point constraint.",
         },
         "limitations": [
             "The current-event rating is fitted to recent provisional 05EA002 observations and can shift if backwater or conveyance changes.",
             "Forecast paths are daily recession-delay scenarios, not an unsteady hydraulic simulation.",
-            "The discharge-to-Starkey transfer has only two low-to-moderate-flow calibration points.",
+            "Only one low-flow field observation anchors the RS18883 operational exposure threshold; the other site points are modelled 1:20 and 1:100 design levels.",
+            "The RS18883 WSE curve between 6.77 and 52 m3/s spans a large data gap and retains approximately plus or minus 0.15 m working uncertainty.",
             "Final construction release requires direct site inspection and bearing-capacity confirmation.",
         ],
     }
