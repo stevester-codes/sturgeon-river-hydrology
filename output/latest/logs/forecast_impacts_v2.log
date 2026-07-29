@@ -1,5 +1,28 @@
-{
-  "training_events": 2,
-  "scenarios": 0,
-  "reps_validated": false
-}
+Traceback (most recent call last):
+  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/forecast_impacts_v2.py", line 431, in <module>
+    main()
+  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/forecast_impacts_v2.py", line 425, in main
+    (OUT / "forecast_impacts_v2.json").write_text(json.dumps(result, indent=2))
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 202, in encode
+    chunks = list(chunks)
+             ^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 432, in _iterencode
+    yield from _iterencode_dict(o, _current_indent_level)
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
+    yield from chunks
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 439, in _iterencode
+    o = _default(o)
+        ^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type int64 is not JSON serializable
