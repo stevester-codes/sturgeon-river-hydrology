@@ -53,6 +53,13 @@ jobs:
           set -o pipefail
           python spatial_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/spatial_qpf.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/spatial_qpf.exitcode
+      - name: Build censor-aware spatial calibration
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python calibrate_events_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/calibrate_events_v2.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/calibrate_events_v2.exitcode
       - name: Retrieve corrected deterministic and ensemble QPF
         continue-on-error: true
         run: |
