@@ -17,11 +17,19 @@
 {
   "status": "operational_sensitivity_not_calibrated_probability",
   "central_p50": {
-    "days": 12.897329999474763,
+    "days": 12.898165283045852,
     "date_utc": "2026-08-11"
   },
+  "screened_direct_q_p50": {
+    "days": 14.064831949712516,
+    "date_utc": "2026-08-12"
+  },
+  "unscreened_direct_q_p50": {
+    "days": 14.898165283045852,
+    "date_utc": "2026-08-13"
+  },
   "protected_schedule_p90": {
-    "days": 26.511631740171097,
+    "days": 26.511767860838205,
     "date_utc": "2026-08-25"
   },
   "protected_schedule_source": "transfer_and_response_sensitivity"
@@ -118,7 +126,7 @@
   "promotion_recommended": false
 }
 {
-  "generated_utc": "2026-07-29T16:41:51.875266+00:00",
+  "generated_utc": "2026-07-29T17:35:10.478397+00:00",
   "latest_stage_utc": "2026-07-29T00:00:00+00:00",
   "project_location": {
     "river_station": 18883,
@@ -151,8 +159,8 @@
   },
   "forecast_main_floodplain_exposure": {
     "dry": {
-      "days_to_main_floodplain_exposure": 10.75359416665522,
-      "date_utc": "2026-08-09"
+      "days_to_main_floodplain_exposure": 11.878309161864191,
+      "date_utc": "2026-08-10"
     },
     "central": {
       "days_to_main_floodplain_exposure": 12.878309161864191,
@@ -169,40 +177,40 @@
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 11.772231067764407,
+        "days": 11.777433872663163,
         "date_utc": "2026-08-10"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 11.775765002620155,
-        "date_utc": "2026-08-10"
+        "days": 12.88985602608318,
+        "date_utc": "2026-08-11"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 12.897329999474763,
+        "days": 12.898165283045852,
         "date_utc": "2026-08-11"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 12.905255254897286,
+        "days": 12.906251006156824,
         "date_utc": "2026-08-11"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 12.906927687782972,
+        "days": 12.90706380845008,
         "date_utc": "2026-08-11"
       }
     },
     "earliest": {
-      "days": 11.772035733952336,
+      "days": 11.77454323256458,
       "date_utc": "2026-08-10"
     },
     "latest": {
-      "days": 12.912026087466385,
+      "days": 12.909674134006332,
       "date_utc": "2026-08-11"
     },
-    "mean_days": 12.473290702329388,
-    "standard_deviation_days": 0.5485216303806894,
+    "mean_days": 12.738540480524435,
+    "standard_deviation_days": 0.39313363697670284,
     "probability_exposed_by_date": [
       {
         "days_from_run": 11,
@@ -212,7 +220,7 @@
       {
         "days_from_run": 12,
         "date_utc": "2026-08-10",
-        "probability_exposed_by_date_pct": 38.095238095238095
+        "probability_exposed_by_date_pct": 14.285714285714285
       },
       {
         "days_from_run": 13,
@@ -235,29 +243,46 @@
         "probability_exposed_by_date_pct": 100.0
       }
     ],
-    "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Analogue-response and site-transfer uncertainty are additional and are not hidden inside the percentages."
+    "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Rainfall-response, rating and project-transfer uncertainty are additional and are not hidden inside the percentages."
   },
   "risk_adjusted_planning": {
     "status": "operational_sensitivity_not_calibrated_probability",
     "planning_summary": {
       "optimistic_p10": {
-        "days": 5.475259006320458,
+        "days": 5.596408893632592,
         "date_utc": "2026-08-04"
       },
       "central_p50": {
-        "days": 12.897329999474763,
+        "days": 12.898165283045852,
         "date_utc": "2026-08-11"
       },
+      "precipitation_screened_direct_q_p50": {
+        "days": 14.064831949712516,
+        "date_utc": "2026-08-12"
+      },
+      "precipitation_screened_direct_q_upper_p90": {
+        "days": 25.011767860838205,
+        "date_utc": "2026-08-23"
+      },
+      "unscreened_direct_q_p50": {
+        "days": 14.898165283045852,
+        "date_utc": "2026-08-13"
+      },
+      "unscreened_direct_q_upper_p90": {
+        "days": 25.845101194171537,
+        "date_utc": "2026-08-24"
+      },
       "transfer_conservative_p90": {
-        "days": 26.511631740171097,
+        "days": 26.511767860838205,
         "date_utc": "2026-08-25"
       },
       "protected_schedule_p90": {
-        "days": 26.511631740171097,
+        "days": 26.511767860838205,
         "date_utc": "2026-08-25"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "recommended_use": "Use central p50 as the working inspection forecast. Protect the schedule using the later of the transfer/response conservative p90 and historical direct-discharge upper-response p90. These are engineering sensitivities, not formal confidence limits."
+      "screened_direct_q_difference_from_live_central_days": 1.1666666666666643,
+      "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
     },
     "scenarios": {
       "optimistic_sensitivity": {
@@ -270,37 +295,37 @@
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 5.569133545025175,
+            "days": 5.593795582609047,
             "date_utc": "2026-08-04"
           },
           "earliest": {
-            "days": 5.474438584424399,
+            "days": 5.47515950865227,
             "date_utc": "2026-08-04"
           },
           "latest": {
-            "days": 5.6091509534571955,
+            "days": 5.611637223489603,
             "date_utc": "2026-08-04"
           },
-          "standard_deviation_days": 0.05909669746916558,
+          "standard_deviation_days": 0.0385601459361798,
           "quantiles": {
             "p10": {
-              "days": 5.475259006320458,
+              "days": 5.596408893632592,
               "date_utc": "2026-08-04"
             },
             "p25": {
-              "days": 5.477401437547048,
+              "days": 5.601745064225577,
               "date_utc": "2026-08-04"
             },
             "p50": {
-              "days": 5.606041126522233,
+              "days": 5.60757032506716,
               "date_utc": "2026-08-04"
             },
             "p75": {
-              "days": 5.6070423044419755,
+              "days": 5.608602452982025,
               "date_utc": "2026-08-04"
             },
             "p90": {
-              "days": 5.6078625940761935,
+              "days": 5.608859053315843,
               "date_utc": "2026-08-04"
             }
           }
@@ -317,37 +342,37 @@
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 12.473290702329388,
+            "days": 12.738540480524435,
             "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 11.772035733952336,
+            "days": 11.77454323256458,
             "date_utc": "2026-08-10"
           },
           "latest": {
-            "days": 12.912026087466385,
+            "days": 12.909674134006332,
             "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 0.5485216303806894,
+          "standard_deviation_days": 0.39313363697670284,
           "quantiles": {
             "p10": {
-              "days": 11.772231067764407,
+              "days": 11.777433872663163,
               "date_utc": "2026-08-10"
             },
             "p25": {
-              "days": 11.775765002620155,
-              "date_utc": "2026-08-10"
+              "days": 12.88985602608318,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 12.897329999474763,
+              "days": 12.898165283045852,
               "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 12.905255254897286,
+              "days": 12.906251006156824,
               "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 12.906927687782972,
+              "days": 12.90706380845008,
               "date_utc": "2026-08-11"
             }
           }
@@ -364,42 +389,379 @@
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 25.69704237376513,
+            "days": 26.20038739005542,
             "date_utc": "2026-08-24"
           },
           "earliest": {
-            "days": 24.376739786340462,
+            "days": 24.379247284952704,
             "date_utc": "2026-08-23"
           },
           "latest": {
-            "days": 26.51673013985451,
+            "days": 26.514378186394456,
             "date_utc": "2026-08-25"
           },
-          "standard_deviation_days": 1.0341333122153302,
+          "standard_deviation_days": 0.7430230944064306,
           "quantiles": {
             "p10": {
-              "days": 24.37693512015253,
+              "days": 24.38213792505129,
               "date_utc": "2026-08-23"
             },
             "p25": {
-              "days": 24.38046905500828,
-              "date_utc": "2026-08-23"
+              "days": 26.494560078471306,
+              "date_utc": "2026-08-25"
             },
             "p50": {
-              "days": 26.50203405186289,
+              "days": 26.502869335433978,
               "date_utc": "2026-08-25"
             },
             "p75": {
-              "days": 26.50995930728541,
+              "days": 26.510955058544948,
               "date_utc": "2026-08-25"
             },
             "p90": {
-              "days": 26.511631740171097,
+              "days": 26.511767860838205,
               "date_utc": "2026-08-25"
             }
           }
         },
         "interpretation": "Requires modelled WSE 0.15 m below nominal and applies upper response delays. Sensitivity only."
+      }
+    },
+    "historical_direct_discharge_sensitivities": {
+      "gauge_only_18_month": {
+        "status": "historical_direct_discharge_sensitivity_available",
+        "rain_free_days_to_6_77_m3s": 10.458333333333334,
+        "central_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 14.738540480524435,
+            "date_utc": "2026-08-13"
+          },
+          "earliest": {
+            "days": 13.77454323256458,
+            "date_utc": "2026-08-12"
+          },
+          "latest": {
+            "days": 14.909674134006332,
+            "date_utc": "2026-08-13"
+          },
+          "standard_deviation_days": 0.39313363697670284,
+          "quantiles": {
+            "p10": {
+              "days": 13.777433872663163,
+              "date_utc": "2026-08-12"
+            },
+            "p25": {
+              "days": 14.88985602608318,
+              "date_utc": "2026-08-13"
+            },
+            "p50": {
+              "days": 14.898165283045852,
+              "date_utc": "2026-08-13"
+            },
+            "p75": {
+              "days": 14.906251006156824,
+              "date_utc": "2026-08-13"
+            },
+            "p90": {
+              "days": 14.90706380845008,
+              "date_utc": "2026-08-13"
+            }
+          }
+        },
+        "upper_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 25.533720723388754,
+            "date_utc": "2026-08-24"
+          },
+          "earliest": {
+            "days": 23.71258061828604,
+            "date_utc": "2026-08-22"
+          },
+          "latest": {
+            "days": 25.84771151972779,
+            "date_utc": "2026-08-24"
+          },
+          "standard_deviation_days": 0.7430230944064302,
+          "quantiles": {
+            "p10": {
+              "days": 23.715471258384625,
+              "date_utc": "2026-08-22"
+            },
+            "p25": {
+              "days": 25.827893411804638,
+              "date_utc": "2026-08-24"
+            },
+            "p50": {
+              "days": 25.83620266876731,
+              "date_utc": "2026-08-24"
+            },
+            "p75": {
+              "days": 25.84428839187828,
+              "date_utc": "2026-08-24"
+            },
+            "p90": {
+              "days": 25.845101194171537,
+              "date_utc": "2026-08-24"
+            }
+          }
+        },
+        "eligible_for_protected_schedule": true,
+        "eligible_for_live_central_replacement": false,
+        "source": "historical_gauge_analysis",
+        "screening": "gauge decline only; not precipitation screened",
+        "support": {
+          "status": "historical_gauge_candidate_ready_for_rdpa_pairing",
+          "generated_utc": "2026-07-29T17:28:31+00:00",
+          "points": 1592,
+          "fit": {
+            "n": 1471,
+            "intercept_per_day": -0.11710802761620995,
+            "coefficient_per_day": -0.04002920856019668,
+            "value_range": [
+              0.06,
+              25.6
+            ],
+            "rate_rmse_per_day": 0.19278504334076876
+          },
+          "year_holdout": {
+            "n": 823,
+            "rmse_per_day": 0.4636160583977938,
+            "mae_per_day": 0.35257729406624716,
+            "bias_per_day": -0.2730851364245531
+          },
+          "target_stage_support": {
+            "n": 37,
+            "tolerance_m3s": 0.5,
+            "discharge_range_m3s": [
+              6.275,
+              7.26
+            ],
+            "stage_min_m": 1.3975,
+            "stage_p10_m": 1.4068,
+            "stage_p25_m": 1.416,
+            "stage_median_m": 1.4425,
+            "stage_p75_m": 1.458,
+            "stage_p90_m": 1.4678,
+            "stage_max_m": 1.477,
+            "stage_standard_deviation_m": 0.02331000782009054,
+            "first_utc": "2026-05-07T14:00:00+00:00",
+            "last_utc": "2026-05-09T03:00:00+00:00"
+          }
+        },
+        "interpretation": "Conservative unscreened historical direct-Q check retained for schedule protection, not central forecasting."
+      },
+      "rdpa_screened_preferred": {
+        "status": "historical_direct_discharge_sensitivity_available",
+        "rain_free_days_to_6_77_m3s": 9.625,
+        "central_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 13.905207147191103,
+            "date_utc": "2026-08-12"
+          },
+          "earliest": {
+            "days": 12.941209899231247,
+            "date_utc": "2026-08-11"
+          },
+          "latest": {
+            "days": 14.076340800672998,
+            "date_utc": "2026-08-12"
+          },
+          "standard_deviation_days": 0.3931336369767028,
+          "quantiles": {
+            "p10": {
+              "days": 12.944100539329831,
+              "date_utc": "2026-08-11"
+            },
+            "p25": {
+              "days": 14.056522692749846,
+              "date_utc": "2026-08-12"
+            },
+            "p50": {
+              "days": 14.064831949712516,
+              "date_utc": "2026-08-12"
+            },
+            "p75": {
+              "days": 14.07291767282349,
+              "date_utc": "2026-08-12"
+            },
+            "p90": {
+              "days": 14.073730475116744,
+              "date_utc": "2026-08-12"
+            }
+          }
+        },
+        "upper_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 24.700387390055415,
+            "date_utc": "2026-08-23"
+          },
+          "earliest": {
+            "days": 22.879247284952704,
+            "date_utc": "2026-08-21"
+          },
+          "latest": {
+            "days": 25.014378186394456,
+            "date_utc": "2026-08-23"
+          },
+          "standard_deviation_days": 0.7430230944064306,
+          "quantiles": {
+            "p10": {
+              "days": 22.88213792505129,
+              "date_utc": "2026-08-21"
+            },
+            "p25": {
+              "days": 24.994560078471306,
+              "date_utc": "2026-08-23"
+            },
+            "p50": {
+              "days": 25.002869335433978,
+              "date_utc": "2026-08-23"
+            },
+            "p75": {
+              "days": 25.010955058544948,
+              "date_utc": "2026-08-23"
+            },
+            "p90": {
+              "days": 25.011767860838205,
+              "date_utc": "2026-08-23"
+            }
+          }
+        },
+        "eligible_for_protected_schedule": true,
+        "eligible_for_live_central_replacement": false,
+        "source": "rdpa_moderate",
+        "screening": "24 h, 72 h and 168 h basin-clipped RDPA dry-period screen",
+        "support": {
+          "pairing_status": "historical_rdpa_pairing_complete",
+          "pairing_generated_utc": "2026-07-29T17:29:04+00:00",
+          "rdpa_coverage_fraction": 1.0,
+          "points": 827,
+          "events": 8,
+          "fit": {
+            "n": 762,
+            "intercept_per_day": -0.13086191001868228,
+            "coefficient_per_day": -0.043169313522551926,
+            "value_range": [
+              0.076,
+              25.1
+            ],
+            "rate_rmse_per_day": 0.19742474336925342
+          },
+          "event_block_cross_validation": {
+            "available": true,
+            "folds": [
+              {
+                "n": 30,
+                "rmse_per_day": 0.0813579597722957,
+                "mae_per_day": 0.07133271481034291,
+                "bias_per_day": -0.07108552619676348,
+                "held_out_event": 10,
+                "train_points": 549,
+                "test_first_utc": "2025-06-03T03:00:00+00:00",
+                "test_last_utc": "2025-06-04T12:00:00+00:00"
+              },
+              {
+                "n": 29,
+                "rmse_per_day": 0.12305746333794419,
+                "mae_per_day": 0.12247695918677251,
+                "bias_per_day": -0.12247695918677251,
+                "held_out_event": 11,
+                "train_points": 550,
+                "test_first_utc": "2025-07-03T12:00:00+00:00",
+                "test_last_utc": "2025-07-04T17:00:00+00:00"
+              },
+              {
+                "n": 47,
+                "rmse_per_day": 0.1425371063341521,
+                "mae_per_day": 0.14220751592838987,
+                "bias_per_day": -0.14220751592838987,
+                "held_out_event": 14,
+                "train_points": 532,
+                "test_first_utc": "2025-07-14T18:00:00+00:00",
+                "test_last_utc": "2025-07-16T18:00:00+00:00"
+              },
+              {
+                "n": 34,
+                "rmse_per_day": 0.1449181696544208,
+                "mae_per_day": 0.14442489184624763,
+                "bias_per_day": -0.14442489184624763,
+                "held_out_event": 27,
+                "train_points": 545,
+                "test_first_utc": "2025-10-29T12:00:00+00:00",
+                "test_last_utc": "2025-10-31T09:00:00+00:00"
+              },
+              {
+                "n": 314,
+                "rmse_per_day": 0.26592106535892546,
+                "mae_per_day": 0.21348576097587557,
+                "bias_per_day": 0.06548044571515038,
+                "held_out_event": 29,
+                "train_points": 265,
+                "test_first_utc": "2026-04-28T00:00:00+00:00",
+                "test_last_utc": "2026-05-11T11:00:00+00:00"
+              },
+              {
+                "n": 34,
+                "rmse_per_day": 0.2277349126027351,
+                "mae_per_day": 0.18460869603852909,
+                "bias_per_day": 0.08470649201252363,
+                "held_out_event": 30,
+                "train_points": 545,
+                "test_first_utc": "2026-05-12T20:00:00+00:00",
+                "test_last_utc": "2026-05-14T05:00:00+00:00"
+              },
+              {
+                "n": 31,
+                "rmse_per_day": 0.10086262830141919,
+                "mae_per_day": 0.08997176736272208,
+                "bias_per_day": -0.02416231686118545,
+                "held_out_event": 36,
+                "train_points": 548,
+                "test_first_utc": "2026-05-28T05:00:00+00:00",
+                "test_last_utc": "2026-05-29T20:00:00+00:00"
+              },
+              {
+                "n": 60,
+                "rmse_per_day": 0.39814297554496314,
+                "mae_per_day": 0.2778201910608141,
+                "bias_per_day": 0.09740920830712121,
+                "held_out_event": 37,
+                "train_points": 519,
+                "test_first_utc": "2026-07-07T06:00:00+00:00",
+                "test_last_utc": "2026-07-09T17:00:00+00:00"
+              }
+            ],
+            "aggregate": {
+              "n": 579,
+              "rmse_per_day": 0.24969981446116865,
+              "mae_per_day": 0.19007871104622034,
+              "bias_per_day": 0.01944353054401986
+            }
+          },
+          "event_block_rmse_per_day": 0.24969981446116865,
+          "skill_improvement_vs_gauge_only_pct": 1.8715339090006413,
+          "selection_status": "screened_candidate_ready_for_operational_sensitivity",
+          "promotion_recommendation": {
+            "promote_now": false,
+            "reasons_not_to_promote": [
+              "event_block_skill_gain_is_less_than_5_percent",
+              "fewer_than_10_independent_dry_event_blocks",
+              "10_km_rdpa_screen_may_miss_sub_grid_convective_rain",
+              "wsc_discharge_is_provisional_and_rating_derived",
+              "manual_engineering_review_is_required"
+            ],
+            "next_evidence_needed": [
+              "additional independent summer falling-limb recession blocks",
+              "surveyed RS18883 WSE observations near 650.20 m",
+              "material out-of-sample skill improvement over the live recession model"
+            ]
+          }
+        },
+        "interpretation": "Preferred precipitation-screened direct-Q sensitivity. It is more defensible than the unscreened fit but remains shadow-only because the skill gain and independent event count are limited."
       }
     },
     "uncertainty_components": {
@@ -414,56 +776,20 @@
         "nominal_wse_m": 650.2,
         "sensitivity_m": 0.15
       },
-      "current_rating": "The short-window rating is retained for nominal scenarios but is explicitly challenged by the independent historical direct-discharge sensitivity.",
+      "current_rating": "The short-window rating is retained for the official central scenario but is explicitly challenged by independent direct-discharge sensitivities.",
       "historical_direct_discharge": {
-        "status": "historical_gauge_candidate_ready_for_rdpa_pairing",
-        "generated_utc": "2026-07-29T16:26:15+00:00",
-        "rain_free_days_to_6_77_m3s": 10.458333333333334,
-        "historical_discharge_fit": {
-          "n": 1471,
-          "intercept_per_day": -0.11710802761620995,
-          "coefficient_per_day": -0.04002920856019668,
-          "value_range": [
-            0.06,
-            25.6
-          ],
-          "rate_rmse_per_day": 0.19278504334076876
-        },
-        "year_holdout": {
-          "n": 823,
-          "rmse_per_day": 0.4636160583977938,
-          "mae_per_day": 0.35257729406624716,
-          "bias_per_day": -0.2730851364245531
-        },
-        "all_near_target_support": {
-          "n": 69,
-          "tolerance_m3s": 0.5,
-          "discharge_range_m3s": [
-            6.27,
-            7.26
-          ],
-          "stage_min_m": 1.365,
-          "stage_p10_m": 1.3818,
-          "stage_p25_m": 1.408,
-          "stage_median_m": 1.439,
-          "stage_p75_m": 1.469,
-          "stage_p90_m": 1.6945000000000001,
-          "stage_max_m": 1.7455,
-          "stage_standard_deviation_m": 0.11427034672349018,
-          "first_utc": "2026-04-14T05:00:00+00:00",
-          "last_utc": "2026-06-24T11:00:00+00:00"
-        },
-        "summer_falling_near_target_support": {
-          "n": 0,
-          "tolerance_m3s": 0.5,
-          "grouping": "season_limb",
-          "season": "summer",
-          "limb": "falling"
-        },
-        "interpretation": "This is an independent gauge-only sensitivity based on the 18-month stage/discharge record. It avoids the short-window target-stage extrapolation, but still uses provisional rating-derived WSC discharge and has not yet been paired with archived precipitation."
+        "historical_gauge_status": "historical_gauge_candidate_ready_for_rdpa_pairing",
+        "rdpa_pairing_status": "historical_rdpa_pairing_complete",
+        "rdpa_coverage_fraction": 1.0,
+        "strict_dry_points": 576,
+        "moderate_dry_points": 827,
+        "model_selection_status": "screened_candidate_ready_for_operational_sensitivity",
+        "preferred_screened_source": "rdpa_moderate",
+        "automatic_operational_promotion": false,
+        "interpretation": "Historical direct-discharge fits are independent checks on the extrapolated current-limb target stage. The precipitation-screened candidate is preferred for interpretation, while the unscreened fit remains a conservative schedule sensitivity."
       }
     },
-    "interpretation": "This sensitivity envelope combines weather-member spread, rainfall-response error sensitivity and the working plus/minus 0.15 m RS18883 transfer allowance. It is more suitable for protecting the construction schedule than raw weather spread alone, but it is not a formal confidence interval."
+    "interpretation": "The live project-transfer forecast remains official. The precipitation-screened direct-Q forecast is the preferred independent timing check; the gauge-only direct-Q forecast is retained as an unscreened conservative diagnostic. The protected schedule uses the latest applicable upper sensitivity."
   },
   "model_health": {
     "status": "diagnostic_only_no_automatic_recalibration",
@@ -798,7 +1124,7 @@
       "target_inside_fit_range_check": false,
       "reason": "One or more holdout, bias, target-range or projection checks are not met."
     },
-    "interpretation": "This shadow model forecasts the 6.77 m3/s threshold directly from discharge recession and compares it with the operational stage-recession-plus-rating chain. It does not alter the official forecast."
+    "interpretation": "This shorter-window shadow model forecasts the 6.77 m3/s threshold directly from discharge recession and compares it with the operational stage-recession-plus-rating chain. It does not alter the official forecast."
   },
   "hysteresis_diagnostics": {
     "status": "diagnostic_only",
@@ -863,7 +1189,7 @@
   "secondary_field_observations": {
     "rising_limb_stage_m": 1.7,
     "spring_stage_m": 1.5,
-    "interpretation": "These support material seasonal/limb hysteresis and are retained as checks, not universal release thresholds."
+    "interpretation": "These observations show that one raw gauge-stage threshold should not be treated as universal. They may reflect season, project-site hydraulics, storage or observation differences; the measured recent 05EA002 rating-loop separation alone is small."
   },
   "low_pocket": {
     "elevation_m": 649.6,
@@ -872,7 +1198,7 @@
   },
   "decision": {
     "status": "not_ready",
-    "schedule_use": "Use the raw all-member p50 as the working hydrometeorological inspection date and the risk-adjusted conservative-sensitivity p90 as the protected schedule contingency. Retain dry/central/wet traces for explanation.",
+    "schedule_use": "Use the nominal all-member p50 as the official working inspection date, compare it with the precipitation-screened direct-Q p50, and use the risk-adjusted protected p90 for schedule contingency. The unscreened direct-Q result is a conservative diagnostic, not an alternate official forecast.",
     "release_rule": "Release floodplain work only after the estimated WSE is at or below 650.20 m and a direct project-site inspection confirms drainage, access bearing and no renewed rise.",
     "site_checks": [
       "main floodplain visibly drained",
@@ -908,23 +1234,377 @@
     },
     "risk_adjusted_sensitivity": {
       "optimistic_p10": {
-        "days": 5.475259006320458,
+        "days": 5.596408893632592,
         "date_utc": "2026-08-04"
       },
       "central_p50": {
-        "days": 12.897329999474763,
+        "days": 12.898165283045852,
         "date_utc": "2026-08-11"
       },
+      "precipitation_screened_direct_q_p50": {
+        "days": 14.064831949712516,
+        "date_utc": "2026-08-12"
+      },
+      "precipitation_screened_direct_q_upper_p90": {
+        "days": 25.011767860838205,
+        "date_utc": "2026-08-23"
+      },
+      "unscreened_direct_q_p50": {
+        "days": 14.898165283045852,
+        "date_utc": "2026-08-13"
+      },
+      "unscreened_direct_q_upper_p90": {
+        "days": 25.845101194171537,
+        "date_utc": "2026-08-24"
+      },
       "transfer_conservative_p90": {
-        "days": 26.511631740171097,
+        "days": 26.511767860838205,
         "date_utc": "2026-08-25"
       },
       "protected_schedule_p90": {
-        "days": 26.511631740171097,
+        "days": 26.511767860838205,
         "date_utc": "2026-08-25"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "recommended_use": "Use central p50 as the working inspection forecast. Protect the schedule using the later of the transfer/response conservative p90 and historical direct-discharge upper-response p90. These are engineering sensitivities, not formal confidence limits."
+      "screened_direct_q_difference_from_live_central_days": 1.1666666666666643,
+      "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
+    },
+    "historical_direct_discharge_sensitivities": {
+      "gauge_only_18_month": {
+        "status": "historical_direct_discharge_sensitivity_available",
+        "rain_free_days_to_6_77_m3s": 10.458333333333334,
+        "central_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 14.738540480524435,
+            "date_utc": "2026-08-13"
+          },
+          "earliest": {
+            "days": 13.77454323256458,
+            "date_utc": "2026-08-12"
+          },
+          "latest": {
+            "days": 14.909674134006332,
+            "date_utc": "2026-08-13"
+          },
+          "standard_deviation_days": 0.39313363697670284,
+          "quantiles": {
+            "p10": {
+              "days": 13.777433872663163,
+              "date_utc": "2026-08-12"
+            },
+            "p25": {
+              "days": 14.88985602608318,
+              "date_utc": "2026-08-13"
+            },
+            "p50": {
+              "days": 14.898165283045852,
+              "date_utc": "2026-08-13"
+            },
+            "p75": {
+              "days": 14.906251006156824,
+              "date_utc": "2026-08-13"
+            },
+            "p90": {
+              "days": 14.90706380845008,
+              "date_utc": "2026-08-13"
+            }
+          }
+        },
+        "upper_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 25.533720723388754,
+            "date_utc": "2026-08-24"
+          },
+          "earliest": {
+            "days": 23.71258061828604,
+            "date_utc": "2026-08-22"
+          },
+          "latest": {
+            "days": 25.84771151972779,
+            "date_utc": "2026-08-24"
+          },
+          "standard_deviation_days": 0.7430230944064302,
+          "quantiles": {
+            "p10": {
+              "days": 23.715471258384625,
+              "date_utc": "2026-08-22"
+            },
+            "p25": {
+              "days": 25.827893411804638,
+              "date_utc": "2026-08-24"
+            },
+            "p50": {
+              "days": 25.83620266876731,
+              "date_utc": "2026-08-24"
+            },
+            "p75": {
+              "days": 25.84428839187828,
+              "date_utc": "2026-08-24"
+            },
+            "p90": {
+              "days": 25.845101194171537,
+              "date_utc": "2026-08-24"
+            }
+          }
+        },
+        "eligible_for_protected_schedule": true,
+        "eligible_for_live_central_replacement": false,
+        "source": "historical_gauge_analysis",
+        "screening": "gauge decline only; not precipitation screened",
+        "support": {
+          "status": "historical_gauge_candidate_ready_for_rdpa_pairing",
+          "generated_utc": "2026-07-29T17:28:31+00:00",
+          "points": 1592,
+          "fit": {
+            "n": 1471,
+            "intercept_per_day": -0.11710802761620995,
+            "coefficient_per_day": -0.04002920856019668,
+            "value_range": [
+              0.06,
+              25.6
+            ],
+            "rate_rmse_per_day": 0.19278504334076876
+          },
+          "year_holdout": {
+            "n": 823,
+            "rmse_per_day": 0.4636160583977938,
+            "mae_per_day": 0.35257729406624716,
+            "bias_per_day": -0.2730851364245531
+          },
+          "target_stage_support": {
+            "n": 37,
+            "tolerance_m3s": 0.5,
+            "discharge_range_m3s": [
+              6.275,
+              7.26
+            ],
+            "stage_min_m": 1.3975,
+            "stage_p10_m": 1.4068,
+            "stage_p25_m": 1.416,
+            "stage_median_m": 1.4425,
+            "stage_p75_m": 1.458,
+            "stage_p90_m": 1.4678,
+            "stage_max_m": 1.477,
+            "stage_standard_deviation_m": 0.02331000782009054,
+            "first_utc": "2026-05-07T14:00:00+00:00",
+            "last_utc": "2026-05-09T03:00:00+00:00"
+          }
+        },
+        "interpretation": "Conservative unscreened historical direct-Q check retained for schedule protection, not central forecasting."
+      },
+      "rdpa_screened_preferred": {
+        "status": "historical_direct_discharge_sensitivity_available",
+        "rain_free_days_to_6_77_m3s": 9.625,
+        "central_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 13.905207147191103,
+            "date_utc": "2026-08-12"
+          },
+          "earliest": {
+            "days": 12.941209899231247,
+            "date_utc": "2026-08-11"
+          },
+          "latest": {
+            "days": 14.076340800672998,
+            "date_utc": "2026-08-12"
+          },
+          "standard_deviation_days": 0.3931336369767028,
+          "quantiles": {
+            "p10": {
+              "days": 12.944100539329831,
+              "date_utc": "2026-08-11"
+            },
+            "p25": {
+              "days": 14.056522692749846,
+              "date_utc": "2026-08-12"
+            },
+            "p50": {
+              "days": 14.064831949712516,
+              "date_utc": "2026-08-12"
+            },
+            "p75": {
+              "days": 14.07291767282349,
+              "date_utc": "2026-08-12"
+            },
+            "p90": {
+              "days": 14.073730475116744,
+              "date_utc": "2026-08-12"
+            }
+          }
+        },
+        "upper_response_distribution": {
+          "member_count": 21,
+          "mean": {
+            "days": 24.700387390055415,
+            "date_utc": "2026-08-23"
+          },
+          "earliest": {
+            "days": 22.879247284952704,
+            "date_utc": "2026-08-21"
+          },
+          "latest": {
+            "days": 25.014378186394456,
+            "date_utc": "2026-08-23"
+          },
+          "standard_deviation_days": 0.7430230944064306,
+          "quantiles": {
+            "p10": {
+              "days": 22.88213792505129,
+              "date_utc": "2026-08-21"
+            },
+            "p25": {
+              "days": 24.994560078471306,
+              "date_utc": "2026-08-23"
+            },
+            "p50": {
+              "days": 25.002869335433978,
+              "date_utc": "2026-08-23"
+            },
+            "p75": {
+              "days": 25.010955058544948,
+              "date_utc": "2026-08-23"
+            },
+            "p90": {
+              "days": 25.011767860838205,
+              "date_utc": "2026-08-23"
+            }
+          }
+        },
+        "eligible_for_protected_schedule": true,
+        "eligible_for_live_central_replacement": false,
+        "source": "rdpa_moderate",
+        "screening": "24 h, 72 h and 168 h basin-clipped RDPA dry-period screen",
+        "support": {
+          "pairing_status": "historical_rdpa_pairing_complete",
+          "pairing_generated_utc": "2026-07-29T17:29:04+00:00",
+          "rdpa_coverage_fraction": 1.0,
+          "points": 827,
+          "events": 8,
+          "fit": {
+            "n": 762,
+            "intercept_per_day": -0.13086191001868228,
+            "coefficient_per_day": -0.043169313522551926,
+            "value_range": [
+              0.076,
+              25.1
+            ],
+            "rate_rmse_per_day": 0.19742474336925342
+          },
+          "event_block_cross_validation": {
+            "available": true,
+            "folds": [
+              {
+                "n": 30,
+                "rmse_per_day": 0.0813579597722957,
+                "mae_per_day": 0.07133271481034291,
+                "bias_per_day": -0.07108552619676348,
+                "held_out_event": 10,
+                "train_points": 549,
+                "test_first_utc": "2025-06-03T03:00:00+00:00",
+                "test_last_utc": "2025-06-04T12:00:00+00:00"
+              },
+              {
+                "n": 29,
+                "rmse_per_day": 0.12305746333794419,
+                "mae_per_day": 0.12247695918677251,
+                "bias_per_day": -0.12247695918677251,
+                "held_out_event": 11,
+                "train_points": 550,
+                "test_first_utc": "2025-07-03T12:00:00+00:00",
+                "test_last_utc": "2025-07-04T17:00:00+00:00"
+              },
+              {
+                "n": 47,
+                "rmse_per_day": 0.1425371063341521,
+                "mae_per_day": 0.14220751592838987,
+                "bias_per_day": -0.14220751592838987,
+                "held_out_event": 14,
+                "train_points": 532,
+                "test_first_utc": "2025-07-14T18:00:00+00:00",
+                "test_last_utc": "2025-07-16T18:00:00+00:00"
+              },
+              {
+                "n": 34,
+                "rmse_per_day": 0.1449181696544208,
+                "mae_per_day": 0.14442489184624763,
+                "bias_per_day": -0.14442489184624763,
+                "held_out_event": 27,
+                "train_points": 545,
+                "test_first_utc": "2025-10-29T12:00:00+00:00",
+                "test_last_utc": "2025-10-31T09:00:00+00:00"
+              },
+              {
+                "n": 314,
+                "rmse_per_day": 0.26592106535892546,
+                "mae_per_day": 0.21348576097587557,
+                "bias_per_day": 0.06548044571515038,
+                "held_out_event": 29,
+                "train_points": 265,
+                "test_first_utc": "2026-04-28T00:00:00+00:00",
+                "test_last_utc": "2026-05-11T11:00:00+00:00"
+              },
+              {
+                "n": 34,
+                "rmse_per_day": 0.2277349126027351,
+                "mae_per_day": 0.18460869603852909,
+                "bias_per_day": 0.08470649201252363,
+                "held_out_event": 30,
+                "train_points": 545,
+                "test_first_utc": "2026-05-12T20:00:00+00:00",
+                "test_last_utc": "2026-05-14T05:00:00+00:00"
+              },
+              {
+                "n": 31,
+                "rmse_per_day": 0.10086262830141919,
+                "mae_per_day": 0.08997176736272208,
+                "bias_per_day": -0.02416231686118545,
+                "held_out_event": 36,
+                "train_points": 548,
+                "test_first_utc": "2026-05-28T05:00:00+00:00",
+                "test_last_utc": "2026-05-29T20:00:00+00:00"
+              },
+              {
+                "n": 60,
+                "rmse_per_day": 0.39814297554496314,
+                "mae_per_day": 0.2778201910608141,
+                "bias_per_day": 0.09740920830712121,
+                "held_out_event": 37,
+                "train_points": 519,
+                "test_first_utc": "2026-07-07T06:00:00+00:00",
+                "test_last_utc": "2026-07-09T17:00:00+00:00"
+              }
+            ],
+            "aggregate": {
+              "n": 579,
+              "rmse_per_day": 0.24969981446116865,
+              "mae_per_day": 0.19007871104622034,
+              "bias_per_day": 0.01944353054401986
+            }
+          },
+          "event_block_rmse_per_day": 0.24969981446116865,
+          "skill_improvement_vs_gauge_only_pct": 1.8715339090006413,
+          "selection_status": "screened_candidate_ready_for_operational_sensitivity",
+          "promotion_recommendation": {
+            "promote_now": false,
+            "reasons_not_to_promote": [
+              "event_block_skill_gain_is_less_than_5_percent",
+              "fewer_than_10_independent_dry_event_blocks",
+              "10_km_rdpa_screen_may_miss_sub_grid_convective_rain",
+              "wsc_discharge_is_provisional_and_rating_derived",
+              "manual_engineering_review_is_required"
+            ],
+            "next_evidence_needed": [
+              "additional independent summer falling-limb recession blocks",
+              "surveyed RS18883 WSE observations near 650.20 m",
+              "material out-of-sample skill improvement over the live recession model"
+            ]
+          }
+        },
+        "interpretation": "Preferred precipitation-screened direct-Q sensitivity. It is more defensible than the unscreened fit but remains shadow-only because the skill gain and independent event count are limited."
+      }
     },
     "apparent_hysteresis": {
       "confidence_effect": "small_apparent_hysteresis",
@@ -951,14 +1631,16 @@
     "This diagnostic does not directly measure project-site RS18883 hysteresis, backwater or floodplain storage.",
     "A project-site logger tied to CGVD28 is required to calibrate actual rising-versus-falling WSE differences at the work site.",
     "The target-discharge comparison is extrapolative when 6.77 m3/s lies outside the overlap of recent rising and falling observations.",
-    "Only two clean rainfall-response events are available, so fallback response errors remain necessary.",
+    "Only two clean rainfall-response events are available for forecasting rainfall delays, so fallback response errors remain necessary.",
     "The plus/minus 0.15 m project-transfer allowance is not a fitted probability distribution.",
-    "The historical direct-discharge fit uses provisional rating-derived WSC discharge and is not yet screened against archived rainfall for every recession period.",
+    "The preferred precipitation-screened direct-Q model uses 10 km RDPA, provisional rating-derived WSC discharge and a limited number of independent event blocks.",
+    "The precipitation-screened direct-Q skill gain is small, so it remains a shadow timing check rather than a replacement central forecast.",
     "Local ponding and bearing capacity remain outside the hydrologic crossing-date calculation.",
     "WSC discharge is provisional and rating-derived from stage rather than independently measured each hour.",
     "The rolling operational dataset is short and the 6.77 m3/s target may lie below the observed fitting range.",
     "This cross-check excludes forecast rainfall and cannot replace the full rainfall-response model.",
     "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
+    "The precipitation-screened historical direct-Q check uses 10 km RDPA and only a limited number of independent dry event blocks.",
     "Construction release remains a field decision, not an automatic model output."
   ]
 }
