@@ -15,6 +15,7 @@ on:
       - 'medium_range_qpf.py'
       - 'geps_ensemble_impacts.py'
       - 'run_geps_ensemble_impacts.py'
+      - 'project_threshold_ensemble.py'
       - 'starkey_wse_transfer.py'
       - 'forecast_starkey_wse.py'
       - 'operational_readiness.py'
@@ -61,6 +62,7 @@ jobs:
             medium_range_qpf.py \
             geps_ensemble_impacts.py \
             run_geps_ensemble_impacts.py \
+            project_threshold_ensemble.py \
             starkey_wse_transfer.py \
             forecast_starkey_wse.py \
             operational_readiness.py \
@@ -86,7 +88,7 @@ jobs:
         run: |
           python summarize_output.py
           python refresh_operational_base.py
-      - name: Estimate current Starkey WSE from discharge
+      - name: Estimate current project WSE from discharge
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
@@ -150,29 +152,120 @@ jobs:
             python run_geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
           fi
-      - name: Forecast Starkey WSE and main floodplain crossing
+      - name: Forecast project WSE and main floodplain crossing
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           if [ "$(cat sturgeon_pipeline_output/logs/starkey_wse_transfer.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping Starkey WSE forecast because transfer or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
+            echo 'Skipping project WSE forecast because transfer or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
             echo 3 > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
           else
             set -o pipefail
             python forecast_starkey_wse.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
           fi
+      - name: Calculate all-member project-threshold probabilities
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping all-member threshold probabilities because project WSE or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/project_threshold_ensemble.log
+            echo 3 > sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode
+          else
+            set -o pipefail
+            python project_threshold_ensemble.py 2>&1 | tee sturgeon_pipeline_output/logs/project_threshold_ensemble.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode
+          fi
       - name: Calculate limb-aware construction readiness dates
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping construction readiness because GEPS or Starkey WSE paths failed.' | tee sturgeon_pipeline_output/logs/operational_readiness.log
+          if [ "$(cat sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping construction readiness because project-threshold ensemble or project WSE failed.' | tee sturgeon_pipeline_output/logs/operational_readiness.log
             echo 3 > sturgeon_pipeline_output/logs/operational_readiness.exitcode
           else
             set -o pipefail
             python operational_readiness.py 2>&1 | tee sturgeon_pipeline_output/logs/operational_readiness.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/operational_readiness.exitcode
+          fi
+      - name: Validate operational package consistency
+        if: always()
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          STATUS=0
+          for name in \
+            qpf_forecast_v2 \
+            validate_qpf \
+            aggregate_qpf_horizons \
+            medium_range_qpf \
+            forecast_impacts_v2 \
+            geps_ensemble_impacts \
+            starkey_wse_transfer \
+            forecast_starkey_wse \
+            project_threshold_ensemble \
+            operational_readiness; do
+            CODE=$(cat "sturgeon_pipeline_output/logs/${name}.exitcode" 2>/dev/null || echo missing)
+            if [ "$CODE" != "0" ]; then
+              echo "${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
+              STATUS=1
+            fi
+          done
+
+          python - <<'PY' || STATUS=1
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+
+          root = Path('sturgeon_pipeline_output')
+          files = {
+              'forecast': root / 'forecast_v2/forecast_impacts_v2.json',
+              'ensemble': root / 'forecast_v2/ensemble_paths_v2.json',
+              'transfer': root / 'routing/starkey_wse_transfer.json',
+              'project_wse': root / 'routing/forecast_starkey_wse.json',
+              'probability': root / 'forecast_v2/project_threshold_ensemble.json',
+              'readiness': root / 'forecast_v2/construction_readiness.json',
+          }
+          data = {}
+          for name, path in files.items():
+              if not path.exists():
+                  raise RuntimeError(f'missing required output: {path}')
+              data[name] = json.loads(path.read_text())
+
+          if data['ensemble'].get('official_outlook', {}).get('status') != 'operational_geps_integrated':
+              raise RuntimeError('ensemble_paths_v2 is not operational_geps_integrated')
+          if data['probability'].get('status') != 'operational_project_threshold_ensemble':
+              raise RuntimeError('project_threshold_ensemble is not operational')
+          if data['transfer'].get('project_location', {}).get('river_station') != 18883:
+              raise RuntimeError('transfer is not referenced to RS18883')
+          if data['project_wse'].get('project_location', {}).get('river_station') != 18883:
+              raise RuntimeError('project WSE is not referenced to RS18883')
+          threshold = data['readiness'].get('authoritative_operational_threshold', {})
+          if abs(float(threshold.get('main_floodplain_elevation_m')) - 650.20) > 0.001:
+              raise RuntimeError('readiness threshold is not 650.20 m')
+          if abs(float(threshold.get('calibrated_05EA002_discharge_m3s')) - 6.77) > 0.01:
+              raise RuntimeError('readiness target discharge is not 6.77 m3/s')
+          if int(data['readiness'].get('probabilistic_exposure', {}).get('member_count', 0)) < 20:
+              raise RuntimeError('fewer than 20 ensemble members reached readiness output')
+
+          times = []
+          for name, item in data.items():
+              value = item.get('generated_utc')
+              if not value:
+                  raise RuntimeError(f'{name} missing generated_utc')
+              times.append(datetime.fromisoformat(value.replace('Z', '+00:00')).astimezone(timezone.utc))
+          now = datetime.now(timezone.utc)
+          if any((now - value).total_seconds() > 6 * 3600 for value in times):
+              raise RuntimeError('one or more operational outputs are older than six hours')
+          if (max(times) - min(times)).total_seconds() > 3 * 3600:
+              raise RuntimeError('operational output timestamps span more than three hours')
+          print('Operational package integrity checks passed.')
+          PY
+
+          echo "$STATUS" > sturgeon_pipeline_output/logs/operational_validation.exitcode
+          if [ "$STATUS" = "0" ]; then
+            echo 'Operational package validation passed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
+          else
+            echo 'Operational package validation failed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
           fi
       - name: Prepare latest operational output
         if: always()
@@ -183,7 +276,11 @@ jobs:
             rsync -a --exclude='sturgeon_pipeline_latest.zip' sturgeon_pipeline_output/ output/latest/
           fi
           date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
-          echo operational > output/latest/workflow_mode.txt
+          if [ "$(cat output/latest/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0" ]; then
+            echo operational > output/latest/workflow_mode.txt
+          else
+            echo degraded > output/latest/workflow_mode.txt
+          fi
       - name: Upload operational package
         if: always()
         uses: actions/upload-artifact@v4
@@ -211,17 +308,22 @@ jobs:
 
             if git diff --cached --quiet; then
               echo 'No operational output changes to publish.'
-              exit 0
+              break
             fi
 
             git commit -m 'Update Sturgeon operational forecast [skip ci]'
             if git push origin HEAD:main; then
-              exit 0
+              break
             fi
 
+            if [ "$attempt" = "4" ]; then
+              echo 'Unable to publish operational output after four attempts.' >&2
+              exit 1
+            fi
             echo 'Another run updated main first; retrying from the new branch head.'
             sleep $((attempt * 2))
           done
-
-          echo 'Unable to publish operational output after four attempts.' >&2
-          exit 1
+      - name: Enforce operational validation
+        if: always()
+        run: |
+          test "$(cat output/latest/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0"
