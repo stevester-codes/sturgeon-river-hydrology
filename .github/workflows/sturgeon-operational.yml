@@ -29,7 +29,7 @@ permissions:
 
 concurrency:
   group: sturgeon-hydrology-operational
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -268,7 +268,7 @@ jobs:
             echo 'Operational package validation failed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
           fi
       - name: Prepare latest operational output
-        if: always()
+        if: ${{ always() && !cancelled() }}
         run: |
           rm -rf output/latest
           mkdir -p output/latest
@@ -282,7 +282,7 @@ jobs:
             echo degraded > output/latest/workflow_mode.txt
           fi
       - name: Upload operational package
-        if: always()
+        if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
           name: sturgeon-operational-latest
@@ -290,7 +290,7 @@ jobs:
           retention-days: 14
           if-no-files-found: warn
       - name: Commit latest operational outputs
-        if: always()
+        if: ${{ always() && !cancelled() }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
@@ -324,6 +324,6 @@ jobs:
             sleep $((attempt * 2))
           done
       - name: Enforce operational validation
-        if: always()
+        if: ${{ always() && !cancelled() }}
         run: |
           test "$(cat output/latest/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0"
