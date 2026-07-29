@@ -1,4 +1,4 @@
-name: Sturgeon hydrology data
+name: Sturgeon historical calibration
 
 on:
   workflow_dispatch:
@@ -6,15 +6,13 @@ on:
     branches: [main]
     paths-ignore:
       - 'output/**'
-  schedule:
-    - cron: '17 * * * *'
 
 permissions:
   contents: write
 
 concurrency:
-  group: sturgeon-hydrology
-  cancel-in-progress: true
+  group: sturgeon-hydrology-backfill
+  cancel-in-progress: false
 
 jobs:
   retrieve:
