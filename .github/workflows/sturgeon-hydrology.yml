@@ -1,0 +1,63 @@
+name: Sturgeon hydrology data
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths-ignore:
+      - 'output/**'
+  schedule:
+    - cron: '17 * * * *'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-hydrology
+  cancel-in-progress: false
+
+jobs:
+  retrieve:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Test parser
+        run: python test_parsing.py
+      - name: Retrieve hydrometric and HRDPA data
+        run: |
+          rm -rf sturgeon_pipeline_output output/latest
+          python sturgeon_pipeline.py --start-date 2026-07-01 --contact stevester-codes@users.noreply.github.com
+      - name: Prepare latest output
+        if: always()
+        run: |
+          mkdir -p output/latest
+          if [ -d sturgeon_pipeline_output ]; then cp -a sturgeon_pipeline_output/. output/latest/; fi
+          ZIP=$(ls -1t sturgeon_pipeline_output_*.zip 2>/dev/null | head -1 || true)
+          if [ -n "$ZIP" ]; then cp "$ZIP" output/latest/sturgeon_pipeline_latest.zip; fi
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
+      - name: Upload complete data package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-hydrology-latest
+          path: |
+            output/latest
+            sturgeon_pipeline_output_*.zip
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Commit latest outputs
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f output/latest
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Update Sturgeon hydrology data [skip ci]'
+          git push
