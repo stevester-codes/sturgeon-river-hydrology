@@ -1,0 +1,270 @@
+{
+  "generated_utc": "2026-07-29T16:01:49.169441+00:00",
+  "status": "diagnostic_only_no_automatic_recalibration",
+  "overall": {
+    "score_out_of_100": 48.0,
+    "tier": "low_to_moderate",
+    "components": {
+      "uncensored_peak_events": 16.0,
+      "complete_recoveries": 0.0,
+      "storm_type_diversity": 8.0,
+      "forecast_feature_coverage": 2.0,
+      "current_rating_support": 2.0,
+      "meteorological_ensemble": 10.0,
+      "project_transfer_support": 4.0,
+      "operational_integrity_controls": 6.0
+    },
+    "warning": "This is a transparent engineering diagnostic score, not a statistically calibrated probability that a forecast date will be correct."
+  },
+  "calibration_sample": {
+    "all_event_constraints": 9,
+    "uncensored_peak_training_events": 2,
+    "complete_recovery_events": 0,
+    "storm_type_counts": {
+      "widespread_basin": 4,
+      "lower_basin_concentrated": 2,
+      "upper_lake_chain_concentrated": 2,
+      "mixed_or_weak": 1
+    },
+    "cross_validation_available": false
+  },
+  "current_forecast_feature_coverage": {
+    "status": "material_extrapolation",
+    "outside_feature_count": 4,
+    "materially_outside_feature_count": 3,
+    "nearest_analogue_distance": 3.99422746874872,
+    "storm_type": "upper_lake_chain_concentrated",
+    "horizon_h": 48,
+    "features": [
+      {
+        "feature": "basin_mm",
+        "current": 8.853542269037497,
+        "training_min": 1.952859654092426,
+        "training_max": 26.846894577404903,
+        "training_mean": 14.399877115748664,
+        "training_standard_deviation": 12.447017461656237,
+        "z_score": -0.4455954901483005,
+        "normalized_distance_outside_range": 0.0,
+        "status": "inside_training_range"
+      },
+      {
+        "feature": "lower_ratio",
+        "current": 0.3601060105482278,
+        "training_min": 0.6433245128726464,
+        "training_max": 1.1049891548057453,
+        "training_mean": 0.8741568338391958,
+        "training_standard_deviation": 0.2308323209665495,
+        "z_score": -2.2269447412672356,
+        "normalized_distance_outside_range": 0.6134723706336179,
+        "status": "material_extrapolation"
+      },
+      {
+        "feature": "upper_ratio",
+        "current": 1.6218745140015802,
+        "training_min": 0.8684102567270844,
+        "training_max": 1.0110260499381822,
+        "training_mean": 0.9397181533326333,
+        "training_standard_deviation": 0.07130789660554893,
+        "z_score": 9.566350897186105,
+        "normalized_distance_outside_range": 4.283175448593052,
+        "status": "material_extrapolation"
+      },
+      {
+        "feature": "duration_h",
+        "current": 12.0,
+        "training_min": 12.0,
+        "training_max": 48.0,
+        "training_mean": 30.0,
+        "training_standard_deviation": 18.0,
+        "z_score": -1.0,
+        "normalized_distance_outside_range": 0.0,
+        "status": "inside_training_range"
+      },
+      {
+        "feature": "antecedent_168h_mm",
+        "current": 27.55774020931002,
+        "training_min": 5.438034463943035,
+        "training_max": 21.91926277396547,
+        "training_mean": 13.678648618954252,
+        "training_standard_deviation": 8.240614155011219,
+        "z_score": 1.6842302441639887,
+        "normalized_distance_outside_range": 0.34211512208199435,
+        "status": "outside_training_range"
+      },
+      {
+        "feature": "basin_pct_gt_10mm",
+        "current": 35.83535108958838,
+        "training_min": 0.0,
+        "training_max": 100.0,
+        "training_mean": 50.0,
+        "training_standard_deviation": 50.0,
+        "z_score": -0.2832929782082324,
+        "normalized_distance_outside_range": 0.0,
+        "status": "inside_training_range"
+      },
+      {
+        "feature": "pre_stage_m",
+        "current": 2.155,
+        "training_min": 2.723,
+        "training_max": 3.01,
+        "training_mean": 2.8665,
+        "training_standard_deviation": 0.14349999999999996,
+        "z_score": -4.958188153310106,
+        "normalized_distance_outside_range": 1.979094076655053,
+        "status": "material_extrapolation"
+      }
+    ]
+  },
+  "hydrologic_memory_and_storage_proxies": {
+    "status": "high_residual_storage_signal",
+    "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
+    "target_change_24h_m": -0.03100000000000014,
+    "antecedent_rain_mm": {
+      "24h": 5.197492502637661,
+      "72h": 13.095752150841552,
+      "168h": 27.55774020931002
+    },
+    "elevated_signal_count": 4,
+    "signals": [
+      {
+        "name": "upper_lake_chain_05EA012",
+        "station": "05EA012",
+        "change_24h_m": 0.09999999999999964,
+        "change_72h_m": 0.1739999999999995,
+        "rising_24h": true,
+        "higher_than_72h_ago": true
+      },
+      {
+        "name": "atim_big_lake_05EA011",
+        "station": "05EA011",
+        "change_24h_m": 0.011000000000001009,
+        "change_72h_m": 0.16600000000000037,
+        "rising_24h": true,
+        "higher_than_72h_ago": true
+      },
+      {
+        "name": "middle_basin_05EA005",
+        "station": "05EA005",
+        "change_24h_m": -0.008000000000000007,
+        "change_72h_m": 0.16599999999999993,
+        "rising_24h": false,
+        "higher_than_72h_ago": true
+      },
+      {
+        "name": "lower_tributary_05EA010",
+        "station": "05EA010",
+        "change_24h_m": -0.06399999999999995,
+        "change_72h_m": 0.08600000000000002,
+        "rising_24h": false,
+        "higher_than_72h_ago": true
+      }
+    ]
+  },
+  "current_limb_rating_support": {
+    "status": "material_target_extrapolation",
+    "fit_r2": 0.9919337001235697,
+    "fit_rmse_m3s": 0.02799766419621489,
+    "fit_hourly_points": 93,
+    "observed_stage_range_m": [
+      2.155,
+      2.253
+    ],
+    "target_stage_m": 1.7611568777519004,
+    "extrapolation_distance_m": 0.39384312224809936,
+    "extrapolation_as_observed_span": 4.0188073698785525,
+    "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
+  },
+  "project_wse_transfer_support": {
+    "status": "one_observed_low_flow_anchor_plus_two_modelled_design_points",
+    "current_discharge_m3s": 11.7,
+    "target_discharge_m3s": 6.77,
+    "constraint_discharges_m3s": [
+      6.77,
+      52.0,
+      90.0
+    ],
+    "working_wse_uncertainty_m": 0.15,
+    "largest_constraint_gap_m3s": 45.230000000000004,
+    "interpretation": "The operational threshold is anchored at 6.77 m3/s, but intermediate WSE above the threshold is interpolated across a large gap to the 52 m3/s design point."
+  },
+  "ensemble_date_spread": {
+    "member_count": 21,
+    "standard_deviation_days": 0.5485216303806894,
+    "earliest": {
+      "days": 11.772035733952336,
+      "date_utc": "2026-08-10"
+    },
+    "latest": {
+      "days": 12.912026087466385,
+      "date_utc": "2026-08-11"
+    },
+    "quantiles": {
+      "p10": {
+        "quantile": 0.1,
+        "days": 11.772231067764407,
+        "date_utc": "2026-08-10"
+      },
+      "p25": {
+        "quantile": 0.25,
+        "days": 11.775765002620155,
+        "date_utc": "2026-08-10"
+      },
+      "p50": {
+        "quantile": 0.5,
+        "days": 12.897329999474763,
+        "date_utc": "2026-08-11"
+      },
+      "p75": {
+        "quantile": 0.75,
+        "days": 12.905255254897286,
+        "date_utc": "2026-08-11"
+      },
+      "p90": {
+        "quantile": 0.9,
+        "days": 12.906927687782972,
+        "date_utc": "2026-08-11"
+      }
+    },
+    "interpretation": "GEPS spread measures meteorological uncertainty; hydrologic-response and project-transfer errors are additional."
+  },
+  "controlled_assimilation": {
+    "automatic_promotion_enabled": false,
+    "candidate_requirements": [
+      "complete and quality-controlled observed precipitation coverage",
+      "clearly observed river-response peak",
+      "no later storm censoring the response window",
+      "preferably a complete recovery",
+      "candidate model does not worsen leave-one-event-out or hindcast performance",
+      "previous calibration retained for rollback"
+    ],
+    "current_reason_not_automatic": "Only two uncensored peaks and zero complete recoveries are presently available."
+  },
+  "priority_actions": [
+    {
+      "priority": 1,
+      "action": "Obtain at least one complete post-storm recovery without intervening rainfall.",
+      "reason": "Zero complete recoveries leave recession-delay estimates weakly constrained."
+    },
+    {
+      "priority": 2,
+      "action": "Install or survey a temporary water-level reference at RS18883 tied to CGVD28.",
+      "reason": "One approximate field-visibility observation currently anchors the low-flow project threshold."
+    },
+    {
+      "priority": 3,
+      "action": "Obtain the full RS18883 HEC-RAS discharge-WSE table or model files.",
+      "reason": "The current curve interpolates across the large 6.77-to-52 m3/s gap."
+    },
+    {
+      "priority": 4,
+      "action": "Assimilate new rainfall-response events only after censoring and backtest checks pass.",
+      "reason": "Automatic promotion with only two clean events could make the model less reliable rather than more reliable."
+    }
+  ],
+  "limitations": [
+    "Storage pressure is inferred from recent rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
+    "The current event stage-discharge fit is based on provisional WSC stage and rating-derived discharge.",
+    "The diagnostic score is intentionally transparent but is not a formal confidence interval.",
+    "A model can pass operational integrity checks while still having low scientific calibration confidence."
+  ]
+}

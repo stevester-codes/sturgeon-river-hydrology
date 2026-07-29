@@ -1,0 +1,183 @@
+{
+  "generated_utc": "2026-07-29T16:01:49.170179+00:00",
+  "status": "operational_sensitivity_not_calibrated_probability",
+  "method": "All GEPS member rainfall sequences are recomputed for three uncertainty configurations. The site-transfer sensitivity shifts the required modelled RS18883 WSE by plus or minus 0.15 m. Hydrologic response uses lower, central or upper short-range delays and later-window analogue RMSE sensitivity.",
+  "uncertainty_components": {
+    "meteorological": "Full validated GEPS member spread through 16 days.",
+    "short_range_hydrologic": {
+      "low_days": 0.04943619654477094,
+      "central_days": 1.049436196544771,
+      "high_days": 8.98747358226623
+    },
+    "later_hydrologic": "Each later rainfall window uses central days lost minus/plus its analogue RMSE for low/high sensitivity.",
+    "project_transfer": {
+      "nominal_wse_m": 650.2,
+      "sensitivity_m": 0.15
+    },
+    "rating": "The current-limb stage-discharge fit is used in every configuration; uncertainty in the provisional WSC rating is described separately and is not assigned a false probability distribution."
+  },
+  "scenarios": {
+    "optimistic_sensitivity": {
+      "target_wse_m": 650.35,
+      "target_discharge_m3s": 8.579942869648988,
+      "equivalent_05EA002_stage_m": 1.904820489182664,
+      "rain_free_days": 5.291666666666667,
+      "short_range_delay_days": 0.04943619654477094,
+      "response_mode": "low",
+      "distribution": {
+        "member_count": 21,
+        "mean": {
+          "days": 5.569133545025175,
+          "date_utc": "2026-08-04"
+        },
+        "earliest": {
+          "days": 5.474438584424399,
+          "date_utc": "2026-08-04"
+        },
+        "latest": {
+          "days": 5.6091509534571955,
+          "date_utc": "2026-08-04"
+        },
+        "standard_deviation_days": 0.05909669746916558,
+        "quantiles": {
+          "p10": {
+            "days": 5.475259006320458,
+            "date_utc": "2026-08-04"
+          },
+          "p25": {
+            "days": 5.477401437547048,
+            "date_utc": "2026-08-04"
+          },
+          "p50": {
+            "days": 5.606041126522233,
+            "date_utc": "2026-08-04"
+          },
+          "p75": {
+            "days": 5.6070423044419755,
+            "date_utc": "2026-08-04"
+          },
+          "p90": {
+            "days": 5.6078625940761935,
+            "date_utc": "2026-08-04"
+          }
+        }
+      },
+      "interpretation": "Higher allowable modelled WSE plus lower analogue response delays. This is a sensitivity bound, not a stated probability."
+    },
+    "central": {
+      "target_wse_m": 650.2,
+      "target_discharge_m3s": 6.769999999999754,
+      "equivalent_05EA002_stage_m": 1.7611568777518811,
+      "rain_free_days": 8.458333333333334,
+      "short_range_delay_days": 1.049436196544771,
+      "response_mode": "central",
+      "distribution": {
+        "member_count": 21,
+        "mean": {
+          "days": 12.473290702329388,
+          "date_utc": "2026-08-11"
+        },
+        "earliest": {
+          "days": 11.772035733952336,
+          "date_utc": "2026-08-10"
+        },
+        "latest": {
+          "days": 12.912026087466385,
+          "date_utc": "2026-08-11"
+        },
+        "standard_deviation_days": 0.5485216303806894,
+        "quantiles": {
+          "p10": {
+            "days": 11.772231067764407,
+            "date_utc": "2026-08-10"
+          },
+          "p25": {
+            "days": 11.775765002620155,
+            "date_utc": "2026-08-10"
+          },
+          "p50": {
+            "days": 12.897329999474763,
+            "date_utc": "2026-08-11"
+          },
+          "p75": {
+            "days": 12.905255254897286,
+            "date_utc": "2026-08-11"
+          },
+          "p90": {
+            "days": 12.906927687782972,
+            "date_utc": "2026-08-11"
+          }
+        }
+      },
+      "interpretation": "Nominal 650.20 m threshold and central analogue response delays."
+    },
+    "conservative_sensitivity": {
+      "target_wse_m": 650.0500000000001,
+      "target_discharge_m3s": 5.25430579383695,
+      "equivalent_05EA002_stage_m": 1.6408491558157396,
+      "rain_free_days": 11.125,
+      "short_range_delay_days": 8.98747358226623,
+      "response_mode": "high",
+      "distribution": {
+        "member_count": 21,
+        "mean": {
+          "days": 25.69704237376513,
+          "date_utc": "2026-08-24"
+        },
+        "earliest": {
+          "days": 24.376739786340462,
+          "date_utc": "2026-08-23"
+        },
+        "latest": {
+          "days": 26.51673013985451,
+          "date_utc": "2026-08-25"
+        },
+        "standard_deviation_days": 1.0341333122153302,
+        "quantiles": {
+          "p10": {
+            "days": 24.37693512015253,
+            "date_utc": "2026-08-23"
+          },
+          "p25": {
+            "days": 24.38046905500828,
+            "date_utc": "2026-08-23"
+          },
+          "p50": {
+            "days": 26.50203405186289,
+            "date_utc": "2026-08-25"
+          },
+          "p75": {
+            "days": 26.50995930728541,
+            "date_utc": "2026-08-25"
+          },
+          "p90": {
+            "days": 26.511631740171097,
+            "date_utc": "2026-08-25"
+          }
+        }
+      },
+      "interpretation": "Requires the modelled WSE to fall 0.15 m below the nominal threshold and applies upper analogue-response delays. This is a planning sensitivity bound, not a calibrated confidence interval."
+    }
+  },
+  "planning_summary": {
+    "optimistic_p10": {
+      "days": 5.475259006320458,
+      "date_utc": "2026-08-04"
+    },
+    "central_p50": {
+      "days": 12.897329999474763,
+      "date_utc": "2026-08-11"
+    },
+    "conservative_p90": {
+      "days": 26.511631740171097,
+      "date_utc": "2026-08-25"
+    },
+    "recommended_use": "Use central p50 as the working inspection forecast and conservative-sensitivity p90 as the protected schedule contingency. These bounds deliberately include more than weather spread but remain sensitivity results, not formal confidence limits."
+  },
+  "limitations": [
+    "Analogue RMSE is unavailable as formal cross-validation with only two clean training events, so fallback error magnitudes are used.",
+    "The plus/minus 0.15 m project-transfer sensitivity is an engineering working allowance, not a fitted statistical distribution.",
+    "The same current-limb WSC rating fit is used in all cases; provisional-rating error is not probabilistically quantified.",
+    "Local ponding and bearing capacity remain outside the hydrologic crossing-date calculation."
+  ]
+}
