@@ -1,0 +1,102 @@
+{
+  "generated_utc": "2026-07-29T04:04:05.987312+00:00",
+  "metric_used": "flow_m3s",
+  "coordinates": {
+    "05EA002": [
+      -113.62722,
+      53.63583
+    ],
+    "starkey_bridge_midpoint": [
+      -113.57115395842341,
+      53.684502361953975
+    ],
+    "05EA001": [
+      -113.2822222222,
+      53.8325
+    ]
+  },
+  "geodesic_distances_km": {
+    "05EA002_to_starkey": 6.563802483659102,
+    "05EA002_to_05EA001": 31.583136095396902,
+    "distance_ratio": 0.2078261786237164
+  },
+  "observed_05EA002_to_05EA001_lag": {
+    "status": "calculated",
+    "best_lag_h": 85,
+    "best_correlation": 0.2658959122292151,
+    "n_pairs": 577,
+    "near_optimal_lag_range_h": [
+      1,
+      96
+    ],
+    "top_lags": [
+      {
+        "lag_h": 85,
+        "correlation": 0.2658959122292151,
+        "n": 577
+      },
+      {
+        "lag_h": 86,
+        "correlation": 0.26492969912010766,
+        "n": 576
+      },
+      {
+        "lag_h": 84,
+        "correlation": 0.2593472296971781,
+        "n": 578
+      },
+      {
+        "lag_h": 2,
+        "correlation": 0.25905965565149564,
+        "n": 660
+      },
+      {
+        "lag_h": 87,
+        "correlation": 0.2577976692621694,
+        "n": 575
+      },
+      {
+        "lag_h": 83,
+        "correlation": 0.247426012917367,
+        "n": 579
+      },
+      {
+        "lag_h": 88,
+        "correlation": 0.24664316248932683,
+        "n": 574
+      },
+      {
+        "lag_h": 1,
+        "correlation": 0.24590799744740494,
+        "n": 661
+      },
+      {
+        "lag_h": 3,
+        "correlation": 0.2447838468370712,
+        "n": 659
+      },
+      {
+        "lag_h": 82,
+        "correlation": 0.23402703423280055,
+        "n": 580
+      }
+    ]
+  },
+  "estimated_05EA002_to_starkey_wave_lag": {
+    "central_h": 17.665225183015895,
+    "range_h": [
+      0.5,
+      29.926969721815162
+    ],
+    "method": "05EA002-to-05EA001 observed hydrograph lag scaled by geodesic distance ratio with routing uncertainty allowance"
+  },
+  "stage_translation": {
+    "status": "not calibrated",
+    "reason": "No water-level gauge or common vertical datum exists at the Starkey construction crossing. The operational 1.70 m threshold remains referenced to 05EA002."
+  },
+  "limitations": [
+    "Geodesic distance is shorter than channel distance, but using the same ratio for both reaches reduces first-order bias.",
+    "05EA001 receives additional downstream drainage, so only coherent hydrograph timing\u2014not absolute stage\u2014is used.",
+    "The wave lag is relevant to river response timing; direct local runoff at Starkey may respond faster during a localized storm."
+  ]
+}
