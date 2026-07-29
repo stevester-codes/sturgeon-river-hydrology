@@ -74,6 +74,18 @@ jobs:
           set -o pipefail
           python validate_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/validate_qpf.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/validate_qpf.exitcode
+      - name: Aggregate cumulative QPF footprints
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping horizon aggregation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
+            echo 3 > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
+          else
+            set -o pipefail
+            python aggregate_qpf_horizons.py 2>&1 | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
+          fi
       - name: Translate QPF into river impacts
         continue-on-error: true
         run: |
