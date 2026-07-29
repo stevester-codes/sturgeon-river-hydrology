@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-29T16:38:01.883039+00:00",
+  "generated_utc": "2026-07-29T16:41:51.875266+00:00",
   "latest_stage_utc": "2026-07-29T00:00:00+00:00",
   "project_location": {
     "river_station": 18883,
@@ -129,11 +129,16 @@
         "days": 12.897329999474763,
         "date_utc": "2026-08-11"
       },
-      "conservative_p90": {
+      "transfer_conservative_p90": {
         "days": 26.511631740171097,
         "date_utc": "2026-08-25"
       },
-      "recommended_use": "Use central p50 as the working inspection forecast and conservative-sensitivity p90 as the protected schedule contingency. These bounds deliberately include more than weather spread but remain sensitivity results, not formal confidence limits."
+      "protected_schedule_p90": {
+        "days": 26.511631740171097,
+        "date_utc": "2026-08-25"
+      },
+      "protected_schedule_source": "transfer_and_response_sensitivity",
+      "recommended_use": "Use central p50 as the working inspection forecast. Protect the schedule using the later of the transfer/response conservative p90 and historical direct-discharge upper-response p90. These are engineering sensitivities, not formal confidence limits."
     },
     "scenarios": {
       "optimistic_sensitivity": {
@@ -181,7 +186,7 @@
             }
           }
         },
-        "interpretation": "Higher allowable modelled WSE plus lower analogue response delays. This is a sensitivity bound, not a stated probability."
+        "interpretation": "Higher allowable modelled WSE plus lower analogue-response delays. Sensitivity only."
       },
       "central": {
         "target_wse_m": 650.2,
@@ -228,7 +233,7 @@
             }
           }
         },
-        "interpretation": "Nominal 650.20 m threshold and central analogue response delays."
+        "interpretation": "Nominal 650.20 m threshold and central analogue-response delays."
       },
       "conservative_sensitivity": {
         "target_wse_m": 650.0500000000001,
@@ -275,7 +280,7 @@
             }
           }
         },
-        "interpretation": "Requires the modelled WSE to fall 0.15 m below the nominal threshold and applies upper analogue-response delays. This is a planning sensitivity bound, not a calibrated confidence interval."
+        "interpretation": "Requires modelled WSE 0.15 m below nominal and applies upper response delays. Sensitivity only."
       }
     },
     "uncertainty_components": {
@@ -285,12 +290,59 @@
         "central_days": 1.049436196544771,
         "high_days": 8.98747358226623
       },
-      "later_hydrologic": "Each later rainfall window uses central days lost minus/plus its analogue RMSE for low/high sensitivity.",
+      "later_hydrologic": "Later rainfall windows use central days lost minus/plus analogue RMSE.",
       "project_transfer": {
         "nominal_wse_m": 650.2,
         "sensitivity_m": 0.15
       },
-      "rating": "The current-limb stage-discharge fit is used in every configuration; uncertainty in the provisional WSC rating is described separately and is not assigned a false probability distribution."
+      "current_rating": "The short-window rating is retained for nominal scenarios but is explicitly challenged by the independent historical direct-discharge sensitivity.",
+      "historical_direct_discharge": {
+        "status": "historical_gauge_candidate_ready_for_rdpa_pairing",
+        "generated_utc": "2026-07-29T16:26:15+00:00",
+        "rain_free_days_to_6_77_m3s": 10.458333333333334,
+        "historical_discharge_fit": {
+          "n": 1471,
+          "intercept_per_day": -0.11710802761620995,
+          "coefficient_per_day": -0.04002920856019668,
+          "value_range": [
+            0.06,
+            25.6
+          ],
+          "rate_rmse_per_day": 0.19278504334076876
+        },
+        "year_holdout": {
+          "n": 823,
+          "rmse_per_day": 0.4636160583977938,
+          "mae_per_day": 0.35257729406624716,
+          "bias_per_day": -0.2730851364245531
+        },
+        "all_near_target_support": {
+          "n": 69,
+          "tolerance_m3s": 0.5,
+          "discharge_range_m3s": [
+            6.27,
+            7.26
+          ],
+          "stage_min_m": 1.365,
+          "stage_p10_m": 1.3818,
+          "stage_p25_m": 1.408,
+          "stage_median_m": 1.439,
+          "stage_p75_m": 1.469,
+          "stage_p90_m": 1.6945000000000001,
+          "stage_max_m": 1.7455,
+          "stage_standard_deviation_m": 0.11427034672349018,
+          "first_utc": "2026-04-14T05:00:00+00:00",
+          "last_utc": "2026-06-24T11:00:00+00:00"
+        },
+        "summer_falling_near_target_support": {
+          "n": 0,
+          "tolerance_m3s": 0.5,
+          "grouping": "season_limb",
+          "season": "summer",
+          "limb": "falling"
+        },
+        "interpretation": "This is an independent gauge-only sensitivity based on the 18-month stage/discharge record. It avoids the short-window target-stage extrapolation, but still uses provisional rating-derived WSC discharge and has not yet been paired with archived precipitation."
+      }
     },
     "interpretation": "This sensitivity envelope combines weather-member spread, rainfall-response error sensitivity and the working plus/minus 0.15 m RS18883 transfer allowance. It is more suitable for protecting the construction schedule than raw weather spread alone, but it is not a formal confidence interval."
   },
@@ -744,11 +796,16 @@
         "days": 12.897329999474763,
         "date_utc": "2026-08-11"
       },
-      "conservative_p90": {
+      "transfer_conservative_p90": {
         "days": 26.511631740171097,
         "date_utc": "2026-08-25"
       },
-      "recommended_use": "Use central p50 as the working inspection forecast and conservative-sensitivity p90 as the protected schedule contingency. These bounds deliberately include more than weather spread but remain sensitivity results, not formal confidence limits."
+      "protected_schedule_p90": {
+        "days": 26.511631740171097,
+        "date_utc": "2026-08-25"
+      },
+      "protected_schedule_source": "transfer_and_response_sensitivity",
+      "recommended_use": "Use central p50 as the working inspection forecast. Protect the schedule using the later of the transfer/response conservative p90 and historical direct-discharge upper-response p90. These are engineering sensitivities, not formal confidence limits."
     },
     "apparent_hysteresis": {
       "confidence_effect": "small_apparent_hysteresis",
@@ -775,9 +832,9 @@
     "This diagnostic does not directly measure project-site RS18883 hysteresis, backwater or floodplain storage.",
     "A project-site logger tied to CGVD28 is required to calibrate actual rising-versus-falling WSE differences at the work site.",
     "The target-discharge comparison is extrapolative when 6.77 m3/s lies outside the overlap of recent rising and falling observations.",
-    "Analogue RMSE is unavailable as formal cross-validation with only two clean training events, so fallback error magnitudes are used.",
-    "The plus/minus 0.15 m project-transfer sensitivity is an engineering working allowance, not a fitted statistical distribution.",
-    "The same current-limb WSC rating fit is used in all cases; provisional-rating error is not probabilistically quantified.",
+    "Only two clean rainfall-response events are available, so fallback response errors remain necessary.",
+    "The plus/minus 0.15 m project-transfer allowance is not a fitted probability distribution.",
+    "The historical direct-discharge fit uses provisional rating-derived WSC discharge and is not yet screened against archived rainfall for every recession period.",
     "Local ponding and bearing capacity remain outside the hydrologic crossing-date calculation.",
     "WSC discharge is provisional and rating-derived from stage rather than independently measured each hour.",
     "The rolling operational dataset is short and the 6.77 m3/s target may lie below the observed fitting range.",
