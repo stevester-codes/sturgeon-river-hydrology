@@ -5,7 +5,7 @@ import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from urllib.parse import urljoin
+from urllib.parse import quote, urljoin
 
 import numpy as np
 import rasterio
@@ -18,12 +18,13 @@ COLLECTION = "weather:rdpa:10km:6f"
 API_ROOT = "https://api.weather.gc.ca/"
 DEFAULT_BBOX = [-115.2, 52.9, -113.0, 54.2]
 DEFAULT_TIME = "2026-07-01T00:00:00Z"
+SUPPORTED_FORMATS = ["GRIB", "GTiff", "NetCDF", "json"]
 
 
 def session() -> requests.Session:
     value = requests.Session()
     value.headers["User-Agent"] = (
-        "sturgeon-river-hydrology-rdpa-probe/1.0 "
+        "sturgeon-river-hydrology-rdpa-probe/1.1 "
         "(stevester-codes@users.noreply.github.com)"
     )
     retry = Retry(
@@ -35,6 +36,12 @@ def session() -> requests.Session:
     )
     value.mount("https://", HTTPAdapter(max_retries=retry))
     return value
+
+
+def safe_json(value):
+    if isinstance(value, np.generic):
+        return value.item()
+    raise TypeError(f"Object of type {value.__class__.__name__} is not JSON serializable")
 
 
 def summarize_raster(content: bytes) -> dict:
@@ -50,8 +57,8 @@ def summarize_raster(content: bytes) -> dict:
                         "height": dataset.height,
                         "band_count": dataset.count,
                         "crs": str(dataset.crs),
-                        "bounds": list(dataset.bounds),
-                        "transform": list(dataset.transform),
+                        "bounds": [float(value) for value in dataset.bounds],
+                        "transform": [float(value) for value in dataset.transform],
                         "descriptions": list(dataset.descriptions),
                         "dataset_tags": dataset.tags(),
                         "bands": [],
@@ -76,96 +83,167 @@ def summarize_raster(content: bytes) -> dict:
     return result
 
 
+def response_record(response: requests.Response, requested_format: str) -> dict:
+    record = {
+        "requested_format": requested_format,
+        "request_url": response.url,
+        "status_code": response.status_code,
+        "content_type": response.headers.get("content-type"),
+        "content_length_header": response.headers.get("content-length"),
+        "bytes_received": len(response.content),
+        "response_prefix_hex": response.content[:24].hex(),
+    }
+    if response.status_code != 200 or len(response.content) <= 100:
+        record["response_text_prefix"] = response.text[:2000]
+    return record
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--datetime", default=DEFAULT_TIME)
-    parser.add_argument("--bbox", default=",".join(str(value) for value in DEFAULT_BBOX))
+    parser.add_argument(
+        "--bbox", default=",".join(str(value) for value in DEFAULT_BBOX)
+    )
     parser.add_argument("--output", default="output/archive_probe/rdpa_probe.json")
     args = parser.parse_args()
 
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
-    http = session()
-    collection_url = urljoin(API_ROOT, f"collections/{COLLECTION}")
-    metadata_response = http.get(
-        collection_url,
-        params={"f": "json"},
-        timeout=90,
-    )
-    metadata_response.raise_for_status()
-    metadata = metadata_response.json()
-    links = metadata.get("links", [])
-    formats = [
-        {
-            "type": link.get("type"),
-            "href": link.get("href"),
-            "rel": link.get("rel"),
-            "title": link.get("title"),
-        }
-        for link in links
-        if "coverage" in str(link.get("href", ""))
-    ]
-
-    coverage_url = urljoin(API_ROOT, f"collections/{COLLECTION}/coverage")
-    attempts = []
-    selected = None
-    for requested_format in ["GRIB", "GRIB2", "NetCDF", "GeoTIFF"]:
-        response = http.get(
-            coverage_url,
-            params={
-                "f": requested_format,
-                "bbox": args.bbox,
-                "datetime": args.datetime,
-            },
-            timeout=300,
-        )
-        attempt = {
-            "requested_format": requested_format,
-            "request_url": response.url,
-            "status_code": response.status_code,
-            "content_type": response.headers.get("content-type"),
-            "content_length_header": response.headers.get("content-length"),
-            "bytes_received": len(response.content),
-            "response_prefix_hex": response.content[:24].hex(),
-        }
-        if response.status_code == 200 and len(response.content) > 100:
-            attempt["raster"] = summarize_raster(response.content)
-            if attempt["raster"].get("open_succeeded"):
-                selected = {
-                    "requested_format": requested_format,
-                    "content_type": attempt["content_type"],
-                    "bytes_received": len(response.content),
-                    "raster": attempt["raster"],
-                }
-                attempts.append(attempt)
-                break
-        else:
-            attempt["response_text_prefix"] = response.text[:1000]
-        attempts.append(attempt)
-
+    generated = datetime.now(timezone.utc)
+    encoded_collection = quote(COLLECTION, safe="")
+    collection_url = urljoin(API_ROOT, f"collections/{encoded_collection}")
+    coverage_url = urljoin(API_ROOT, f"collections/{encoded_collection}/coverage")
     output = {
-        "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "status": "passed" if selected else "failed",
+        "generated_utc": generated.isoformat(),
+        "status": "failed",
         "collection": COLLECTION,
         "collection_url": collection_url,
-        "metadata": {
-            "title": metadata.get("title"),
-            "description": metadata.get("description"),
-            "extent": metadata.get("extent"),
-            "coverage_links": formats,
+        "coverage_url": coverage_url,
+        "query": {
+            "bbox": args.bbox,
+            "datetime": args.datetime,
+            "properties": "1",
         },
-        "query": {"bbox": args.bbox, "datetime": args.datetime},
-        "attempts": attempts,
-        "selected": selected,
-        "next_step": (
-            "Build monthly, basin-clipped archived RDPA retrieval and event hindcasting."
-            if selected
-            else "Inspect response formats and adapt the archive retrieval before any historical calibration is changed."
-        ),
+        "metadata_request": {},
+        "metadata": {},
+        "attempts": [],
+        "selected": None,
+        "fatal_error": None,
+        "next_step": "Inspect the saved request diagnostics and adapt archive retrieval before changing calibration.",
     }
-    out.write_text(json.dumps(output, indent=2))
-    print(json.dumps({"status": output["status"], "selected": selected}, indent=2))
-    if selected is None:
+
+    try:
+        http = session()
+        metadata_response = http.get(
+            collection_url,
+            params={"f": "json"},
+            timeout=90,
+        )
+        output["metadata_request"] = response_record(metadata_response, "json")
+        if metadata_response.status_code == 200:
+            try:
+                metadata = metadata_response.json()
+                links = metadata.get("links", [])
+                output["metadata"] = {
+                    "title": metadata.get("title"),
+                    "description": metadata.get("description"),
+                    "extent": metadata.get("extent"),
+                    "coverage_links": [
+                        {
+                            "type": link.get("type"),
+                            "href": link.get("href"),
+                            "rel": link.get("rel"),
+                            "title": link.get("title"),
+                        }
+                        for link in links
+                        if "coverage" in str(link.get("href", ""))
+                    ],
+                }
+            except Exception as exc:
+                output["metadata_parse_error"] = (
+                    f"{exc.__class__.__name__}: {exc}"
+                )
+        else:
+            output["metadata_request"]["response_text_prefix"] = (
+                metadata_response.text[:2000]
+            )
+
+        for requested_format in SUPPORTED_FORMATS:
+            try:
+                response = http.get(
+                    coverage_url,
+                    params={
+                        "f": requested_format,
+                        "bbox": args.bbox,
+                        "datetime": args.datetime,
+                        "properties": "1",
+                    },
+                    timeout=300,
+                )
+                attempt = response_record(response, requested_format)
+                if response.status_code == 200 and len(response.content) > 100:
+                    if requested_format == "json":
+                        try:
+                            payload = response.json()
+                            attempt["json_top_level_keys"] = sorted(payload.keys())
+                            attempt["json_preview"] = payload
+                            output["selected"] = {
+                                "requested_format": requested_format,
+                                "content_type": attempt["content_type"],
+                                "bytes_received": len(response.content),
+                                "coverage_json": payload,
+                            }
+                            output["attempts"].append(attempt)
+                            break
+                        except Exception as exc:
+                            attempt["json_parse_error"] = (
+                                f"{exc.__class__.__name__}: {exc}"
+                            )
+                    else:
+                        attempt["raster"] = summarize_raster(response.content)
+                        if attempt["raster"].get("open_succeeded"):
+                            output["selected"] = {
+                                "requested_format": requested_format,
+                                "content_type": attempt["content_type"],
+                                "bytes_received": len(response.content),
+                                "raster": attempt["raster"],
+                            }
+                            output["attempts"].append(attempt)
+                            break
+                output["attempts"].append(attempt)
+            except Exception as exc:
+                output["attempts"].append(
+                    {
+                        "requested_format": requested_format,
+                        "request_error": f"{exc.__class__.__name__}: {exc}",
+                    }
+                )
+
+        if output["selected"] is not None:
+            output["status"] = "passed"
+            output["next_step"] = (
+                "Build basin-clipped archived RDPA retrieval and multi-event hindcasting."
+            )
+    except Exception as exc:
+        output["fatal_error"] = f"{exc.__class__.__name__}: {exc}"
+    finally:
+        out.write_text(json.dumps(output, indent=2, default=safe_json))
+        print(
+            json.dumps(
+                {
+                    "status": output["status"],
+                    "selected_format": (
+                        output["selected"].get("requested_format")
+                        if output["selected"]
+                        else None
+                    ),
+                    "fatal_error": output["fatal_error"],
+                },
+                indent=2,
+            )
+        )
+
+    if output["status"] != "passed":
         raise SystemExit(1)
 
 
