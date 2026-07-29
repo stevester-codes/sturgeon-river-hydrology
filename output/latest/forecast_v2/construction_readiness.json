@@ -1,218 +1,72 @@
 {
-  "generated_utc": "2026-07-29T06:00:06.779834+00:00",
+  "generated_utc": "2026-07-29T06:34:05.673004+00:00",
   "latest_stage_utc": "2026-07-29T00:00:00+00:00",
-  "latest_stage_m": 2.155,
-  "change_24h_m": -0.03100000000000014,
   "hydrograph_limb": "falling",
-  "thresholds": {
-    "inspection_trigger": {
-      "stage_m": 1.7,
-      "basis": "Observed in 2026 on the rising limb when the Starkey floodplain was visible.",
-      "use": "Mobilization/site-inspection trigger only; not an unconditional work release.",
-      "scenarios": {
-        "dry": {
-          "rain_free_days": 9.791666666666666,
-          "forecast_rain_delay_days": 2.407176733094982,
-          "projected_days": 12.198843399761648,
-          "projected_date_utc": "2026-08-10",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 0.13640684345345488,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1366937173605938,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.134076172280933,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        },
-        "central": {
-          "rain_free_days": 9.791666666666666,
-          "forecast_rain_delay_days": 4.539329562623923,
-          "projected_days": 14.330996229290589,
-          "projected_date_utc": "2026-08-12",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 1.1364068434534549,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1352619994486228,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.1344871209455651,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 240.0,
-              "end_h": 384.0,
-              "delay_days": 1.13317359877628,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        },
-        "wet": {
-          "rain_free_days": 9.791666666666666,
-          "forecast_rain_delay_days": 5.827364627180378,
-          "projected_days": 15.619031293847044,
-          "projected_date_utc": "2026-08-13",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 2.418228430941486,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1356546195696962,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.1334340532429572,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 240.0,
-              "end_h": 384.0,
-              "delay_days": 1.140047523426238,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        }
-      }
+  "current_conditions": {
+    "stage_05EA002_m": 2.155,
+    "stage_change_24h_m": -0.03100000000000014,
+    "observed_discharge_05EA002_m3s": 11.7,
+    "estimated_starkey_wse_m": 650.5037658227849,
+    "estimated_starkey_wse_range_m": [
+      650.3537658227849,
+      650.6537658227849
+    ],
+    "estimated_depth_over_main_floodplain_m": 0.30376582278483966,
+    "estimated_depth_over_low_pocket_m": 0.9037658227848624
+  },
+  "authoritative_operational_threshold": {
+    "main_floodplain_elevation_m": 650.2,
+    "calibrated_05EA002_discharge_m3s": 6.77,
+    "equivalent_05EA002_stage_on_current_limb_m": 1.7611568777519004,
+    "basis": "The user observed the approximately 650.20 m Starkey floodplain visible when the rising 05EA002 gauge crossed 1.700 m; the paired reported discharge was 6.77 m3/s. Current-limb stage is therefore recalculated from discharge rather than fixed at 1.70 m."
+  },
+  "forecast_main_floodplain_exposure": {
+    "dry": {
+      "days_to_main_floodplain_exposure": 10.836750019607427,
+      "date_utc": "2026-08-09"
     },
-    "conservative_release_check": {
-      "stage_m": 1.5,
-      "basis": "Observed during spring 2026 as the approximate Starkey exposure threshold.",
-      "use": "Conservative field-release check, still subject to site drainage and bearing-capacity inspection.",
-      "scenarios": {
-        "dry": {
-          "rain_free_days": 14.333333333333334,
-          "forecast_rain_delay_days": 2.407176733094982,
-          "projected_days": 16.740510066428314,
-          "projected_date_utc": "2026-08-14",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 0.13640684345345488,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1366937173605938,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.134076172280933,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        },
-        "central": {
-          "rain_free_days": 14.333333333333334,
-          "forecast_rain_delay_days": 4.539329562623923,
-          "projected_days": 18.872662895957255,
-          "projected_date_utc": "2026-08-17",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 1.1364068434534549,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1352619994486228,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.1344871209455651,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 240.0,
-              "end_h": 384.0,
-              "delay_days": 1.13317359877628,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        },
-        "wet": {
-          "rain_free_days": 14.333333333333334,
-          "forecast_rain_delay_days": 5.827364627180378,
-          "projected_days": 20.160697960513712,
-          "projected_date_utc": "2026-08-18",
-          "applied_rain_windows": [
-            {
-              "start_h": 0,
-              "end_h": 48,
-              "delay_days": 2.418228430941486,
-              "source": "HRDPS"
-            },
-            {
-              "start_h": 48.0,
-              "end_h": 120.0,
-              "delay_days": 1.1356546195696962,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 120.0,
-              "end_h": 240.0,
-              "delay_days": 1.1334340532429572,
-              "source": "GEPS member window analogue"
-            },
-            {
-              "start_h": 240.0,
-              "end_h": 384.0,
-              "delay_days": 1.140047523426238,
-              "source": "GEPS member window analogue"
-            }
-          ]
-        }
-      }
+    "central": {
+      "days_to_main_floodplain_exposure": 12.96138989679677,
+      "date_utc": "2026-08-11"
+    },
+    "wet": {
+      "days_to_main_floodplain_exposure": 14.253605546580843,
+      "date_utc": "2026-08-12"
     }
   },
-  "recommended_use": {
-    "schedule_planning": "Use the 1.70 m forecast to schedule inspection and provisional mobilization.",
-    "work_release": "Do not release floodplain earthworks solely at 1.70 m on a falling limb. Confirm field conditions; use the 1.50 m forecast as the conservative fallback threshold.",
+  "secondary_field_observations": {
+    "rising_limb_stage_m": 1.7,
+    "spring_stage_m": 1.5,
+    "interpretation": "These support material seasonal/limb hysteresis and are retained as checks, not universal release thresholds."
+  },
+  "low_pocket": {
+    "elevation_m": 649.6,
+    "status": "not reliably represented by river-stage transfer",
+    "interpretation": "At 649.60 m the pocket is below the empirical positive-flow intercept and may be controlled by local ponding/drainage. Raising it toward 650.20 m removes this separate low-point constraint."
+  },
+  "decision": {
+    "status": "not_ready",
+    "schedule_use": "Use the dry/central/wet 650.20 m crossing dates for construction sequencing and provisional mobilization.",
+    "release_rule": "Release floodplain work only after the estimated WSE is at or below 650.20 m and a direct Starkey inspection confirms drainage, access bearing and no renewed rise.",
     "site_checks": [
-      "floodplain visibly drained",
+      "main floodplain visibly drained",
       "no sustained renewed rise forecast",
       "access and working platform have acceptable bearing capacity",
-      "rutting, pumping, and dewatering are manageable"
+      "rutting, pumping and dewatering are manageable",
+      "confirm whether the former 649.60 m pocket has in fact been raised and drains with the main platform"
     ]
   },
+  "uncertainty": {
+    "starkey_transfer_m": 0.15,
+    "rating_fit_rmse_m3s": 0.02799766419621489,
+    "confidence": "low_to_moderate_for_scheduling; field verification required"
+  },
   "limitations": [
-    "The 1.70 m observation was made on a rising limb; the same gauge stage can correspond to different local inundation on a falling limb because of storage and drainage hysteresis.",
-    "The 1.50 m observation was made in spring; summer vegetation, channel conveyance, and antecedent saturation may alter the relationship.",
-    "Both thresholds are provisional field correlations from one year, not statistically calibrated hydraulic stage-transfer relationships."
+    "The current-event rating is fitted to recent provisional 05EA002 observations and can shift if backwater or conveyance changes.",
+    "Forecast paths are daily recession-delay scenarios, not an unsteady hydraulic simulation.",
+    "The discharge-to-Starkey transfer has only two low-to-moderate-flow calibration points.",
+    "Final construction release requires direct site inspection and bearing-capacity confirmation.",
+    "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent Starkey water level.",
+    "Construction release remains a field decision, not an automatic model output."
   ]
 }
