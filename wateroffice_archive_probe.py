@@ -7,7 +7,6 @@ import json
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 import requests
 from requests.adapters import HTTPAdapter
@@ -15,12 +14,13 @@ from urllib3.util.retry import Retry
 
 URL = "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline"
 DEFAULT_STATION = "05EA002"
+TARGET_Q_M3S = 6.77
 
 
 def session() -> requests.Session:
     value = requests.Session()
     value.headers["User-Agent"] = (
-        "sturgeon-river-hydrology-wateroffice-probe/1.0 "
+        "sturgeon-river-hydrology-wateroffice-probe/1.1 "
         "(stevester-codes@users.noreply.github.com)"
     )
     retry = Retry(
@@ -82,6 +82,7 @@ def request_chunk(
         "status_code": response.status_code,
         "content_type": response.headers.get("content-type"),
         "bytes_received": len(response.content),
+        "availability": "request_failed" if response.status_code != 200 else "unknown",
         "rows": 0,
         "stage_rows": 0,
         "discharge_rows": 0,
@@ -95,7 +96,11 @@ def request_chunk(
     try:
         frame = pd.read_csv(io.BytesIO(response.content), encoding="utf-8-sig")
         if frame.empty:
-            record["error"] = "CSV contained headers but no data rows"
+            record["availability"] = "no_station_data_returned"
+            record["note"] = (
+                "HTTP request succeeded but the station reported no unit values; "
+                "this can represent seasonal gauge shutdown rather than a retrieval failure."
+            )
             return record, frame
         date_column, parameter_column, value_column = identify_columns(frame)
         frame[date_column] = pd.to_datetime(frame[date_column], utc=True, errors="coerce")
@@ -104,6 +109,7 @@ def request_chunk(
         frame = frame.dropna(subset=[date_column, parameter_column, value_column])
         record.update(
             {
+                "availability": "data_returned",
                 "rows": int(len(frame)),
                 "stage_rows": int((frame[parameter_column] == 46).sum()),
                 "discharge_rows": int((frame[parameter_column] == 47).sum()),
@@ -121,6 +127,7 @@ def request_chunk(
         )
         return record, normalized
     except Exception as exc:
+        record["availability"] = "parse_failed"
         record["error"] = f"{exc.__class__.__name__}: {exc}"
         record["response_prefix"] = response.text[:2000]
         return record, pd.DataFrame()
@@ -128,10 +135,7 @@ def request_chunk(
 
 def coverage_summary(frame: pd.DataFrame) -> dict:
     if frame.empty:
-        return {
-            "status": "no_data",
-            "rows": 0,
-        }
+        return {"status": "no_data", "rows": 0}
     pivot = frame.pivot_table(
         index="date_utc",
         columns="parameter_id",
@@ -148,14 +152,30 @@ def coverage_summary(frame: pd.DataFrame) -> dict:
         hourly.get("discharge_m3s", pd.Series(dtype=float)).notna().sum()
     )
     paired_hours = int(hourly.dropna(subset=["stage_m", "discharge_m3s"]).shape[0])
-    gaps = hourly[[column for column in ["stage_m", "discharge_m3s"] if column in hourly]].isna().all(axis=1)
+    available_columns = [
+        column for column in ["stage_m", "discharge_m3s"] if column in hourly
+    ]
+    gaps = hourly[available_columns].isna().all(axis=1)
     groups = (gaps != gaps.shift()).cumsum()
     gap_lengths = gaps[gaps].groupby(groups[gaps]).size()
+    stage_range = (
+        [float(pivot.stage_m.min()), float(pivot.stage_m.max())]
+        if "stage_m" in pivot
+        else None
+    )
+    discharge_range = (
+        [float(pivot.discharge_m3s.min()), float(pivot.discharge_m3s.max())]
+        if "discharge_m3s" in pivot
+        else None
+    )
     return {
         "status": "data_available",
         "raw_rows": int(len(frame)),
         "first_timestamp_utc": pivot.index.min().isoformat(),
         "last_timestamp_utc": pivot.index.max().isoformat(),
+        "calendar_span_days": float(
+            (pivot.index.max() - pivot.index.min()).total_seconds() / 86400.0
+        ),
         "expected_hourly_steps": expected_hours,
         "stage_hourly_values": stage_hours,
         "discharge_hourly_values": discharge_hours,
@@ -164,15 +184,12 @@ def coverage_summary(frame: pd.DataFrame) -> dict:
         "discharge_hourly_coverage_pct": 100.0 * discharge_hours / expected_hours,
         "paired_hourly_coverage_pct": 100.0 * paired_hours / expected_hours,
         "longest_all_parameter_gap_h": int(gap_lengths.max()) if len(gap_lengths) else 0,
-        "stage_range_m": (
-            [float(pivot.stage_m.min()), float(pivot.stage_m.max())]
-            if "stage_m" in pivot
-            else None
-        ),
-        "discharge_range_m3s": (
-            [float(pivot.discharge_m3s.min()), float(pivot.discharge_m3s.max())]
-            if "discharge_m3s" in pivot
-            else None
+        "stage_range_m": stage_range,
+        "discharge_range_m3s": discharge_range,
+        "target_discharge_m3s": TARGET_Q_M3S,
+        "target_discharge_inside_observed_range": bool(
+            discharge_range
+            and discharge_range[0] <= TARGET_Q_M3S <= discharge_range[1]
         ),
     }
 
@@ -189,8 +206,7 @@ def main() -> None:
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     now = datetime.now(timezone.utc).replace(microsecond=0)
-    start = now - pd.DateOffset(months=args.months)
-    start = start.to_pydatetime()
+    start = (now - pd.DateOffset(months=args.months)).to_pydatetime()
     output = {
         "generated_utc": now.isoformat(),
         "status": "failed",
@@ -208,9 +224,7 @@ def main() -> None:
     try:
         http = session()
         for chunk_start, chunk_end in month_chunks(start, now):
-            record, frame = request_chunk(
-                http, args.station, chunk_start, chunk_end
-            )
+            record, frame = request_chunk(http, args.station, chunk_start, chunk_end)
             output["chunks"].append(record)
             if not frame.empty:
                 frames.append(frame)
@@ -221,25 +235,59 @@ def main() -> None:
             if frames
             else pd.DataFrame()
         )
-        output["coverage"] = coverage_summary(combined)
-        successful_chunks = sum(
-            1
+        coverage = coverage_summary(combined)
+        output["coverage"] = coverage
+        data_chunks = sum(
+            record.get("availability") == "data_returned"
             for record in output["chunks"]
-            if record.get("status_code") == 200 and record.get("rows", 0) > 0
         )
-        output["successful_chunks"] = successful_chunks
-        output["chunk_count"] = len(output["chunks"])
-        if successful_chunks == len(output["chunks"]) and not combined.empty:
-            output["status"] = "passed"
-            output["next_step"] = (
-                "Retrieve all basin gauges for the same period and pair them with archived RDPA for multi-season event hindcasting."
-            )
-        elif combined.empty:
+        empty_chunks = sum(
+            record.get("availability") == "no_station_data_returned"
+            for record in output["chunks"]
+        )
+        failed_chunks = sum(
+            record.get("availability") in {"request_failed", "parse_failed"}
+            for record in output["chunks"]
+        )
+        output.update(
+            {
+                "data_chunks": data_chunks,
+                "seasonal_no_data_chunks": empty_chunks,
+                "failed_chunks": failed_chunks,
+                "chunk_count": len(output["chunks"]),
+                "availability_interpretation": (
+                    "05EA002 is seasonally operated; successful header-only winter responses are retained as seasonal no-data intervals and are not silently filled."
+                ),
+            }
+        )
+
+        latest = pd.Timestamp(coverage.get("last_timestamp_utc")) if coverage.get("last_timestamp_utc") else None
+        recent_enough = bool(
+            latest is not None
+            and (pd.Timestamp(now) - latest).total_seconds() <= 72 * 3600
+        )
+        criteria = {
+            "no_http_or_parse_failures": failed_chunks == 0,
+            "at_least_ten_months_with_data": data_chunks >= 10,
+            "at_least_300_calendar_days_spanned": coverage.get("calendar_span_days", 0) >= 300,
+            "at_least_60_percent_hourly_coverage_across_calendar_span": coverage.get("paired_hourly_coverage_pct", 0) >= 60,
+            "target_discharge_inside_observed_range": bool(
+                coverage.get("target_discharge_inside_observed_range")
+            ),
+            "latest_data_within_72_hours": recent_enough,
+        }
+        output["acceptance_criteria"] = criteria
+        if combined.empty:
             output["status"] = "failed_no_data"
+        elif all(criteria.values()):
+            output["status"] = "passed_seasonal_open_water_archive"
+            output["next_step"] = (
+                "Retrieve all basin gauges for the same open-water periods and pair them with archived RDPA for multi-season event hindcasting."
+            )
         else:
             output["status"] = "partial"
             output["next_step"] = (
-                "Repair failed monthly chunks, then build the historical event dataset without filling gaps silently."
+                "Use only verified open-water intervals and resolve any failed acceptance criterion before candidate calibration."
             )
     except Exception as exc:
         output["fatal_error"] = f"{exc.__class__.__name__}: {exc}"
@@ -249,16 +297,18 @@ def main() -> None:
             json.dumps(
                 {
                     "status": output["status"],
-                    "successful_chunks": output.get("successful_chunks"),
-                    "chunk_count": output.get("chunk_count"),
+                    "data_chunks": output.get("data_chunks"),
+                    "seasonal_no_data_chunks": output.get("seasonal_no_data_chunks"),
+                    "failed_chunks": output.get("failed_chunks"),
                     "coverage": output.get("coverage"),
+                    "acceptance_criteria": output.get("acceptance_criteria"),
                     "fatal_error": output["fatal_error"],
                 },
                 indent=2,
             )
         )
 
-    if output["status"] != "passed":
+    if output["status"] != "passed_seasonal_open_water_archive":
         raise SystemExit(1)
 
 
