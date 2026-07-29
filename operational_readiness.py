@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import calibration_health
+import discharge_recession_candidate
 import hysteresis_diagnostics
 import uncertainty_sensitivity
 
@@ -16,6 +17,7 @@ PROBABILISTIC = ROOT / "forecast_v2" / "project_threshold_ensemble.json"
 CALIBRATION_HEALTH = ROOT / "diagnostics" / "calibration_health.json"
 HYSTERESIS = ROOT / "diagnostics" / "hysteresis_diagnostics.json"
 UNCERTAINTY = ROOT / "diagnostics" / "uncertainty_sensitivity.json"
+DISCHARGE_CANDIDATE = ROOT / "diagnostics" / "discharge_recession_candidate.json"
 OUT = ROOT / "forecast_v2" / "construction_readiness.json"
 
 
@@ -37,18 +39,20 @@ def main() -> None:
     if probabilistic.get("status") != "operational_project_threshold_ensemble":
         raise RuntimeError("Project-threshold ensemble output is not operational")
 
-    # Diagnostics are part of the authoritative readiness product. A failure
-    # must fail readiness rather than silently publishing an apparently
-    # complete forecast.
+    # Diagnostics are regenerated as part of the authoritative readiness build.
+    # The direct-discharge model remains shadow-only and cannot alter the
+    # operational crossing date without later historical validation.
     hysteresis_diagnostics.main()
     calibration_health.main()
     uncertainty_sensitivity.main()
-    for path in (CALIBRATION_HEALTH, HYSTERESIS, UNCERTAINTY):
+    discharge_recession_candidate.main()
+    for path in (CALIBRATION_HEALTH, HYSTERESIS, UNCERTAINTY, DISCHARGE_CANDIDATE):
         if not path.exists():
             raise RuntimeError(f"Required diagnostic output was not generated: {path}")
     health = json.loads(CALIBRATION_HEALTH.read_text())
     hysteresis = json.loads(HYSTERESIS.read_text())
     uncertainty = json.loads(UNCERTAINTY.read_text())
+    discharge_candidate = json.loads(DISCHARGE_CANDIDATE.read_text())
 
     target = summary.get("target_05EA002", {})
     current = starkey.get("current", {})
@@ -122,6 +126,16 @@ def main() -> None:
             "priority_actions": health.get("priority_actions", []),
             "interpretation": "Operational integrity and scientific confidence are separate. This block reports whether the forecast is running correctly and how strongly its current prediction is supported by calibration data.",
         },
+        "direct_discharge_redundancy_check": {
+            "status": discharge_candidate.get("status"),
+            "mode": discharge_candidate.get("mode"),
+            "dry_hourly_points": discharge_candidate.get("dry_hourly_points"),
+            "candidate_fit": discharge_candidate.get("candidate_fit"),
+            "holdout": discharge_candidate.get("holdout", {}),
+            "current_projection": discharge_candidate.get("current_projection", {}),
+            "promotion_recommendation": discharge_candidate.get("promotion_recommendation", {}),
+            "interpretation": "This shadow model forecasts the 6.77 m3/s threshold directly from discharge recession and compares it with the operational stage-recession-plus-rating chain. It does not alter the official forecast.",
+        },
         "hysteresis_diagnostics": {
             "status": hysteresis.get("status"),
             "current_limb": hysteresis.get("current_limb"),
@@ -166,6 +180,7 @@ def main() -> None:
         + health.get("limitations", [])
         + hysteresis.get("limitations", [])
         + uncertainty.get("limitations", [])
+        + discharge_candidate.get("limitations", [])
         + [
             "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
             "Construction release remains a field decision, not an automatic model output.",
