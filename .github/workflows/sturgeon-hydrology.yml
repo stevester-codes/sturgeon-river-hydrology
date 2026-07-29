@@ -36,6 +36,8 @@ jobs:
           python sturgeon_pipeline.py --start-date 2026-07-01 --contact stevester-codes@users.noreply.github.com
       - name: Generate compact summaries
         run: python summarize_output.py
+      - name: Calibrate rainfall-runoff events
+        run: python calibrate_events.py
       - name: Prepare latest output
         if: always()
         run: |
