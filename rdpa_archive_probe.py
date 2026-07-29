@@ -8,27 +8,27 @@ from pathlib import Path
 from urllib.parse import quote, urljoin
 
 import numpy as np
-import rasterio
 import requests
 from rasterio.io import MemoryFile
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 COLLECTION = "weather:rdpa:10km:6f"
-API_ROOT = "https://api.weather.gc.ca/"
+OGC_API_ROOT = "https://api.weather.gc.ca/"
+WCS_URL = "https://geo.weather.gc.ca/geomet"
+WCS_LAYER = "RDPA.6F_PR"
 DEFAULT_BBOX = [-115.2, 52.9, -113.0, 54.2]
 DEFAULT_TIME = "2026-07-01T00:00:00Z"
-SUPPORTED_FORMATS = ["GRIB", "GTiff", "NetCDF", "json"]
 
 
 def session() -> requests.Session:
     value = requests.Session()
     value.headers["User-Agent"] = (
-        "sturgeon-river-hydrology-rdpa-probe/1.1 "
+        "sturgeon-river-hydrology-rdpa-probe/1.2 "
         "(stevester-codes@users.noreply.github.com)"
     )
     retry = Retry(
-        total=4,
+        total=3,
         backoff_factor=2,
         status_forcelist=[429, 500, 502, 503, 504],
         allowed_methods=["GET"],
@@ -98,6 +98,67 @@ def response_record(response: requests.Response, requested_format: str) -> dict:
     return record
 
 
+def parse_bbox(value: str) -> tuple[float, float, float, float]:
+    values = [float(item.strip()) for item in value.split(",")]
+    if len(values) != 4:
+        raise ValueError("bbox must contain minx,miny,maxx,maxy")
+    minx, miny, maxx, maxy = values
+    if minx >= maxx or miny >= maxy:
+        raise ValueError("bbox bounds are not ordered")
+    return minx, miny, maxx, maxy
+
+
+def try_raster_response(
+    response: requests.Response,
+    label: str,
+    attempts: list[dict],
+):
+    attempt = response_record(response, label)
+    if response.status_code == 200 and len(response.content) > 100:
+        attempt["raster"] = summarize_raster(response.content)
+        attempts.append(attempt)
+        if attempt["raster"].get("open_succeeded"):
+            return {
+                "source": label,
+                "content_type": attempt["content_type"],
+                "bytes_received": len(response.content),
+                "raster": attempt["raster"],
+            }
+    else:
+        attempts.append(attempt)
+    return None
+
+
+def wcs_parameters(
+    bbox: tuple[float, float, float, float],
+    timestamp: str,
+    output_format: str,
+    include_resolution: bool,
+):
+    minx, miny, maxx, maxy = bbox
+    params = [
+        ("SERVICE", "WCS"),
+        ("VERSION", "2.0.1"),
+        ("REQUEST", "GetCoverage"),
+        ("COVERAGEID", WCS_LAYER),
+        ("SUBSETTINGCRS", "EPSG:4326"),
+        ("OUTPUTCRS", "EPSG:4326"),
+        ("SUBSET", f"x({minx},{maxx})"),
+        ("SUBSET", f"y({miny},{maxy})"),
+        ("FORMAT", output_format),
+        ("TIME", timestamp),
+    ]
+    if include_resolution:
+        params.extend(
+            [
+                ("RESOLUTION", "x(0.09)"),
+                ("RESOLUTION", "y(0.09)"),
+                ("INTERPOLATION", "NEAREST"),
+            ]
+        )
+    return params
+
+
 def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--datetime", default=DEFAULT_TIME)
@@ -110,23 +171,25 @@ def main() -> None:
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
     generated = datetime.now(timezone.utc)
+    bbox = parse_bbox(args.bbox)
     encoded_collection = quote(COLLECTION, safe="")
-    collection_url = urljoin(API_ROOT, f"collections/{encoded_collection}")
-    coverage_url = urljoin(API_ROOT, f"collections/{encoded_collection}/coverage")
+    collection_url = urljoin(OGC_API_ROOT, f"collections/{encoded_collection}")
+    default_coverage_url = urljoin(
+        OGC_API_ROOT, f"collections/{encoded_collection}/coverage"
+    )
     output = {
         "generated_utc": generated.isoformat(),
         "status": "failed",
         "collection": COLLECTION,
         "collection_url": collection_url,
-        "coverage_url": coverage_url,
-        "query": {
-            "bbox": args.bbox,
-            "datetime": args.datetime,
-            "properties": "1",
-        },
+        "ogc_coverage_url": default_coverage_url,
+        "wcs_url": WCS_URL,
+        "wcs_layer": WCS_LAYER,
+        "query": {"bbox": args.bbox, "datetime": args.datetime},
         "metadata_request": {},
         "metadata": {},
-        "attempts": [],
+        "ogc_attempts": [],
+        "wcs_attempts": [],
         "selected": None,
         "fatal_error": None,
         "next_step": "Inspect the saved request diagnostics and adapt archive retrieval before changing calibration.",
@@ -140,24 +203,26 @@ def main() -> None:
             timeout=90,
         )
         output["metadata_request"] = response_record(metadata_response, "json")
+        metadata = {}
         if metadata_response.status_code == 200:
             try:
                 metadata = metadata_response.json()
                 links = metadata.get("links", [])
+                coverage_links = [
+                    {
+                        "type": link.get("type"),
+                        "href": link.get("href"),
+                        "rel": link.get("rel"),
+                        "title": link.get("title"),
+                    }
+                    for link in links
+                    if "coverage" in str(link.get("href", ""))
+                ]
                 output["metadata"] = {
                     "title": metadata.get("title"),
                     "description": metadata.get("description"),
                     "extent": metadata.get("extent"),
-                    "coverage_links": [
-                        {
-                            "type": link.get("type"),
-                            "href": link.get("href"),
-                            "rel": link.get("rel"),
-                            "title": link.get("title"),
-                        }
-                        for link in links
-                        if "coverage" in str(link.get("href", ""))
-                    ],
+                    "coverage_links": coverage_links,
                 }
             except Exception as exc:
                 output["metadata_parse_error"] = (
@@ -168,56 +233,98 @@ def main() -> None:
                 metadata_response.text[:2000]
             )
 
-        for requested_format in SUPPORTED_FORMATS:
+        # Try only formats actually advertised by the collection and use its
+        # exact unescaped link. The field filter is omitted because this RDPA
+        # collection has exhibited server-side 500s when properties=1 is used.
+        advertised = output.get("metadata", {}).get("coverage_links", [])
+        ogc_candidates = []
+        for link in advertised:
+            href = str(link.get("href", ""))
+            media_type = str(link.get("type", ""))
+            if "application/x-grib" in media_type:
+                ogc_candidates.append(("OGC_API_GRIB", href, "GRIB"))
+            elif "coverage+json" in media_type:
+                ogc_candidates.append(("OGC_API_JSON", href, "json"))
+        if not ogc_candidates:
+            ogc_candidates = [
+                ("OGC_API_GRIB", default_coverage_url, "GRIB"),
+                ("OGC_API_JSON", default_coverage_url, "json"),
+            ]
+
+        for label, href, requested_format in ogc_candidates:
             try:
                 response = http.get(
-                    coverage_url,
+                    href,
                     params={
                         "f": requested_format,
                         "bbox": args.bbox,
                         "datetime": args.datetime,
-                        "properties": "1",
                     },
                     timeout=300,
                 )
-                attempt = response_record(response, requested_format)
-                if response.status_code == 200 and len(response.content) > 100:
-                    if requested_format == "json":
+                if requested_format == "json":
+                    attempt = response_record(response, label)
+                    if response.status_code == 200 and len(response.content) > 100:
                         try:
                             payload = response.json()
                             attempt["json_top_level_keys"] = sorted(payload.keys())
-                            attempt["json_preview"] = payload
                             output["selected"] = {
-                                "requested_format": requested_format,
+                                "source": label,
                                 "content_type": attempt["content_type"],
                                 "bytes_received": len(response.content),
-                                "coverage_json": payload,
+                                "coverage_json_top_level_keys": sorted(payload.keys()),
                             }
-                            output["attempts"].append(attempt)
-                            break
                         except Exception as exc:
                             attempt["json_parse_error"] = (
                                 f"{exc.__class__.__name__}: {exc}"
                             )
-                    else:
-                        attempt["raster"] = summarize_raster(response.content)
-                        if attempt["raster"].get("open_succeeded"):
-                            output["selected"] = {
-                                "requested_format": requested_format,
-                                "content_type": attempt["content_type"],
-                                "bytes_received": len(response.content),
-                                "raster": attempt["raster"],
-                            }
-                            output["attempts"].append(attempt)
-                            break
-                output["attempts"].append(attempt)
+                    output["ogc_attempts"].append(attempt)
+                else:
+                    selected = try_raster_response(
+                        response, label, output["ogc_attempts"]
+                    )
+                    if selected:
+                        output["selected"] = selected
+                if output["selected"]:
+                    break
             except Exception as exc:
-                output["attempts"].append(
+                output["ogc_attempts"].append(
                     {
-                        "requested_format": requested_format,
+                        "source": label,
                         "request_error": f"{exc.__class__.__name__}: {exc}",
                     }
                 )
+
+        # Official WCS 2.0.1 fallback. Try native resolution first, then an
+        # explicit 0.09-degree output grid, and finally NetCDF.
+        if output["selected"] is None:
+            wcs_requests = [
+                ("WCS_TIFF_NATIVE", "image/tiff", False),
+                ("WCS_TIFF_0.09DEG", "image/tiff", True),
+                ("WCS_NETCDF_NATIVE", "image/netcdf", False),
+            ]
+            for label, output_format, include_resolution in wcs_requests:
+                try:
+                    response = http.get(
+                        WCS_URL,
+                        params=wcs_parameters(
+                            bbox, args.datetime, output_format, include_resolution
+                        ),
+                        timeout=300,
+                    )
+                    selected = try_raster_response(
+                        response, label, output["wcs_attempts"]
+                    )
+                    if selected:
+                        output["selected"] = selected
+                        break
+                except Exception as exc:
+                    output["wcs_attempts"].append(
+                        {
+                            "source": label,
+                            "request_error": f"{exc.__class__.__name__}: {exc}",
+                        }
+                    )
 
         if output["selected"] is not None:
             output["status"] = "passed"
@@ -232,8 +339,8 @@ def main() -> None:
             json.dumps(
                 {
                     "status": output["status"],
-                    "selected_format": (
-                        output["selected"].get("requested_format")
+                    "selected_source": (
+                        output["selected"].get("source")
                         if output["selected"]
                         else None
                     ),
