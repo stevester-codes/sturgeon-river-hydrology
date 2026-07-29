@@ -1,24 +1,16 @@
-Traceback (most recent call last):
-  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/geps_ensemble_impacts.py", line 477, in <module>
-    main()
-  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/geps_ensemble_impacts.py", line 457, in main
-    ENSEMBLE_OUT.write_text(json.dumps(output, indent=2))
-                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/__init__.py", line 238, in dumps
-    **kw).encode(obj)
-          ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 202, in encode
-    chunks = list(chunks)
-             ^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 432, in _iterencode
-    yield from _iterencode_dict(o, _current_indent_level)
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 406, in _iterencode_dict
-    yield from chunks
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 326, in _iterencode_list
-    yield from chunks
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 439, in _iterencode
-    o = _default(o)
-        ^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.13/x64/lib/python3.12/json/encoder.py", line 180, in default
-    raise TypeError(f'Object of type {o.__class__.__name__} '
-TypeError: Object of type int64 is not JSON serializable
+{
+  "geps_members": 21,
+  "horizons": 12,
+  "official_outlook": {
+    "status": "operational_geps_integrated",
+    "primary_scenario": "central",
+    "dry_days_to_1_70": 12.198843399761648,
+    "central_days_to_1_70": 14.330996229290589,
+    "wet_days_to_1_70": 15.619031293847044,
+    "dry_date_utc": "2026-08-10",
+    "central_date_utc": "2026-08-12",
+    "wet_date_utc": "2026-08-13",
+    "interpretation": "HRDPS governs the first 48 hours. Actual GEPS members selected near the 10th, 50th and 90th percentiles govern later rainfall windows through 16 days. Only windows beginning before the projected 1.70 m crossing are allowed to delay that crossing.",
+    "confidence": "low"
+  }
+}
