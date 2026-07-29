@@ -1,0 +1,116 @@
+{
+  "generated_utc": "2026-07-29T15:55:50.094595+00:00",
+  "status": "diagnostic_candidate_gate",
+  "recent_data_range": {
+    "stage_start_utc": "2026-07-15T00:00:00+00:00",
+    "stage_end_utc": "2026-07-29T00:00:00+00:00",
+    "precip_start_utc": "2026-07-15T00:00:00+00:00",
+    "precip_end_utc": "2026-07-29T06:00:00+00:00"
+  },
+  "counts": {
+    "detected_recent_events": 4,
+    "new_events_not_in_calibration": 0,
+    "clean_peak_candidates": 0,
+    "complete_recovery_candidates": 0
+  },
+  "promotion_policy": {
+    "automatic_promotion_enabled": false,
+    "required_before_candidate_model": [
+      "retrieve full HRDPA grid coverage for the complete event",
+      "recompute the same spatial features used by the existing calibration",
+      "confirm peak and censoring classifications against the longer historical window",
+      "create a candidate calibration without overwriting the operational calibration",
+      "run leave-one-event-out and hindcast comparisons where sample size permits",
+      "promote only if performance and physical plausibility do not worsen",
+      "retain the previous calibration and outputs for immediate rollback"
+    ]
+  },
+  "recommended_action": "Run the manual historical backfill and candidate-calibration comparison when a clean new peak or recovery candidate appears. Do not modify the live training set from the rolling 14-day operational files alone.",
+  "candidates": [
+    {
+      "rain_start_utc": "2026-07-15T00:00:00+00:00",
+      "rain_end_utc": "2026-07-16T12:00:00+00:00",
+      "analysis_end_utc": "2026-07-19T00:00:00+00:00",
+      "status": "already_in_calibration_dataset",
+      "already_calibrated": true,
+      "censor_reason": "next_rain_event",
+      "basin_rain_mm": 14.205777214105865,
+      "pre_event_stage_m": 2.532,
+      "departure_peak_m": 0.10157696151344453,
+      "departure_peak_utc": "2026-07-15T09:00:00+00:00",
+      "departure_at_analysis_end_m": 0.04634534978710869,
+      "hours_observed_after_peak": 87.0,
+      "peak_decline_after_peak_m": 0.05523161172633584,
+      "clean_peak_observed": true,
+      "complete_recovery_observed": false,
+      "recovery_utc": null,
+      "full_grid_spatial_backfill_required": false,
+      "automatic_promotion_allowed": false
+    },
+    {
+      "rain_start_utc": "2026-07-19T00:00:00+00:00",
+      "rain_end_utc": "2026-07-22T12:00:00+00:00",
+      "analysis_end_utc": "2026-07-26T00:00:00+00:00",
+      "status": "already_in_calibration_dataset",
+      "already_calibrated": true,
+      "censor_reason": "next_rain_event",
+      "basin_rain_mm": 36.3557031563733,
+      "pre_event_stage_m": 2.3775,
+      "departure_peak_m": 0.17279897530690835,
+      "departure_peak_utc": "2026-07-19T04:00:00+00:00",
+      "departure_at_analysis_end_m": 0.15558849835363553,
+      "hours_observed_after_peak": 164.0,
+      "peak_decline_after_peak_m": 0.017210476953272824,
+      "clean_peak_observed": true,
+      "complete_recovery_observed": false,
+      "recovery_utc": null,
+      "full_grid_spatial_backfill_required": false,
+      "automatic_promotion_allowed": false
+    },
+    {
+      "rain_start_utc": "2026-07-26T00:00:00+00:00",
+      "rain_end_utc": "2026-07-27T06:00:00+00:00",
+      "analysis_end_utc": "2026-07-27T18:00:00+00:00",
+      "status": "already_in_calibration_dataset",
+      "already_calibrated": true,
+      "censor_reason": "next_rain_event",
+      "basin_rain_mm": 15.260784067726622,
+      "pre_event_stage_m": 2.193,
+      "departure_peak_m": 0.08857678709679195,
+      "departure_peak_utc": "2026-07-26T04:00:00+00:00",
+      "departure_at_analysis_end_m": 0.06582279939972624,
+      "hours_observed_after_peak": 38.0,
+      "peak_decline_after_peak_m": 0.022753987697065714,
+      "clean_peak_observed": true,
+      "complete_recovery_observed": false,
+      "recovery_utc": null,
+      "full_grid_spatial_backfill_required": false,
+      "automatic_promotion_allowed": false
+    },
+    {
+      "rain_start_utc": "2026-07-27T18:00:00+00:00",
+      "rain_end_utc": "2026-07-29T12:00:00+00:00",
+      "analysis_end_utc": "2026-07-29T00:00:00+00:00",
+      "status": "already_in_calibration_dataset",
+      "already_calibrated": true,
+      "censor_reason": "dataset_right_edge",
+      "basin_rain_mm": 11.31796733618846,
+      "pre_event_stage_m": 2.1745,
+      "departure_peak_m": 0.06852846723917194,
+      "departure_peak_utc": "2026-07-27T20:00:00+00:00",
+      "departure_at_analysis_end_m": 0.04067289865977797,
+      "hours_observed_after_peak": 28.0,
+      "peak_decline_after_peak_m": 0.027855568579393974,
+      "clean_peak_observed": true,
+      "complete_recovery_observed": false,
+      "recovery_utc": null,
+      "full_grid_spatial_backfill_required": false,
+      "automatic_promotion_allowed": false
+    }
+  ],
+  "limitations": [
+    "The rolling operational dataset is only about 14 days and can truncate an event that began earlier.",
+    "Operational precipitation contains watershed summaries but not all full-grid spatial features required by calibration_v2.",
+    "Peak and recovery classifications are screening tests; final assimilation must use the longer historical backfill."
+  ]
+}
