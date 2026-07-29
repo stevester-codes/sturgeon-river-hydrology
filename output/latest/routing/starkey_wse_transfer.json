@@ -1,6 +1,15 @@
 {
-  "generated_utc": "2026-07-29T13:09:04.331246+00:00",
-  "method": "discharge_based_empirical_transfer_with_hec_ras_check",
+  "generated_utc": "2026-07-29T14:48:20.950282+00:00",
+  "method": "site_specific_rs18883_log_discharge_wse_curve",
+  "project_location": {
+    "river_station": 18883,
+    "description": "Trail and pedestrian bridge project section near Starkey",
+    "downstream_bridge_sections": [
+      18192,
+      18178
+    ],
+    "note": "RS 18883 is the project section; bridge sections near RS 18192/18178 are not used as the project WSE location."
+  },
   "current_05EA002": {
     "stage_m": 2.155,
     "discharge_m3s": 11.7
@@ -10,59 +19,90 @@
     "2026_rising_stage_m": 1.7,
     "2026_rising_discharge_m3s": 6.77,
     "discharge_ratio_2026_to_historical": 0.48357142857142854,
-    "interpretation": "The same approximately 1.70 m gauge stage carried only about half the historical/model discharge; therefore stage alone is not used to estimate Starkey WSE."
+    "interpretation": "The same approximately 1.70 m gauge stage carried only about half the historical/model discharge; stage alone is not used to estimate project-site WSE."
   },
-  "calibration_points": [
+  "site_constraints": [
     {
-      "source": "2026 user field observation matched to 05EA002 rising crossing",
       "discharge_m3s": 6.77,
-      "starkey_wse_m": 650.2,
-      "quality": "approximate field threshold"
+      "wse_m": 650.2,
+      "source": "2026 user field observation at project site",
+      "quality": "approximate floodplain-visibility threshold; not a concurrent surveyed WSE"
     },
     {
-      "source": "2018 surveyed Starkey high-water marks",
-      "discharge_m3s": 20.2,
-      "starkey_wse_m": 651.0275,
-      "quality": "surveyed event mean"
+      "discharge_m3s": 52.0,
+      "wse_m": 651.8,
+      "source": "1:20-year project/design level at RS 18883",
+      "quality": "modelled design WSE; 20-year discharge from 2022 flood-frequency study"
+    },
+    {
+      "discharge_m3s": 90.0,
+      "wse_m": 652.35,
+      "source": "1:100-year project/design level at RS 18883",
+      "quality": "modelled design WSE; 100-year discharge from 2022 flood-frequency study"
     }
   ],
   "transfer": {
-    "equation": "Starkey_WSE_m = intercept + slope * Q_05EA002_m3s",
-    "intercept_m": 649.7828611317946,
-    "slope_m_per_m3s": 0.06161578555472721,
-    "intended_discharge_range_m3s": [
-      6.77,
-      20.2
+    "type": "quadratic_lagrange_in_ln_discharge",
+    "equation": "WSE is quadratic-interpolated against ln(Q) through the three RS 18883 site constraints",
+    "points": [
+      {
+        "discharge_m3s": 6.77,
+        "wse_m": 650.2,
+        "source": "2026 user field observation at project site",
+        "quality": "approximate floodplain-visibility threshold; not a concurrent surveyed WSE"
+      },
+      {
+        "discharge_m3s": 52.0,
+        "wse_m": 651.8,
+        "source": "1:20-year project/design level at RS 18883",
+        "quality": "modelled design WSE; 20-year discharge from 2022 flood-frequency study"
+      },
+      {
+        "discharge_m3s": 90.0,
+        "wse_m": 652.35,
+        "source": "1:100-year project/design level at RS 18883",
+        "quality": "modelled design WSE; 100-year discharge from 2022 flood-frequency study"
+      }
+    ],
+    "operational_threshold_discharge_m3s": 6.77,
+    "design_check_discharge_range_m3s": [
+      52.0,
+      90.0
     ],
     "uncertainty_m": 0.15
   },
-  "hec_ras_check": {
-    "discharge_m3s": 14.0,
-    "modelled_starkey_wse_m": 650.49,
-    "2018_bias_correction_m": 0.13750000000004547,
-    "bias_corrected_wse_m": 650.6275,
-    "empirical_transfer_wse_m": 650.6454821295607
+  "downstream_bridge_check": {
+    "river_stations": [
+      18192,
+      18178
+    ],
+    "discharge_m3s": 20.2,
+    "observed_mean_wse_m": 651.0275,
+    "project_curve_wse_m": 650.9709048910015,
+    "difference_project_curve_minus_bridge_hwm_m": -0.05659510899852194,
+    "interpretation": "This is a location-mismatched reasonableness check only; bridge high-water marks are not a project-site calibration point."
   },
   "current_starkey_estimate": {
-    "central_wse_m": 650.5037658227849,
+    "central_wse_m": 650.5606512309578,
     "range_m": [
-      650.3537658227849,
-      650.6537658227849
+      650.4106512309578,
+      650.7106512309578
     ],
-    "depth_over_main_floodplain_m": 0.30376582278483966,
-    "depth_over_low_pocket_m": 0.9037658227848624
+    "depth_over_main_floodplain_m": 0.36065123095772833,
+    "depth_over_low_pocket_m": 0.9606512309577511
   },
   "site_thresholds": {
     "main_floodplain_elevation_m": 650.2,
-    "main_floodplain_target_discharge_m3s": 6.769999999999688,
+    "main_floodplain_target_discharge_m3s": 6.769999999999754,
     "low_pocket_elevation_m": 649.6,
-    "low_pocket_target_discharge_m3s": null,
-    "low_pocket_note": "The 649.60 m pocket lies below the positive-flow intercept of this limited transfer and may remain ponded or hydraulically controlled independently; raising it toward 650.20 m materially improves drainage readiness."
+    "low_pocket_curve_discharge_m3s": 2.1120925601620675,
+    "low_pocket_note": "The 649.60 m pocket may remain controlled by local ponding or drainage and is not a reliable automatic work-release threshold. Raising it toward 650.20 m removes this separate low-point constraint."
   },
   "limitations": [
-    "Only two low-to-moderate-flow calibration points are available.",
-    "The 2026 field point is an approximate visibility threshold rather than a surveyed water surface.",
-    "The relationship is not extrapolated confidently below 6.77 or above 20.2 m3/s.",
-    "Local blockage, downstream backwater, floodplain storage, and rising/falling limb hysteresis may shift Starkey WSE by more than the stated uncertainty."
+    "Only one low-flow project-site field observation anchors the operational exposure threshold.",
+    "The 1:20 and 1:100 project-site elevations are modelled design levels, not observed events.",
+    "The 2026 field point is an approximate visibility threshold rather than a surveyed concurrent water surface.",
+    "The curve between 6.77 and 52 m3/s is interpolated across a large data gap; approximately plus or minus 0.15 m remains the working uncertainty.",
+    "Local blockage, downstream backwater, floodplain storage, and rising/falling-limb hysteresis can shift project-site WSE beyond the stated uncertainty."
   ]
 }
