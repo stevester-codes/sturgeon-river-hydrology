@@ -124,7 +124,8 @@ def zipdir(src,dst):
 def main():
     ap=argparse.ArgumentParser(); ap.add_argument('--start-date',default='2026-07-01'); ap.add_argument('--end-date'); ap.add_argument('--output-dir',default='sturgeon_pipeline_output'); ap.add_argument('--contact',default='github-actions@users.noreply.github.com'); args=ap.parse_args()
     start=datetime.strptime(args.start_date,'%Y-%m-%d').replace(tzinfo=timezone.utc)
-    end=datetime.strptime(args.end_date,'%Y-%m-%d').replace(tzinfo=timezone.utc) if args.end_date else datetime.now(timezone.utc).replace(hour=0,minute=0,second=0,microsecond=0)
+    end=datetime.strptime(args.end_date,'%Y-%m-%d').replace(tzinfo=timezone.utc) if args.end_date else datetime.now(timezone.utc).replace(microsecond=0)
+    if end<start: raise ValueError(f'end {end.isoformat()} precedes start {start.isoformat()}')
     out=Path(args.output_dir); out.mkdir(parents=True,exist_ok=True)
     logging.basicConfig(level=logging.INFO,format='%(asctime)s %(levelname)s %(message)s',handlers=[logging.StreamHandler(),logging.FileHandler(out/'run.log')])
     s=session(args.contact); warnings=[]
@@ -133,7 +134,7 @@ def main():
     for accum in ('06','24'):
         rows,w=fetch_hrdpa(s,start,end,accum,out/f'raw/hrdpa_watershed/{accum}'); warnings+=w; write_csv(rows,out/f'processed/watershed_precip_{accum}h.csv')
     (out/'logs').mkdir(exist_ok=True); (out/'logs/missing_periods.log').write_text('\n'.join(warnings) if warnings else 'No warnings.\n')
-    status={'run_utc':datetime.now(timezone.utc).isoformat(),'start':str(start.date()),'end':str(end.date()),'warnings':len(warnings)}; (out/'status.json').write_text(json.dumps(status,indent=2))
+    status={'run_utc':datetime.now(timezone.utc).isoformat(),'start_utc':start.isoformat(),'end_utc':end.isoformat(),'warnings':len(warnings)}; (out/'status.json').write_text(json.dumps(status,indent=2))
     z=out.parent/f'{out.name}_{datetime.now(timezone.utc):%Y%m%dT%H%M%SZ}.zip'; zipdir(out,z); print(z)
 
 if __name__=='__main__': main()
