@@ -1,0 +1,70 @@
+name: Sturgeon RDPA archive probe
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'rdpa_archive_probe.py'
+      - '.github/workflows/sturgeon-rdpa-archive-probe.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-rdpa-archive-probe
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile probe
+        run: python -m py_compile rdpa_archive_probe.py
+      - name: Probe archived RDPA coverage
+        run: |
+          rm -rf output/archive_probe
+          python rdpa_archive_probe.py \
+            --datetime '2026-07-01T00:00:00Z' \
+            --bbox=-115.2,52.9,-113.0,54.2 \
+            --output output/archive_probe/rdpa_probe.json
+      - name: Upload probe result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-rdpa-archive-probe
+          path: output/archive_probe
+          retention-days: 14
+      - name: Publish probe result
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/rdpa-probe
+          cp -a output/archive_probe /tmp/rdpa-probe
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/archive_probe
+            mkdir -p output
+            cp -a /tmp/rdpa-probe output/archive_probe
+            git add -f output/archive_probe
+            if git diff --cached --quiet; then
+              exit 0
+            fi
+            git commit -m 'Update RDPA archive probe [skip ci]'
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1
