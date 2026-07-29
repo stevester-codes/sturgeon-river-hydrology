@@ -47,6 +47,8 @@ jobs:
         run: python calibrate_events.py
       - name: Process full-grid rainfall and QPF
         run: python spatial_qpf.py
+      - name: Translate QPF into river impacts
+        run: python forecast_impacts.py
       - name: Prepare latest output
         if: always()
         run: |
