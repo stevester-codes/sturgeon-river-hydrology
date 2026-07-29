@@ -15,6 +15,8 @@ on:
       - 'medium_range_qpf.py'
       - 'geps_ensemble_impacts.py'
       - 'run_geps_ensemble_impacts.py'
+      - 'starkey_wse_transfer.py'
+      - 'forecast_starkey_wse.py'
       - 'operational_readiness.py'
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
@@ -59,6 +61,8 @@ jobs:
             medium_range_qpf.py \
             geps_ensemble_impacts.py \
             run_geps_ensemble_impacts.py \
+            starkey_wse_transfer.py \
+            forecast_starkey_wse.py \
             operational_readiness.py \
             validate_qpf.py \
             aggregate_qpf_horizons.py \
@@ -82,6 +86,13 @@ jobs:
         run: |
           python summarize_output.py
           python refresh_operational_base.py
+      - name: Estimate current Starkey WSE from discharge
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python starkey_wse_transfer.py 2>&1 | tee sturgeon_pipeline_output/logs/starkey_wse_transfer.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/starkey_wse_transfer.exitcode
       - name: Retrieve high-resolution short-range QPF
         continue-on-error: true
         run: |
@@ -139,12 +150,24 @@ jobs:
             python run_geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
           fi
+      - name: Forecast Starkey WSE and main floodplain crossing
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/starkey_wse_transfer.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping Starkey WSE forecast because transfer or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
+            echo 3 > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
+          else
+            set -o pipefail
+            python forecast_starkey_wse.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
+          fi
       - name: Calculate limb-aware construction readiness dates
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping construction readiness because GEPS river paths failed.' | tee sturgeon_pipeline_output/logs/operational_readiness.log
+          if [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping construction readiness because GEPS or Starkey WSE paths failed.' | tee sturgeon_pipeline_output/logs/operational_readiness.log
             echo 3 > sturgeon_pipeline_output/logs/operational_readiness.exitcode
           else
             set -o pipefail
