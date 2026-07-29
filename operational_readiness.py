@@ -19,6 +19,7 @@ HYSTERESIS = ROOT / "diagnostics" / "hysteresis_diagnostics.json"
 UNCERTAINTY = ROOT / "diagnostics" / "uncertainty_sensitivity.json"
 DISCHARGE_CANDIDATE = ROOT / "diagnostics" / "discharge_recession_candidate.json"
 OUT = ROOT / "forecast_v2" / "construction_readiness.json"
+MAX_OBSERVATION_AGE_HOURS = 6.0
 
 
 def finite(value, default=None):
@@ -26,6 +27,18 @@ def finite(value, default=None):
         return float(value)
     except (TypeError, ValueError):
         return default
+
+
+def parse_utc(value) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
+    except Exception:
+        return None
 
 
 def main() -> None:
@@ -38,6 +51,23 @@ def main() -> None:
     probabilistic = json.loads(PROBABILISTIC.read_text())
     if probabilistic.get("status") != "operational_project_threshold_ensemble":
         raise RuntimeError("Project-threshold ensemble output is not operational")
+
+    target = summary.get("target_05EA002", {})
+    generated_now = datetime.now(timezone.utc)
+    observation_time = parse_utc(target.get("latest_utc"))
+    if observation_time is None:
+        raise RuntimeError("Latest 05EA002 observation timestamp is missing or invalid")
+    observation_age_hours = (
+        generated_now - observation_time
+    ).total_seconds() / 3600.0
+    if observation_age_hours < -0.25:
+        raise RuntimeError(
+            f"Latest 05EA002 observation is in the future by {-observation_age_hours:.2f} hours"
+        )
+    if observation_age_hours > MAX_OBSERVATION_AGE_HOURS:
+        raise RuntimeError(
+            f"Latest 05EA002 observation is stale: {observation_age_hours:.2f} hours old"
+        )
 
     # Diagnostics are regenerated as part of the authoritative readiness build.
     # Direct-discharge models remain independent sensitivities and cannot alter
@@ -54,7 +84,6 @@ def main() -> None:
     uncertainty = json.loads(UNCERTAINTY.read_text())
     discharge_candidate = json.loads(DISCHARGE_CANDIDATE.read_text())
 
-    target = summary.get("target_05EA002", {})
     current = starkey.get("current", {})
     threshold = starkey.get("construction_threshold", {})
     scenarios = starkey.get("scenarios", {})
@@ -81,8 +110,13 @@ def main() -> None:
     planning_summary = uncertainty.get("planning_summary", {})
 
     output = {
-        "generated_utc": datetime.now(timezone.utc).isoformat(),
-        "latest_stage_utc": target.get("latest_utc"),
+        "generated_utc": generated_now.isoformat(),
+        "latest_stage_utc": observation_time.isoformat(),
+        "observation_freshness": {
+            "age_hours": observation_age_hours,
+            "maximum_allowed_age_hours": MAX_OBSERVATION_AGE_HOURS,
+            "status": "current",
+        },
         "project_location": starkey.get("project_location", {}),
         "hydrograph_limb": limb,
         "current_conditions": {
