@@ -1,0 +1,141 @@
+name: Sturgeon operational forecast
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sturgeon-operational.yml'
+      - 'refresh_operational_base.py'
+      - 'sturgeon_pipeline.py'
+      - 'summarize_output.py'
+      - 'qpf_forecast_v2.py'
+      - 'validate_qpf.py'
+      - 'aggregate_qpf_horizons.py'
+      - 'forecast_impacts_v2.py'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-hydrology-operational
+  cancel-in-progress: true
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Restore forecast grid cache
+        uses: actions/cache@v4
+        with:
+          path: grid_cache
+          key: sturgeon-operational-grid-v1-${{ runner.os }}
+          restore-keys: |
+            sturgeon-operational-grid-v1-${{ runner.os }}
+            sturgeon-grid-cache-v3-${{ runner.os }}
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile-check operational scripts
+        run: |
+          python -m py_compile \
+            sturgeon_pipeline.py \
+            summarize_output.py \
+            refresh_operational_base.py \
+            qpf_forecast_v2.py \
+            validate_qpf.py \
+            aggregate_qpf_horizons.py \
+            forecast_impacts_v2.py
+      - name: Seed working directory from calibrated output
+        run: |
+          test -f output/latest/calibration_v2/calibration_v2.json
+          test -f output/latest/calibration_v2/event_response_v2.csv
+          test -f output/latest/calibration/calibration.json
+          test -f output/latest/spatial/derived_subareas.geojson
+          rm -rf sturgeon_pipeline_output
+          cp -a output/latest sturgeon_pipeline_output
+      - name: Refresh recent gauges and observed basin rainfall
+        run: |
+          START=$(date -u -d '14 days ago' +%F)
+          python sturgeon_pipeline.py \
+            --start-date "$START" \
+            --output-dir sturgeon_pipeline_output \
+            --contact stevester-codes@users.noreply.github.com
+      - name: Refresh current summary and rain-free projection
+        run: |
+          python summarize_output.py
+          python refresh_operational_base.py
+      - name: Retrieve corrected deterministic and ensemble QPF
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python qpf_forecast_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/qpf_forecast_v2.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/qpf_forecast_v2.exitcode
+      - name: Validate QPF accumulation semantics
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python validate_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/validate_qpf.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/validate_qpf.exitcode
+      - name: Aggregate cumulative QPF footprints
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping horizon aggregation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
+            echo 3 > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
+          else
+            set -o pipefail
+            python aggregate_qpf_horizons.py 2>&1 | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
+          fi
+      - name: Translate QPF with calibrated censor-aware model
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping operational forecast because validated cumulative QPF is unavailable.' | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          else
+            set -o pipefail
+            python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          fi
+      - name: Prepare latest operational output
+        if: always()
+        run: |
+          rm -rf output/latest
+          mkdir -p output/latest
+          if [ -d sturgeon_pipeline_output ]; then cp -a sturgeon_pipeline_output/. output/latest/; fi
+          ZIP=$(ls -1t sturgeon_pipeline_output_*.zip 2>/dev/null | head -1 || true)
+          if [ -n "$ZIP" ]; then cp "$ZIP" output/latest/sturgeon_pipeline_latest.zip; fi
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
+          echo operational > output/latest/workflow_mode.txt
+      - name: Upload operational package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-operational-latest
+          path: output/latest
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Commit latest operational outputs
+        if: always()
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f output/latest
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m 'Update Sturgeon operational forecast [skip ci]'
+          git pull --rebase origin main
+          git push
