@@ -1,20 +1,22 @@
 {
-  "generated_utc": "2026-07-29T17:42:56.305342+00:00",
+  "generated_utc": "2026-07-29T18:22:52.306797+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
-    "score_out_of_100": 48.0,
+    "score_version": 2,
+    "score_out_of_100": 58.0,
     "tier": "low_to_moderate",
     "components": {
-      "uncensored_peak_events": 16.0,
+      "uncensored_peak_events": 14.0,
       "complete_recoveries": 0.0,
       "storm_type_diversity": 8.0,
       "forecast_feature_coverage": 2.0,
       "current_rating_support": 2.0,
-      "meteorological_ensemble": 10.0,
-      "project_transfer_support": 4.0,
-      "operational_integrity_controls": 6.0
+      "meteorological_ensemble": 8.0,
+      "project_transfer_support": 8.0,
+      "historical_recession_validation": 8.0,
+      "operational_integrity_controls": 8.0
     },
-    "warning": "This is a transparent engineering diagnostic score, not a statistically calibrated probability that a forecast date will be correct."
+    "warning": "This is a transparent engineering diagnostic score, not a statistically calibrated probability that a forecast date will be correct. Version 2 recognizes full-profile transfer support and historical event-block validation, so it is not directly comparable point-for-point with version 1."
   },
   "calibration_sample": {
     "all_event_constraints": 9,
@@ -118,7 +120,7 @@
   "hydrologic_memory_and_storage_proxies": {
     "status": "high_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.008000000000000007,
+    "target_change_24h_m": -0.004999999999999893,
     "antecedent_rain_mm": {
       "24h": 5.197492502637661,
       "72h": 13.095752150841552,
@@ -137,8 +139,8 @@
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.053000000000000824,
-        "change_72h_m": 0.041999999999999815,
+        "change_24h_m": -0.051000000000000156,
+        "change_72h_m": 0.038000000000000256,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
@@ -153,8 +155,8 @@
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.062000000000000055,
-        "change_72h_m": 0.02400000000000002,
+        "change_24h_m": 0.06000000000000005,
+        "change_72h_m": 0.02100000000000002,
         "rising_24h": true,
         "higher_than_72h_ago": false
       }
@@ -162,66 +164,114 @@
   },
   "current_limb_rating_support": {
     "status": "material_target_extrapolation",
-    "fit_r2": 0.9874746067146856,
-    "fit_rmse_m3s": 0.027118535771678283,
-    "fit_hourly_points": 91,
+    "fit_r2": 0.9903803388396504,
+    "fit_rmse_m3s": 0.02761527124424823,
+    "fit_hourly_points": 74,
     "observed_stage_range_m": [
       2.155,
-      2.226
+      2.2735000000000003
     ],
-    "target_stage_m": 1.7621576698707475,
-    "extrapolation_distance_m": 0.3928423301292523,
-    "extrapolation_as_observed_span": 5.5329905652007225,
+    "target_stage_m": 1.7631676349937386,
+    "extrapolation_distance_m": 0.3918323650062612,
+    "extrapolation_as_observed_span": 3.306602236339743,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
-    "status": "one_observed_low_flow_anchor_plus_two_modelled_design_points",
+    "status": "approximate_low_flow_anchor_plus_complete_design_profile",
+    "score_out_of_10": 8.0,
     "current_discharge_m3s": 11.8,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
+      14.0,
+      27.0,
+      39.0,
       52.0,
-      90.0
+      64.0,
+      72.0,
+      82.0,
+      90.0,
+      110.0,
+      130.0,
+      140.0,
+      155.0,
+      166.0
     ],
+    "design_profile_point_count": 13,
+    "first_design_discharge_m3s": 14.0,
+    "low_flow_anchor_to_first_design_gap_m3s": 7.23,
     "working_wse_uncertainty_m": 0.15,
-    "largest_constraint_gap_m3s": 45.230000000000004,
-    "interpretation": "The operational threshold is anchored at 6.77 m3/s, but intermediate WSE above the threshold is interpolated across a large gap to the 52 m3/s design point."
+    "largest_constraint_gap_m3s": 20.0,
+    "interpretation": "The high-flow RS18883 transfer is now constrained by the complete 2- to 1,000-year design profile. Remaining transfer uncertainty is concentrated in the reconstructed 6.77 m3/s low-flow anchor and the segment to the 14 m3/s two-year point."
+  },
+  "historical_recession_validation": {
+    "status": "screened_event_block_validation_available",
+    "score_out_of_9": 8.0,
+    "preferred_model": "rdpa_moderate",
+    "rdpa_coverage_fraction": 1.0,
+    "screened_points": 827,
+    "independent_event_blocks": 8,
+    "rain_free_days_to_6_77_m3s": 9.625,
+    "event_block_rmse_per_day": 0.24969981446116865,
+    "event_block_mae_per_day": 0.19007871104622034,
+    "skill_improvement_vs_gauge_only_pct": 1.8715339090006198,
+    "operational_use": {
+      "replace_live_central_forecast": false,
+      "include_as_independent_schedule_sensitivity": true,
+      "reason": "The selected RDPA-screened direct-discharge model is a more defensible independent sensitivity than the unscreened gauge-only fit, but its skill gain and event diversity are not sufficient for automatic operational promotion."
+    },
+    "promotion_recommendation": {
+      "promote_now": false,
+      "reasons_not_to_promote": [
+        "event_block_skill_gain_is_less_than_5_percent",
+        "fewer_than_10_independent_dry_event_blocks",
+        "10_km_rdpa_screen_may_miss_sub_grid_convective_rain",
+        "wsc_discharge_is_provisional_and_rating_derived",
+        "manual_engineering_review_is_required"
+      ],
+      "next_evidence_needed": [
+        "additional independent summer falling-limb recession blocks",
+        "surveyed RS18883 WSE observations near 650.20 m",
+        "material out-of-sample skill improvement over the live recession model"
+      ]
+    },
+    "interpretation": "This is independent precipitation-screened validation of the direct-discharge recession timing. It improves confidence in schedule sensitivity, but remains shadow-only because skill gain and event diversity are not sufficient for promotion."
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 0.3931294880728317,
+    "standard_deviation_days": 0.3931294880728319,
     "earliest": {
-      "days": 11.81604817906052,
+      "days": 11.774381512393854,
       "date_utc": "2026-08-10"
     },
     "latest": {
-      "days": 12.951186806118116,
+      "days": 12.909520139451448,
       "date_utc": "2026-08-11"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 11.818953548030475,
+        "days": 11.777286881363807,
         "date_utc": "2026-08-10"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 12.931348483428962,
+        "days": 12.889681816762298,
         "date_utc": "2026-08-11"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 12.939665317331542,
+        "days": 12.897998650664878,
         "date_utc": "2026-08-11"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 12.947759549320509,
+        "days": 12.906092882653843,
         "date_utc": "2026-08-11"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 12.94857330093112,
+        "days": 12.906906634264454,
         "date_utc": "2026-08-11"
       }
     },
@@ -242,29 +292,30 @@
   "priority_actions": [
     {
       "priority": 1,
-      "action": "Obtain at least one complete post-storm recovery without intervening rainfall.",
-      "reason": "Zero complete recoveries leave recession-delay estimates weakly constrained."
+      "action": "Survey at least one concurrent RS18883 water level near 650.20 m tied to CGVD28.",
+      "reason": "The complete design profile improves the transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed."
     },
     {
       "priority": 2,
-      "action": "Install or survey a temporary water-level reference at RS18883 tied to CGVD28.",
-      "reason": "One approximate field-visibility observation currently anchors the low-flow project threshold."
+      "action": "Obtain at least one complete post-storm recovery without intervening rainfall.",
+      "reason": "Zero complete recoveries leave live rainfall-delay estimates weakly constrained."
     },
     {
       "priority": 3,
-      "action": "Obtain the full RS18883 HEC-RAS discharge-WSE table or model files.",
-      "reason": "The current curve interpolates across the large 6.77-to-52 m3/s gap."
+      "action": "Accumulate additional independent summer falling-limb dry recession blocks.",
+      "reason": "The precipitation-screened direct-Q model has event-block validation, but only eight independent blocks and 1.87 percent skill gain."
     },
     {
       "priority": 4,
       "action": "Assimilate new rainfall-response events only after censoring and backtest checks pass.",
-      "reason": "Automatic promotion with only two clean events could make the model less reliable rather than more reliable."
+      "reason": "Automatic promotion with only two clean response events could make the model less reliable rather than more reliable."
     }
   ],
   "limitations": [
     "Storage pressure is inferred from recent rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
     "The current event stage-discharge fit is based on provisional WSC stage and rating-derived discharge.",
     "The diagnostic score is intentionally transparent but is not a formal confidence interval.",
-    "A model can pass operational integrity checks while still having low scientific calibration confidence."
+    "A model can pass operational integrity checks while still having limited scientific calibration confidence.",
+    "The full design profile materially improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow project observation."
   ]
 }

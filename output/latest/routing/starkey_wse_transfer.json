@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-07-29T17:40:20.558641+00:00",
-  "method": "site_specific_rs18883_log_discharge_wse_curve",
+  "generated_utc": "2026-07-29T18:20:29.539826+00:00",
+  "method": "site_specific_rs18883_piecewise_log_discharge_wse_curve",
   "project_location": {
     "river_station": 18883,
     "description": "Trail and pedestrian bridge project section near Starkey",
@@ -14,62 +14,246 @@
     "stage_m": 2.158,
     "discharge_m3s": 11.8
   },
+  "evidence_hierarchy": {
+    "field_context": {
+      "project_work_area_threshold_wse_m": 650.2,
+      "original_gauge_stage_understood_m": 1.5,
+      "later_reconstructed_rising_stage_m": 1.7,
+      "later_reconstructed_discharge_m3s": 6.77,
+      "surveyed_concurrent_project_wse": false,
+      "interpretation": "Use 650.20 m as the physical project threshold and 6.77 m3/s as the current operational discharge anchor. Do not treat either 1.50 m or 1.70 m at 05EA002 as a universal release stage."
+    },
+    "design_profile": {
+      "point_count": 13,
+      "discharge_range_m3s": [
+        14.0,
+        166.0
+      ],
+      "project_drawing_confirmed_levels": {
+        "20_year_wse_m": 651.8,
+        "100_year_wse_m": 652.35
+      },
+      "interpretation": "The project drawing levels match the flood-study calibrated profile at RS18883. The full flood-frequency table supplies the matching design discharges."
+    }
+  },
   "stage_discharge_detachment": {
     "historical_model_q14_stage_m": 1.7029999999999745,
-    "2026_rising_stage_m": 1.7,
-    "2026_rising_discharge_m3s": 6.77,
+    "original_project_condition_stage_understood_m": 1.5,
+    "later_reconstructed_rising_stage_m": 1.7,
+    "later_reconstructed_rising_discharge_m3s": 6.77,
     "discharge_ratio_2026_to_historical": 0.48357142857142854,
-    "interpretation": "The same approximately 1.70 m gauge stage carried only about half the historical/model discharge; stage alone is not used to estimate project-site WSE."
+    "interpretation": "The project condition was originally understood near 1.50 m, while a later reconstructed event placed a relevant rising-limb condition near 1.70 m but only 6.77 m3/s. Stage alone is therefore not used as a universal project-release threshold."
   },
   "site_constraints": [
     {
       "discharge_m3s": 6.77,
       "wse_m": 650.2,
-      "source": "2026 user field observation at project site",
-      "quality": "approximate floodplain-visibility threshold; not a concurrent surveyed WSE"
+      "return_period_years": null,
+      "source": "project threshold plus reconstructed 2026 field condition",
+      "quality": "approximate low-flow operational anchor; project elevation was not surveyed concurrently with the 05EA002 observation"
+    },
+    {
+      "discharge_m3s": 14.0,
+      "wse_m": 650.53,
+      "return_period_years": 2,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 27.0,
+      "wse_m": 651.21,
+      "return_period_years": 5,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 39.0,
+      "wse_m": 651.54,
+      "return_period_years": 10,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
     },
     {
       "discharge_m3s": 52.0,
       "wse_m": 651.8,
-      "source": "1:20-year project/design level at RS 18883",
-      "quality": "modelled design WSE; 20-year discharge from 2022 flood-frequency study"
+      "return_period_years": 20,
+      "source": "project drawing and 2022 St. Albert Flood Hazard Study at RS18883",
+      "quality": "modelled design point; project drawing confirmation"
+    },
+    {
+      "discharge_m3s": 64.0,
+      "wse_m": 652.0,
+      "return_period_years": 35,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 72.0,
+      "wse_m": 652.12,
+      "return_period_years": 50,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 82.0,
+      "wse_m": 652.25,
+      "return_period_years": 75,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
     },
     {
       "discharge_m3s": 90.0,
       "wse_m": 652.35,
-      "source": "1:100-year project/design level at RS 18883",
-      "quality": "modelled design WSE; 100-year discharge from 2022 flood-frequency study"
+      "return_period_years": 100,
+      "source": "project drawing and 2022 St. Albert Flood Hazard Study at RS18883",
+      "quality": "modelled design point; project drawing confirmation"
+    },
+    {
+      "discharge_m3s": 110.0,
+      "wse_m": 652.59,
+      "return_period_years": 200,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 130.0,
+      "wse_m": 652.81,
+      "return_period_years": 350,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 140.0,
+      "wse_m": 652.91,
+      "return_period_years": 500,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 155.0,
+      "wse_m": 653.06,
+      "return_period_years": 750,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
+    },
+    {
+      "discharge_m3s": 166.0,
+      "wse_m": 653.16,
+      "return_period_years": 1000,
+      "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+      "quality": "modelled design point"
     }
   ],
   "transfer": {
-    "type": "quadratic_lagrange_in_ln_discharge",
-    "equation": "WSE is quadratic-interpolated against ln(Q) through the three RS 18883 site constraints",
+    "type": "piecewise_linear_in_ln_discharge",
+    "equation": "WSE is linearly interpolated against ln(Q) between the low-flow anchor and every available RS18883 design-profile point",
     "points": [
       {
         "discharge_m3s": 6.77,
         "wse_m": 650.2,
-        "source": "2026 user field observation at project site",
-        "quality": "approximate floodplain-visibility threshold; not a concurrent surveyed WSE"
+        "return_period_years": null,
+        "source": "project threshold plus reconstructed 2026 field condition",
+        "quality": "approximate low-flow operational anchor; project elevation was not surveyed concurrently with the 05EA002 observation"
+      },
+      {
+        "discharge_m3s": 14.0,
+        "wse_m": 650.53,
+        "return_period_years": 2,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 27.0,
+        "wse_m": 651.21,
+        "return_period_years": 5,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 39.0,
+        "wse_m": 651.54,
+        "return_period_years": 10,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
       },
       {
         "discharge_m3s": 52.0,
         "wse_m": 651.8,
-        "source": "1:20-year project/design level at RS 18883",
-        "quality": "modelled design WSE; 20-year discharge from 2022 flood-frequency study"
+        "return_period_years": 20,
+        "source": "project drawing and 2022 St. Albert Flood Hazard Study at RS18883",
+        "quality": "modelled design point; project drawing confirmation"
+      },
+      {
+        "discharge_m3s": 64.0,
+        "wse_m": 652.0,
+        "return_period_years": 35,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 72.0,
+        "wse_m": 652.12,
+        "return_period_years": 50,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 82.0,
+        "wse_m": 652.25,
+        "return_period_years": 75,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
       },
       {
         "discharge_m3s": 90.0,
         "wse_m": 652.35,
-        "source": "1:100-year project/design level at RS 18883",
-        "quality": "modelled design WSE; 100-year discharge from 2022 flood-frequency study"
+        "return_period_years": 100,
+        "source": "project drawing and 2022 St. Albert Flood Hazard Study at RS18883",
+        "quality": "modelled design point; project drawing confirmation"
+      },
+      {
+        "discharge_m3s": 110.0,
+        "wse_m": 652.59,
+        "return_period_years": 200,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 130.0,
+        "wse_m": 652.81,
+        "return_period_years": 350,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 140.0,
+        "wse_m": 652.91,
+        "return_period_years": 500,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 155.0,
+        "wse_m": 653.06,
+        "return_period_years": 750,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
+      },
+      {
+        "discharge_m3s": 166.0,
+        "wse_m": 653.16,
+        "return_period_years": 1000,
+        "source": "2022 St. Albert Flood Hazard Study, 05EA002 flow and RS18883 profile",
+        "quality": "modelled design point"
       }
     ],
     "operational_threshold_discharge_m3s": 6.77,
     "design_check_discharge_range_m3s": [
-      52.0,
-      90.0
+      14.0,
+      166.0
     ],
-    "uncertainty_m": 0.15
+    "uncertainty_m": 0.15,
+    "uncertainty_basis": "Retained primarily for the unsurveyed low-flow anchor and local backwater/storage effects; the high-flow profile itself is now densely constrained by design points."
   },
   "downstream_bridge_check": {
     "river_stations": [
@@ -78,31 +262,31 @@
     ],
     "discharge_m3s": 20.2,
     "observed_mean_wse_m": 651.0275,
-    "project_curve_wse_m": 650.9709048910015,
-    "difference_project_curve_minus_bridge_hwm_m": -0.05659510899852194,
+    "project_curve_wse_m": 650.909587324278,
+    "difference_project_curve_minus_bridge_hwm_m": -0.11791267572198194,
     "interpretation": "This is a location-mismatched reasonableness check only; bridge high-water marks are not a project-site calibration point."
   },
   "current_starkey_estimate": {
-    "central_wse_m": 650.5666597270051,
+    "central_wse_m": 650.4523514023107,
     "range_m": [
-      650.4166597270051,
-      650.7166597270051
+      650.3023514023107,
+      650.6023514023107
     ],
-    "depth_over_main_floodplain_m": 0.36665972700507155,
-    "depth_over_low_pocket_m": 0.9666597270050943
+    "depth_over_main_floodplain_m": 0.25235140231063724,
+    "depth_over_low_pocket_m": 0.85235140231066
   },
   "site_thresholds": {
     "main_floodplain_elevation_m": 650.2,
-    "main_floodplain_target_discharge_m3s": 6.769999999999754,
+    "main_floodplain_target_discharge_m3s": 6.7700000000000005,
     "low_pocket_elevation_m": 649.6,
-    "low_pocket_curve_discharge_m3s": 2.1120925601620675,
+    "low_pocket_curve_discharge_m3s": 1.8066778857274997,
     "low_pocket_note": "The 649.60 m pocket may remain controlled by local ponding or drainage and is not a reliable automatic work-release threshold. Raising it toward 650.20 m removes this separate low-point constraint."
   },
   "limitations": [
-    "Only one low-flow project-site field observation anchors the operational exposure threshold.",
-    "The 1:20 and 1:100 project-site elevations are modelled design levels, not observed events.",
-    "The 2026 field point is an approximate visibility threshold rather than a surveyed concurrent water surface.",
-    "The curve between 6.77 and 52 m3/s is interpolated across a large data gap; approximately plus or minus 0.15 m remains the working uncertainty.",
-    "Local blockage, downstream backwater, floodplain storage, and rising/falling-limb hysteresis can shift project-site WSE beyond the stated uncertainty."
+    "The operational 650.20 m / 6.77 m3/s anchor is reconstructed from project and gauge evidence rather than one concurrent surveyed project-site water level.",
+    "The original approximately 1.50 m and later approximately 1.70 m gauge-stage interpretations are contextual observations, not universal thresholds.",
+    "Design points from 14 to 166 m3/s are modelled flood-profile values rather than observed project-site events.",
+    "Below 6.77 m3/s the curve extrapolates the first log-discharge segment and should not control construction release without field inspection.",
+    "Local blockage, downstream backwater, floodplain storage, and rising/falling-limb effects can shift project-site WSE beyond the stated uncertainty."
   ]
 }
