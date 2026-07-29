@@ -9,6 +9,8 @@ on:
       - 'wateroffice_archive_probe.py'
       - 'historical_gauge_analysis.py'
       - 'historical_rdpa_pairing.py'
+      - 'historical_rdpa_wcs_pairing.py'
+      - 'spatial_qpf.py'
       - '.github/workflows/sturgeon-rdpa-archive-probe.yml'
       - 'forecast_impacts_v2.py'
       - 'requirements.txt'
@@ -30,6 +32,15 @@ jobs:
         with:
           python-version: '3.12'
           cache: pip
+      - name: Restore historical RDPA cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            archive_cache
+            grid_cache/basins
+          key: sturgeon-historical-rdpa-${{ runner.os }}
+          restore-keys: |
+            sturgeon-historical-rdpa-${{ runner.os }}
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Compile archive tools
@@ -38,7 +49,9 @@ jobs:
             rdpa_archive_probe.py \
             wateroffice_archive_probe.py \
             historical_gauge_analysis.py \
-            historical_rdpa_pairing.py
+            historical_rdpa_pairing.py \
+            historical_rdpa_wcs_pairing.py \
+            spatial_qpf.py
       - name: Prepare archive output
         run: |
           rm -rf output/archive_probe
@@ -79,10 +92,11 @@ jobs:
         continue-on-error: true
         run: |
           set +e
-          python historical_rdpa_pairing.py \
+          python historical_rdpa_wcs_pairing.py \
             --months 18 \
-            --workers 6 \
+            --workers 4 \
             --lookback-hours 168 \
+            --cache archive_cache/historical_rdpa_05EA002.csv \
             --output output/archive_probe/historical_rdpa_pairing.json \
             --pairs-output output/archive_probe/historical_rdpa_pairs.csv
           CODE=$?
