@@ -1,0 +1,108 @@
+name: Sturgeon shadow diagnostics
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'project_site_calibration.py'
+      - 'project_site_observations.csv'
+      - 'discharge_recession_candidate.py'
+      - '.github/workflows/sturgeon-shadow-diagnostics.yml'
+      - 'forecast_impacts_v2.py'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-shadow-diagnostics
+  cancel-in-progress: true
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile diagnostics
+        run: |
+          python -m py_compile \
+            project_site_calibration.py \
+            discharge_recession_candidate.py
+      - name: Seed diagnostic working directory
+        run: |
+          rm -rf sturgeon_pipeline_output output/shadow_diagnostics
+          cp -a output/latest sturgeon_pipeline_output
+          mkdir -p output/shadow_diagnostics
+      - name: Evaluate project-site field calibration
+        continue-on-error: true
+        run: |
+          set +e
+          python project_site_calibration.py 2>&1 | tee output/shadow_diagnostics/project_site_calibration.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > output/shadow_diagnostics/project_site_calibration.exitcode
+          test -f sturgeon_pipeline_output/diagnostics/project_site_calibration.json && \
+            cp sturgeon_pipeline_output/diagnostics/project_site_calibration.json output/shadow_diagnostics/
+          exit "$CODE"
+      - name: Evaluate direct-discharge recession candidate
+        continue-on-error: true
+        run: |
+          set +e
+          python discharge_recession_candidate.py 2>&1 | tee output/shadow_diagnostics/discharge_recession_candidate.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > output/shadow_diagnostics/discharge_recession_candidate.exitcode
+          test -f sturgeon_pipeline_output/diagnostics/discharge_recession_candidate.json && \
+            cp sturgeon_pipeline_output/diagnostics/discharge_recession_candidate.json output/shadow_diagnostics/
+          exit "$CODE"
+      - name: Summarize shadow status
+        if: always()
+        run: |
+          SITE=$(cat output/shadow_diagnostics/project_site_calibration.exitcode 2>/dev/null || echo missing)
+          Q=$(cat output/shadow_diagnostics/discharge_recession_candidate.exitcode 2>/dev/null || echo missing)
+          cat > output/shadow_diagnostics/status.json <<EOF
+          {
+            "project_site_calibration_exitcode": "${SITE}",
+            "discharge_recession_candidate_exitcode": "${Q}",
+            "all_diagnostics_executed": $([ "$SITE" != "missing" ] && [ "$Q" != "missing" ] && echo true || echo false)
+          }
+          EOF
+      - name: Upload diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-shadow-diagnostics
+          path: output/shadow_diagnostics
+          retention-days: 14
+      - name: Publish diagnostics
+        if: ${{ always() && !cancelled() }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/sturgeon-shadow-diagnostics
+          cp -a output/shadow_diagnostics /tmp/sturgeon-shadow-diagnostics
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/shadow_diagnostics
+            mkdir -p output
+            cp -a /tmp/sturgeon-shadow-diagnostics output/shadow_diagnostics
+            git add -f output/shadow_diagnostics
+            if git diff --cached --quiet; then
+              exit 0
+            fi
+            git commit -m 'Update shadow diagnostics [skip ci]'
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
