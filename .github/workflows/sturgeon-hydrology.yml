@@ -46,11 +46,26 @@ jobs:
       - name: Calibrate rainfall-runoff events
         run: python calibrate_events.py
       - name: Process full-grid rainfall and QPF
-        run: python spatial_qpf.py
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python spatial_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/spatial_qpf.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/spatial_qpf.exitcode
       - name: Translate QPF into river impacts
-        run: python forecast_impacts.py
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python forecast_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
       - name: Calibrate 05EA002-to-Starkey timing
-        run: python starkey_routing.py
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python starkey_routing.py 2>&1 | tee sturgeon_pipeline_output/logs/starkey_routing.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/starkey_routing.exitcode
       - name: Prepare latest output
         if: always()
         run: |
