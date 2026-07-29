@@ -147,7 +147,14 @@ def main() -> None:
             "equivalent_05EA002_stage_on_current_limb_m": threshold.get(
                 "equivalent_05EA002_stage_on_current_limb_m"
             ),
-            "basis": "The user observed the approximately 650.20 m project floodplain visible when the rising 05EA002 gauge crossed 1.700 m; the paired reported discharge was 6.77 m3/s. Current-limb stage is recalculated from discharge rather than fixed at 1.70 m.",
+            "basis": (
+                "Elevation 650.20 m is the physical project work-area threshold. "
+                "The corresponding 6.77 m3/s operational anchor was reconstructed "
+                "from a later 2026 rising-limb condition near 1.70 m at 05EA002, "
+                "not from a concurrent surveyed project WSE. The original project "
+                "condition had been understood near 1.50 m. Current-limb stage is "
+                "recalculated from discharge; neither raw stage is universal."
+            ),
         },
         "forecast_main_floodplain_exposure": schedule,
         "probabilistic_exposure": {
@@ -189,6 +196,9 @@ def main() -> None:
             "project_wse_transfer_support": health.get(
                 "project_wse_transfer_support", {}
             ),
+            "historical_recession_validation": health.get(
+                "historical_recession_validation", {}
+            ),
             "controlled_assimilation": health.get("controlled_assimilation", {}),
             "priority_actions": health.get("priority_actions", []),
             "interpretation": "Operational integrity and scientific confidence are separate. This block reports whether the forecast is running correctly and how strongly its current prediction is supported by calibration data.",
@@ -218,9 +228,17 @@ def main() -> None:
             "interpretation": hysteresis.get("interpretation"),
         },
         "secondary_field_observations": {
-            "rising_limb_stage_m": 1.70,
-            "spring_stage_m": 1.50,
-            "interpretation": "These observations show that one raw gauge-stage threshold should not be treated as universal. They may reflect season, project-site hydraulics, storage or observation differences; the measured recent 05EA002 rating-loop separation alone is small.",
+            "original_project_condition_stage_understood_m": 1.50,
+            "later_reconstructed_rising_stage_m": 1.70,
+            "later_reconstructed_rising_discharge_m3s": 6.77,
+            "project_threshold_wse_m": 650.20,
+            "concurrent_surveyed_triple_available": False,
+            "interpretation": (
+                "These are related pieces of evidence, not one simultaneous "
+                "surveyed observation. Their disagreement is why the system "
+                "maps current stage to discharge and then discharge to RS18883, "
+                "rather than releasing work at a fixed gauge stage."
+            ),
         },
         "low_pocket": starkey.get("low_pocket", {}),
         "decision": {
@@ -260,7 +278,7 @@ def main() -> None:
         + uncertainty.get("limitations", [])
         + discharge_candidate.get("limitations", [])
         + [
-            "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
+            "The 650.20 m threshold and 6.77 m3/s operational anchor are reconstructed from related evidence rather than one concurrent surveyed project-site water level.",
             "The precipitation-screened historical direct-Q check uses 10 km RDPA and only a limited number of independent dry event blocks.",
             "Construction release remains a field decision, not an automatic model output.",
         ],
