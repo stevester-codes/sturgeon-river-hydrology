@@ -5,10 +5,13 @@ import json
 from datetime import datetime, timezone
 from pathlib import Path
 
+import calibration_health
+
 ROOT = Path("sturgeon_pipeline_output")
 SUMMARY = ROOT / "summary" / "summary.json"
 STARKEY = ROOT / "routing" / "forecast_starkey_wse.json"
 PROBABILISTIC = ROOT / "forecast_v2" / "project_threshold_ensemble.json"
+CALIBRATION_HEALTH = ROOT / "diagnostics" / "calibration_health.json"
 OUT = ROOT / "forecast_v2" / "construction_readiness.json"
 
 
@@ -29,6 +32,14 @@ def main() -> None:
     probabilistic = json.loads(PROBABILISTIC.read_text())
     if probabilistic.get("status") != "operational_project_threshold_ensemble":
         raise RuntimeError("Project-threshold ensemble output is not operational")
+
+    # The calibration-health diagnostic is part of the authoritative readiness
+    # product. A diagnostic failure must therefore fail readiness rather than
+    # silently publishing an apparently complete forecast.
+    calibration_health.main()
+    if not CALIBRATION_HEALTH.exists():
+        raise RuntimeError("Calibration-health output was not generated")
+    health = json.loads(CALIBRATION_HEALTH.read_text())
 
     target = summary.get("target_05EA002", {})
     current = starkey.get("current", {})
@@ -83,6 +94,18 @@ def main() -> None:
             "probability_exposed_by_date": distribution.get("probability_exposed_by_date", []),
             "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Analogue-response and site-transfer uncertainty are additional and are not hidden inside the percentages.",
         },
+        "model_health": {
+            "status": health.get("status"),
+            "overall": health.get("overall", {}),
+            "calibration_sample": health.get("calibration_sample", {}),
+            "forecast_feature_coverage": health.get("current_forecast_feature_coverage", {}),
+            "hydrologic_memory_and_storage_proxies": health.get("hydrologic_memory_and_storage_proxies", {}),
+            "current_limb_rating_support": health.get("current_limb_rating_support", {}),
+            "project_wse_transfer_support": health.get("project_wse_transfer_support", {}),
+            "controlled_assimilation": health.get("controlled_assimilation", {}),
+            "priority_actions": health.get("priority_actions", []),
+            "interpretation": "Operational integrity and scientific confidence are separate. This block reports whether the forecast is running correctly and how strongly its current prediction is supported by calibration data.",
+        },
         "secondary_field_observations": {
             "rising_limb_stage_m": 1.70,
             "spring_stage_m": 1.50,
@@ -104,8 +127,12 @@ def main() -> None:
         "uncertainty": {
             **starkey.get("uncertainty", {}),
             "all_member_model_uncertainty": probabilistic.get("model_uncertainty", {}),
+            "calibration_health": health.get("overall", {}),
         },
-        "limitations": starkey.get("limitations", []) + probabilistic.get("limitations", []) + [
+        "limitations": starkey.get("limitations", [])
+        + probabilistic.get("limitations", [])
+        + health.get("limitations", [])
+        + [
             "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
             "Construction release remains a field decision, not an automatic model output.",
         ],
