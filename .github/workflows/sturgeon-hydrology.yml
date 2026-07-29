@@ -46,6 +46,7 @@ jobs:
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             calibrate_events_v2.py \
+            normalize_calibration_v2.py \
             forecast_impacts_v2.py \
             starkey_routing.py
       - name: Retrieve hydrometric and HRDPA data
@@ -70,6 +71,18 @@ jobs:
           set -o pipefail
           python calibrate_events_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/calibrate_events_v2.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/calibrate_events_v2.exitcode
+      - name: Normalize calibration training flags
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/calibrate_events_v2.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping calibration normalization because v2 calibration failed.' | tee sturgeon_pipeline_output/logs/normalize_calibration_v2.log
+            echo 3 > sturgeon_pipeline_output/logs/normalize_calibration_v2.exitcode
+          else
+            set -o pipefail
+            python normalize_calibration_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/normalize_calibration_v2.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/normalize_calibration_v2.exitcode
+          fi
       - name: Retrieve corrected deterministic and ensemble QPF
         continue-on-error: true
         run: |
@@ -108,18 +121,6 @@ jobs:
             python forecast_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
           fi
-      - name: Translate QPF with censor-aware model
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping censor-aware impact model because validated cumulative QPF is unavailable.' | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
-            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
-          else
-            set -o pipefail
-            python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
-            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
-          fi
       - name: Calibrate 05EA002-to-Starkey timing
         continue-on-error: true
         run: |
@@ -127,6 +128,18 @@ jobs:
           set -o pipefail
           python starkey_routing.py 2>&1 | tee sturgeon_pipeline_output/logs/starkey_routing.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/starkey_routing.exitcode
+      - name: Translate QPF with censor-aware model
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/normalize_calibration_v2.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping censor-aware impact model because validated cumulative QPF or normalized calibration is unavailable.' | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          else
+            set -o pipefail
+            python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          fi
       - name: Prepare latest output
         if: always()
         run: |
