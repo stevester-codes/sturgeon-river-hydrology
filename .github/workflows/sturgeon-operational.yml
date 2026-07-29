@@ -179,9 +179,9 @@ jobs:
         run: |
           rm -rf output/latest
           mkdir -p output/latest
-          if [ -d sturgeon_pipeline_output ]; then cp -a sturgeon_pipeline_output/. output/latest/; fi
-          ZIP=$(ls -1t sturgeon_pipeline_output_*.zip 2>/dev/null | head -1 || true)
-          if [ -n "$ZIP" ]; then cp "$ZIP" output/latest/sturgeon_pipeline_latest.zip; fi
+          if [ -d sturgeon_pipeline_output ]; then
+            rsync -a --exclude='sturgeon_pipeline_latest.zip' sturgeon_pipeline_output/ output/latest/
+          fi
           date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
           echo operational > output/latest/workflow_mode.txt
       - name: Upload operational package
@@ -197,8 +197,31 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add -f output/latest
-          if git diff --cached --quiet; then exit 0; fi
-          git commit -m 'Update Sturgeon operational forecast [skip ci]'
-          git pull --rebase origin main
-          git push
+
+          rm -rf /tmp/sturgeon-operational-latest
+          cp -a output/latest /tmp/sturgeon-operational-latest
+
+          for attempt in 1 2 3 4; do
+            echo "Publish attempt ${attempt}"
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/latest
+            cp -a /tmp/sturgeon-operational-latest output/latest
+            git add -f output/latest
+
+            if git diff --cached --quiet; then
+              echo 'No operational output changes to publish.'
+              exit 0
+            fi
+
+            git commit -m 'Update Sturgeon operational forecast [skip ci]'
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+
+            echo 'Another run updated main first; retrying from the new branch head.'
+            sleep $((attempt * 2))
+          done
+
+          echo 'Unable to publish operational output after four attempts.' >&2
+          exit 1
