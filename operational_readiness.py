@@ -40,8 +40,8 @@ def main() -> None:
         raise RuntimeError("Project-threshold ensemble output is not operational")
 
     # Diagnostics are regenerated as part of the authoritative readiness build.
-    # The direct-discharge model remains shadow-only and cannot alter the
-    # operational crossing date without later historical validation.
+    # Direct-discharge models remain independent sensitivities and cannot alter
+    # the official crossing date without later evidence and manual review.
     hysteresis_diagnostics.main()
     calibration_health.main()
     uncertainty_sensitivity.main()
@@ -64,7 +64,9 @@ def main() -> None:
     for name in ("dry", "central", "wet"):
         item = scenarios.get(name, {})
         schedule[name] = {
-            "days_to_main_floodplain_exposure": item.get("main_floodplain_crossing_days"),
+            "days_to_main_floodplain_exposure": item.get(
+                "main_floodplain_crossing_days"
+            ),
             "date_utc": item.get("main_floodplain_crossing_date_utc"),
         }
 
@@ -73,6 +75,10 @@ def main() -> None:
     limb = starkey.get("hydrograph_limb", "unknown")
     current_wse = finite(current.get("estimated_starkey_wse_m"))
     depth_main = finite(current.get("depth_over_main_floodplain_m"))
+    historical_sensitivities = uncertainty.get(
+        "historical_direct_discharge_sensitivities", {}
+    )
+    planning_summary = uncertainty.get("planning_summary", {})
 
     output = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
@@ -82,17 +88,31 @@ def main() -> None:
         "current_conditions": {
             "stage_05EA002_m": stage_now,
             "stage_change_24h_m": change_24h,
-            "observed_discharge_05EA002_m3s": current.get("observed_discharge_05EA002_m3s"),
+            "observed_discharge_05EA002_m3s": current.get(
+                "observed_discharge_05EA002_m3s"
+            ),
             "estimated_starkey_wse_m": current_wse,
-            "estimated_project_wse_m": current.get("estimated_project_wse_m", current_wse),
-            "estimated_starkey_wse_range_m": current.get("estimated_starkey_wse_range_m"),
+            "estimated_project_wse_m": current.get(
+                "estimated_project_wse_m", current_wse
+            ),
+            "estimated_starkey_wse_range_m": current.get(
+                "estimated_starkey_wse_range_m"
+            ),
             "estimated_depth_over_main_floodplain_m": depth_main,
-            "estimated_depth_over_low_pocket_m": current.get("depth_over_low_pocket_m"),
+            "estimated_depth_over_low_pocket_m": current.get(
+                "depth_over_low_pocket_m"
+            ),
         },
         "authoritative_operational_threshold": {
-            "main_floodplain_elevation_m": threshold.get("main_floodplain_wse_m", 650.20),
-            "calibrated_05EA002_discharge_m3s": threshold.get("calibrated_target_discharge_m3s", 6.77),
-            "equivalent_05EA002_stage_on_current_limb_m": threshold.get("equivalent_05EA002_stage_on_current_limb_m"),
+            "main_floodplain_elevation_m": threshold.get(
+                "main_floodplain_wse_m", 650.20
+            ),
+            "calibrated_05EA002_discharge_m3s": threshold.get(
+                "calibrated_target_discharge_m3s", 6.77
+            ),
+            "equivalent_05EA002_stage_on_current_limb_m": threshold.get(
+                "equivalent_05EA002_stage_on_current_limb_m"
+            ),
             "basis": "The user observed the approximately 650.20 m project floodplain visible when the rising 05EA002 gauge crossed 1.700 m; the paired reported discharge was 6.77 m3/s. Current-limb stage is recalculated from discharge rather than fixed at 1.70 m.",
         },
         "forecast_main_floodplain_exposure": schedule,
@@ -103,25 +123,38 @@ def main() -> None:
             "earliest": distribution.get("earliest"),
             "latest": distribution.get("latest"),
             "mean_days": distribution.get("mean_days"),
-            "standard_deviation_days": distribution.get("standard_deviation_days"),
-            "probability_exposed_by_date": distribution.get("probability_exposed_by_date", []),
-            "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Analogue-response and site-transfer uncertainty are additional and are not hidden inside the percentages.",
+            "standard_deviation_days": distribution.get(
+                "standard_deviation_days"
+            ),
+            "probability_exposed_by_date": distribution.get(
+                "probability_exposed_by_date", []
+            ),
+            "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Rainfall-response, rating and project-transfer uncertainty are additional and are not hidden inside the percentages.",
         },
         "risk_adjusted_planning": {
             "status": uncertainty.get("status"),
-            "planning_summary": uncertainty.get("planning_summary", {}),
+            "planning_summary": planning_summary,
             "scenarios": uncertainty.get("scenarios", {}),
+            "historical_direct_discharge_sensitivities": historical_sensitivities,
             "uncertainty_components": uncertainty.get("uncertainty_components", {}),
-            "interpretation": "This sensitivity envelope combines weather-member spread, rainfall-response error sensitivity and the working plus/minus 0.15 m RS18883 transfer allowance. It is more suitable for protecting the construction schedule than raw weather spread alone, but it is not a formal confidence interval.",
+            "interpretation": "The live project-transfer forecast remains official. The precipitation-screened direct-Q forecast is the preferred independent timing check; the gauge-only direct-Q forecast is retained as an unscreened conservative diagnostic. The protected schedule uses the latest applicable upper sensitivity.",
         },
         "model_health": {
             "status": health.get("status"),
             "overall": health.get("overall", {}),
             "calibration_sample": health.get("calibration_sample", {}),
-            "forecast_feature_coverage": health.get("current_forecast_feature_coverage", {}),
-            "hydrologic_memory_and_storage_proxies": health.get("hydrologic_memory_and_storage_proxies", {}),
-            "current_limb_rating_support": health.get("current_limb_rating_support", {}),
-            "project_wse_transfer_support": health.get("project_wse_transfer_support", {}),
+            "forecast_feature_coverage": health.get(
+                "current_forecast_feature_coverage", {}
+            ),
+            "hydrologic_memory_and_storage_proxies": health.get(
+                "hydrologic_memory_and_storage_proxies", {}
+            ),
+            "current_limb_rating_support": health.get(
+                "current_limb_rating_support", {}
+            ),
+            "project_wse_transfer_support": health.get(
+                "project_wse_transfer_support", {}
+            ),
             "controlled_assimilation": health.get("controlled_assimilation", {}),
             "priority_actions": health.get("priority_actions", []),
             "interpretation": "Operational integrity and scientific confidence are separate. This block reports whether the forecast is running correctly and how strongly its current prediction is supported by calibration data.",
@@ -132,9 +165,13 @@ def main() -> None:
             "dry_hourly_points": discharge_candidate.get("dry_hourly_points"),
             "candidate_fit": discharge_candidate.get("candidate_fit"),
             "holdout": discharge_candidate.get("holdout", {}),
-            "current_projection": discharge_candidate.get("current_projection", {}),
-            "promotion_recommendation": discharge_candidate.get("promotion_recommendation", {}),
-            "interpretation": "This shadow model forecasts the 6.77 m3/s threshold directly from discharge recession and compares it with the operational stage-recession-plus-rating chain. It does not alter the official forecast.",
+            "current_projection": discharge_candidate.get(
+                "current_projection", {}
+            ),
+            "promotion_recommendation": discharge_candidate.get(
+                "promotion_recommendation", {}
+            ),
+            "interpretation": "This shorter-window shadow model forecasts the 6.77 m3/s threshold directly from discharge recession and compares it with the operational stage-recession-plus-rating chain. It does not alter the official forecast.",
         },
         "hysteresis_diagnostics": {
             "status": hysteresis.get("status"),
@@ -149,12 +186,12 @@ def main() -> None:
         "secondary_field_observations": {
             "rising_limb_stage_m": 1.70,
             "spring_stage_m": 1.50,
-            "interpretation": "These support material seasonal/limb hysteresis and are retained as checks, not universal release thresholds.",
+            "interpretation": "These observations show that one raw gauge-stage threshold should not be treated as universal. They may reflect season, project-site hydraulics, storage or observation differences; the measured recent 05EA002 rating-loop separation alone is small.",
         },
         "low_pocket": starkey.get("low_pocket", {}),
         "decision": {
             "status": "not_ready" if depth_main is None or depth_main > 0 else "inspect_now",
-            "schedule_use": "Use the raw all-member p50 as the working hydrometeorological inspection date and the risk-adjusted conservative-sensitivity p90 as the protected schedule contingency. Retain dry/central/wet traces for explanation.",
+            "schedule_use": "Use the nominal all-member p50 as the official working inspection date, compare it with the precipitation-screened direct-Q p50, and use the risk-adjusted protected p90 for schedule contingency. The unscreened direct-Q result is a conservative diagnostic, not an alternate official forecast.",
             "release_rule": "Release floodplain work only after the estimated WSE is at or below 650.20 m and a direct project-site inspection confirms drainage, access bearing and no renewed rise.",
             "site_checks": [
                 "main floodplain visibly drained",
@@ -166,13 +203,20 @@ def main() -> None:
         },
         "uncertainty": {
             **starkey.get("uncertainty", {}),
-            "all_member_model_uncertainty": probabilistic.get("model_uncertainty", {}),
+            "all_member_model_uncertainty": probabilistic.get(
+                "model_uncertainty", {}
+            ),
             "calibration_health": health.get("overall", {}),
-            "risk_adjusted_sensitivity": uncertainty.get("planning_summary", {}),
+            "risk_adjusted_sensitivity": planning_summary,
+            "historical_direct_discharge_sensitivities": historical_sensitivities,
             "apparent_hysteresis": {
                 "confidence_effect": hysteresis.get("confidence_effect"),
-                "maximum_absolute_stage_separation_m": hysteresis.get("loop_comparison", {}).get("maximum_absolute_stage_separation_m"),
-                "target_rising_minus_falling_stage_m": hysteresis.get("loop_comparison", {}).get("target_rising_minus_falling_stage_m"),
+                "maximum_absolute_stage_separation_m": hysteresis.get(
+                    "loop_comparison", {}
+                ).get("maximum_absolute_stage_separation_m"),
+                "target_rising_minus_falling_stage_m": hysteresis.get(
+                    "loop_comparison", {}
+                ).get("target_rising_minus_falling_stage_m"),
             },
         },
         "limitations": starkey.get("limitations", [])
@@ -183,6 +227,7 @@ def main() -> None:
         + discharge_candidate.get("limitations", [])
         + [
             "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
+            "The precipitation-screened historical direct-Q check uses 10 km RDPA and only a limited number of independent dry event blocks.",
             "Construction release remains a field decision, not an automatic model output.",
         ],
     }
