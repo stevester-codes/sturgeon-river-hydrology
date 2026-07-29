@@ -1,4 +1,4 @@
-name: Sturgeon RDPA archive probe
+name: Sturgeon historical archive probes
 
 on:
   workflow_dispatch:
@@ -6,6 +6,7 @@ on:
     branches: [main]
     paths:
       - 'rdpa_archive_probe.py'
+      - 'wateroffice_archive_probe.py'
       - '.github/workflows/sturgeon-rdpa-archive-probe.yml'
       - 'requirements.txt'
 
@@ -13,13 +14,13 @@ permissions:
   contents: write
 
 concurrency:
-  group: sturgeon-rdpa-archive-probe
+  group: sturgeon-historical-archive-probes
   cancel-in-progress: true
 
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,43 +29,84 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Compile probe
-        run: python -m py_compile rdpa_archive_probe.py
-      - name: Probe archived RDPA coverage
+      - name: Compile probes
+        run: |
+          python -m py_compile \
+            rdpa_archive_probe.py \
+            wateroffice_archive_probe.py
+      - name: Prepare probe output
         run: |
           rm -rf output/archive_probe
+          mkdir -p output/archive_probe
+      - name: Probe archived RDPA coverage
+        continue-on-error: true
+        run: |
+          set +e
           python rdpa_archive_probe.py \
             --datetime '2026-07-01T00:00:00Z' \
             --bbox=-115.2,52.9,-113.0,54.2 \
             --output output/archive_probe/rdpa_probe.json
-      - name: Upload probe result
+          CODE=$?
+          echo "$CODE" > output/archive_probe/rdpa_probe.exitcode
+          exit "$CODE"
+      - name: Probe 18 month WaterOffice unit values
+        continue-on-error: true
+        run: |
+          set +e
+          python wateroffice_archive_probe.py \
+            --station 05EA002 \
+            --months 18 \
+            --output output/archive_probe/wateroffice_probe.json
+          CODE=$?
+          echo "$CODE" > output/archive_probe/wateroffice_probe.exitcode
+          exit "$CODE"
+      - name: Summarize probe status
+        if: always()
+        run: |
+          RDPA=$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo missing)
+          WATER=$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo missing)
+          cat > output/archive_probe/probe_status.json <<EOF
+          {
+            "rdpa_exitcode": "${RDPA}",
+            "wateroffice_exitcode": "${WATER}",
+            "both_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && echo true || echo false)
+          }
+          EOF
+      - name: Upload probe results
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sturgeon-rdpa-archive-probe
+          name: sturgeon-historical-archive-probes
           path: output/archive_probe
           retention-days: 14
-      - name: Publish probe result
-        if: always()
+      - name: Publish probe results
+        if: ${{ always() && !cancelled() }}
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm -rf /tmp/rdpa-probe
-          cp -a output/archive_probe /tmp/rdpa-probe
+          rm -rf /tmp/sturgeon-archive-probe
+          cp -a output/archive_probe /tmp/sturgeon-archive-probe
           for attempt in 1 2 3 4; do
             git fetch origin main
             git reset --hard origin/main
             rm -rf output/archive_probe
             mkdir -p output
-            cp -a /tmp/rdpa-probe output/archive_probe
+            cp -a /tmp/sturgeon-archive-probe output/archive_probe
             git add -f output/archive_probe
             if git diff --cached --quiet; then
-              exit 0
+              break
             fi
-            git commit -m 'Update RDPA archive probe [skip ci]'
+            git commit -m 'Update historical archive probes [skip ci]'
             if git push origin HEAD:main; then
-              exit 0
+              break
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
             fi
             sleep $((attempt * 2))
           done
-          exit 1
+      - name: Enforce probe success
+        if: ${{ always() && !cancelled() }}
+        run: |
+          test "$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo 1)" = "0"
+          test "$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo 1)" = "0"
