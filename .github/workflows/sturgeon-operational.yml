@@ -14,6 +14,7 @@ on:
       - 'qpf_forecast_v2.py'
       - 'medium_range_qpf.py'
       - 'geps_ensemble_impacts.py'
+      - 'run_geps_ensemble_impacts.py'
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
       - 'forecast_impacts_v2.py'
@@ -56,6 +57,7 @@ jobs:
             qpf_forecast_v2.py \
             medium_range_qpf.py \
             geps_ensemble_impacts.py \
+            run_geps_ensemble_impacts.py \
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             forecast_impacts_v2.py
@@ -132,7 +134,7 @@ jobs:
             echo 3 > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
           else
             set -o pipefail
-            python geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
+            python run_geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
           fi
       - name: Prepare latest operational output
