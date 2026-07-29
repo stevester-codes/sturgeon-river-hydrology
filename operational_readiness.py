@@ -7,6 +7,7 @@ from pathlib import Path
 
 import calibration_health
 import hysteresis_diagnostics
+import uncertainty_sensitivity
 
 ROOT = Path("sturgeon_pipeline_output")
 SUMMARY = ROOT / "summary" / "summary.json"
@@ -14,6 +15,7 @@ STARKEY = ROOT / "routing" / "forecast_starkey_wse.json"
 PROBABILISTIC = ROOT / "forecast_v2" / "project_threshold_ensemble.json"
 CALIBRATION_HEALTH = ROOT / "diagnostics" / "calibration_health.json"
 HYSTERESIS = ROOT / "diagnostics" / "hysteresis_diagnostics.json"
+UNCERTAINTY = ROOT / "diagnostics" / "uncertainty_sensitivity.json"
 OUT = ROOT / "forecast_v2" / "construction_readiness.json"
 
 
@@ -40,11 +42,13 @@ def main() -> None:
     # complete forecast.
     hysteresis_diagnostics.main()
     calibration_health.main()
-    for path in (CALIBRATION_HEALTH, HYSTERESIS):
+    uncertainty_sensitivity.main()
+    for path in (CALIBRATION_HEALTH, HYSTERESIS, UNCERTAINTY):
         if not path.exists():
             raise RuntimeError(f"Required diagnostic output was not generated: {path}")
     health = json.loads(CALIBRATION_HEALTH.read_text())
     hysteresis = json.loads(HYSTERESIS.read_text())
+    uncertainty = json.loads(UNCERTAINTY.read_text())
 
     target = summary.get("target_05EA002", {})
     current = starkey.get("current", {})
@@ -99,6 +103,13 @@ def main() -> None:
             "probability_exposed_by_date": distribution.get("probability_exposed_by_date", []),
             "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the RS18883 threshold. Analogue-response and site-transfer uncertainty are additional and are not hidden inside the percentages.",
         },
+        "risk_adjusted_planning": {
+            "status": uncertainty.get("status"),
+            "planning_summary": uncertainty.get("planning_summary", {}),
+            "scenarios": uncertainty.get("scenarios", {}),
+            "uncertainty_components": uncertainty.get("uncertainty_components", {}),
+            "interpretation": "This sensitivity envelope combines weather-member spread, rainfall-response error sensitivity and the working plus/minus 0.15 m RS18883 transfer allowance. It is more suitable for protecting the construction schedule than raw weather spread alone, but it is not a formal confidence interval.",
+        },
         "model_health": {
             "status": health.get("status"),
             "overall": health.get("overall", {}),
@@ -129,7 +140,7 @@ def main() -> None:
         "low_pocket": starkey.get("low_pocket", {}),
         "decision": {
             "status": "not_ready" if depth_main is None or depth_main > 0 else "inspect_now",
-            "schedule_use": "Use the all-member p10/p50/p90 RS18883 crossing dates and exposure-by-date probabilities for schedule risk. Retain the dry/central/wet paths as readable scenario traces.",
+            "schedule_use": "Use the raw all-member p50 as the working hydrometeorological inspection date and the risk-adjusted conservative-sensitivity p90 as the protected schedule contingency. Retain dry/central/wet traces for explanation.",
             "release_rule": "Release floodplain work only after the estimated WSE is at or below 650.20 m and a direct project-site inspection confirms drainage, access bearing and no renewed rise.",
             "site_checks": [
                 "main floodplain visibly drained",
@@ -143,6 +154,7 @@ def main() -> None:
             **starkey.get("uncertainty", {}),
             "all_member_model_uncertainty": probabilistic.get("model_uncertainty", {}),
             "calibration_health": health.get("overall", {}),
+            "risk_adjusted_sensitivity": uncertainty.get("planning_summary", {}),
             "apparent_hysteresis": {
                 "confidence_effect": hysteresis.get("confidence_effect"),
                 "maximum_absolute_stage_separation_m": hysteresis.get("loop_comparison", {}).get("maximum_absolute_stage_separation_m"),
@@ -153,6 +165,7 @@ def main() -> None:
         + probabilistic.get("limitations", [])
         + health.get("limitations", [])
         + hysteresis.get("limitations", [])
+        + uncertainty.get("limitations", [])
         + [
             "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
             "Construction release remains a field decision, not an automatic model output.",
