@@ -60,13 +60,25 @@ jobs:
           set -o pipefail
           python qpf_forecast_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/qpf_forecast_v2.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/qpf_forecast_v2.exitcode
-      - name: Translate QPF into river impacts
+      - name: Validate QPF accumulation semantics
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           set -o pipefail
-          python forecast_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts.log
-          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
+          python validate_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/validate_qpf.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/validate_qpf.exitcode
+      - name: Translate QPF into river impacts
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping impact translation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/forecast_impacts.log
+            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
+          else
+            set -o pipefail
+            python forecast_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
+          fi
       - name: Calibrate 05EA002-to-Starkey timing
         continue-on-error: true
         run: |
