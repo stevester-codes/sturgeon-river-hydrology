@@ -7,7 +7,9 @@ on:
     paths:
       - 'rdpa_archive_probe.py'
       - 'wateroffice_archive_probe.py'
+      - 'historical_gauge_analysis.py'
       - '.github/workflows/sturgeon-rdpa-archive-probe.yml'
+      - 'forecast_impacts_v2.py'
       - 'requirements.txt'
 
 permissions:
@@ -20,7 +22,7 @@ concurrency:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -29,12 +31,13 @@ jobs:
           cache: pip
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Compile probes
+      - name: Compile archive tools
         run: |
           python -m py_compile \
             rdpa_archive_probe.py \
-            wateroffice_archive_probe.py
-      - name: Prepare probe output
+            wateroffice_archive_probe.py \
+            historical_gauge_analysis.py
+      - name: Prepare archive output
         run: |
           rm -rf output/archive_probe
           mkdir -p output/archive_probe
@@ -60,26 +63,38 @@ jobs:
           CODE=$?
           echo "$CODE" > output/archive_probe/wateroffice_probe.exitcode
           exit "$CODE"
-      - name: Summarize probe status
+      - name: Analyze historical target stage and recession
+        continue-on-error: true
+        run: |
+          set +e
+          python historical_gauge_analysis.py \
+            --months 18 \
+            --output output/archive_probe/historical_gauge_analysis.json
+          CODE=$?
+          echo "$CODE" > output/archive_probe/historical_gauge_analysis.exitcode
+          exit "$CODE"
+      - name: Summarize archive status
         if: always()
         run: |
           RDPA=$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo missing)
           WATER=$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo missing)
+          ANALYSIS=$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo missing)
           cat > output/archive_probe/probe_status.json <<EOF
           {
             "rdpa_exitcode": "${RDPA}",
             "wateroffice_exitcode": "${WATER}",
-            "both_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && echo true || echo false)
+            "historical_gauge_analysis_exitcode": "${ANALYSIS}",
+            "all_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && [ "$ANALYSIS" = "0" ] && echo true || echo false)
           }
           EOF
-      - name: Upload probe results
+      - name: Upload archive results
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: sturgeon-historical-archive-probes
           path: output/archive_probe
           retention-days: 14
-      - name: Publish probe results
+      - name: Publish archive results
         if: ${{ always() && !cancelled() }}
         run: |
           git config user.name 'github-actions[bot]'
@@ -105,8 +120,9 @@ jobs:
             fi
             sleep $((attempt * 2))
           done
-      - name: Enforce probe success
+      - name: Enforce archive success
         if: ${{ always() && !cancelled() }}
         run: |
           test "$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo 1)" = "0"
           test "$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo 1)" = "0"
+          test "$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo 1)" = "0"
