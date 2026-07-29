@@ -13,6 +13,7 @@ on:
       - 'summarize_output.py'
       - 'qpf_forecast_v2.py'
       - 'medium_range_qpf.py'
+      - 'geps_ensemble_impacts.py'
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
       - 'forecast_impacts_v2.py'
@@ -54,6 +55,7 @@ jobs:
             refresh_operational_base.py \
             qpf_forecast_v2.py \
             medium_range_qpf.py \
+            geps_ensemble_impacts.py \
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             forecast_impacts_v2.py
@@ -120,6 +122,18 @@ jobs:
             set -o pipefail
             python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          fi
+      - name: Integrate GEPS dry central and wet river paths
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/medium_range_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping GEPS impact integration because medium-range QPF or short-range impacts failed.' | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
+            echo 3 > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
+          else
+            set -o pipefail
+            python geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
           fi
       - name: Prepare latest operational output
         if: always()
