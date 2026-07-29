@@ -12,6 +12,7 @@ on:
       - 'sturgeon_pipeline.py'
       - 'summarize_output.py'
       - 'qpf_forecast_v2.py'
+      - 'medium_range_qpf.py'
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
       - 'forecast_impacts_v2.py'
@@ -27,7 +28,7 @@ concurrency:
 jobs:
   update:
     runs-on: ubuntu-latest
-    timeout-minutes: 60
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -38,8 +39,9 @@ jobs:
         uses: actions/cache@v4
         with:
           path: grid_cache
-          key: sturgeon-operational-grid-v1-${{ runner.os }}
+          key: sturgeon-operational-grid-v2-${{ runner.os }}
           restore-keys: |
+            sturgeon-operational-grid-v2-${{ runner.os }}
             sturgeon-operational-grid-v1-${{ runner.os }}
             sturgeon-grid-cache-v3-${{ runner.os }}
       - name: Install dependencies
@@ -51,6 +53,7 @@ jobs:
             summarize_output.py \
             refresh_operational_base.py \
             qpf_forecast_v2.py \
+            medium_range_qpf.py \
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             forecast_impacts_v2.py
@@ -73,21 +76,21 @@ jobs:
         run: |
           python summarize_output.py
           python refresh_operational_base.py
-      - name: Retrieve corrected deterministic and ensemble QPF
+      - name: Retrieve high-resolution short-range QPF
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           set -o pipefail
           python qpf_forecast_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/qpf_forecast_v2.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/qpf_forecast_v2.exitcode
-      - name: Validate QPF accumulation semantics
+      - name: Validate short-range QPF accumulation semantics
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           set -o pipefail
           python validate_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/validate_qpf.log
           echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/validate_qpf.exitcode
-      - name: Aggregate cumulative QPF footprints
+      - name: Aggregate short-range cumulative QPF footprints
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
@@ -99,7 +102,14 @@ jobs:
             python aggregate_qpf_horizons.py 2>&1 | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
           fi
-      - name: Translate QPF with calibrated censor-aware model
+      - name: Retrieve 10-day deterministic and 16-day ensemble QPF
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set -o pipefail
+          python medium_range_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/medium_range_qpf.log
+          echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/medium_range_qpf.exitcode
+      - name: Translate short-range QPF with calibrated censor-aware model
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
