@@ -8,6 +8,7 @@ on:
       - 'rdpa_archive_probe.py'
       - 'wateroffice_archive_probe.py'
       - 'historical_gauge_analysis.py'
+      - 'historical_rdpa_pairing.py'
       - '.github/workflows/sturgeon-rdpa-archive-probe.yml'
       - 'forecast_impacts_v2.py'
       - 'requirements.txt'
@@ -36,7 +37,8 @@ jobs:
           python -m py_compile \
             rdpa_archive_probe.py \
             wateroffice_archive_probe.py \
-            historical_gauge_analysis.py
+            historical_gauge_analysis.py \
+            historical_rdpa_pairing.py
       - name: Prepare archive output
         run: |
           rm -rf output/archive_probe
@@ -73,18 +75,33 @@ jobs:
           CODE=$?
           echo "$CODE" > output/archive_probe/historical_gauge_analysis.exitcode
           exit "$CODE"
+      - name: Pair historical recessions with archived RDPA
+        continue-on-error: true
+        run: |
+          set +e
+          python historical_rdpa_pairing.py \
+            --months 18 \
+            --workers 6 \
+            --lookback-hours 168 \
+            --output output/archive_probe/historical_rdpa_pairing.json \
+            --pairs-output output/archive_probe/historical_rdpa_pairs.csv
+          CODE=$?
+          echo "$CODE" > output/archive_probe/historical_rdpa_pairing.exitcode
+          exit "$CODE"
       - name: Summarize archive status
         if: always()
         run: |
           RDPA=$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo missing)
           WATER=$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo missing)
           ANALYSIS=$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo missing)
+          PAIRING=$(cat output/archive_probe/historical_rdpa_pairing.exitcode 2>/dev/null || echo missing)
           cat > output/archive_probe/probe_status.json <<EOF
           {
             "rdpa_exitcode": "${RDPA}",
             "wateroffice_exitcode": "${WATER}",
             "historical_gauge_analysis_exitcode": "${ANALYSIS}",
-            "all_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && [ "$ANALYSIS" = "0" ] && echo true || echo false)
+            "historical_rdpa_pairing_exitcode": "${PAIRING}",
+            "all_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && [ "$ANALYSIS" = "0" ] && [ "$PAIRING" = "0" ] && echo true || echo false)
           }
           EOF
       - name: Upload archive results
@@ -126,3 +143,4 @@ jobs:
           test "$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo 1)" = "0"
           test "$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo 1)" = "0"
           test "$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo 1)" = "0"
+          test "$(cat output/archive_probe/historical_rdpa_pairing.exitcode 2>/dev/null || echo 1)" = "0"
