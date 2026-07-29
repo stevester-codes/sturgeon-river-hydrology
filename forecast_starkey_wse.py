@@ -147,10 +147,40 @@ def stage_from_q(discharge: float, fit: dict) -> float:
 def starkey_wse(discharge: float, transfer: dict) -> float:
     equation = transfer["transfer"]
     equation_type = str(equation.get("type", "linear"))
+    if equation_type == "piecewise_linear_in_ln_discharge":
+        points = sorted(
+            equation.get("points", []),
+            key=lambda row: float(row["discharge_m3s"]),
+        )
+        if len(points) < 2:
+            raise RuntimeError("RS18883 transfer requires at least two site points")
+        q = max(0.05, float(discharge))
+        if q <= float(points[0]["discharge_m3s"]):
+            left, right = points[0], points[1]
+        elif q >= float(points[-1]["discharge_m3s"]):
+            left, right = points[-2], points[-1]
+        else:
+            left = right = None
+            for candidate_left, candidate_right in zip(points, points[1:]):
+                if (
+                    float(candidate_left["discharge_m3s"])
+                    <= q
+                    <= float(candidate_right["discharge_m3s"])
+                ):
+                    left, right = candidate_left, candidate_right
+                    break
+            if left is None or right is None:
+                raise RuntimeError("Unable to bracket RS18883 discharge")
+        q0 = float(left["discharge_m3s"])
+        q1 = float(right["discharge_m3s"])
+        w0 = float(left["wse_m"])
+        w1 = float(right["wse_m"])
+        fraction = (math.log(q) - math.log(q0)) / (math.log(q1) - math.log(q0))
+        return w0 + fraction * (w1 - w0)
     if equation_type == "quadratic_lagrange_in_ln_discharge":
         points = equation.get("points", [])
         if len(points) != 3:
-            raise RuntimeError("RS18883 transfer requires exactly three site points")
+            raise RuntimeError("Legacy RS18883 transfer requires exactly three site points")
         q = max(0.05, float(discharge))
         x = math.log(q)
         result = 0.0
@@ -244,7 +274,7 @@ def main() -> None:
     project_location = transfer.get("project_location", {})
     output = {
         "generated_utc": generated.isoformat(),
-        "method": "current_event_stage_discharge_fit_then_rs18883_site_specific_wse_curve",
+        "method": "current_event_stage_discharge_fit_then_rs18883_multi_point_wse_curve",
         "project_location": project_location,
         "hydrograph_limb": limb,
         "current_event_rating_fit": fit,
@@ -265,7 +295,11 @@ def main() -> None:
             "main_floodplain_wse_m": MAIN_FLOODPLAIN_WSE,
             "calibrated_target_discharge_m3s": FIELD_TARGET_Q,
             "equivalent_05EA002_stage_on_current_limb_m": target_stage_current_limb,
-            "interpretation": "The current-event stage corresponding to the field-calibrated RS18883 exposure discharge is preferred over a universal 1.70 m stage threshold.",
+            "interpretation": (
+                "The physical project threshold is 650.20 m. The current-event "
+                "stage corresponding to the operational 6.77 m3/s anchor is used "
+                "instead of either the contextual 1.50 m or 1.70 m gauge-stage observations."
+            ),
         },
         "scenarios": scenarios,
         "uncertainty": {
@@ -281,8 +315,8 @@ def main() -> None:
         "limitations": [
             "The current-event rating is fitted to recent provisional 05EA002 observations and can shift if backwater or conveyance changes.",
             "Forecast paths are daily recession-delay scenarios, not an unsteady hydraulic simulation.",
-            "Only one low-flow field observation anchors the RS18883 operational exposure threshold; the other site points are modelled 1:20 and 1:100 design levels.",
-            "The RS18883 WSE curve between 6.77 and 52 m3/s spans a large data gap and retains approximately plus or minus 0.15 m working uncertainty.",
+            "The 650.20 m / 6.77 m3/s low-flow anchor is reconstructed rather than one concurrent surveyed project-site water level.",
+            "The RS18883 curve is now constrained by the complete 2- to 1,000-year design profile above 14 m3/s, but the segment from 6.77 to 14 m3/s still depends on the approximate low-flow anchor.",
             "Final construction release requires direct site inspection and bearing-capacity confirmation.",
         ],
     }
