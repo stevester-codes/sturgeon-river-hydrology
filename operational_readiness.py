@@ -6,12 +6,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 import calibration_health
+import hysteresis_diagnostics
 
 ROOT = Path("sturgeon_pipeline_output")
 SUMMARY = ROOT / "summary" / "summary.json"
 STARKEY = ROOT / "routing" / "forecast_starkey_wse.json"
 PROBABILISTIC = ROOT / "forecast_v2" / "project_threshold_ensemble.json"
 CALIBRATION_HEALTH = ROOT / "diagnostics" / "calibration_health.json"
+HYSTERESIS = ROOT / "diagnostics" / "hysteresis_diagnostics.json"
 OUT = ROOT / "forecast_v2" / "construction_readiness.json"
 
 
@@ -33,13 +35,16 @@ def main() -> None:
     if probabilistic.get("status") != "operational_project_threshold_ensemble":
         raise RuntimeError("Project-threshold ensemble output is not operational")
 
-    # The calibration-health diagnostic is part of the authoritative readiness
-    # product. A diagnostic failure must therefore fail readiness rather than
-    # silently publishing an apparently complete forecast.
+    # Diagnostics are part of the authoritative readiness product. A failure
+    # must fail readiness rather than silently publishing an apparently
+    # complete forecast.
+    hysteresis_diagnostics.main()
     calibration_health.main()
-    if not CALIBRATION_HEALTH.exists():
-        raise RuntimeError("Calibration-health output was not generated")
+    for path in (CALIBRATION_HEALTH, HYSTERESIS):
+        if not path.exists():
+            raise RuntimeError(f"Required diagnostic output was not generated: {path}")
     health = json.loads(CALIBRATION_HEALTH.read_text())
+    hysteresis = json.loads(HYSTERESIS.read_text())
 
     target = summary.get("target_05EA002", {})
     current = starkey.get("current", {})
@@ -106,6 +111,16 @@ def main() -> None:
             "priority_actions": health.get("priority_actions", []),
             "interpretation": "Operational integrity and scientific confidence are separate. This block reports whether the forecast is running correctly and how strongly its current prediction is supported by calibration data.",
         },
+        "hysteresis_diagnostics": {
+            "status": hysteresis.get("status"),
+            "current_limb": hysteresis.get("current_limb"),
+            "classification": hysteresis.get("classification", {}),
+            "rising_fit": hysteresis.get("rising_fit"),
+            "falling_fit": hysteresis.get("falling_fit"),
+            "loop_comparison": hysteresis.get("loop_comparison", {}),
+            "confidence_effect": hysteresis.get("confidence_effect"),
+            "interpretation": hysteresis.get("interpretation"),
+        },
         "secondary_field_observations": {
             "rising_limb_stage_m": 1.70,
             "spring_stage_m": 1.50,
@@ -128,10 +143,16 @@ def main() -> None:
             **starkey.get("uncertainty", {}),
             "all_member_model_uncertainty": probabilistic.get("model_uncertainty", {}),
             "calibration_health": health.get("overall", {}),
+            "apparent_hysteresis": {
+                "confidence_effect": hysteresis.get("confidence_effect"),
+                "maximum_absolute_stage_separation_m": hysteresis.get("loop_comparison", {}).get("maximum_absolute_stage_separation_m"),
+                "target_rising_minus_falling_stage_m": hysteresis.get("loop_comparison", {}).get("target_rising_minus_falling_stage_m"),
+            },
         },
         "limitations": starkey.get("limitations", [])
         + probabilistic.get("limitations", [])
         + health.get("limitations", [])
+        + hysteresis.get("limitations", [])
         + [
             "The approximately 650.20 m field threshold and the 6.77 m3/s calibration are based on one 2026 observation rather than a surveyed concurrent project-site water level.",
             "Construction release remains a field decision, not an automatic model output.",
