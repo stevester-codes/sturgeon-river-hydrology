@@ -19,6 +19,7 @@ FORECAST = ROOT / "forecast_v2" / "forecast_impacts_v2.json"
 PROBABILITY = ROOT / "forecast_v2" / "project_threshold_ensemble.json"
 PROJECT_WSE = ROOT / "routing" / "forecast_starkey_wse.json"
 TRANSFER = ROOT / "routing" / "starkey_wse_transfer.json"
+HISTORICAL_SELECTION = Path("output/archive_probe/historical_rdpa_model_selection.json")
 OUT = ROOT / "diagnostics" / "calibration_health.json"
 
 
@@ -219,15 +220,40 @@ def transfer_support(transfer: dict, project: dict) -> dict:
         for point in points
         if finite(point.get("discharge_m3s")) is not None
     )
+    design_points = [
+        point for point in points if point.get("return_period_years") is not None
+    ]
     current_q = finite(project.get("current", {}).get("observed_discharge_05EA002_m3s"))
     target_q = finite(
         project.get("construction_threshold", {}).get("calibrated_target_discharge_m3s")
     )
+    first_design_q = min(
+        (finite(point.get("discharge_m3s")) for point in design_points),
+        default=None,
+    )
+    low_flow_gap = (
+        first_design_q - target_q
+        if first_design_q is not None and target_q is not None
+        else None
+    )
+    if len(design_points) >= 10 and target_q is not None:
+        status = "approximate_low_flow_anchor_plus_complete_design_profile"
+        score = 8.0
+    elif len(design_points) >= 3:
+        status = "approximate_low_flow_anchor_plus_partial_design_profile"
+        score = 6.0
+    else:
+        status = "sparse_project_transfer_support"
+        score = 3.0
     return {
-        "status": "one_observed_low_flow_anchor_plus_two_modelled_design_points",
+        "status": status,
+        "score_out_of_10": score,
         "current_discharge_m3s": current_q,
         "target_discharge_m3s": target_q,
         "constraint_discharges_m3s": discharges,
+        "design_profile_point_count": len(design_points),
+        "first_design_discharge_m3s": first_design_q,
+        "low_flow_anchor_to_first_design_gap_m3s": low_flow_gap,
         "working_wse_uncertainty_m": finite(
             transfer.get("transfer", {}).get("uncertainty_m"), 0.15
         ),
@@ -235,8 +261,60 @@ def transfer_support(transfer: dict, project: dict) -> dict:
             (b - a for a, b in zip(discharges, discharges[1:])), default=None
         ),
         "interpretation": (
-            "The operational threshold is anchored at 6.77 m3/s, but intermediate WSE above the threshold is "
-            "interpolated across a large gap to the 52 m3/s design point."
+            "The high-flow RS18883 transfer is now constrained by the complete "
+            "2- to 1,000-year design profile. Remaining transfer uncertainty is "
+            "concentrated in the reconstructed 6.77 m3/s low-flow anchor and the "
+            "segment to the 14 m3/s two-year point."
+        ),
+    }
+
+
+def historical_recession_validation() -> dict:
+    if not HISTORICAL_SELECTION.exists():
+        return {
+            "status": "unavailable",
+            "score_out_of_9": 0.0,
+            "reason": "historical RDPA model-selection output is missing",
+        }
+    data = load_json(HISTORICAL_SELECTION)
+    preferred = data.get("preferred_screened_candidate", {})
+    cv = preferred.get("event_block_cross_validation", {}).get("aggregate", {})
+    coverage = finite(data.get("rdpa_coverage_fraction"), 0.0)
+    points = int(preferred.get("points") or 0)
+    events = int(preferred.get("events") or 0)
+    skill = finite(preferred.get("skill_improvement_vs_gauge_only_pct"), 0.0)
+    rmse = finite(preferred.get("event_block_rmse_per_day"))
+    score = 0.0
+    score += 2.0 if coverage >= 0.90 else (1.0 if coverage >= 0.50 else 0.0)
+    score += 1.0 if points >= 200 else 0.0
+    score += 2.0 if events >= 8 else (1.0 if events >= 3 else 0.0)
+    score += 2.0 if cv and rmse is not None else 0.0
+    score += 2.0 if skill >= 5.0 else (1.0 if skill >= 0.0 and rmse is not None else 0.0)
+    status = (
+        "screened_event_block_validation_available"
+        if score >= 6.0
+        else "limited_historical_validation"
+    )
+    return {
+        "status": status,
+        "score_out_of_9": score,
+        "preferred_model": preferred.get("name"),
+        "rdpa_coverage_fraction": coverage,
+        "screened_points": points,
+        "independent_event_blocks": events,
+        "rain_free_days_to_6_77_m3s": finite(
+            preferred.get("rain_free_days_to_6_77_m3s")
+        ),
+        "event_block_rmse_per_day": rmse,
+        "event_block_mae_per_day": finite(cv.get("mae_per_day")),
+        "skill_improvement_vs_gauge_only_pct": skill,
+        "operational_use": data.get("operational_use", {}),
+        "promotion_recommendation": data.get("promotion_recommendation", {}),
+        "interpretation": (
+            "This is independent precipitation-screened validation of the direct-"
+            "discharge recession timing. It improves confidence in schedule "
+            "sensitivity, but remains shadow-only because skill gain and event "
+            "diversity are not sufficient for promotion."
         ),
     }
 
@@ -248,15 +326,20 @@ def diagnostic_score(
     coverage_status: str,
     rating_status: str,
     member_count: int,
+    transfer_score: float,
+    historical_score: float,
 ) -> dict:
+    # Version 2 rebalances the same 100-point diagnostic to recognize the
+    # complete RS18883 design profile and independent historical event-block
+    # validation. It remains an engineering evidence score, not probability.
     components = {
-        "uncensored_peak_events": min(25.0, uncensored * 8.0),
-        "complete_recoveries": min(20.0, recoveries * 10.0),
-        "storm_type_diversity": min(10.0, storm_types * 2.0),
+        "uncensored_peak_events": min(20.0, uncensored * 7.0),
+        "complete_recoveries": min(15.0, recoveries * 7.5),
+        "storm_type_diversity": min(8.0, storm_types * 2.0),
         "forecast_feature_coverage": {
-            "within_observed_feature_envelope": 15.0,
-            "minor_extrapolation": 11.0,
-            "marginal_extrapolation": 7.0,
+            "within_observed_feature_envelope": 12.0,
+            "minor_extrapolation": 9.0,
+            "marginal_extrapolation": 6.0,
             "material_extrapolation": 2.0,
         }.get(coverage_status, 0.0),
         "current_rating_support": {
@@ -264,9 +347,10 @@ def diagnostic_score(
             "mild_target_extrapolation": 6.0,
             "material_target_extrapolation": 2.0,
         }.get(rating_status, 0.0),
-        "meteorological_ensemble": 10.0 if member_count >= 20 else (5.0 if member_count else 0.0),
-        "project_transfer_support": 4.0,
-        "operational_integrity_controls": 6.0,
+        "meteorological_ensemble": 8.0 if member_count >= 20 else (4.0 if member_count else 0.0),
+        "project_transfer_support": min(10.0, max(0.0, transfer_score)),
+        "historical_recession_validation": min(9.0, max(0.0, historical_score)),
+        "operational_integrity_controls": 8.0,
     }
     total = float(sum(components.values()))
     if total < 40:
@@ -278,12 +362,14 @@ def diagnostic_score(
     else:
         tier = "high"
     return {
+        "score_version": 2,
         "score_out_of_100": total,
         "tier": tier,
         "components": components,
         "warning": (
             "This is a transparent engineering diagnostic score, not a statistically calibrated probability "
-            "that a forecast date will be correct."
+            "that a forecast date will be correct. Version 2 recognizes full-profile transfer support and "
+            "historical event-block validation, so it is not directly comparable point-for-point with version 1."
         ),
     }
 
@@ -303,6 +389,7 @@ def main() -> None:
     storage = storage_state(summary)
     rating = rating_support(project)
     transfer_health = transfer_support(transfer, project)
+    historical_health = historical_recession_validation()
 
     uncensored = int(calibration.get("uncensored_peak_events", len(training)))
     recoveries = int(calibration.get("complete_recovery_events", 0))
@@ -315,29 +402,31 @@ def main() -> None:
         coverage.get("status", "unavailable"),
         rating.get("status", "unavailable"),
         member_count,
+        finite(transfer_health.get("score_out_of_10"), 0.0),
+        finite(historical_health.get("score_out_of_9"), 0.0),
     )
 
     crossing = probability.get("crossing_distribution", {})
     actions = [
         {
             "priority": 1,
-            "action": "Obtain at least one complete post-storm recovery without intervening rainfall.",
-            "reason": "Zero complete recoveries leave recession-delay estimates weakly constrained.",
+            "action": "Survey at least one concurrent RS18883 water level near 650.20 m tied to CGVD28.",
+            "reason": "The complete design profile improves the transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed.",
         },
         {
             "priority": 2,
-            "action": "Install or survey a temporary water-level reference at RS18883 tied to CGVD28.",
-            "reason": "One approximate field-visibility observation currently anchors the low-flow project threshold.",
+            "action": "Obtain at least one complete post-storm recovery without intervening rainfall.",
+            "reason": "Zero complete recoveries leave live rainfall-delay estimates weakly constrained.",
         },
         {
             "priority": 3,
-            "action": "Obtain the full RS18883 HEC-RAS discharge-WSE table or model files.",
-            "reason": "The current curve interpolates across the large 6.77-to-52 m3/s gap.",
+            "action": "Accumulate additional independent summer falling-limb dry recession blocks.",
+            "reason": "The precipitation-screened direct-Q model has event-block validation, but only eight independent blocks and 1.87 percent skill gain.",
         },
         {
             "priority": 4,
             "action": "Assimilate new rainfall-response events only after censoring and backtest checks pass.",
-            "reason": "Automatic promotion with only two clean events could make the model less reliable rather than more reliable.",
+            "reason": "Automatic promotion with only two clean response events could make the model less reliable rather than more reliable.",
         },
     ]
 
@@ -356,6 +445,7 @@ def main() -> None:
         "hydrologic_memory_and_storage_proxies": storage,
         "current_limb_rating_support": rating,
         "project_wse_transfer_support": transfer_health,
+        "historical_recession_validation": historical_health,
         "ensemble_date_spread": {
             "member_count": member_count,
             "standard_deviation_days": finite(crossing.get("standard_deviation_days")),
@@ -381,7 +471,8 @@ def main() -> None:
             "Storage pressure is inferred from recent rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
             "The current event stage-discharge fit is based on provisional WSC stage and rating-derived discharge.",
             "The diagnostic score is intentionally transparent but is not a formal confidence interval.",
-            "A model can pass operational integrity checks while still having low scientific calibration confidence.",
+            "A model can pass operational integrity checks while still having limited scientific calibration confidence.",
+            "The full design profile materially improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow project observation.",
         ],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -394,6 +485,8 @@ def main() -> None:
                 "tier": score["tier"],
                 "feature_coverage": coverage["status"],
                 "rating_support": rating["status"],
+                "transfer_support": transfer_health["status"],
+                "historical_validation": historical_health["status"],
                 "storage_signal": storage["status"],
             },
             indent=2,
