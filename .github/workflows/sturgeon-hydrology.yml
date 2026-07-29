@@ -38,6 +38,16 @@ jobs:
         run: pip install -r requirements.txt
       - name: Test parser
         run: python test_parsing.py
+      - name: Compile-check advanced model scripts
+        run: |
+          python -m py_compile \
+            spatial_qpf.py \
+            qpf_forecast_v2.py \
+            validate_qpf.py \
+            aggregate_qpf_horizons.py \
+            calibrate_events_v2.py \
+            forecast_impacts_v2.py \
+            starkey_routing.py
       - name: Retrieve hydrometric and HRDPA data
         run: |
           rm -rf sturgeon_pipeline_output output/latest
@@ -86,17 +96,29 @@ jobs:
             python aggregate_qpf_horizons.py 2>&1 | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
           fi
-      - name: Translate QPF into river impacts
+      - name: Translate QPF into legacy river impacts
         continue-on-error: true
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping impact translation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/forecast_impacts.log
+            echo 'Skipping legacy impact translation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/forecast_impacts.log
             echo 3 > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
           else
             set -o pipefail
             python forecast_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts.log
             echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts.exitcode
+          fi
+      - name: Translate QPF with censor-aware model
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode 2>/dev/null || echo 1)" != "0" ]; then
+            echo 'Skipping censor-aware impact model because validated cumulative QPF is unavailable.' | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
+          else
+            set -o pipefail
+            python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
+            echo ${PIPESTATUS[0]} > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
           fi
       - name: Calibrate 05EA002-to-Starkey timing
         continue-on-error: true
