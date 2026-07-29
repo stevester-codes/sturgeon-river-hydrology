@@ -40,6 +40,15 @@ def finite(value, default=np.nan):
         return default
 
 
+def json_default(value):
+    """Convert NumPy/Pandas scalar types without hiding unsupported objects."""
+    if isinstance(value, np.generic):
+        return value.item()
+    if isinstance(value, pd.Timestamp):
+        return value.isoformat()
+    raise TypeError(f"Object of type {value.__class__.__name__} is not JSON serializable")
+
+
 def model_rate(model: dict, stage: float) -> float:
     intercept = finite(model.get("intercept_m_per_day"), -0.01)
     coefficient = finite(model.get("stage_coefficient_per_day"), -0.01)
@@ -234,7 +243,7 @@ def reps_validation() -> dict:
     for file_meta in metadata.get("files", []):
         band_count = max(band_count, int(file_meta.get("band_count", 0)))
         for band in file_meta.get("band_metadata_sample", []):
-            text = json.dumps(band, sort_keys=True).lower()
+            text = json.dumps(band, sort_keys=True, default=json_default).lower()
             if any(token in text for token in ["perturbation", "ensemble member", "numberofensembleforecasts", "grib_perturbationnumber"]):
                 member_markers += 1
                 if len(examples) < 3:
@@ -399,6 +408,10 @@ def main() -> None:
                 })
                 scenarios.append(detail)
     reps_status = reps_validation()
+    storm_type_counts = {
+        str(key): int(value)
+        for key, value in training.storm_type.value_counts().to_dict().items()
+    } if not training.empty else {}
     result = {
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "latest_stage_m": stage_now,
@@ -407,7 +420,7 @@ def main() -> None:
         "training": {
             "all_event_constraints": int(len(all_events)),
             "uncensored_peak_training_events": int(len(training)),
-            "storm_type_counts": training.storm_type.value_counts().to_dict() if not training.empty else {},
+            "storm_type_counts": storm_type_counts,
             "features": FEATURES,
             "targets": TARGETS,
         },
@@ -422,9 +435,21 @@ def main() -> None:
             "REPS probabilities are withheld from operational use until GRIB band metadata verifies individual ensemble members.",
         ],
     }
-    (OUT / "forecast_impacts_v2.json").write_text(json.dumps(result, indent=2))
+    (OUT / "forecast_impacts_v2.json").write_text(
+        json.dumps(result, indent=2, default=json_default)
+    )
     pd.DataFrame(scenarios).to_json(OUT / "deterministic_scenarios_v2.json", orient="records", indent=2)
-    print(json.dumps({"training_events": len(training), "scenarios": len(scenarios), "reps_validated": reps_status["validated"]}, indent=2))
+    print(
+        json.dumps(
+            {
+                "training_events": len(training),
+                "scenarios": len(scenarios),
+                "reps_validated": reps_status["validated"],
+            },
+            indent=2,
+            default=json_default,
+        )
+    )
 
 
 if __name__ == "__main__":
