@@ -41,9 +41,9 @@ jobs:
           path: |
             archive_cache
             grid_cache/basins
-          key: sturgeon-historical-rdpa-${{ runner.os }}
+          key: sturgeon-historical-rdpa-${{ runner.os }}-${{ github.run_id }}
           restore-keys: |
-            sturgeon-historical-rdpa-${{ runner.os }}
+            sturgeon-historical-rdpa-${{ runner.os }}-
       - name: Install dependencies
         run: pip install -r requirements.txt
       - name: Compile archive tools
