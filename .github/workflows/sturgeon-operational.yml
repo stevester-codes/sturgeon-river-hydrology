@@ -23,6 +23,7 @@ on:
       - 'hysteresis_diagnostics.py'
       - 'uncertainty_sensitivity.py'
       - 'assimilation_candidates.py'
+      - 'storage_state_candidate.py'
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
       - 'forecast_impacts_v2.py'
@@ -74,6 +75,7 @@ jobs:
             hysteresis_diagnostics.py \
             uncertainty_sensitivity.py \
             assimilation_candidates.py \
+            storage_state_candidate.py \
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             forecast_impacts_v2.py
@@ -226,6 +228,26 @@ jobs:
           CODE=${PIPESTATUS[0]}
           echo "$CODE" > sturgeon_pipeline_output/logs/operational_readiness.exitcode
           exit "$CODE"
+      - name: Screen new calibration candidates
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set +e
+          set -o pipefail
+          python assimilation_candidates.py 2>&1 | tee sturgeon_pipeline_output/logs/assimilation_candidates.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/assimilation_candidates.exitcode
+          exit "$CODE"
+      - name: Test storage-state candidate in shadow mode
+        continue-on-error: true
+        run: |
+          mkdir -p sturgeon_pipeline_output/logs
+          set +e
+          set -o pipefail
+          python storage_state_candidate.py 2>&1 | tee sturgeon_pipeline_output/logs/storage_state_candidate.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/storage_state_candidate.exitcode
+          exit "$CODE"
       - name: Validate operational package consistency
         if: always()
         run: |
@@ -248,6 +270,10 @@ jobs:
               echo "${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
               STATUS=1
             fi
+          done
+          for name in assimilation_candidates storage_state_candidate; do
+            CODE=$(cat "sturgeon_pipeline_output/logs/${name}.exitcode" 2>/dev/null || echo missing)
+            echo "shadow diagnostic ${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
           done
 
           python - <<'PY' || STATUS=1
