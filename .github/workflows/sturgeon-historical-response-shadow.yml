@@ -1,0 +1,99 @@
+name: Sturgeon historical response shadow
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 * * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'historical_response_shadow_forecast.py'
+      - 'historical_censored_response_model.py'
+      - '.github/workflows/sturgeon-historical-response-shadow.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-historical-response-shadow
+  cancel-in-progress: true
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile shadow forecast
+        run: python -m py_compile historical_response_shadow_forecast.py
+      - name: Verify current forecast and historical model
+        run: |
+          test -f output/latest/forecast_v2/forecast_impacts_v2.json
+          test -f output/historical_event_backfill/historical_censored_response_model.json
+      - name: Run historical response comparison
+        run: |
+          set -o pipefail
+          python historical_response_shadow_forecast.py \
+            --forecast output/latest/forecast_v2/forecast_impacts_v2.json \
+            --model output/historical_event_backfill/historical_censored_response_model.json \
+            --output output/historical_event_backfill/current_historical_response_shadow.json \
+            2>&1 | tee output/historical_event_backfill/current_historical_response_shadow.log
+          echo "${PIPESTATUS[0]}" > output/historical_event_backfill/current_historical_response_shadow.exitcode
+      - name: Validate shadow status
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          path = Path('output/historical_event_backfill/current_historical_response_shadow.json')
+          result = json.loads(path.read_text())
+          if result.get('mode') != 'shadow_only_no_effect_on_operational_forecast':
+              raise RuntimeError('historical response comparison is not shadow-only')
+          if result.get('historical_model', {}).get('combined_screen_passed') is True:
+              print('Historical candidate passed its internal screen but remains shadow-only pending manual review.')
+          print('Historical response shadow validation passed.')
+          PY
+      - name: Upload response shadow
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-historical-response-shadow
+          path: output/historical_event_backfill/current_historical_response_shadow*
+          retention-days: 14
+          if-no-files-found: warn
+      - name: Publish response shadow
+        if: ${{ always() && !cancelled() }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/sturgeon-response-shadow
+          mkdir -p /tmp/sturgeon-response-shadow
+          cp output/historical_event_backfill/current_historical_response_shadow* /tmp/sturgeon-response-shadow/
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            mkdir -p output/historical_event_backfill
+            cp /tmp/sturgeon-response-shadow/* output/historical_event_backfill/
+            git add -f output/historical_event_backfill/current_historical_response_shadow*
+            if git diff --cached --quiet; then
+              break
+            fi
+            git commit -m 'Update historical response shadow [skip ci]'
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
+      - name: Enforce successful shadow comparison
+        if: ${{ always() && !cancelled() }}
+        run: |
+          test "$(cat output/historical_event_backfill/current_historical_response_shadow.exitcode 2>/dev/null || echo 1)" = "0"
