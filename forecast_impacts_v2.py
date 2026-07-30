@@ -30,6 +30,7 @@ FEATURES = [
     "pre_stage_m",
 ]
 TARGETS = ["departure_m", "days_lost", "lag_h"]
+# Persistent bounded HRDPS carry-forward enabled.
 
 
 def finite(value, default=np.nan):
