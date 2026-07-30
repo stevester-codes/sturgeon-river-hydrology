@@ -1,22 +1,27 @@
 {
-  "generated_utc": "2026-07-30T14:35:46.200902+00:00",
+  "generated_utc": "2026-07-30T15:12:36.584205+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
-    "score_version": 2,
-    "score_out_of_100": 68.0,
-    "tier": "moderate",
+    "score_version": 3,
+    "score_out_of_100": 56.0,
+    "tier": "low_to_moderate",
     "components": {
       "uncensored_peak_events": 14.0,
       "complete_recoveries": 0.0,
       "storm_type_diversity": 8.0,
-      "forecast_feature_coverage": 12.0,
+      "forecast_feature_coverage": 0.0,
       "current_rating_support": 2.0,
       "meteorological_ensemble": 8.0,
       "project_transfer_support": 8.0,
       "historical_recession_validation": 8.0,
       "operational_integrity_controls": 8.0
     },
-    "warning": "This is a transparent engineering diagnostic score, not a statistically calibrated probability that a forecast date will be correct. Version 2 recognizes full-profile transfer support and historical event-block validation, so it is not directly comparable point-for-point with version 1."
+    "warning": "This is a transparent engineering evidence diagnostic, not a probability. Version 3 no longer awards full feature-coverage points when a complete HRDPS forecast is dry or when feature inputs are missing. A dry forecast can reduce near-term timing risk without increasing calibration evidence."
+  },
+  "short_range_forecast_input": {
+    "status": "short_range_forecast_unavailable",
+    "feature_vector_required": null,
+    "interpretation": "No complete HRDPS 48-hour scenario is available. Missing short-range inputs must not be treated as zero rain or as within the calibration envelope."
   },
   "calibration_sample": {
     "all_event_constraints": 9,
@@ -31,12 +36,17 @@
     "cross_validation_available": false
   },
   "current_forecast_feature_coverage": {
-    "status": "within_observed_feature_envelope",
+    "status": "short_range_features_unavailable",
+    "short_range_input_status": "short_range_forecast_unavailable",
+    "available_feature_count": 0,
+    "required_feature_count": 7,
     "outside_feature_count": 0,
     "materially_outside_feature_count": 0,
     "nearest_analogue_distance": null,
     "storm_type": null,
     "horizon_h": null,
+    "run_time_utc": null,
+    "basin_mm": null,
     "features": [
       {
         "feature": "basin_mm",
@@ -73,7 +83,8 @@
         "status": "unavailable",
         "current": null
       }
-    ]
+    ],
+    "interpretation": "No complete HRDPS 48-hour scenario is available. Missing short-range inputs must not be treated as zero rain or as within the calibration envelope."
   },
   "hydrologic_memory_and_storage_proxies": {
     "status": "elevated_residual_storage_signal",
@@ -105,8 +116,8 @@
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": -0.09199999999999986,
-        "change_72h_m": -0.07899999999999996,
+        "change_24h_m": -0.09099999999999997,
+        "change_72h_m": -0.08299999999999996,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
@@ -160,16 +171,16 @@
     "low_flow_anchor_to_first_design_gap_m3s": 7.23,
     "working_wse_uncertainty_m": 0.15,
     "largest_constraint_gap_m3s": 20.0,
-    "interpretation": "The high-flow RS18883 transfer is now constrained by the complete 2- to 1,000-year design profile. Remaining transfer uncertainty is concentrated in the reconstructed 6.77 m3/s low-flow anchor and the segment to the 14 m3/s two-year point."
+    "interpretation": "The high-flow RS18883 transfer is constrained by the complete 2- to 1,000-year design profile. Remaining transfer uncertainty is concentrated in the reconstructed 6.77 m3/s low-flow anchor and the segment to 14 m3/s."
   },
   "historical_recession_validation": {
     "status": "screened_event_block_validation_available",
     "score_out_of_9": 8.0,
     "preferred_model": "rdpa_moderate",
-    "rdpa_coverage_fraction": 1.0,
+    "rdpa_coverage_fraction": 0.9991142604074402,
     "screened_points": 827,
     "independent_event_blocks": 8,
-    "rain_free_days_to_6_77_m3s": 9.625,
+    "rain_free_days_to_6_77_m3s": 9.125,
     "event_block_rmse_per_day": 0.24969981446116865,
     "event_block_mae_per_day": 0.19007871104622034,
     "skill_improvement_vs_gauge_only_pct": 1.8715339090006198,
@@ -193,7 +204,7 @@
         "material out-of-sample skill improvement over the live recession model"
       ]
     },
-    "interpretation": "This is independent precipitation-screened validation of the direct-discharge recession timing. It improves confidence in schedule sensitivity, but remains shadow-only because skill gain and event diversity are not sufficient for promotion."
+    "interpretation": "This is independent precipitation-screened validation of direct-discharge recession timing. It remains shadow-only because skill gain and event diversity are not sufficient for promotion."
   },
   "ensemble_date_spread": {
     "member_count": 21,
@@ -251,7 +262,7 @@
     {
       "priority": 1,
       "action": "Survey at least one concurrent RS18883 water level near 650.20 m tied to CGVD28.",
-      "reason": "The complete design profile improves the transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed."
+      "reason": "The complete design profile improves transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed."
     },
     {
       "priority": 2,
@@ -261,19 +272,19 @@
     {
       "priority": 3,
       "action": "Accumulate additional independent summer falling-limb dry recession blocks.",
-      "reason": "The precipitation-screened direct-Q model has event-block validation, but only eight independent blocks and 1.87 percent skill gain."
+      "reason": "The screened direct-Q model has only eight independent blocks and 1.87 percent skill gain."
     },
     {
       "priority": 4,
       "action": "Assimilate new rainfall-response events only after censoring and backtest checks pass.",
-      "reason": "Automatic promotion with only two clean response events could make the model less reliable rather than more reliable."
+      "reason": "Automatic promotion with only two clean response events could make the model less reliable."
     }
   ],
   "limitations": [
-    "Storage pressure is inferred from recent rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
-    "The current event stage-discharge fit is based on provisional WSC stage and rating-derived discharge.",
-    "The diagnostic score is intentionally transparent but is not a formal confidence interval.",
-    "A model can pass operational integrity checks while still having limited scientific calibration confidence.",
-    "The full design profile materially improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow project observation."
+    "Storage pressure is inferred from rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
+    "The current-event stage-discharge fit uses provisional WSC stage and rating-derived discharge.",
+    "The diagnostic score is intentionally transparent but is not a confidence interval.",
+    "A dry short-range forecast reduces dependence on the weak rainfall-response model but is not new calibration evidence.",
+    "The full design profile improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow observation."
   ]
 }
