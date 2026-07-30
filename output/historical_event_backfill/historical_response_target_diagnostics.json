@@ -1,0 +1,1170 @@
+{
+  "generated_utc": "2026-07-30T16:17:01+00:00",
+  "status": "historical_response_target_diagnostics_complete",
+  "mode": "shadow_only_no_automatic_promotion",
+  "station": "05EA002",
+  "resolved_peak_events": 10,
+  "paired_target_events": 10,
+  "recession_baseline": {
+    "support": {
+      "moderate_dry_points": 827,
+      "first_utc": "2025-04-17T17:00:00+00:00",
+      "last_utc": "2026-07-09T17:00:00+00:00"
+    },
+    "discharge_fit": {
+      "n": 762,
+      "intercept_per_day": -0.13086191001868225,
+      "coefficient_per_day": -0.04316931352255193,
+      "value_range": [
+        0.076,
+        25.1
+      ],
+      "rate_rmse_per_day": 0.19742474336925342
+    },
+    "stage_fit": {
+      "n": 758,
+      "intercept_per_day": -0.011596583685701097,
+      "coefficient_per_day": -0.014963642670169156,
+      "value_range": [
+        0.532,
+        2.953
+      ],
+      "rate_rmse_per_day": 0.015536899935923793
+    }
+  },
+  "stage_discharge_target_comparison": {
+    "correlation": 0.9929311650001168,
+    "agreement_events": 10,
+    "agreement_fraction": 1.0,
+    "mean_stage_minus_q_days": 1.6041666666666665,
+    "median_stage_minus_q_days": 0.41666666666666674,
+    "mean_absolute_difference_days": 1.7041666666666664,
+    "records": [
+      {
+        "event_id": 5,
+        "storm_type": "upper_lake_chain_concentrated",
+        "q_exact_days": 2.3333333333333335,
+        "stage_exact_days": 2.5833333333333335,
+        "difference_days": 0.25,
+        "agreement": true
+      },
+      {
+        "event_id": 11,
+        "storm_type": "tributary_localized_carrot_creek",
+        "q_exact_days": 7.166666666666667,
+        "stage_exact_days": 11.416666666666666,
+        "difference_days": 4.249999999999999,
+        "agreement": true
+      },
+      {
+        "event_id": 13,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 13.208333333333334,
+        "stage_exact_days": 19.666666666666668,
+        "difference_days": 6.458333333333334,
+        "agreement": true
+      },
+      {
+        "event_id": 14,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 9.75,
+        "stage_exact_days": 13.625,
+        "difference_days": 3.875,
+        "agreement": true
+      },
+      {
+        "event_id": 56,
+        "storm_type": "tributary_localized_carrot_creek",
+        "q_exact_days": 2.5,
+        "stage_exact_days": 3.0833333333333335,
+        "difference_days": 0.5833333333333335,
+        "agreement": true
+      },
+      {
+        "event_id": 62,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 4.083333333333333,
+        "stage_exact_days": 5.083333333333333,
+        "difference_days": 1.0,
+        "agreement": true
+      },
+      {
+        "event_id": 66,
+        "storm_type": "tributary_localized_carrot_creek",
+        "q_exact_days": 0.9166666666666666,
+        "stage_exact_days": 0.9166666666666666,
+        "difference_days": 0.0,
+        "agreement": true
+      },
+      {
+        "event_id": 67,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 1.0416666666666667,
+        "stage_exact_days": 1.0416666666666667,
+        "difference_days": 0.0,
+        "agreement": true
+      },
+      {
+        "event_id": 68,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 1.9166666666666667,
+        "stage_exact_days": 2.0416666666666665,
+        "difference_days": 0.12499999999999978,
+        "agreement": true
+      },
+      {
+        "event_id": 69,
+        "storm_type": "widespread_basin",
+        "q_exact_days": 3.875,
+        "stage_exact_days": 3.375,
+        "difference_days": -0.5,
+        "agreement": true
+      }
+    ]
+  },
+  "q_target_model_validation": {
+    "target": "q_exact_recession_equivalent_days",
+    "events": 10,
+    "storm_type_count": 3,
+    "models": {
+      "median_baseline": {
+        "n": 10,
+        "rmse_days": 4.6721322160705645,
+        "mae_days": 3.625000000000001,
+        "bias_days": -1.491666666666667,
+        "median_absolute_error_days": 2.395833333333333,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.3333333333333335,
+            "predicted_days": 3.875
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 7.166666666666667,
+            "predicted_days": 2.5
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.208333333333334,
+            "predicted_days": 2.5
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 9.75,
+            "predicted_days": 2.5
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 2.5,
+            "predicted_days": 3.875
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 4.083333333333333,
+            "predicted_days": 2.5
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 3.875
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 3.875
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.9166666666666667,
+            "predicted_days": 3.875
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.875,
+            "predicted_days": 2.5
+          }
+        ]
+      },
+      "amount_only_log_ridge": {
+        "n": 10,
+        "rmse_days": 3.0423758530998013,
+        "mae_days": 2.08851849803683,
+        "bias_days": -0.7334746450636327,
+        "median_absolute_error_days": 1.8170320674099951,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.3333333333333335,
+            "predicted_days": 4.8932896475237335
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 7.166666666666667,
+            "predicted_days": 5.230705126136078
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.208333333333334,
+            "predicted_days": 4.904660910163919
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 9.75,
+            "predicted_days": 7.417827558443373
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 2.5,
+            "predicted_days": 2.0493321720787905
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 4.083333333333333,
+            "predicted_days": 5.865360294658846
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 0.6291500126260834
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 2.893703840161144
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.9166666666666667,
+            "predicted_days": 2.4978654825222626
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.875,
+            "predicted_days": 3.0750251717161117
+          }
+        ]
+      },
+      "spatial_log_ridge": {
+        "n": 10,
+        "rmse_days": 3.2177400250307895,
+        "mae_days": 1.9622250030593775,
+        "bias_days": -0.6519995676966988,
+        "median_absolute_error_days": 1.243569980162652,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.3333333333333335,
+            "predicted_days": 3.928436600218742
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 7.166666666666667,
+            "predicted_days": 8.058703360106563
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.208333333333334,
+            "predicted_days": 4.547940072240618
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 9.75,
+            "predicted_days": 5.582045601708486
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 2.5,
+            "predicted_days": 2.488295709456665
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 4.083333333333333,
+            "predicted_days": 5.746120820404223
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 0.8126325043747913
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 3.2789267362829815
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.9166666666666667,
+            "predicted_days": 2.080606326467552
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.875,
+            "predicted_days": 3.7479632584390603
+          }
+        ]
+      },
+      "spatial_log_knn": {
+        "n": 10,
+        "rmse_days": 4.165322160104128,
+        "mae_days": 2.974276764123504,
+        "bias_days": -0.9090051730413663,
+        "median_absolute_error_days": 2.2459545565551204,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.3333333333333335,
+            "predicted_days": 2.7173853917066437
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 7.166666666666667,
+            "predicted_days": 4.454815273115331
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.208333333333334,
+            "predicted_days": 2.74819698106165
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 9.75,
+            "predicted_days": 4.269825611770533
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 2.5,
+            "predicted_days": 4.918459549764961
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 4.083333333333333,
+            "predicted_days": 3.9801327250851655
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 2.9901162300119464
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 4.508991568392461
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.9166666666666667,
+            "predicted_days": 3.8997385488680116
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.875,
+            "predicted_days": 3.213953056476299
+          }
+        ]
+      }
+    },
+    "preferred_candidate": "amount_only_log_ridge",
+    "skill_improvement_vs_median_pct": 34.88249663322774,
+    "skill_improvement_vs_amount_only_pct": 0.0,
+    "status": "leave_one_event_out_complete"
+  },
+  "stage_target_model_validation": {
+    "target": "stage_exact_recession_equivalent_days",
+    "events": 10,
+    "storm_type_count": 3,
+    "models": {
+      "median_baseline": {
+        "n": 10,
+        "rmse_days": 6.882155367324978,
+        "mae_days": 4.495833333333333,
+        "bias_days": -3.0541666666666667,
+        "median_absolute_error_days": 2.166666666666666,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.5833333333333335,
+            "predicted_days": 3.375
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 11.416666666666666,
+            "predicted_days": 3.0833333333333335
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 19.666666666666668,
+            "predicted_days": 3.0833333333333335
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.625,
+            "predicted_days": 3.0833333333333335
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 3.0833333333333335,
+            "predicted_days": 3.375
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 5.083333333333333,
+            "predicted_days": 3.0833333333333335
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 3.375
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 3.375
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 2.0416666666666665,
+            "predicted_days": 3.375
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.375,
+            "predicted_days": 3.0833333333333335
+          }
+        ]
+      },
+      "amount_only_log_ridge": {
+        "n": 10,
+        "rmse_days": 5.036708587698892,
+        "mae_days": 3.2864295467255915,
+        "bias_days": -1.3466085850735698,
+        "median_absolute_error_days": 2.1113853814760066,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.5833333333333335,
+            "predicted_days": 7.234315686208084
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 11.416666666666666,
+            "predicted_days": 6.795972969884258
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 19.666666666666668,
+            "predicted_days": 6.043730662465764
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.625,
+            "predicted_days": 9.779451706118294
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 3.0833333333333335,
+            "predicted_days": 2.3404430654523765
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 5.083333333333333,
+            "predicted_days": 7.5982407166743915
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 0.5835442704168382
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 2.7495300462776218
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 2.0416666666666665,
+            "predicted_days": 2.659579173027917
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.375,
+            "predicted_days": 3.582439186072091
+          }
+        ]
+      },
+      "spatial_log_ridge": {
+        "n": 10,
+        "rmse_days": 5.1116568862076806,
+        "mae_days": 3.0186050464493106,
+        "bias_days": -1.2286990327577578,
+        "median_absolute_error_days": 1.626866837557249,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.5833333333333335,
+            "predicted_days": 5.94918479545397
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 11.416666666666666,
+            "predicted_days": 11.137639614708908
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 19.666666666666668,
+            "predicted_days": 5.837868470982518
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.625,
+            "predicted_days": 6.70868377790163
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 3.0833333333333335,
+            "predicted_days": 2.903310155388648
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 5.083333333333333,
+            "predicted_days": 7.032133210434016
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 0.8843109183162876
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 3.3388955813304637
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 2.0416666666666665,
+            "predicted_days": 2.0743826832254975
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.375,
+            "predicted_days": 4.679933798013815
+          }
+        ]
+      },
+      "spatial_log_knn": {
+        "n": 10,
+        "rmse_days": 6.545180797748322,
+        "mae_days": 4.541022239555524,
+        "bias_days": -1.7894022225308095,
+        "median_absolute_error_days": 3.1251680946046116,
+        "predictions": [
+          {
+            "event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days": 2.5833333333333335,
+            "predicted_days": 3.1933604615537754
+          },
+          {
+            "event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 11.416666666666666,
+            "predicted_days": 5.68896331340009
+          },
+          {
+            "event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days": 19.666666666666668,
+            "predicted_days": 3.034655588330221
+          },
+          {
+            "event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days": 13.625,
+            "predicted_days": 4.9037429067975635
+          },
+          {
+            "event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 3.0833333333333335,
+            "predicted_days": 6.548459898202859
+          },
+          {
+            "event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days": 5.083333333333333,
+            "predicted_days": 4.512182547707123
+          },
+          {
+            "event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days": 0.9166666666666666,
+            "predicted_days": 3.701876291006364
+          },
+          {
+            "event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days": 1.0416666666666667,
+            "predicted_days": 5.114712619023251
+          },
+          {
+            "event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days": 2.0416666666666665,
+            "predicted_days": 4.418695893825724
+          },
+          {
+            "event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days": 3.375,
+            "predicted_days": 3.822661588178266
+          }
+        ]
+      }
+    },
+    "preferred_candidate": "amount_only_log_ridge",
+    "skill_improvement_vs_median_pct": 26.81495376271041,
+    "skill_improvement_vs_amount_only_pct": 0.0,
+    "status": "leave_one_event_out_complete"
+  },
+  "target_recommendation": {
+    "status": "retain_shadow_only",
+    "preferred_target_for_operational_compatibility": "stage_exact_recession_equivalent_days",
+    "reason": "The live rainfall-response model is stage-based, so stage-space delay is the compatible target. Discharge-space delay remains an independent diagnostic.",
+    "automatic_promotion_enabled": false,
+    "requirements_before_use": [
+      "stage and discharge targets show acceptable event-level agreement",
+      "stage-target model materially outperforms a median baseline",
+      "spatial features materially outperform amount-only features",
+      "censored lower-bound behaviour is acceptable",
+      "manual engineering review and hindcast"
+    ],
+    "reasons_not_to_promote": [
+      "spatial_model_is_not_best_for_stage_target"
+    ],
+    "candidate_passes_target_screen": false
+  },
+  "wateroffice_retrieval_chunks": [
+    {
+      "start_utc": "2025-01-30T16:16:57+00:00",
+      "end_utc": "2025-02-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-01-30+16%3A16%3A57&end_date=2025-02-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 150,
+      "availability": "no_station_data_returned",
+      "rows": 0,
+      "stage_rows": 0,
+      "discharge_rows": 0,
+      "first_timestamp_utc": null,
+      "last_timestamp_utc": null,
+      "error": null,
+      "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
+    },
+    {
+      "start_utc": "2025-02-01T00:00:00+00:00",
+      "end_utc": "2025-03-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+00%3A00%3A00&end_date=2025-03-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 150,
+      "availability": "no_station_data_returned",
+      "rows": 0,
+      "stage_rows": 0,
+      "discharge_rows": 0,
+      "first_timestamp_utc": null,
+      "last_timestamp_utc": null,
+      "error": null,
+      "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
+    },
+    {
+      "start_utc": "2025-03-01T00:00:00+00:00",
+      "end_utc": "2025-04-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-03-01+00%3A00%3A00&end_date=2025-04-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1043653,
+      "availability": "data_returned",
+      "rows": 17690,
+      "stage_rows": 8845,
+      "discharge_rows": 8845,
+      "first_timestamp_utc": "2025-03-01T07:00:00+00:00",
+      "last_timestamp_utc": "2025-04-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-04-01T00:00:00+00:00",
+      "end_utc": "2025-05-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-04-01+00%3A00%3A00&end_date=2025-05-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 982695,
+      "availability": "data_returned",
+      "rows": 17282,
+      "stage_rows": 8641,
+      "discharge_rows": 8641,
+      "first_timestamp_utc": "2025-04-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-05-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-05-01T00:00:00+00:00",
+      "end_utc": "2025-06-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-05-01+00%3A00%3A00&end_date=2025-06-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1014158,
+      "availability": "data_returned",
+      "rows": 17832,
+      "stage_rows": 8916,
+      "discharge_rows": 8916,
+      "first_timestamp_utc": "2025-05-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-06-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-06-01T00:00:00+00:00",
+      "end_utc": "2025-07-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-06-01+00%3A00%3A00&end_date=2025-07-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 983164,
+      "availability": "data_returned",
+      "rows": 17264,
+      "stage_rows": 8632,
+      "discharge_rows": 8632,
+      "first_timestamp_utc": "2025-06-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-07-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-07-01T00:00:00+00:00",
+      "end_utc": "2025-08-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-07-01+00%3A00%3A00&end_date=2025-08-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1015579,
+      "availability": "data_returned",
+      "rows": 17818,
+      "stage_rows": 8909,
+      "discharge_rows": 8909,
+      "first_timestamp_utc": "2025-07-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-08-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-08-01T00:00:00+00:00",
+      "end_utc": "2025-09-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-08-01+00%3A00%3A00&end_date=2025-09-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1018056,
+      "availability": "data_returned",
+      "rows": 17858,
+      "stage_rows": 8929,
+      "discharge_rows": 8929,
+      "first_timestamp_utc": "2025-08-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-09-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-09-01T00:00:00+00:00",
+      "end_utc": "2025-10-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-09-01+00%3A00%3A00&end_date=2025-10-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 985224,
+      "availability": "data_returned",
+      "rows": 17282,
+      "stage_rows": 8641,
+      "discharge_rows": 8641,
+      "first_timestamp_utc": "2025-09-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-10-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-10-01T00:00:00+00:00",
+      "end_utc": "2025-11-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-10-01+00%3A00%3A00&end_date=2025-11-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1018056,
+      "availability": "data_returned",
+      "rows": 17858,
+      "stage_rows": 8929,
+      "discharge_rows": 8929,
+      "first_timestamp_utc": "2025-10-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-11-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-11-01T00:00:00+00:00",
+      "end_utc": "2025-12-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-11-01+00%3A00%3A00&end_date=2025-12-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 9726,
+      "availability": "data_returned",
+      "rows": 168,
+      "stage_rows": 84,
+      "discharge_rows": 84,
+      "first_timestamp_utc": "2025-11-01T00:00:00+00:00",
+      "last_timestamp_utc": "2025-11-01T06:55:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2025-12-01T00:00:00+00:00",
+      "end_utc": "2026-01-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-12-01+00%3A00%3A00&end_date=2026-01-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 150,
+      "availability": "no_station_data_returned",
+      "rows": 0,
+      "stage_rows": 0,
+      "discharge_rows": 0,
+      "first_timestamp_utc": null,
+      "last_timestamp_utc": null,
+      "error": null,
+      "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
+    },
+    {
+      "start_utc": "2026-01-01T00:00:00+00:00",
+      "end_utc": "2026-02-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-01-01+00%3A00%3A00&end_date=2026-02-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 150,
+      "availability": "no_station_data_returned",
+      "rows": 0,
+      "stage_rows": 0,
+      "discharge_rows": 0,
+      "first_timestamp_utc": null,
+      "last_timestamp_utc": null,
+      "error": null,
+      "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
+    },
+    {
+      "start_utc": "2026-02-01T00:00:00+00:00",
+      "end_utc": "2026-03-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-02-01+00%3A00%3A00&end_date=2026-03-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 150,
+      "availability": "no_station_data_returned",
+      "rows": 0,
+      "stage_rows": 0,
+      "discharge_rows": 0,
+      "first_timestamp_utc": null,
+      "last_timestamp_utc": null,
+      "error": null,
+      "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
+    },
+    {
+      "start_utc": "2026-03-01T00:00:00+00:00",
+      "end_utc": "2026-04-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-03-01+00%3A00%3A00&end_date=2026-04-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1199532,
+      "availability": "data_returned",
+      "rows": 17690,
+      "stage_rows": 8845,
+      "discharge_rows": 8845,
+      "first_timestamp_utc": "2026-03-01T07:00:00+00:00",
+      "last_timestamp_utc": "2026-04-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2026-04-01T00:00:00+00:00",
+      "end_utc": "2026-05-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-04-01+00%3A00%3A00&end_date=2026-05-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1148913,
+      "availability": "data_returned",
+      "rows": 17282,
+      "stage_rows": 8641,
+      "discharge_rows": 8641,
+      "first_timestamp_utc": "2026-04-01T00:00:00+00:00",
+      "last_timestamp_utc": "2026-05-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2026-05-01T00:00:00+00:00",
+      "end_utc": "2026-06-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-05-01+00%3A00%3A00&end_date=2026-06-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1170126,
+      "availability": "data_returned",
+      "rows": 17858,
+      "stage_rows": 8929,
+      "discharge_rows": 8929,
+      "first_timestamp_utc": "2026-05-01T00:00:00+00:00",
+      "last_timestamp_utc": "2026-06-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2026-06-01T00:00:00+00:00",
+      "end_utc": "2026-07-01T00:00:00+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-06-01+00%3A00%3A00&end_date=2026-07-01+00%3A00%3A00",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1130563,
+      "availability": "data_returned",
+      "rows": 17258,
+      "stage_rows": 8629,
+      "discharge_rows": 8629,
+      "first_timestamp_utc": "2026-06-01T00:00:00+00:00",
+      "last_timestamp_utc": "2026-07-01T00:00:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    },
+    {
+      "start_utc": "2026-07-01T00:00:00+00:00",
+      "end_utc": "2026-07-30T16:16:57+00:00",
+      "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-07-01+00%3A00%3A00&end_date=2026-07-30+16%3A16%3A57",
+      "status_code": 200,
+      "content_type": "text/csv; charset=utf-8",
+      "bytes_received": 1115615,
+      "availability": "data_returned",
+      "rows": 17030,
+      "stage_rows": 8515,
+      "discharge_rows": 8515,
+      "first_timestamp_utc": "2026-07-01T00:00:00+00:00",
+      "last_timestamp_utc": "2026-07-30T15:05:00+00:00",
+      "error": null,
+      "columns": [
+        "ID",
+        "Date",
+        "Parameter/Param\u00e8tre",
+        "Value/Valeur",
+        "Qualifier/Qualificatif",
+        "Symbol/Symbole",
+        "Approval/Approbation",
+        "Grade/Classification",
+        "Qualifiers/Qualificatifs"
+      ]
+    }
+  ],
+  "output_csv": "output/historical_event_backfill/historical_response_target_diagnostics.csv",
+  "limitations": [
+    "Both targets depend on empirical precipitation-screened recession fits.",
+    "The current WaterOffice discharge is rating-derived and provisional.",
+    "Stage and discharge delay targets can diverge when the rating relationship changes.",
+    "The historical spatial rainfall grids are 10 km.",
+    "No automatic operational promotion is permitted."
+  ]
+}

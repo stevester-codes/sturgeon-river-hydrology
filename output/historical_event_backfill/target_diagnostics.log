@@ -1,0 +1,25 @@
+{
+  "status": "historical_response_target_diagnostics_complete",
+  "paired_events": 10,
+  "target_correlation": 0.9929311650001168,
+  "agreement_fraction": 1.0,
+  "q_preferred_model": "amount_only_log_ridge",
+  "stage_preferred_model": "amount_only_log_ridge",
+  "recommendation": {
+    "status": "retain_shadow_only",
+    "preferred_target_for_operational_compatibility": "stage_exact_recession_equivalent_days",
+    "reason": "The live rainfall-response model is stage-based, so stage-space delay is the compatible target. Discharge-space delay remains an independent diagnostic.",
+    "automatic_promotion_enabled": false,
+    "requirements_before_use": [
+      "stage and discharge targets show acceptable event-level agreement",
+      "stage-target model materially outperforms a median baseline",
+      "spatial features materially outperform amount-only features",
+      "censored lower-bound behaviour is acceptable",
+      "manual engineering review and hindcast"
+    ],
+    "reasons_not_to_promote": [
+      "spatial_model_is_not_best_for_stage_target"
+    ],
+    "candidate_passes_target_screen": false
+  }
+}
