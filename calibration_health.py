@@ -589,5 +589,15 @@ def main() -> None:
     )
 
 
+    if context.get("status") in {
+        "short_range_forecast_unavailable",
+        "short_range_feature_vector_incomplete",
+    }:
+        raise RuntimeError(
+            "Complete HRDPS 48-hour input is unavailable or incomplete; "
+            "the operational package must be degraded rather than treating the short-range delay as zero."
+        )
+
+
 if __name__ == "__main__":
     main()
