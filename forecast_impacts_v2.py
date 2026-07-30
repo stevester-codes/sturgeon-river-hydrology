@@ -261,12 +261,19 @@ def reps_validation() -> dict:
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     previous_path = OUT / "forecast_impacts_v2.json"
+    state_path = OUT / "last_valid_hrdps.json"
     previous_result = {}
+    state_result = {}
     if previous_path.exists():
         try:
             previous_result = json.loads(previous_path.read_text())
         except Exception:
             previous_result = {}
+    if state_path.exists():
+        try:
+            state_result = json.loads(state_path.read_text())
+        except Exception:
+            state_result = {}
     base = json.loads(BASE_CAL.read_text())
     events = pd.read_csv(CAL_V2)
     all_events, training = training_frame(events)
@@ -425,7 +432,16 @@ def main() -> None:
         "maximum_carry_forward_age_hours": 12.0,
     }
     if not current_complete_48:
-        previous_scenarios = previous_result.get("deterministic_scenarios", [])
+        fallback_result = previous_result
+        previous_candidates = fallback_result.get("deterministic_scenarios", [])
+        if not any(
+            str(row.get("model")) == "HRDPS"
+            and int(row.get("horizon_h", 0) or 0) == 48
+            and bool(row.get("complete_horizon"))
+            for row in previous_candidates
+        ):
+            fallback_result = state_result
+        previous_scenarios = fallback_result.get("deterministic_scenarios", [])
         previous_hrdps = [
             dict(row)
             for row in previous_scenarios
@@ -436,7 +452,7 @@ def main() -> None:
         previous_has_48 = any(
             int(row.get("horizon_h", 0) or 0) == 48 for row in previous_hrdps
         )
-        previous_generated = previous_result.get("generated_utc")
+        previous_generated = fallback_result.get("generated_utc")
         previous_age_hours = None
         if previous_generated:
             try:
@@ -482,6 +498,19 @@ def main() -> None:
                     "No current or sufficiently recent complete HRDPS 48-hour scenario is available."
                 ),
             }
+
+    if current_complete_48:
+        state_payload = {
+            "generated_utc": datetime.now(timezone.utc).isoformat(),
+            "deterministic_scenarios": [
+                row
+                for row in scenarios
+                if str(row.get("model")) == "HRDPS"
+                and int(row.get("horizon_h", 0) or 0) in {24, 48}
+                and bool(row.get("complete_horizon"))
+            ],
+        }
+        state_path.write_text(json.dumps(state_payload, indent=2, default=json_default))
 
     reps_status = reps_validation()
     storm_type_counts = {
