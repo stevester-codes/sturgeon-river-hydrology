@@ -6,7 +6,6 @@ import math
 from datetime import datetime, timezone
 from pathlib import Path
 
-import numpy as np
 import pandas as pd
 
 from forecast_impacts_v2 import FEATURES, current_antecedent_rain, training_frame
@@ -44,28 +43,115 @@ def gauge_map(summary: dict) -> dict[tuple[str, str], dict]:
     }
 
 
-def select_operational_scenario(forecast: dict) -> dict:
-    candidates = [
+def short_range_context(forecast: dict) -> dict:
+    """Classify the newest complete 48 h HRDPS scenario without conflating
+    negligible QPF with missing inputs.
+    """
+    rows = [
         row
         for row in forecast.get("deterministic_scenarios", [])
-        if str(row.get("model")) == "HRDPS" and row.get("feature_vector")
+        if str(row.get("model")) == "HRDPS"
+        and int(row.get("horizon_h", 0) or 0) == 48
+        and bool(row.get("complete_horizon"))
     ]
-    if not candidates:
-        return {}
-    return max(candidates, key=lambda row: int(row.get("horizon_h", 0)))
+    if not rows:
+        return {
+            "status": "short_range_forecast_unavailable",
+            "scenario": {},
+            "feature_vector_required": None,
+            "interpretation": (
+                "No complete HRDPS 48-hour scenario is available. Missing short-range "
+                "inputs must not be treated as zero rain or as within the calibration envelope."
+            ),
+        }
+
+    scenario = max(rows, key=lambda row: str(row.get("run_time_utc") or ""))
+    basin_mm = finite(scenario.get("basin_mm"))
+    vector = scenario.get("feature_vector") or {}
+    if vector:
+        return {
+            "status": "material_short_range_qpf_feature_vector_available",
+            "scenario": scenario,
+            "feature_vector_required": True,
+            "basin_mm": basin_mm,
+            "run_time_utc": scenario.get("run_time_utc"),
+            "interpretation": (
+                "A complete HRDPS 48-hour rainfall scenario requires the calibrated "
+                "rainfall-response model, so feature-envelope support is assessed."
+            ),
+        }
+
+    impact = str(scenario.get("impact") or "").lower()
+    negligible = (
+        basin_mm is not None
+        and basin_mm <= 0.5
+        and ("negligible" in impact or "no material" in impact)
+    )
+    if negligible:
+        return {
+            "status": "valid_negligible_short_range_qpf",
+            "scenario": scenario,
+            "feature_vector_required": False,
+            "basin_mm": basin_mm,
+            "run_time_utc": scenario.get("run_time_utc"),
+            "interpretation": (
+                "The HRDPS input is complete and forecasts negligible basin rainfall. "
+                "A rainfall-response feature vector is intentionally not required; this "
+                "is not missing data and does not add new calibration evidence."
+            ),
+        }
+
+    return {
+        "status": "short_range_feature_vector_incomplete",
+        "scenario": scenario,
+        "feature_vector_required": True,
+        "basin_mm": basin_mm,
+        "run_time_utc": scenario.get("run_time_utc"),
+        "interpretation": (
+            "A complete HRDPS scenario exists but a required rainfall-response feature "
+            "vector is absent. Treat the feature assessment as unavailable, not favourable."
+        ),
+    }
 
 
-def feature_coverage(training: pd.DataFrame, scenario: dict) -> dict:
-    vector = scenario.get("feature_vector", {}) if scenario else {}
+def feature_coverage(training: pd.DataFrame, context: dict) -> dict:
+    context_status = str(context.get("status") or "short_range_forecast_unavailable")
+    scenario = context.get("scenario") or {}
+
+    if context_status == "valid_negligible_short_range_qpf":
+        return {
+            "status": "not_applicable_negligible_short_range_qpf",
+            "short_range_input_status": context_status,
+            "available_feature_count": 0,
+            "required_feature_count": 0,
+            "outside_feature_count": 0,
+            "materially_outside_feature_count": 0,
+            "nearest_analogue_distance": None,
+            "storm_type": scenario.get("storm_type"),
+            "horizon_h": scenario.get("horizon_h"),
+            "run_time_utc": scenario.get("run_time_utc"),
+            "basin_mm": finite(scenario.get("basin_mm")),
+            "features": [
+                {"feature": feature, "status": "not_required_negligible_qpf", "current": None}
+                for feature in FEATURES
+            ],
+            "interpretation": context.get("interpretation"),
+        }
+
+    vector = scenario.get("feature_vector") or {}
     rows = []
     outside = 0
     material = 0
+    available = 0
     for feature in FEATURES:
-        values = pd.to_numeric(training.get(feature, pd.Series(dtype=float)), errors="coerce").dropna()
+        values = pd.to_numeric(
+            training.get(feature, pd.Series(dtype=float)), errors="coerce"
+        ).dropna()
         current = finite(vector.get(feature))
         if values.empty or current is None:
             rows.append({"feature": feature, "status": "unavailable", "current": current})
             continue
+        available += 1
         minimum = float(values.min())
         maximum = float(values.max())
         mean = float(values.mean())
@@ -98,7 +184,12 @@ def feature_coverage(training: pd.DataFrame, scenario: dict) -> dict:
                 "status": status,
             }
         )
-    if material:
+
+    if context_status != "material_short_range_qpf_feature_vector_available":
+        status = "short_range_features_unavailable"
+    elif available < len(FEATURES):
+        status = "incomplete_feature_vector"
+    elif material:
         status = "material_extrapolation"
     elif outside >= 2:
         status = "marginal_extrapolation"
@@ -106,16 +197,23 @@ def feature_coverage(training: pd.DataFrame, scenario: dict) -> dict:
         status = "minor_extrapolation"
     else:
         status = "within_observed_feature_envelope"
+
     return {
         "status": status,
+        "short_range_input_status": context_status,
+        "available_feature_count": available,
+        "required_feature_count": len(FEATURES),
         "outside_feature_count": outside,
         "materially_outside_feature_count": material,
         "nearest_analogue_distance": finite(
-            scenario.get("analog_prediction", {}).get("nearest_distance") if scenario else None
+            scenario.get("analog_prediction", {}).get("nearest_distance")
         ),
-        "storm_type": scenario.get("storm_type") if scenario else None,
-        "horizon_h": scenario.get("horizon_h") if scenario else None,
+        "storm_type": scenario.get("storm_type"),
+        "horizon_h": scenario.get("horizon_h"),
+        "run_time_utc": scenario.get("run_time_utc"),
+        "basin_mm": finite(scenario.get("basin_mm")),
         "features": rows,
+        "interpretation": context.get("interpretation"),
     }
 
 
@@ -150,7 +248,6 @@ def storage_state(summary: dict) -> dict:
                 "higher_than_72h_ago": elevated_72h,
             }
         )
-    target_24h = value("05EA002", "water_level_m", "change_24h")
     if elevated >= 3:
         state = "high_residual_storage_signal"
     elif elevated >= 1:
@@ -163,7 +260,7 @@ def storage_state(summary: dict) -> dict:
             "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, "
             "tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state."
         ),
-        "target_change_24h_m": target_24h,
+        "target_change_24h_m": value("05EA002", "water_level_m", "change_24h"),
         "antecedent_rain_mm": {
             "24h": current_antecedent_rain(24),
             "72h": current_antecedent_rain(72),
@@ -187,9 +284,7 @@ def rating_support(project: dict) -> dict:
     if minimum is None or maximum is None or target_stage is None:
         return {"status": "unavailable"}
     span = max(maximum - minimum, 1e-9)
-    below = max(0.0, minimum - target_stage)
-    above = max(0.0, target_stage - maximum)
-    extrapolation = max(below, above)
+    extrapolation = max(max(0.0, minimum - target_stage), max(0.0, target_stage - maximum))
     span_multiple = extrapolation / span
     if extrapolation == 0:
         status = "target_inside_current_limb_fit_range"
@@ -220,16 +315,13 @@ def transfer_support(transfer: dict, project: dict) -> dict:
         for point in points
         if finite(point.get("discharge_m3s")) is not None
     )
-    design_points = [
-        point for point in points if point.get("return_period_years") is not None
-    ]
+    design_points = [point for point in points if point.get("return_period_years") is not None]
     current_q = finite(project.get("current", {}).get("observed_discharge_05EA002_m3s"))
     target_q = finite(
         project.get("construction_threshold", {}).get("calibrated_target_discharge_m3s")
     )
     first_design_q = min(
-        (finite(point.get("discharge_m3s")) for point in design_points),
-        default=None,
+        (finite(point.get("discharge_m3s")) for point in design_points), default=None
     )
     low_flow_gap = (
         first_design_q - target_q
@@ -237,14 +329,11 @@ def transfer_support(transfer: dict, project: dict) -> dict:
         else None
     )
     if len(design_points) >= 10 and target_q is not None:
-        status = "approximate_low_flow_anchor_plus_complete_design_profile"
-        score = 8.0
+        status, score = "approximate_low_flow_anchor_plus_complete_design_profile", 8.0
     elif len(design_points) >= 3:
-        status = "approximate_low_flow_anchor_plus_partial_design_profile"
-        score = 6.0
+        status, score = "approximate_low_flow_anchor_plus_partial_design_profile", 6.0
     else:
-        status = "sparse_project_transfer_support"
-        score = 3.0
+        status, score = "sparse_project_transfer_support", 3.0
     return {
         "status": status,
         "score_out_of_10": score,
@@ -261,10 +350,9 @@ def transfer_support(transfer: dict, project: dict) -> dict:
             (b - a for a, b in zip(discharges, discharges[1:])), default=None
         ),
         "interpretation": (
-            "The high-flow RS18883 transfer is now constrained by the complete "
-            "2- to 1,000-year design profile. Remaining transfer uncertainty is "
-            "concentrated in the reconstructed 6.77 m3/s low-flow anchor and the "
-            "segment to the 14 m3/s two-year point."
+            "The high-flow RS18883 transfer is constrained by the complete 2- to "
+            "1,000-year design profile. Remaining transfer uncertainty is concentrated "
+            "in the reconstructed 6.77 m3/s low-flow anchor and the segment to 14 m3/s."
         ),
     }
 
@@ -290,13 +378,12 @@ def historical_recession_validation() -> dict:
     score += 2.0 if events >= 8 else (1.0 if events >= 3 else 0.0)
     score += 2.0 if cv and rmse is not None else 0.0
     score += 2.0 if skill >= 5.0 else (1.0 if skill >= 0.0 and rmse is not None else 0.0)
-    status = (
-        "screened_event_block_validation_available"
-        if score >= 6.0
-        else "limited_historical_validation"
-    )
     return {
-        "status": status,
+        "status": (
+            "screened_event_block_validation_available"
+            if score >= 6.0
+            else "limited_historical_validation"
+        ),
         "score_out_of_9": score,
         "preferred_model": preferred.get("name"),
         "rdpa_coverage_fraction": coverage,
@@ -311,9 +398,8 @@ def historical_recession_validation() -> dict:
         "operational_use": data.get("operational_use", {}),
         "promotion_recommendation": data.get("promotion_recommendation", {}),
         "interpretation": (
-            "This is independent precipitation-screened validation of the direct-"
-            "discharge recession timing. It improves confidence in schedule "
-            "sensitivity, but remains shadow-only because skill gain and event "
+            "This is independent precipitation-screened validation of direct-discharge "
+            "recession timing. It remains shadow-only because skill gain and event "
             "diversity are not sufficient for promotion."
         ),
     }
@@ -329,19 +415,23 @@ def diagnostic_score(
     transfer_score: float,
     historical_score: float,
 ) -> dict:
-    # Version 2 rebalances the same 100-point diagnostic to recognize the
-    # complete RS18883 design profile and independent historical event-block
-    # validation. It remains an engineering evidence score, not probability.
+    feature_points = {
+        "within_observed_feature_envelope": 12.0,
+        "minor_extrapolation": 9.0,
+        "marginal_extrapolation": 6.0,
+        "material_extrapolation": 2.0,
+        # A dry complete forecast avoids use of the weak response model but adds
+        # no new calibration evidence. Keep the neutral evidence contribution at
+        # the same floor as material extrapolation rather than awarding 12 points.
+        "not_applicable_negligible_short_range_qpf": 2.0,
+        "incomplete_feature_vector": 0.0,
+        "short_range_features_unavailable": 0.0,
+    }.get(coverage_status, 0.0)
     components = {
         "uncensored_peak_events": min(20.0, uncensored * 7.0),
         "complete_recoveries": min(15.0, recoveries * 7.5),
         "storm_type_diversity": min(8.0, storm_types * 2.0),
-        "forecast_feature_coverage": {
-            "within_observed_feature_envelope": 12.0,
-            "minor_extrapolation": 9.0,
-            "marginal_extrapolation": 6.0,
-            "material_extrapolation": 2.0,
-        }.get(coverage_status, 0.0),
+        "forecast_feature_coverage": feature_points,
         "current_rating_support": {
             "target_inside_current_limb_fit_range": 10.0,
             "mild_target_extrapolation": 6.0,
@@ -362,14 +452,15 @@ def diagnostic_score(
     else:
         tier = "high"
     return {
-        "score_version": 2,
+        "score_version": 3,
         "score_out_of_100": total,
         "tier": tier,
         "components": components,
         "warning": (
-            "This is a transparent engineering diagnostic score, not a statistically calibrated probability "
-            "that a forecast date will be correct. Version 2 recognizes full-profile transfer support and "
-            "historical event-block validation, so it is not directly comparable point-for-point with version 1."
+            "This is a transparent engineering evidence diagnostic, not a probability. "
+            "Version 3 no longer awards full feature-coverage points when a complete "
+            "HRDPS forecast is dry or when feature inputs are missing. A dry forecast can "
+            "reduce near-term timing risk without increasing calibration evidence."
         ),
     }
 
@@ -384,8 +475,8 @@ def main() -> None:
     events = pd.read_csv(CAL_EVENTS)
     _, training = training_frame(events)
 
-    scenario = select_operational_scenario(forecast)
-    coverage = feature_coverage(training, scenario)
+    context = short_range_context(forecast)
+    coverage = feature_coverage(training, context)
     storage = storage_state(summary)
     rating = rating_support(project)
     transfer_health = transfer_support(transfer, project)
@@ -399,7 +490,7 @@ def main() -> None:
         uncensored,
         recoveries,
         storm_types,
-        coverage.get("status", "unavailable"),
+        coverage.get("status", "short_range_features_unavailable"),
         rating.get("status", "unavailable"),
         member_count,
         finite(transfer_health.get("score_out_of_10"), 0.0),
@@ -411,7 +502,7 @@ def main() -> None:
         {
             "priority": 1,
             "action": "Survey at least one concurrent RS18883 water level near 650.20 m tied to CGVD28.",
-            "reason": "The complete design profile improves the transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed.",
+            "reason": "The complete design profile improves transfer above 14 m3/s, but the operational low-flow anchor remains reconstructed.",
         },
         {
             "priority": 2,
@@ -421,12 +512,12 @@ def main() -> None:
         {
             "priority": 3,
             "action": "Accumulate additional independent summer falling-limb dry recession blocks.",
-            "reason": "The precipitation-screened direct-Q model has event-block validation, but only eight independent blocks and 1.87 percent skill gain.",
+            "reason": "The screened direct-Q model has only eight independent blocks and 1.87 percent skill gain.",
         },
         {
             "priority": 4,
             "action": "Assimilate new rainfall-response events only after censoring and backtest checks pass.",
-            "reason": "Automatic promotion with only two clean response events could make the model less reliable rather than more reliable.",
+            "reason": "Automatic promotion with only two clean response events could make the model less reliable.",
         },
     ]
 
@@ -434,6 +525,9 @@ def main() -> None:
         "generated_utc": datetime.now(timezone.utc).isoformat(),
         "status": "diagnostic_only_no_automatic_recalibration",
         "overall": score,
+        "short_range_forecast_input": {
+            key: value for key, value in context.items() if key != "scenario"
+        },
         "calibration_sample": {
             "all_event_constraints": int(calibration.get("event_count", len(events))),
             "uncensored_peak_training_events": uncensored,
@@ -468,11 +562,11 @@ def main() -> None:
         },
         "priority_actions": actions,
         "limitations": [
-            "Storage pressure is inferred from recent rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
-            "The current event stage-discharge fit is based on provisional WSC stage and rating-derived discharge.",
-            "The diagnostic score is intentionally transparent but is not a formal confidence interval.",
-            "A model can pass operational integrity checks while still having limited scientific calibration confidence.",
-            "The full design profile materially improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow project observation.",
+            "Storage pressure is inferred from rainfall and upstream gauge trends, not simulated as physical reservoir volumes.",
+            "The current-event stage-discharge fit uses provisional WSC stage and rating-derived discharge.",
+            "The diagnostic score is intentionally transparent but is not a confidence interval.",
+            "A dry short-range forecast reduces dependence on the weak rainfall-response model but is not new calibration evidence.",
+            "The full design profile improves RS18883 interpolation above 14 m3/s but does not replace a surveyed low-flow observation.",
         ],
     }
     OUT.parent.mkdir(parents=True, exist_ok=True)
@@ -483,6 +577,7 @@ def main() -> None:
                 "status": output["status"],
                 "score": score["score_out_of_100"],
                 "tier": score["tier"],
+                "short_range_input": context["status"],
                 "feature_coverage": coverage["status"],
                 "rating_support": rating["status"],
                 "transfer_support": transfer_health["status"],
