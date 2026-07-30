@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-30T15:33:21.156587+00:00",
+  "generated_utc": "2026-07-30T16:54:04.819371+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -21,8 +21,8 @@
   "short_range_forecast_input": {
     "status": "valid_negligible_short_range_qpf",
     "feature_vector_required": false,
-    "basin_mm": 0.0122303991953896,
-    "run_time_utc": "2026-07-30T06:00:00+00:00",
+    "basin_mm": 0.0017925060061914,
+    "run_time_utc": "2026-07-30T12:00:00+00:00",
     "interpretation": "The HRDPS input is complete and forecasts negligible basin rainfall. A rainfall-response feature vector is intentionally not required; this is not missing data and does not add new calibration evidence."
   },
   "calibration_sample": {
@@ -47,8 +47,8 @@
     "nearest_analogue_distance": null,
     "storm_type": "upper_lake_chain_concentrated",
     "horizon_h": 48,
-    "run_time_utc": "2026-07-30T06:00:00+00:00",
-    "basin_mm": 0.0122303991953896,
+    "run_time_utc": "2026-07-30T12:00:00+00:00",
+    "basin_mm": 0.0017925060061914,
     "features": [
       {
         "feature": "basin_mm",
@@ -91,7 +91,7 @@
   "hydrologic_memory_and_storage_proxies": {
     "status": "elevated_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.03699999999999992,
+    "target_change_24h_m": -0.03500000000000014,
     "antecedent_rain_mm": {
       "24h": 0.005256492927487,
       "72h": 12.251283649254596,
@@ -102,32 +102,32 @@
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": 0.027000000000001023,
-        "change_72h_m": 0.1479999999999997,
+        "change_24h_m": 0.01699999999999946,
+        "change_72h_m": 0.14599999999999902,
         "rising_24h": true,
         "higher_than_72h_ago": true
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.018000000000000682,
-        "change_72h_m": -0.04300000000000104,
+        "change_24h_m": -0.025000000000000355,
+        "change_72h_m": -0.0470000000000006,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": -0.09099999999999997,
-        "change_72h_m": -0.08299999999999996,
+        "change_24h_m": -0.08799999999999986,
+        "change_72h_m": -0.08899999999999997,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": -0.08999999999999997,
-        "change_72h_m": -0.07199999999999995,
+        "change_24h_m": -0.09399999999999997,
+        "change_72h_m": -0.07799999999999996,
         "rising_24h": false,
         "higher_than_72h_ago": false
       }
@@ -135,16 +135,16 @@
   },
   "current_limb_rating_support": {
     "status": "material_target_extrapolation",
-    "fit_r2": 0.9879453584233587,
-    "fit_rmse_m3s": 0.028143695281365236,
+    "fit_r2": 0.9885392732352682,
+    "fit_rmse_m3s": 0.02731386217012891,
     "fit_hourly_points": 93,
     "observed_stage_range_m": [
-      2.1295,
-      2.212
+      2.1275,
+      2.21
     ],
-    "target_stage_m": 1.7522920690897763,
-    "extrapolation_distance_m": 0.37720793091022387,
-    "extrapolation_as_observed_span": 4.572217344366349,
+    "target_stage_m": 1.749516479376838,
+    "extrapolation_distance_m": 0.3779835206231619,
+    "extrapolation_as_observed_span": 4.5816184317959,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
@@ -182,7 +182,7 @@
     "rdpa_coverage_fraction": 0.9991142604074402,
     "screened_points": 827,
     "independent_event_blocks": 8,
-    "rain_free_days_to_6_77_m3s": 9.125,
+    "rain_free_days_to_6_77_m3s": 8.958333333333334,
     "event_block_rmse_per_day": 0.24969981446116865,
     "event_block_mae_per_day": 0.19007871104622034,
     "skill_improvement_vs_gauge_only_pct": 1.8715339090006198,
@@ -210,39 +210,39 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 0.9593621754673575,
+    "standard_deviation_days": 0.9593634026385675,
     "earliest": {
-      "days": 9.217979952455865,
+      "days": 9.259648338043693,
       "date_utc": "2026-08-08"
     },
     "latest": {
-      "days": 11.489932741089778,
+      "days": 11.531590730885545,
       "date_utc": "2026-08-11"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 9.220327698255906,
+        "days": 9.261994417162493,
         "date_utc": "2026-08-08"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 10.352037025085608,
+        "days": 10.393704366252923,
         "date_utc": "2026-08-10"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 11.468775673673504,
+        "days": 11.510449081085667,
         "date_utc": "2026-08-11"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 11.47872559355336,
+        "days": 11.520392194911805,
         "date_utc": "2026-08-11"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 11.483057988065003,
+        "days": 11.52472122859359,
         "date_utc": "2026-08-11"
       }
     },
