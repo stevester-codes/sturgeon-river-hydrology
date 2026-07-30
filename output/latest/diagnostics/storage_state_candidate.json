@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-07-30T03:33:14.927622+00:00",
+  "generated_utc": "2026-07-30T06:44:52.062756+00:00",
   "status": "not_ready_for_operational_promotion",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "method": "A ridge-regression correction to the existing stage-dependent recession curve uses decaying rainfall-memory states and recent upstream gauge movement. The final 30 percent of observations are held out chronologically.",
   "data": {
-    "complete_hourly_rows": 310,
-    "train_rows": 217,
-    "test_rows": 93,
+    "complete_hourly_rows": 313,
+    "train_rows": 219,
+    "test_rows": 94,
     "start_utc": "2026-07-17T00:00:00+00:00",
-    "end_utc": "2026-07-29T21:00:00+00:00",
+    "end_utc": "2026-07-30T00:00:00+00:00",
     "forecast_horizon_h": 6,
     "ridge_lambda": 4.0,
     "features": [
@@ -30,21 +30,21 @@
   },
   "holdout_performance": {
     "baseline_recession": {
-      "n": 93,
-      "rmse_m": 0.017958019194413553,
-      "mae_m": 0.010697997157693201,
-      "bias_m": -0.007938540210521719,
-      "correlation": 0.43842743314939486
+      "n": 94,
+      "rmse_m": 0.01619964361083669,
+      "mae_m": 0.009546104143311092,
+      "bias_m": -0.0068160031211095175,
+      "correlation": 0.4495963138699508
     },
     "storage_candidate": {
-      "n": 93,
-      "rmse_m": 0.021527165331087193,
-      "mae_m": 0.01782706130108239,
-      "bias_m": -0.005236786807706308,
-      "correlation": 0.35244844120089497
+      "n": 94,
+      "rmse_m": 0.02160608301973447,
+      "mae_m": 0.018265464794617055,
+      "bias_m": -0.0017021369066044995,
+      "correlation": 0.2947206015446008
     },
-    "rmse_improvement_fraction": -0.19874943322167415,
-    "mae_improvement_fraction": -0.6663924132997641,
+    "rmse_improvement_fraction": -0.3337381697262254,
+    "mae_improvement_fraction": -0.9133946707899239,
     "promotion_screen": {
       "minimum_rmse_improvement_fraction": 0.1,
       "minimum_mae_improvement_fraction": 0.05,
@@ -53,122 +53,122 @@
     }
   },
   "current_state": {
-    "timestamp_utc": "2026-07-29T21:00:00+00:00",
-    "baseline_expected_change_next_6h_m": -0.01205198119891372,
-    "storage_memory_correction_next_6h_m": 0.030674927810664512,
-    "candidate_expected_change_next_6h_m": 0.01862294661175079,
-    "rain_24h_mm": 5.197529550122109,
-    "rain_72h_mm": 13.085064330968143,
-    "rain_168h_mm": 27.555811003399274,
+    "timestamp_utc": "2026-07-30T00:00:00+00:00",
+    "baseline_expected_change_next_6h_m": -0.012042945076096009,
+    "storage_memory_correction_next_6h_m": 0.02249098466591829,
+    "candidate_expected_change_next_6h_m": 0.010448039589822282,
+    "rain_24h_mm": 5.180581884628624,
+    "rain_72h_mm": 13.085018790968464,
+    "rain_168h_mm": 27.555687981540984,
     "rain_memory_states_mm": {
-      "12h": 0.9408575660511439,
-      "36h": 1.1586151787069054,
-      "96h": 1.0592230795869682,
-      "240h": 0.7237517957412128
+      "12h": 0.7911637545567418,
+      "36h": 1.0935871054645578,
+      "96h": 1.0365261132023036,
+      "240h": 0.7175080523006121
     },
     "upstream_changes": {
-      "05EA005_change_6h_m": -0.02499999999999991,
-      "05EA005_change_24h_m": -0.028000000000000025,
-      "05EA010_change_6h_m": -0.018000000000000016,
-      "05EA011_change_6h_m": 0.014000000000001123,
-      "05EA012_change_6h_m": 0.11249999999999893,
-      "05EA012_change_24h_m": 0.0799999999999983
+      "05EA005_change_6h_m": -0.025500000000000078,
+      "05EA005_change_24h_m": -0.03400000000000025,
+      "05EA010_change_6h_m": -0.027000000000000024,
+      "05EA011_change_6h_m": 0.02099999999999902,
+      "05EA012_change_6h_m": 0.11250000000000071,
+      "05EA012_change_24h_m": 0.15300000000000047
     }
   },
   "coefficients": [
     {
       "feature": "intercept",
-      "standardized_coefficient_m_per_6h": 0.005139739241239749
+      "standardized_coefficient_m_per_6h": 0.005564098714361657
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.015770827170973216
+      "standardized_coefficient_m_per_6h": -0.01728827701893406
     },
     {
       "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.008614964192889703
+      "standardized_coefficient_m_per_6h": -0.008489263378019453
     },
     {
       "feature": "05EA005_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.011276162225612965
+      "standardized_coefficient_m_per_6h": -0.011570819131376666
     },
     {
       "feature": "05EA005_change_24h_m",
-      "standardized_coefficient_m_per_6h": 0.004466529337074936
+      "standardized_coefficient_m_per_6h": 0.004691223485294345
     },
     {
       "feature": "05EA010_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.0021692699168000583
+      "standardized_coefficient_m_per_6h": 0.002461795962749986
     },
     {
       "feature": "05EA011_change_6h_m",
-      "standardized_coefficient_m_per_6h": 5.157792612877782e-05
+      "standardized_coefficient_m_per_6h": 0.00010777317318229862
     },
     {
       "feature": "05EA012_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.008346076616642125
+      "standardized_coefficient_m_per_6h": 0.008391957508014778
     },
     {
       "feature": "05EA012_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.014636625058692008
+      "standardized_coefficient_m_per_6h": -0.014416671225525729
     },
     {
       "feature": "rain_24h_mm",
-      "standardized_coefficient_m_per_6h": -0.011347871288275552
+      "standardized_coefficient_m_per_6h": -0.011660068741032904
     },
     {
       "feature": "rain_72h_mm",
-      "standardized_coefficient_m_per_6h": 0.015093954033147299
+      "standardized_coefficient_m_per_6h": 0.015575896634528739
     },
     {
       "feature": "rain_memory_12h_mm",
-      "standardized_coefficient_m_per_6h": 0.00278804728756937
+      "standardized_coefficient_m_per_6h": 0.0033113944101220687
     },
     {
       "feature": "rain_memory_36h_mm",
-      "standardized_coefficient_m_per_6h": 0.017558933929858758
+      "standardized_coefficient_m_per_6h": 0.01725496923601681
     },
     {
       "feature": "rain_memory_96h_mm",
-      "standardized_coefficient_m_per_6h": -0.0015653143485193902
+      "standardized_coefficient_m_per_6h": -0.0021864630650509182
     },
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.023205741456353554
+      "standardized_coefficient_m_per_6h": -0.02342843926144568
     }
   ],
   "largest_standardized_effects": [
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.023205741456353554
-    },
-    {
-      "feature": "rain_memory_36h_mm",
-      "standardized_coefficient_m_per_6h": 0.017558933929858758
+      "standardized_coefficient_m_per_6h": -0.02342843926144568
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.015770827170973216
+      "standardized_coefficient_m_per_6h": -0.01728827701893406
+    },
+    {
+      "feature": "rain_memory_36h_mm",
+      "standardized_coefficient_m_per_6h": 0.01725496923601681
     },
     {
       "feature": "rain_72h_mm",
-      "standardized_coefficient_m_per_6h": 0.015093954033147299
+      "standardized_coefficient_m_per_6h": 0.015575896634528739
     },
     {
       "feature": "05EA012_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.014636625058692008
+      "standardized_coefficient_m_per_6h": -0.014416671225525729
     },
     {
       "feature": "rain_24h_mm",
-      "standardized_coefficient_m_per_6h": -0.011347871288275552
+      "standardized_coefficient_m_per_6h": -0.011660068741032904
     },
     {
       "feature": "05EA005_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.011276162225612965
+      "standardized_coefficient_m_per_6h": -0.011570819131376666
     },
     {
       "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.008614964192889703
+      "standardized_coefficient_m_per_6h": -0.008489263378019453
     }
   ],
   "promotion_policy": {

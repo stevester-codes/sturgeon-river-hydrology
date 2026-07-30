@@ -1,9 +1,16 @@
-Traceback (most recent call last):
-  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/run_geps_ensemble_impacts.py", line 42, in <module>
-    geps_ensemble_impacts.main()
-  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/geps_ensemble_impacts.py", line 284, in main
-    members = load_geps_members()
-              ^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/sturgeon-river-hydrology/sturgeon-river-hydrology/geps_ensemble_impacts.py", line 51, in load_geps_members
-    raise RuntimeError("GEPS validation has not passed")
-RuntimeError: GEPS validation has not passed
+{
+  "geps_members": 21,
+  "horizons": 12,
+  "official_outlook": {
+    "status": "operational_geps_integrated",
+    "primary_scenario": "central",
+    "dry_days_to_1_70": 12.897111212856476,
+    "central_days_to_1_70": 12.897531345805014,
+    "wet_days_to_1_70": 12.879329090615997,
+    "dry_date_utc": "2026-08-12",
+    "central_date_utc": "2026-08-12",
+    "wet_date_utc": "2026-08-12",
+    "interpretation": "HRDPS governs the first 48 hours. Actual GEPS members selected near the 10th, 50th and 90th percentiles govern later rainfall windows through 16 days. Only windows beginning before the projected 1.70 m crossing are allowed to delay that crossing.",
+    "confidence": "low"
+  }
+}
