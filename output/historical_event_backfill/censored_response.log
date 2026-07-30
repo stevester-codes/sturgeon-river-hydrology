@@ -1,0 +1,28 @@
+{
+  "status": "historical_censored_response_model_evaluated",
+  "resolved_events": 10,
+  "censored_events": 26,
+  "baseline_rmse_days": 5.036708587698893,
+  "preferred_feature_set": "amount_only",
+  "preferred_ridge_penalty": 10.0,
+  "preferred_censored_weight": 1.0,
+  "preferred_exact_rmse": 4.040135623521664,
+  "preferred_constraint_satisfaction_pct": 65.38461538461539,
+  "combined_screen_passed": false,
+  "promotion_screen": {
+    "candidate_passes_minimum_screen": false,
+    "automatic_promotion_enabled": false,
+    "reasons_not_to_promote": [
+      "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds",
+      "spatial_features_are_not_selected"
+    ],
+    "requirements": [
+      "at least ten resolved response peaks",
+      "at least fifteen unresolved censored lower bounds",
+      "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
+      "at least 75 percent of censored lower bounds satisfied",
+      "spatial model selected over amount-only model",
+      "manual engineering review and operational hindcast"
+    ]
+  }
+}
