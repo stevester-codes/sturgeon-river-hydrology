@@ -1,0 +1,529 @@
+{
+  "generated_utc": "2026-07-30T16:13:13+00:00",
+  "status": "historical_spatial_peak_response_shadow_model_evaluated",
+  "mode": "shadow_only_manual_promotion_required",
+  "target": "peak-derived recession days lost",
+  "amount_features": [
+    "log_basin_mm",
+    "log_antecedent_168h_mm",
+    "pre_stage_m"
+  ],
+  "spatial_features": [
+    "log_basin_mm",
+    "lower_ratio",
+    "upper_ratio",
+    "log_duration_h",
+    "log_antecedent_168h_mm",
+    "basin_pct_gt_10mm_fraction",
+    "pre_stage_m"
+  ],
+  "validation": {
+    "resolved_peak_events": 10,
+    "censored_lower_bound_events": 26,
+    "complete_recovery_events": 1,
+    "storm_type_count": 3,
+    "models": {
+      "median_baseline": {
+        "n": 10,
+        "rmse_days": 6.247531719289581,
+        "mae_days": 4.57304727918212,
+        "bias_days": -2.1915456326798006,
+        "median_absolute_error_days": 2.6703805625073924,
+        "predictions": [
+          {
+            "held_out_event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days_lost": 2.442784489164578,
+            "predicted_days_lost": 4.175059914357309
+          },
+          {
+            "held_out_event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 8.382007973723763,
+            "predicted_days_lost": 2.613390069703184
+          },
+          {
+            "held_out_event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 17.79705676360003,
+            "predicted_days_lost": 2.613390069703184
+          },
+          {
+            "held_out_event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 12.091741732728876,
+            "predicted_days_lost": 2.613390069703184
+          },
+          {
+            "held_out_event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 2.613390069703184,
+            "predicted_days_lost": 4.175059914357309
+          },
+          {
+            "held_out_event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.4440485234155425,
+            "predicted_days_lost": 2.613390069703184
+          },
+          {
+            "held_out_event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 0.9022580767073545,
+            "predicted_days_lost": 4.175059914357309
+          },
+          {
+            "held_out_event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.0282980458908386,
+            "predicted_days_lost": 4.175059914357309
+          },
+          {
+            "held_out_event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.9810606578089947,
+            "predicted_days_lost": 4.175059914357309
+          },
+          {
+            "held_out_event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.175059914357309,
+            "predicted_days_lost": 2.613390069703184
+          }
+        ]
+      },
+      "amount_only_log_ridge": {
+        "n": 10,
+        "rmse_days": 4.368747755956948,
+        "mae_days": 2.806953181817694,
+        "bias_days": -1.1197323185622086,
+        "median_absolute_error_days": 2.2351676364133315,
+        "predictions": [
+          {
+            "held_out_event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days_lost": 2.442784489164578,
+            "predicted_days_lost": 5.662449153849345
+          },
+          {
+            "held_out_event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 8.382007973723763,
+            "predicted_days_lost": 6.02423480422833
+          },
+          {
+            "held_out_event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 17.79705676360003,
+            "predicted_days_lost": 5.469385127322221
+          },
+          {
+            "held_out_event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 12.091741732728876,
+            "predicted_days_lost": 8.74782891273434
+          },
+          {
+            "held_out_event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 2.613390069703184,
+            "predicted_days_lost": 2.178783204273687
+          },
+          {
+            "held_out_event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.4440485234155425,
+            "predicted_days_lost": 6.882222475076836
+          },
+          {
+            "held_out_event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 0.9022580767073545,
+            "predicted_days_lost": 0.4871093367956456
+          },
+          {
+            "held_out_event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.0282980458908386,
+            "predicted_days_lost": 3.1408601492220694
+          },
+          {
+            "held_out_event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.9810606578089947,
+            "predicted_days_lost": 2.6467642544091285
+          },
+          {
+            "held_out_event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.175059914357309,
+            "predicted_days_lost": 3.4207456435667796
+          }
+        ]
+      },
+      "spatial_log_ridge": {
+        "n": 10,
+        "rmse_days": 4.627717898533696,
+        "mae_days": 2.751552218416965,
+        "bias_days": -0.9742255539560997,
+        "median_absolute_error_days": 1.8666485826752242,
+        "predictions": [
+          {
+            "held_out_event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days_lost": 2.442784489164578,
+            "predicted_days_lost": 4.648117300052388
+          },
+          {
+            "held_out_event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 8.382007973723763,
+            "predicted_days_lost": 9.9099723281864
+          },
+          {
+            "held_out_event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 17.79705676360003,
+            "predicted_days_lost": 5.055694463552626
+          },
+          {
+            "held_out_event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 12.091741732728876,
+            "predicted_days_lost": 6.401021386082855
+          },
+          {
+            "held_out_event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 2.613390069703184,
+            "predicted_days_lost": 2.6489951614194345
+          },
+          {
+            "held_out_event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.4440485234155425,
+            "predicted_days_lost": 6.747460575438045
+          },
+          {
+            "held_out_event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 0.9022580767073545,
+            "predicted_days_lost": 0.7054518615354557
+          },
+          {
+            "held_out_event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.0282980458908386,
+            "predicted_days_lost": 3.646016496490782
+          },
+          {
+            "held_out_event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.9810606578089947,
+            "predicted_days_lost": 2.167301306678027
+          },
+          {
+            "held_out_event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.175059914357309,
+            "predicted_days_lost": 4.185419828103458
+          }
+        ]
+      },
+      "spatial_log_knn": {
+        "n": 10,
+        "rmse_days": 5.681142845837665,
+        "mae_days": 3.840190407993312,
+        "bias_days": -1.3669475081302944,
+        "median_absolute_error_days": 2.702185761244457,
+        "predictions": [
+          {
+            "held_out_event_id": 5,
+            "storm_type": "upper_lake_chain_concentrated",
+            "observed_days_lost": 2.442784489164578,
+            "predicted_days_lost": 2.94116504182923
+          },
+          {
+            "held_out_event_id": 11,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 8.382007973723763,
+            "predicted_days_lost": 5.143078970503172
+          },
+          {
+            "held_out_event_id": 13,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 17.79705676360003,
+            "predicted_days_lost": 2.90579223884919
+          },
+          {
+            "held_out_event_id": 14,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 12.091741732728876,
+            "predicted_days_lost": 4.800719620172306
+          },
+          {
+            "held_out_event_id": 56,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 2.613390069703184,
+            "predicted_days_lost": 5.678667245524942
+          },
+          {
+            "held_out_event_id": 62,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.4440485234155425,
+            "predicted_days_lost": 4.534241950888295
+          },
+          {
+            "held_out_event_id": 66,
+            "storm_type": "tributary_localized_carrot_creek",
+            "observed_days_lost": 0.9022580767073545,
+            "predicted_days_lost": 3.2103269723944763
+          },
+          {
+            "held_out_event_id": 67,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.0282980458908386,
+            "predicted_days_lost": 5.093498146892489
+          },
+          {
+            "held_out_event_id": 68,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 1.9810606578089947,
+            "predicted_days_lost": 4.320155004476151
+          },
+          {
+            "held_out_event_id": 69,
+            "storm_type": "widespread_basin",
+            "observed_days_lost": 4.175059914357309,
+            "predicted_days_lost": 3.560585974267269
+          }
+        ]
+      }
+    },
+    "preferred_candidate": "amount_only_log_ridge",
+    "censored_constraint_evaluation": {
+      "events": 26,
+      "constraints_satisfied": 10,
+      "constraint_satisfaction_pct": 38.46153846153847,
+      "mean_underprediction_shortfall_days": 7.950024162913352,
+      "maximum_underprediction_shortfall_days": 38.076905937659724,
+      "records": [
+        {
+          "event_id": 1,
+          "observed_response_lower_bound_days": 5.359373470180386,
+          "predicted_days_lost": 5.8660400235661365,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 2,
+          "observed_response_lower_bound_days": 21.898321985209645,
+          "predicted_days_lost": 6.600830452752279,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 3,
+          "observed_response_lower_bound_days": 42.489651110253206,
+          "predicted_days_lost": 7.188345908696171,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 4,
+          "observed_response_lower_bound_days": 17.6117883684884,
+          "predicted_days_lost": 5.260373586554726,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 6,
+          "observed_response_lower_bound_days": 3.7933832796943694,
+          "predicted_days_lost": 4.431602269438148,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 7,
+          "observed_response_lower_bound_days": 3.524896455131648,
+          "predicted_days_lost": 5.120333262837542,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 8,
+          "observed_response_lower_bound_days": 3.7809689353891662,
+          "predicted_days_lost": 6.925586448557955,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 10,
+          "observed_response_lower_bound_days": 7.718078543653793,
+          "predicted_days_lost": 8.607136940750044,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 17,
+          "observed_response_lower_bound_days": 14.422890080009351,
+          "predicted_days_lost": 7.372331705514089,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 18,
+          "observed_response_lower_bound_days": 5.9985983441093635,
+          "predicted_days_lost": 6.523721196990265,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 19,
+          "observed_response_lower_bound_days": 11.364203801468731,
+          "predicted_days_lost": 5.741144830786371,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 20,
+          "observed_response_lower_bound_days": 4.348964003787783,
+          "predicted_days_lost": 7.070889137523661,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 26,
+          "observed_response_lower_bound_days": 19.054360381158823,
+          "predicted_days_lost": 5.570819341692683,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 27,
+          "observed_response_lower_bound_days": 8.006936131086894,
+          "predicted_days_lost": 6.378404062995507,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 48,
+          "observed_response_lower_bound_days": 13.742108678251613,
+          "predicted_days_lost": 5.979215641161851,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 49,
+          "observed_response_lower_bound_days": 5.36871511320956,
+          "predicted_days_lost": 4.839572831175124,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 50,
+          "observed_response_lower_bound_days": 6.221965826805231,
+          "predicted_days_lost": 4.5959523869655925,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 51,
+          "observed_response_lower_bound_days": 10.50219761074033,
+          "predicted_days_lost": 7.332660494830581,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 52,
+          "observed_response_lower_bound_days": 22.134327192839937,
+          "predicted_days_lost": 6.006298984449824,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 53,
+          "observed_response_lower_bound_days": 6.356582645480886,
+          "predicted_days_lost": 3.97225013053436,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 54,
+          "observed_response_lower_bound_days": 23.211674285402328,
+          "predicted_days_lost": 4.683665176928585,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 55,
+          "observed_response_lower_bound_days": 43.687247171517356,
+          "predicted_days_lost": 5.610341233857631,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 57,
+          "observed_response_lower_bound_days": 1.2031815609456642,
+          "predicted_days_lost": 3.256478133867941,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 58,
+          "observed_response_lower_bound_days": 9.292120025467199,
+          "predicted_days_lost": 9.897568062956589,
+          "constraint_satisfied": true
+        },
+        {
+          "event_id": 64,
+          "observed_response_lower_bound_days": 33.15479570812636,
+          "predicted_days_lost": 5.39493108540612,
+          "constraint_satisfied": false
+        },
+        {
+          "event_id": 70,
+          "observed_response_lower_bound_days": 1.7758514408244277,
+          "predicted_days_lost": 3.4344067203106103,
+          "constraint_satisfied": true
+        }
+      ]
+    },
+    "promotion_screen": {
+      "candidate_passes_minimum_screen": false,
+      "automatic_promotion_enabled": false,
+      "reasons_not_to_promote": [
+        "spatial_model_is_not_cross_validated_best",
+        "preferred_model_satisfies_fewer_than_75_percent_of_censored_bounds"
+      ],
+      "skill_improvement_vs_median_pct": 30.072419761100043,
+      "skill_improvement_vs_amount_only_pct": 0.0,
+      "requirements": [
+        "at least ten isolated events with clearly resolved response peaks",
+        "at least three resolved-peak storm-pattern classes",
+        "leave-one-event-out validation available",
+        "preferred model improves median baseline by at least 15 percent",
+        "spatial model improves amount-only model by at least 10 percent",
+        "at least 75 percent of unresolved censored lower bounds are satisfied",
+        "manual engineering review and operational hindcast before promotion"
+      ]
+    },
+    "fitted_shadow_model": {
+      "type": "standardized_log_target_ridge",
+      "penalty": 2.0,
+      "features": [
+        "log_basin_mm",
+        "log_antecedent_168h_mm",
+        "pre_stage_m"
+      ],
+      "target_transform": "log1p_days_lost",
+      "feature_means": {
+        "log_basin_mm": 2.4433472487313743,
+        "log_antecedent_168h_mm": 1.9190329125267893,
+        "pre_stage_m": 1.6454499999999999
+      },
+      "feature_scales": {
+        "log_basin_mm": 0.9253149038330658,
+        "log_antecedent_168h_mm": 1.184456057926196,
+        "pre_stage_m": 0.9243170843925801
+      },
+      "intercept_log1p_days": 1.6046294498851694,
+      "standardized_coefficients": {
+        "log_basin_mm": 0.22355231910791298,
+        "log_antecedent_168h_mm": 0.06610074127090546,
+        "pre_stage_m": -0.5140334097874873
+      }
+    }
+  },
+  "peak_resolution_gate": {
+    "minimum_hours_after_peak": 18.0,
+    "minimum_peak_departure_m3s": 0.2,
+    "minimum_post_peak_decline": "max(0.10 m3/s, 10 percent of peak departure)",
+    "maximum_supported_point_target_days": 45.0,
+    "interpretation": "A clearly resolved response peak may train peak-derived delay even if the next storm arrives before full recovery. Full recovery is retained as a separate and stricter training target."
+  },
+  "limitations": [
+    "Historical WCS RDPA is 10 km, while the live HRDPS and recent HRDPA products are 2.5 km.",
+    "Peak-derived days lost is an empirical recession-equivalent metric, not observed construction delay.",
+    "WaterOffice discharge is rating-derived and provisional.",
+    "Unresolved peaks are one-sided lower-bound checks and are not point-training targets.",
+    "No automatic operational promotion is permitted."
+  ]
+}

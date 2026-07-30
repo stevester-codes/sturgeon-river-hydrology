@@ -1,0 +1,26 @@
+{
+  "status": "historical_spatial_peak_reanalysis_complete",
+  "resolved_peak_events": 10,
+  "censored_lower_bounds": 26,
+  "complete_recoveries": 1,
+  "preferred_model": "amount_only_log_ridge",
+  "promotion_screen": {
+    "candidate_passes_minimum_screen": false,
+    "automatic_promotion_enabled": false,
+    "reasons_not_to_promote": [
+      "spatial_model_is_not_cross_validated_best",
+      "preferred_model_satisfies_fewer_than_75_percent_of_censored_bounds"
+    ],
+    "skill_improvement_vs_median_pct": 30.072419761100043,
+    "skill_improvement_vs_amount_only_pct": 0.0,
+    "requirements": [
+      "at least ten isolated events with clearly resolved response peaks",
+      "at least three resolved-peak storm-pattern classes",
+      "leave-one-event-out validation available",
+      "preferred model improves median baseline by at least 15 percent",
+      "spatial model improves amount-only model by at least 10 percent",
+      "at least 75 percent of unresolved censored lower bounds are satisfied",
+      "manual engineering review and operational hindcast before promotion"
+    ]
+  }
+}
