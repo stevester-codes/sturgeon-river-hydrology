@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-29T17:49:38+00:00",
+  "generated_utc": "2026-07-30T14:55:56+00:00",
   "status": "historical_rdpa_pairing_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "station": "05EA002",
@@ -8,9 +8,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-01-29T17:49:08+00:00",
+        "start_utc": "2025-01-30T14:55:45+00:00",
         "end_utc": "2025-02-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-01-29+17%3A49%3A08&end_date=2025-02-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-01-30+14%3A55%3A45&end_date=2025-02-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -427,17 +427,17 @@
       },
       {
         "start_utc": "2026-07-01T00:00:00+00:00",
-        "end_utc": "2026-07-29T17:49:08+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-07-01+00%3A00%3A00&end_date=2026-07-29+17%3A49%3A08",
+        "end_utc": "2026-07-30T14:55:45+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-07-01+00%3A00%3A00&end_date=2026-07-30+14%3A55%3A45",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 1081031,
+        "bytes_received": 1114043,
         "availability": "data_returned",
-        "rows": 16502,
-        "stage_rows": 8251,
-        "discharge_rows": 8251,
+        "rows": 17006,
+        "stage_rows": 8503,
+        "discharge_rows": 8503,
         "first_timestamp_utc": "2026-07-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-07-29T17:05:00+00:00",
+        "last_timestamp_utc": "2026-07-30T14:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -452,22 +452,22 @@
         ]
       }
     ],
-    "hourly_points": 9493,
+    "hourly_points": 9514,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-07-29T17:00:00+00:00"
+    "last_utc": "2026-07-30T14:00:00+00:00"
   },
   "rdpa_retrieval": {
     "product": "RDPA 6-hour 10 km WCS",
-    "requested_periods": 1123,
-    "retrieved_periods": 1123,
-    "missing_periods": 0,
-    "coverage_fraction": 1.0,
+    "requested_periods": 1129,
+    "retrieved_periods": 1128,
+    "missing_periods": 1,
+    "coverage_fraction": 0.9991142604074402,
     "first_valid_utc": "2025-04-10T12:00:00+00:00",
-    "last_valid_utc": "2026-07-29T00:00:00+00:00",
+    "last_valid_utc": "2026-07-30T12:00:00+00:00",
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 0,
+      "periods_fetched_this_run": 6,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -491,10 +491,21 @@
       },
       "method": "WCS 10 km RDPA clipped to the official WSC 05EA002 drainage-basin polygon"
     },
-    "missing_examples": []
+    "missing_examples": [
+      {
+        "index": "2026-07-30 12:00:00+00:00",
+        "status": "missing",
+        "station": "05EA002",
+        "precip_mm": NaN,
+        "source_type": "wcs_official_basin_clip",
+        "source_url": NaN,
+        "valid_cells": 0,
+        "error": "RasterioIOError: '/vsimem/87016f3d-b046-4acf-bbc5-e1f412c59c20/87016f3d-b046-4acf-bbc5-e1f412c59c20.tif' not recognized as being in a supported file format."
+      }
+    ]
   },
   "pairing": {
-    "gauge_only_candidate_points": 1592,
+    "gauge_only_candidate_points": 1593,
     "complete_168h_coverage_points": 1592,
     "strict_dry_points": 576,
     "moderate_dry_points": 827,
@@ -513,7 +524,7 @@
   "models": {
     "gauge_only": {
       "label": "gauge_only_with_rdpa_metrics",
-      "points": 1592,
+      "points": 1593,
       "events": 19,
       "fit": {
         "n": 1471,
@@ -527,57 +538,52 @@
       },
       "projection": {
         "reached": true,
-        "days": 10.458333333333334,
+        "days": 9.958333333333334,
         "path_daily": [
           {
             "day": 1,
-            "value": 11.221716320783111,
-            "rate_per_day": -0.567250558579002
+            "value": 10.933497540098402,
+            "rate_per_day": -0.5556941140907317
           },
           {
             "day": 2,
-            "value": 10.666142264403923,
-            "rate_per_day": -0.5449742144545268
+            "value": 10.389242045939326,
+            "rate_per_day": -0.533871599989661
           },
           {
             "day": 3,
-            "value": 10.132386007371704,
-            "rate_per_day": -0.5235726786489628
+            "value": 9.866359862914384,
+            "rate_per_day": -0.5129060719707095
           },
           {
             "day": 4,
-            "value": 9.619590748756178,
-            "rate_per_day": -0.5030115968000973
+            "value": 9.364011645470368,
+            "rate_per_day": -0.4927638755639321
           },
           {
             "day": 5,
-            "value": 9.126933334825958,
-            "rate_per_day": -0.48325796366663576
+            "value": 8.881391009767542,
+            "rate_per_day": -0.4734126779350216
           },
           {
             "day": 6,
-            "value": 8.65362293769847,
-            "rate_per_day": -0.46428007014723827
+            "value": 8.41772323924905,
+            "rate_per_day": -0.4548214159837102
           },
           {
             "day": 7,
-            "value": 8.198899785880197,
-            "rate_per_day": -0.44604745238015486
+            "value": 7.9722640410436005,
+            "rate_per_day": -0.4369602464803872
           },
           {
             "day": 8,
-            "value": 7.762033944659642,
-            "rate_per_day": -0.42853084284175813
+            "value": 7.544298351205063,
+            "rate_per_day": -0.41980049816088516
           },
           {
             "day": 9,
-            "value": 7.342324144395021,
-            "rate_per_day": -0.41170212336546885
-          },
-          {
-            "day": 10,
-            "value": 6.939096654816053,
-            "rate_per_day": -0.3955342800056654
+            "value": 7.13313918687122,
+            "rate_per_day": -0.40331462570254073
           }
         ]
       },
@@ -820,52 +826,47 @@
       },
       "projection": {
         "reached": true,
-        "days": 9.333333333333334,
+        "days": 8.875,
         "path_daily": [
           {
             "day": 1,
-            "value": 11.161363925920984,
-            "rate_per_day": -0.6258474549848014
+            "value": 10.873720714319004,
+            "rate_per_day": -0.6137381099531446
           },
           {
             "day": 2,
-            "value": 10.549032821277757,
-            "rate_per_day": -0.6000692397491828
+            "value": 10.273237430675417,
+            "rate_per_day": -0.5884586700981752
           },
           {
             "day": 3,
-            "value": 9.9619232029332,
-            "rate_per_day": -0.5753528110167145
+            "value": 9.697487629940266,
+            "rate_per_day": -0.5642204725402334
           },
           {
             "day": 4,
-            "value": 9.39899621565639,
-            "rate_per_day": -0.5516544345502523
+            "value": 9.14545255739807,
+            "rate_per_day": -0.5409806292435347
           },
           {
             "day": 5,
-            "value": 8.85925579393063,
-            "rate_per_day": -0.5289321774950324
+            "value": 8.616155420121501,
+            "rate_per_day": -0.5186980187002372
           },
           {
             "day": 6,
-            "value": 8.341746899475279,
-            "rate_per_day": -0.5071458341810015
+            "value": 8.108659658594943,
+            "rate_per_day": -0.49733321316840307
           },
           {
             "day": 7,
-            "value": 7.845553831362849,
-            "rate_per_day": -0.48625685498129745
+            "value": 7.622067289528634,
+            "rate_per_day": -0.47684840890697444
           },
           {
             "day": 8,
-            "value": 7.369798605741181,
-            "rate_per_day": -0.4662282781009979
-          },
-          {
-            "day": 9,
-            "value": 6.913639402293708,
-            "rate_per_day": -0.44702466417544273
+            "value": 7.155517316931137,
+            "rate_per_day": -0.45720735928432354
           }
         ]
       },
@@ -943,52 +944,52 @@
       },
       "projection": {
         "reached": true,
-        "days": 9.625,
+        "days": 9.125,
         "path_daily": [
           {
             "day": 1,
-            "value": 11.172811095897265,
-            "rate_per_day": -0.6142894306885093
+            "value": 10.88549749946364,
+            "rate_per_day": -0.6018639499867706
           },
           {
             "day": 2,
-            "value": 10.572144763627197,
-            "rate_per_day": -0.5883123519409323
+            "value": 10.296981087975114,
+            "rate_per_day": -0.5764123201148219
           },
           {
             "day": 3,
-            "value": 9.996879416356835,
-            "rate_per_day": -0.5634337922082463
+            "value": 9.73335186549185,
+            "rate_per_day": -0.552036989069465
           },
           {
             "day": 4,
-            "value": 9.445940896930548,
-            "rate_per_day": -0.5396072973052903
+            "value": 9.193557402269334,
+            "rate_per_day": -0.5286924423131261
           },
           {
             "day": 5,
-            "value": 8.918300472163269,
-            "rate_per_day": -0.5167883775020379
+            "value": 8.67658977372461,
+            "rate_per_day": -0.5063350900275374
           },
           {
             "day": 6,
-            "value": 8.412972911951096,
-            "rate_per_day": -0.49493442445069474
+            "value": 8.181483678401442,
+            "rate_per_day": -0.48492318572118354
           },
           {
             "day": 7,
-            "value": 7.929014649612472,
-            "rate_per_day": -0.4740046316257851
+            "value": 7.707314635523084,
+            "rate_per_day": -0.46441674827867996
           },
           {
             "day": 8,
-            "value": 7.465522020024874,
-            "rate_per_day": -0.45395991812866665
+            "value": 7.253197258766849,
+            "rate_per_day": -0.4447774873065238
           },
           {
             "day": 9,
-            "value": 7.021629572267239,
-            "rate_per_day": -0.4347628557142042
+            "value": 6.81828360303739,
+            "rate_per_day": -0.425968731635828
           }
         ]
       },
