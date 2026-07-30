@@ -1,0 +1,60 @@
+{
+  "generated_utc": "2026-07-30T16:23:29+00:00",
+  "status": "historical_response_shadow_available",
+  "mode": "shadow_only_no_effect_on_operational_forecast",
+  "hrdps": {
+    "run_time_utc": "2026-07-30T06:00:00+00:00",
+    "horizon_h": 48,
+    "complete_horizon": true,
+    "basin_mm": 0.0122303991953896,
+    "storm_type": "upper_lake_chain_concentrated",
+    "feature_vector": {
+      "basin_mm": 0.0122303991953896,
+      "antecedent_168h_mm": 27.560907426984024,
+      "pre_stage_m": null,
+      "duration_h": 0.0,
+      "basin_pct_gt_10mm": 0.0
+    }
+  },
+  "official_analogue_response_days_lost": 0.0,
+  "historical_censored_model_days_lost": 0.0,
+  "historical_model_minus_official_days": null,
+  "historical_model_rmse_sensitivity_days": 4.040135623521664,
+  "historical_model_upper_rmse_sensitivity_days": 4.040135623521664,
+  "prediction_detail": {
+    "status": "valid_negligible_short_range_qpf",
+    "reason": "Complete HRDPS 48-hour basin rainfall is below 0.10 mm."
+  },
+  "historical_model": {
+    "status": "historical_censored_response_model_evaluated",
+    "target": "stage_exact_recession_equivalent_days",
+    "resolved_peak_events": 10,
+    "censored_lower_bound_events": 26,
+    "preferred_feature_set": "amount_only",
+    "preferred_exact_rmse_days": 4.040135623521664,
+    "constraint_satisfaction_pct": 65.38461538461539,
+    "combined_screen_passed": false,
+    "promotion_screen": {
+      "candidate_passes_minimum_screen": false,
+      "automatic_promotion_enabled": false,
+      "reasons_not_to_promote": [
+        "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds",
+        "spatial_features_are_not_selected"
+      ],
+      "requirements": [
+        "at least ten resolved response peaks",
+        "at least fifteen unresolved censored lower bounds",
+        "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
+        "at least 75 percent of censored lower bounds satisfied",
+        "spatial model selected over amount-only model",
+        "manual engineering review and operational hindcast"
+      ]
+    }
+  },
+  "interpretation": "This is an independent historical response comparison using all resolved peaks and censored lower bounds. It does not alter the official forecast. A difference is diagnostic evidence, not a calibrated probability.",
+  "limitations": [
+    "The historical candidate is amount-only because 10 km spatial features did not improve leave-one-event-out skill.",
+    "The candidate satisfies only about 65 percent of censored lower bounds and has not passed promotion gates.",
+    "The RMSE-based upper sensitivity is not a p90 confidence bound."
+  ]
+}
