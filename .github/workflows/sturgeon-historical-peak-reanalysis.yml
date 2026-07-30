@@ -1,0 +1,115 @@
+name: Sturgeon historical peak-response reanalysis
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '37 14 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'historical_spatial_peak_reanalysis.py'
+      - 'historical_spatial_event_backfill.py'
+      - 'historical_gauge_analysis.py'
+      - 'historical_rdpa_pairing.py'
+      - '.github/workflows/sturgeon-historical-peak-reanalysis.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-historical-peak-response-reanalysis
+  cancel-in-progress: true
+
+jobs:
+  reanalyze:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile peak-response tools
+        run: |
+          python -m py_compile \
+            historical_spatial_peak_reanalysis.py \
+            historical_spatial_event_backfill.py \
+            historical_gauge_analysis.py \
+            historical_rdpa_pairing.py
+      - name: Verify historical inputs
+        run: |
+          test -f output/historical_event_backfill/historical_spatial_events.csv
+          test -f output/archive_probe/historical_rdpa_pairs.csv
+      - name: Reanalyze resolved peaks and censored bounds
+        run: |
+          set -o pipefail
+          python historical_spatial_peak_reanalysis.py \
+            --months 18 \
+            --events output/historical_event_backfill/historical_spatial_events.csv \
+            --pairs output/archive_probe/historical_rdpa_pairs.csv \
+            --output output/historical_event_backfill/historical_spatial_peak_reanalysis.json \
+            --augmented-output output/historical_event_backfill/historical_spatial_events_peak_reanalysis.csv \
+            --model-output output/historical_event_backfill/historical_spatial_peak_response_model.json \
+            2>&1 | tee output/historical_event_backfill/peak_reanalysis.log
+          echo "${PIPESTATUS[0]}" > output/historical_event_backfill/peak_reanalysis.exitcode
+      - name: Validate shadow model status
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('output/historical_event_backfill')
+          summary = json.loads((root / 'historical_spatial_peak_reanalysis.json').read_text())
+          model = json.loads((root / 'historical_spatial_peak_response_model.json').read_text())
+          if summary.get('status') != 'historical_spatial_peak_reanalysis_complete':
+              raise RuntimeError('peak-response reanalysis did not complete')
+          if summary.get('mode') != 'shadow_only_no_automatic_promotion':
+              raise RuntimeError('peak-response reanalysis is not shadow-only')
+          if model.get('mode') != 'shadow_only_manual_promotion_required':
+              raise RuntimeError('peak-response model is not shadow-only')
+          if model.get('validation', {}).get('promotion_screen', {}).get('automatic_promotion_enabled') is not False:
+              raise RuntimeError('automatic promotion is not explicitly disabled')
+          print('Historical peak-response shadow validation passed.')
+          PY
+      - name: Upload peak-response results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-historical-peak-response-reanalysis
+          path: output/historical_event_backfill
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Publish peak-response results
+        if: ${{ always() && !cancelled() }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/sturgeon-historical-event-backfill
+          cp -a output/historical_event_backfill /tmp/sturgeon-historical-event-backfill
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/historical_event_backfill
+            mkdir -p output
+            cp -a /tmp/sturgeon-historical-event-backfill output/historical_event_backfill
+            git add -f output/historical_event_backfill
+            if git diff --cached --quiet; then
+              break
+            fi
+            git commit -m 'Update historical peak-response reanalysis [skip ci]'
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
+      - name: Enforce successful peak reanalysis
+        if: ${{ always() && !cancelled() }}
+        run: |
+          test "$(cat output/historical_event_backfill/peak_reanalysis.exitcode 2>/dev/null || echo 1)" = "0"
