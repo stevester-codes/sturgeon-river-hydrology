@@ -1,0 +1,33 @@
+name: Apply short-range operational gate
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apply_short_range_gate_patch.py'
+      - '.github/workflows/apply-short-range-gate.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Apply source patch
+        run: python apply_short_range_gate_patch.py
+      - name: Compile patched source
+        run: python -m py_compile calibration_health.py
+      - name: Commit patched source
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add calibration_health.py
+          if git diff --cached --quiet; then
+            echo 'Patch already applied.'
+          else
+            git commit -m 'Fail operational runs without complete HRDPS [skip ci]'
+            git push origin HEAD:main
+          fi
