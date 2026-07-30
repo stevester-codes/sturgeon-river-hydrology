@@ -1,0 +1,137 @@
+name: Sturgeon historical spatial event backfill
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 14 * * *'
+  push:
+    branches: [main]
+    paths:
+      - 'historical_spatial_event_backfill.py'
+      - 'historical_gauge_analysis.py'
+      - 'historical_rdpa_pairing.py'
+      - 'historical_rdpa_wcs_pairing.py'
+      - 'rdpa_archive_probe.py'
+      - 'spatial_qpf.py'
+      - '.github/workflows/sturgeon-historical-event-backfill.yml'
+      - 'requirements.txt'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-historical-spatial-event-backfill
+  cancel-in-progress: true
+
+jobs:
+  backfill:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Restore historical rainfall caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            archive_cache
+            grid_cache/basins
+          key: sturgeon-historical-events-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: |
+            sturgeon-historical-events-${{ runner.os }}-
+            sturgeon-historical-rdpa-${{ runner.os }}-
+            sturgeon-historical-rdpa-${{ runner.os }}
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Compile historical event tools
+        run: |
+          python -m py_compile \
+            historical_spatial_event_backfill.py \
+            historical_gauge_analysis.py \
+            historical_rdpa_pairing.py \
+            historical_rdpa_wcs_pairing.py \
+            rdpa_archive_probe.py \
+            spatial_qpf.py
+      - name: Verify recession archive inputs
+        run: |
+          test -f output/archive_probe/historical_rdpa_pairing.json
+          test -f output/archive_probe/historical_rdpa_pairs.csv
+      - name: Mine historical spatial rainfall events
+        run: |
+          rm -rf output/historical_event_backfill
+          mkdir -p output/historical_event_backfill
+          set -o pipefail
+          python historical_spatial_event_backfill.py \
+            --months 18 \
+            --workers 4 \
+            --pairing output/archive_probe/historical_rdpa_pairing.json \
+            --pairs output/archive_probe/historical_rdpa_pairs.csv \
+            --basin-cache archive_cache/historical_rdpa_05EA002.csv \
+            --grid-cache archive_cache/historical_rdpa_spatial_grids \
+            --output output/historical_event_backfill/historical_spatial_event_backfill.json \
+            --events-output output/historical_event_backfill/historical_spatial_events.csv \
+            --model-output output/historical_event_backfill/historical_spatial_response_model.json \
+            2>&1 | tee output/historical_event_backfill/workflow.log
+          echo "${PIPESTATUS[0]}" > output/historical_event_backfill/workflow.exitcode
+      - name: Validate shadow output
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          root = Path('output/historical_event_backfill')
+          result = json.loads((root / 'historical_spatial_event_backfill.json').read_text())
+          model = json.loads((root / 'historical_spatial_response_model.json').read_text())
+          if result.get('status') != 'historical_spatial_event_backfill_complete':
+              raise RuntimeError('historical event backfill did not complete')
+          if result.get('mode') != 'shadow_only_no_automatic_promotion':
+              raise RuntimeError('historical event backfill is not shadow-only')
+          if model.get('mode') != 'shadow_only_manual_promotion_required':
+              raise RuntimeError('historical response model is not shadow-only')
+          if float(result.get('continuous_rdpa_retrieval', {}).get('coverage_fraction', 0)) < 0.90:
+              raise RuntimeError('continuous RDPA coverage is below 90 percent')
+          if int(result.get('event_detection', {}).get('detected_events', 0)) < 1:
+              raise RuntimeError('no historical rainfall events were detected')
+          print('Historical spatial event backfill validation passed.')
+          PY
+      - name: Upload historical event results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sturgeon-historical-spatial-event-backfill
+          path: output/historical_event_backfill
+          retention-days: 30
+          if-no-files-found: warn
+      - name: Publish historical event results
+        if: ${{ always() && !cancelled() }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/sturgeon-historical-event-backfill
+          cp -a output/historical_event_backfill /tmp/sturgeon-historical-event-backfill
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/historical_event_backfill
+            mkdir -p output
+            cp -a /tmp/sturgeon-historical-event-backfill output/historical_event_backfill
+            git add -f output/historical_event_backfill
+            if git diff --cached --quiet; then
+              break
+            fi
+            git commit -m 'Update historical spatial event backfill [skip ci]'
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
+            fi
+            sleep $((attempt * 2))
+          done
+      - name: Enforce successful backfill
+        if: ${{ always() && !cancelled() }}
+        run: |
+          test "$(cat output/historical_event_backfill/workflow.exitcode 2>/dev/null || echo 1)" = "0"
