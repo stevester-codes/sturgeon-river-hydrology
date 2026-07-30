@@ -4,13 +4,7 @@ from pathlib import Path
 path = Path("forecast_impacts_v2.py")
 text = path.read_text()
 
-needle_start = '''def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    base = json.loads(BASE_CAL.read_text())
-'''
-replacement_start = '''def main() -> None:
-    OUT.mkdir(parents=True, exist_ok=True)
-    previous_path = OUT / "forecast_impacts_v2.json"
+needle_state = '''    previous_path = OUT / "forecast_impacts_v2.json"
     previous_result = {}
     if previous_path.exists():
         try:
@@ -19,99 +13,77 @@ replacement_start = '''def main() -> None:
             previous_result = {}
     base = json.loads(BASE_CAL.read_text())
 '''
-if needle_start not in text:
-    raise SystemExit("main start marker not found")
-text = text.replace(needle_start, replacement_start, 1)
-
-needle_fallback = '''    reps_status = reps_validation()
-    storm_type_counts = {
+replacement_state = '''    previous_path = OUT / "forecast_impacts_v2.json"
+    state_path = OUT / "last_valid_hrdps.json"
+    previous_result = {}
+    state_result = {}
+    if previous_path.exists():
+        try:
+            previous_result = json.loads(previous_path.read_text())
+        except Exception:
+            previous_result = {}
+    if state_path.exists():
+        try:
+            state_result = json.loads(state_path.read_text())
+        except Exception:
+            state_result = {}
+    base = json.loads(BASE_CAL.read_text())
 '''
-replacement_fallback = '''    current_complete_48 = any(
-        str(row.get("model")) == "HRDPS"
-        and int(row.get("horizon_h", 0) or 0) == 48
-        and bool(row.get("complete_horizon"))
-        for row in scenarios
-    )
-    short_range_provenance = {
-        "status": "current_complete_hrdps" if current_complete_48 else "current_hrdps_incomplete",
-        "maximum_carry_forward_age_hours": 12.0,
-    }
-    if not current_complete_48:
+if needle_state not in text:
+    raise SystemExit("state insertion marker not found")
+text = text.replace(needle_state, replacement_state, 1)
+
+needle_previous = '''    if not current_complete_48:
         previous_scenarios = previous_result.get("deterministic_scenarios", [])
         previous_hrdps = [
-            dict(row)
-            for row in previous_scenarios
-            if str(row.get("model")) == "HRDPS"
-            and int(row.get("horizon_h", 0) or 0) in {24, 48}
+'''
+replacement_previous = '''    if not current_complete_48:
+        fallback_result = previous_result
+        previous_candidates = fallback_result.get("deterministic_scenarios", [])
+        if not any(
+            str(row.get("model")) == "HRDPS"
+            and int(row.get("horizon_h", 0) or 0) == 48
             and bool(row.get("complete_horizon"))
-        ]
-        previous_has_48 = any(
-            int(row.get("horizon_h", 0) or 0) == 48 for row in previous_hrdps
-        )
-        previous_generated = previous_result.get("generated_utc")
-        previous_age_hours = None
-        if previous_generated:
-            try:
-                previous_time = datetime.fromisoformat(
-                    str(previous_generated).replace("Z", "+00:00")
-                ).astimezone(timezone.utc)
-                previous_age_hours = max(
-                    0.0,
-                    (datetime.now(timezone.utc) - previous_time).total_seconds() / 3600.0,
-                )
-            except Exception:
-                previous_age_hours = None
-        if (
-            previous_has_48
-            and previous_age_hours is not None
-            and previous_age_hours <= 12.0
+            for row in previous_candidates
         ):
-            scenarios = [
-                row for row in scenarios if str(row.get("model")) != "HRDPS"
-            ]
-            for row in previous_hrdps:
-                row["input_provenance"] = "carried_forward_last_valid_hrdps"
-                row["carried_forward_from_generated_utc"] = previous_generated
-                row["carried_forward_age_hours"] = previous_age_hours
-                scenarios.append(row)
-            short_range_provenance = {
-                "status": "carried_forward_last_valid_hrdps",
-                "source_generated_utc": previous_generated,
-                "age_hours": previous_age_hours,
-                "maximum_carry_forward_age_hours": 12.0,
-                "interpretation": (
-                    "The current HRDPS publication was incomplete. The previous complete "
-                    "24/48-hour scenarios were retained for up to 12 hours rather than "
-                    "silently treating missing short-range rainfall as zero."
-                ),
-            }
-        else:
-            short_range_provenance = {
-                "status": "short_range_forecast_unavailable",
-                "previous_complete_age_hours": previous_age_hours,
-                "maximum_carry_forward_age_hours": 12.0,
-                "interpretation": (
-                    "No current or sufficiently recent complete HRDPS 48-hour scenario is available."
-                ),
-            }
+            fallback_result = state_result
+        previous_scenarios = fallback_result.get("deterministic_scenarios", [])
+        previous_hrdps = [
+'''
+if needle_previous not in text:
+    raise SystemExit("fallback selection marker not found")
+text = text.replace(needle_previous, replacement_previous, 1)
+
+needle_generated = '''        previous_generated = previous_result.get("generated_utc")
+'''
+replacement_generated = '''        previous_generated = fallback_result.get("generated_utc")
+'''
+if needle_generated not in text:
+    raise SystemExit("fallback timestamp marker not found")
+text = text.replace(needle_generated, replacement_generated, 1)
+
+needle_before_reps = '''
+    reps_status = reps_validation()
+'''
+replacement_before_reps = '''
+    if current_complete_48:
+        state_payload = {
+            "generated_utc": datetime.now(timezone.utc).isoformat(),
+            "deterministic_scenarios": [
+                row
+                for row in scenarios
+                if str(row.get("model")) == "HRDPS"
+                and int(row.get("horizon_h", 0) or 0) in {24, 48}
+                and bool(row.get("complete_horizon"))
+            ],
+        }
+        state_path.write_text(json.dumps(state_payload, indent=2, default=json_default))
 
     reps_status = reps_validation()
-    storm_type_counts = {
 '''
-if needle_fallback not in text:
-    raise SystemExit("fallback insertion marker not found")
-text = text.replace(needle_fallback, replacement_fallback, 1)
-
-needle_result = '''        "reps_validation": reps_status,
-        "deterministic_scenarios": scenarios,
-'''
-replacement_result = '''        "reps_validation": reps_status,
-        "short_range_input_provenance": short_range_provenance,
-        "deterministic_scenarios": scenarios,
-'''
-if needle_result not in text:
-    raise SystemExit("result marker not found")
-text = text.replace(needle_result, replacement_result, 1)
+if needle_before_reps not in text:
+    raise SystemExit("state-write marker not found")
+text = text.replace(needle_before_reps, replacement_before_reps, 1)
 
 path.write_text(text)
-print("Patched forecast_impacts_v2.py with bounded last-valid HRDPS carry-forward")
+print("Extended forecast_impacts_v2.py with persistent last-valid HRDPS state")
