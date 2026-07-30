@@ -138,6 +138,7 @@ def main() -> None:
         full_model = preferred.get("full_model", {})
         analogue = finite(row.get("analog_prediction", {}).get("days_lost"))
         negligible = basin_mm < 0.10
+        official_response = analogue if analogue is not None else (0.0 if negligible else None)
         prediction = 0.0 if negligible else None
         prediction_detail = {
             "status": "valid_negligible_short_range_qpf",
@@ -149,8 +150,8 @@ def main() -> None:
             preferred.get("exact_leave_one_event_out", {}).get("rmse_days")
         )
         difference = (
-            prediction - analogue
-            if prediction is not None and analogue is not None
+            prediction - official_response
+            if prediction is not None and official_response is not None
             else None
         )
         result = {
@@ -169,7 +170,7 @@ def main() -> None:
                 "storm_type": row.get("storm_type"),
                 "feature_vector": vector,
             },
-            "official_analogue_response_days_lost": analogue if analogue is not None else (0.0 if negligible else None),
+            "official_analogue_response_days_lost": official_response,
             "historical_censored_model_days_lost": prediction,
             "historical_model_minus_official_days": difference,
             "historical_model_rmse_sensitivity_days": rmse,
