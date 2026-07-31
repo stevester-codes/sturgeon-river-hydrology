@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-07-31T10:04:19.906835+00:00",
+  "generated_utc": "2026-07-31T12:20:36.869285+00:00",
   "status": "not_ready_for_operational_promotion",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "method": "A ridge-regression correction to the existing stage-dependent recession curve uses decaying rainfall-memory states and recent upstream gauge movement. The final 30 percent of observations are held out chronologically.",
   "data": {
-    "complete_hourly_rows": 316,
-    "train_rows": 221,
-    "test_rows": 95,
+    "complete_hourly_rows": 319,
+    "train_rows": 223,
+    "test_rows": 96,
     "start_utc": "2026-07-18T00:00:00+00:00",
-    "end_utc": "2026-07-31T03:00:00+00:00",
+    "end_utc": "2026-07-31T06:00:00+00:00",
     "forecast_horizon_h": 6,
     "ridge_lambda": 4.0,
     "features": [
@@ -30,21 +30,21 @@
   },
   "holdout_performance": {
     "baseline_recession": {
-      "n": 95,
-      "rmse_m": 0.014722357541228292,
-      "mae_m": 0.008890762919232367,
-      "bias_m": -0.007050709775231225,
-      "correlation": 0.10779051573038266
+      "n": 96,
+      "rmse_m": 0.01466881675360962,
+      "mae_m": 0.00889892446450218,
+      "bias_m": -0.007078038540751047,
+      "correlation": 0.0911603728118611
     },
     "storage_candidate": {
-      "n": 95,
-      "rmse_m": 0.01736396402338099,
-      "mae_m": 0.015187227924677086,
-      "bias_m": 0.006427858892723575,
-      "correlation": 0.28582076139143486
+      "n": 96,
+      "rmse_m": 0.018024842270046585,
+      "mae_m": 0.015729679112919562,
+      "bias_m": 0.007244292630477902,
+      "correlation": 0.2704081759939607
     },
-    "rmse_improvement_fraction": -0.17942822504854816,
-    "mae_improvement_fraction": -0.7082030037967044,
+    "rmse_improvement_fraction": -0.2287863822152616,
+    "mae_improvement_fraction": -0.7675932833979286,
     "promotion_screen": {
       "minimum_rmse_improvement_fraction": 0.1,
       "minimum_mae_improvement_fraction": 0.05,
@@ -53,122 +53,122 @@
     }
   },
   "current_state": {
-    "timestamp_utc": "2026-07-31T03:00:00+00:00",
-    "baseline_expected_change_next_6h_m": -0.011966138032145435,
-    "storage_memory_correction_next_6h_m": 0.03952154649159798,
-    "candidate_expected_change_next_6h_m": 0.02755540845945255,
+    "timestamp_utc": "2026-07-31T06:00:00+00:00",
+    "baseline_expected_change_next_6h_m": -0.011970656093554292,
+    "storage_memory_correction_next_6h_m": 0.036477200547670306,
+    "candidate_expected_change_next_6h_m": 0.024506544454116014,
     "rain_24h_mm": 0.0035587474897520004,
-    "rain_72h_mm": 5.206483959549088,
-    "rain_168h_mm": 27.56446230813714,
+    "rain_72h_mm": 5.2063077430549,
+    "rain_168h_mm": 27.529594964133747,
     "rain_memory_states_mm": {
-      "12h": 0.16719563443785612,
-      "36h": 0.6507715516339915,
-      "96h": 0.8493008872771606,
-      "240h": 0.6558570447014924
+      "12h": 0.14059420964486372,
+      "36h": 0.614246551011333,
+      "96h": 0.8311021205957244,
+      "240h": 0.6501990233398557
     },
     "upstream_changes": {
-      "05EA005_change_6h_m": -0.013500000000000068,
-      "05EA005_change_24h_m": -0.07050000000000001,
-      "05EA010_change_6h_m": -0.02650000000000008,
-      "05EA011_change_6h_m": -0.0065000000000008384,
-      "05EA012_change_6h_m": -0.03149999999999942,
-      "05EA012_change_24h_m": -0.2024999999999988
+      "05EA005_change_6h_m": -0.011499999999999844,
+      "05EA005_change_24h_m": -0.0665,
+      "05EA010_change_6h_m": -0.07050000000000001,
+      "05EA011_change_6h_m": -0.015000000000000568,
+      "05EA012_change_6h_m": -0.026999999999999247,
+      "05EA012_change_24h_m": -0.17499999999999893
     }
   },
   "coefficients": [
     {
       "feature": "intercept",
-      "standardized_coefficient_m_per_6h": 0.00610731495904187
+      "standardized_coefficient_m_per_6h": 0.006087243078816421
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.01857261261531856
+      "standardized_coefficient_m_per_6h": -0.018765206543348643
     },
     {
       "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.0077643443188837044
+      "standardized_coefficient_m_per_6h": -0.0077428048361168605
     },
     {
       "feature": "05EA005_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0065940749079244085
+      "standardized_coefficient_m_per_6h": -0.006793674106393685
     },
     {
       "feature": "05EA005_change_24h_m",
-      "standardized_coefficient_m_per_6h": 0.005401127954706219
+      "standardized_coefficient_m_per_6h": 0.005428016980632681
     },
     {
       "feature": "05EA010_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0024454798141838848
+      "standardized_coefficient_m_per_6h": -0.002434321362410419
     },
     {
       "feature": "05EA011_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.000531228872475982
+      "standardized_coefficient_m_per_6h": -0.000566312693143004
     },
     {
       "feature": "05EA012_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.007876211217797809
+      "standardized_coefficient_m_per_6h": 0.007611770645388405
     },
     {
       "feature": "05EA012_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.01351695227977234
+      "standardized_coefficient_m_per_6h": -0.013547072977313095
     },
     {
       "feature": "rain_24h_mm",
-      "standardized_coefficient_m_per_6h": -0.005990643060883421
+      "standardized_coefficient_m_per_6h": -0.0052894568117447995
     },
     {
       "feature": "rain_72h_mm",
-      "standardized_coefficient_m_per_6h": 0.007747469513678215
+      "standardized_coefficient_m_per_6h": 0.007961344502181293
     },
     {
       "feature": "rain_memory_12h_mm",
-      "standardized_coefficient_m_per_6h": 0.0005383364237132221
+      "standardized_coefficient_m_per_6h": 0.000108262540115069
     },
     {
       "feature": "rain_memory_36h_mm",
-      "standardized_coefficient_m_per_6h": 0.019478584217255353
+      "standardized_coefficient_m_per_6h": 0.019316015203186005
     },
     {
       "feature": "rain_memory_96h_mm",
-      "standardized_coefficient_m_per_6h": -0.0014522282515694995
+      "standardized_coefficient_m_per_6h": -0.001510976961676077
     },
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.023504453623610564
+      "standardized_coefficient_m_per_6h": -0.02351432288922219
     }
   ],
   "largest_standardized_effects": [
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.023504453623610564
+      "standardized_coefficient_m_per_6h": -0.02351432288922219
     },
     {
       "feature": "rain_memory_36h_mm",
-      "standardized_coefficient_m_per_6h": 0.019478584217255353
+      "standardized_coefficient_m_per_6h": 0.019316015203186005
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.01857261261531856
+      "standardized_coefficient_m_per_6h": -0.018765206543348643
     },
     {
       "feature": "05EA012_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.01351695227977234
-    },
-    {
-      "feature": "05EA012_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.007876211217797809
-    },
-    {
-      "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.0077643443188837044
+      "standardized_coefficient_m_per_6h": -0.013547072977313095
     },
     {
       "feature": "rain_72h_mm",
-      "standardized_coefficient_m_per_6h": 0.007747469513678215
+      "standardized_coefficient_m_per_6h": 0.007961344502181293
+    },
+    {
+      "feature": "target_change_24h_m",
+      "standardized_coefficient_m_per_6h": -0.0077428048361168605
+    },
+    {
+      "feature": "05EA012_change_6h_m",
+      "standardized_coefficient_m_per_6h": 0.007611770645388405
     },
     {
       "feature": "05EA005_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0065940749079244085
+      "standardized_coefficient_m_per_6h": -0.006793674106393685
     }
   ],
   "promotion_policy": {
