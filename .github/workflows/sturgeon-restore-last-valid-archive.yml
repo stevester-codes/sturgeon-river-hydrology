@@ -1,0 +1,72 @@
+name: Restore last valid Sturgeon archive
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sturgeon-restore-last-valid-archive.yml'
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sturgeon-restore-last-valid-archive
+  cancel-in-progress: false
+
+jobs:
+  restore:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Restore last all-pass archive snapshot
+        run: |
+          git checkout c2624bdcb351aa87a0e72d72f0c0f6ce095c3c94 -- output/archive_probe
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('output/archive_probe')
+          status = json.loads((root / 'probe_status.json').read_text())
+          if status.get('all_passed') is not True:
+              raise RuntimeError('selected archive snapshot is not all-pass')
+          for name in [
+              'historical_gauge_analysis.json',
+              'historical_rdpa_pairing.json',
+              'historical_rdpa_pairs.csv',
+              'historical_rdpa_model_selection.json',
+          ]:
+              if not (root / name).exists() or (root / name).stat().st_size == 0:
+                  raise RuntimeError(f'missing restored archive file: {name}')
+          (root / 'restored_from_last_valid.json').write_text(json.dumps({
+              'status': 'last_valid_archive_restored',
+              'source_commit': 'c2624bdcb351aa87a0e72d72f0c0f6ce095c3c94',
+              'reason': 'A failed July 31 candidate had overwritten the last valid archive before candidate-only publication controls were added.'
+          }, indent=2))
+          print('Last valid archive snapshot verified.')
+          PY
+      - name: Publish restored archive
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f output/archive_probe
+          git commit -m 'Restore last valid historical archive [skip ci]'
+          for attempt in 1 2 3 4; do
+            if git push origin HEAD:main; then
+              break
+            fi
+            if [ "$attempt" = "4" ]; then
+              exit 1
+            fi
+            git pull --rebase origin main
+            sleep $((attempt * 2))
+          done
+      - name: Rebuild live forecast with restored independent checks
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh workflow run sturgeon-operational.yml \
+            -f trigger_reason='restored last valid historical direct-Q archive'
