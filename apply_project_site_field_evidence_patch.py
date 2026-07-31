@@ -8,6 +8,9 @@ def replace_once(text: str, old: str, new: str, label: str) -> str:
     return text.replace(old, new, 1)
 
 
+# One-time integration patch. The workflow removes no production evidence and
+# fails before committing if any expected source block has changed unexpectedly.
+
 # ---------------------------------------------------------------------------
 # operational_readiness.py
 # ---------------------------------------------------------------------------
