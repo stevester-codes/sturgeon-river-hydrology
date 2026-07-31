@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path("output/historical_event_backfill")
 ARCHIVE = Path("output/archive_probe")
+SHADOW_PREFIX = "current_historical_response_shadow"
 
 
 def run(name: str, command: list[str], log_name: str, exit_name: str) -> None:
@@ -87,11 +88,19 @@ def main() -> None:
         if not path.exists():
             raise RuntimeError(f"missing archive prerequisite: {path}")
 
-    # Rebuild the directory once, then preserve every downstream product in it.
+    # Rebuild the historical model products, but never erase the latest live shadow
+    # comparison while a new model is being prepared.
     ROOT.mkdir(parents=True, exist_ok=True)
+    preserved_shadow = {
+        path.name: path.read_bytes()
+        for path in ROOT.glob(f"{SHADOW_PREFIX}*")
+        if path.is_file()
+    }
     for path in ROOT.iterdir():
         if path.is_file():
             path.unlink()
+    for name, payload in preserved_shadow.items():
+        (ROOT / name).write_bytes(payload)
 
     run(
         "historical spatial event backfill",
@@ -184,6 +193,7 @@ def main() -> None:
         "generated_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "status": "historical_response_refresh_complete",
         "mode": "shadow_only_no_effect_on_operational_forecast",
+        "preserved_live_shadow_files": sorted(preserved_shadow),
         "checks": checks,
         "sequence": [
             "spatial_event_backfill",
