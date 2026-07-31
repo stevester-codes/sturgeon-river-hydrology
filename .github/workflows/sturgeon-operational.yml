@@ -2,8 +2,11 @@ name: Sturgeon operational forecast
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '17 * * * *'
+    inputs:
+      trigger_reason:
+        description: 'Fresh upstream data or manual reason'
+        required: false
+        default: 'manual refresh'
   push:
     branches: [main]
     paths:
@@ -27,6 +30,7 @@ on:
       - 'validate_qpf.py'
       - 'aggregate_qpf_horizons.py'
       - 'forecast_impacts_v2.py'
+      - 'operational_update_probe.py'
       - 'requirements.txt'
 
 permissions:
@@ -34,7 +38,7 @@ permissions:
 
 concurrency:
   group: sturgeon-hydrology-operational
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   update:
@@ -42,6 +46,8 @@ jobs:
     timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
+      - name: Show refresh trigger
+        run: echo "${{ inputs.trigger_reason || 'code change' }}"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
