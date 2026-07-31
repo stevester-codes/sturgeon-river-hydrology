@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-07-31T15:09:26.042446+00:00",
-  "status": "failed",
+  "generated_utc": "2026-07-30T15:31:18.539195+00:00",
+  "status": "passed",
   "collection": "weather:rdpa:10km:6f",
   "collection_url": "https://api.weather.gc.ca/collections/weather%3Ardpa%3A10km%3A6f",
   "ogc_coverage_url": "https://api.weather.gc.ca/collections/weather%3Ardpa%3A10km%3A6f/coverage",
@@ -10,11 +10,183 @@
     "bbox": "-115.2,52.9,-113.0,54.2",
     "datetime": "2026-07-01T00:00:00Z"
   },
-  "metadata_request": {},
-  "metadata": {},
-  "ogc_attempts": [],
-  "wcs_attempts": [],
-  "selected": null,
-  "fatal_error": "ConnectTimeout: HTTPSConnectionPool(host='api.weather.gc.ca', port=443): Max retries exceeded with url: /collections/weather%3Ardpa%3A10km%3A6f?f=json (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.weather.gc.ca', port=443) at 0x7f6e75a3a4e0>, 'Connection to api.weather.gc.ca timed out. (connect timeout=90)'))",
-  "next_step": "Inspect the saved request diagnostics and adapt archive retrieval before changing calibration."
+  "metadata_request": {
+    "requested_format": "json",
+    "request_url": "https://api.weather.gc.ca/collections/weather%3Ardpa%3A10km%3A6f?f=json",
+    "status_code": 200,
+    "content_type": "application/json",
+    "content_length_header": null,
+    "bytes_received": 2996,
+    "response_prefix_hex": "7b226964223a22776561746865723a726470613a31306b6d"
+  },
+  "metadata": {
+    "title": "RDPA - 6 Hours Accumulation at 10 km Resolution",
+    "description": "The Regional Deterministic Precipitation Analysis (RDPA) produces a best estimate of the amount of precipitation that occurred over recent past periods of 6 hours. The estimate integrates data from in situ precipitation gauge measurements, weather radar and numerical weather prediction models. Geographic coverage is North America (Canada, United States and Mexico). Data is available at horizontal resolution of 10 km. Data is only available for the surface level. Analysis data is made available four times a day for 6h intervals. A preliminary estimate is available approximately 1h after the end of the accumulation period, and revised 6h after in order to assimilate gauge data arriving later.",
+    "extent": {
+      "spatial": {
+        "bbox": [
+          [
+            -180,
+            24.4,
+            180,
+            90
+          ]
+        ],
+        "crs": "http://www.opengis.net/def/crs/OGC/1.3/CRS84",
+        "grid": [
+          {
+            "cellsCount": 935,
+            "resolution": 10000.0
+          },
+          {
+            "cellsCount": 824,
+            "resolution": 10000.0
+          }
+        ]
+      },
+      "temporal": {
+        "interval": [
+          [
+            "2012-10-03T06Z",
+            "2026-07-30T06Z"
+          ]
+        ],
+        "grid": {
+          "resolution": "PT6H"
+        }
+      }
+    },
+    "coverage_links": [
+      {
+        "type": "application/prs.coverage+json",
+        "href": "https://api.weather.gc.ca/collections/weather:rdpa:10km:6f/coverage?f=json",
+        "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+        "title": "Coverage data"
+      },
+      {
+        "type": "application/x-grib2",
+        "href": "https://api.weather.gc.ca/collections/weather:rdpa:10km:6f/coverage?f=GRIB",
+        "rel": "http://www.opengis.net/def/rel/ogc/1.0/coverage",
+        "title": "Coverage data as GRIB"
+      }
+    ]
+  },
+  "ogc_attempts": [
+    {
+      "source": "OGC_API_JSON",
+      "request_error": "RetryError: HTTPSConnectionPool(host='api.weather.gc.ca', port=443): Max retries exceeded with url: /collections/weather:rdpa:10km:6f/coverage?f=json&f=json&bbox=-115.2%2C52.9%2C-113.0%2C54.2&datetime=2026-07-01T00%3A00%3A00Z (Caused by ResponseError('too many 500 error responses'))"
+    },
+    {
+      "source": "OGC_API_GRIB",
+      "request_error": "RetryError: HTTPSConnectionPool(host='api.weather.gc.ca', port=443): Max retries exceeded with url: /collections/weather:rdpa:10km:6f/coverage?f=GRIB&f=GRIB&bbox=-115.2%2C52.9%2C-113.0%2C54.2&datetime=2026-07-01T00%3A00%3A00Z (Caused by ResponseError('too many 500 error responses'))"
+    }
+  ],
+  "wcs_attempts": [
+    {
+      "requested_format": "WCS_TIFF_NATIVE",
+      "request_url": "https://geo.weather.gc.ca/geomet?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=RDPA.6F_PR&SUBSETTINGCRS=EPSG%3A4326&OUTPUTCRS=EPSG%3A4326&SUBSET=x%28-115.2%2C-113.0%29&SUBSET=y%2852.9%2C54.2%29&FORMAT=image%2Ftiff&TIME=2026-07-01T00%3A00%3A00Z",
+      "status_code": 200,
+      "content_type": "image/tiff",
+      "content_length_header": null,
+      "bytes_received": 778,
+      "response_prefix_hex": "49492a000800000013000001030001000000060000000101",
+      "raster": {
+        "open_succeeded": true,
+        "driver": "GTiff",
+        "width": 6,
+        "height": 15,
+        "band_count": 1,
+        "crs": "EPSG:4326",
+        "bounds": [
+          -115.19999999999999,
+          52.9,
+          -113.0,
+          54.199999999999996
+        ],
+        "transform": [
+          0.3666666666666657,
+          0.0,
+          -115.19999999999999,
+          0.0,
+          -0.08666666666666652,
+          54.199999999999996,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "descriptions": [
+          null
+        ],
+        "dataset_tags": {
+          "TIFFTAG_XRESOLUTION": "72",
+          "TIFFTAG_YRESOLUTION": "72",
+          "TIFFTAG_RESOLUTIONUNIT": "2 (pixels/inch)",
+          "AREA_OR_POINT": "Area"
+        },
+        "bands": [
+          {
+            "band": 1,
+            "description": null,
+            "tags": {},
+            "valid_cells": 90,
+            "minimum": 0.0,
+            "maximum": 2.4375998973846436,
+            "mean": 0.4931344281636282
+          }
+        ]
+      }
+    }
+  ],
+  "selected": {
+    "source": "WCS_TIFF_NATIVE",
+    "content_type": "image/tiff",
+    "bytes_received": 778,
+    "raster": {
+      "open_succeeded": true,
+      "driver": "GTiff",
+      "width": 6,
+      "height": 15,
+      "band_count": 1,
+      "crs": "EPSG:4326",
+      "bounds": [
+        -115.19999999999999,
+        52.9,
+        -113.0,
+        54.199999999999996
+      ],
+      "transform": [
+        0.3666666666666657,
+        0.0,
+        -115.19999999999999,
+        0.0,
+        -0.08666666666666652,
+        54.199999999999996,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "descriptions": [
+        null
+      ],
+      "dataset_tags": {
+        "TIFFTAG_XRESOLUTION": "72",
+        "TIFFTAG_YRESOLUTION": "72",
+        "TIFFTAG_RESOLUTIONUNIT": "2 (pixels/inch)",
+        "AREA_OR_POINT": "Area"
+      },
+      "bands": [
+        {
+          "band": 1,
+          "description": null,
+          "tags": {},
+          "valid_cells": 90,
+          "minimum": 0.0,
+          "maximum": 2.4375998973846436,
+          "mean": 0.4931344281636282
+        }
+      ]
+    }
+  },
+  "fatal_error": null,
+  "next_step": "Build basin-clipped archived RDPA retrieval and multi-event hindcasting."
 }
