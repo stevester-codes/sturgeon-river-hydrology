@@ -114,7 +114,11 @@ def geps_time(filename: str | None) -> datetime | None:
     return datetime.strptime(match.group(1), "%Y%m%d%H").replace(tzinfo=timezone.utc)
 
 
-def latest_complete_geps(http: requests.Session) -> datetime | None:
+def geps_publication_state(
+    http: requests.Session,
+) -> tuple[datetime | None, datetime | None]:
+    """Return newest advertised PT024 run and newest fully published PT384 run."""
+    advertised: list[datetime] = []
     complete: list[datetime] = []
     for hour in ["00", "12"]:
         try:
@@ -124,9 +128,14 @@ def latest_complete_geps(http: requests.Session) -> datetime | None:
             continue
         first_time = geps_time(first)
         last_time = geps_time(last)
+        if first_time:
+            advertised.append(first_time)
         if first_time and first_time == last_time:
             complete.append(first_time)
-    return max(complete) if complete else None
+    return (
+        max(advertised) if advertised else None,
+        max(complete) if complete else None,
+    )
 
 
 def latest_gauge(http: requests.Session) -> tuple[datetime | None, float | None]:
@@ -213,9 +222,9 @@ def main() -> None:
         source_hrdps = None
         errors.append(f"HRDPS probe failed: {exc}")
     try:
-        source_geps = latest_complete_geps(http)
+        advertised_geps, source_geps = geps_publication_state(http)
     except Exception as exc:
-        source_geps = None
+        advertised_geps, source_geps = None, None
         errors.append(f"GEPS probe failed: {exc}")
 
     old_gauge_time, old_gauge_value = published_gauge(root)
@@ -226,11 +235,17 @@ def main() -> None:
     if completed_path.exists():
         completed = utc(completed_path.read_text().strip())
 
-    reasons: list[str] = []
+    publication_block = bool(
+        advertised_geps
+        and (old_geps is None or advertised_geps > old_geps)
+        and (source_geps is None or source_geps < advertised_geps)
+    )
+
+    candidate_reasons: list[str] = []
     if source_hrdps and (old_hrdps is None or source_hrdps > old_hrdps):
-        reasons.append(f"complete HRDPS cycle {source_hrdps.isoformat()} is new")
+        candidate_reasons.append(f"complete HRDPS cycle {source_hrdps.isoformat()} is new")
     if source_geps and (old_geps is None or source_geps > old_geps):
-        reasons.append(f"complete GEPS cycle {source_geps.isoformat()} is new")
+        candidate_reasons.append(f"complete GEPS cycle {source_geps.isoformat()} is new")
 
     if source_gauge_time:
         age_since_published = (
@@ -244,22 +259,34 @@ def main() -> None:
             else None
         )
         if age_since_published >= 30 and (stage_change is None or stage_change >= 0.002):
-            reasons.append(
+            candidate_reasons.append(
                 f"05EA002 is {age_since_published:.0f} minutes newer"
                 + (f" and changed {stage_change:.3f} m" if stage_change is not None else "")
             )
         elif completed and (datetime.now(timezone.utc) - completed).total_seconds() >= 2 * 3600:
-            reasons.append("published operational package is at least two hours old")
+            candidate_reasons.append("published operational package is at least two hours old")
+
+    reasons = [] if publication_block else candidate_reasons
+    waiting_reason = None
+    if publication_block:
+        waiting_reason = (
+            f"GEPS cycle {advertised_geps.isoformat()} has begun publishing but "
+            "the PT384 all-member file is not yet available"
+        )
 
     result = {
         "generated_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
         "dispatch_required": bool(reasons),
+        "dispatch_blocked_for_incomplete_geps": publication_block,
+        "waiting_reason": waiting_reason,
+        "candidate_reasons": candidate_reasons,
         "reasons": reasons,
         "errors": errors,
         "source": {
             "gauge_time_utc": source_gauge_time.isoformat() if source_gauge_time else None,
             "gauge_stage_m": source_gauge_value,
             "complete_hrdps_run_utc": source_hrdps.isoformat() if source_hrdps else None,
+            "advertised_geps_run_utc": advertised_geps.isoformat() if advertised_geps else None,
             "complete_geps_run_utc": source_geps.isoformat() if source_geps else None,
         },
         "published": {
@@ -270,8 +297,10 @@ def main() -> None:
             "workflow_completed_utc": completed.isoformat() if completed else None,
         },
         "interpretation": (
-            "A forecast rerun is requested only for a complete new weather cycle, "
-            "a meaningful newer gauge observation, or a two-hour safety refresh."
+            "The detector runs every ten minutes. It dispatches for complete new weather "
+            "cycles, meaningful newer gauge observations, or a two-hour safety refresh. "
+            "It temporarily waits while a newer GEPS cycle is only partly published, then "
+            "dispatches on the first check after PT384 becomes available."
         ),
     }
     Path(args.json_output).write_text(json.dumps(result, indent=2))
