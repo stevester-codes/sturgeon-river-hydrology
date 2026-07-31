@@ -4,6 +4,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+# This script is intentionally text-based so it can safely patch existing workflow files.
 WORKFLOWS = Path('.github/workflows')
 
 
