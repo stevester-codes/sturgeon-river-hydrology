@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-31T16:52:06.177093+00:00",
+  "generated_utc": "2026-07-30T15:31:18.539195+00:00",
   "status": "passed",
   "collection": "weather:rdpa:10km:6f",
   "collection_url": "https://api.weather.gc.ca/collections/weather%3Ardpa%3A10km%3A6f",
@@ -48,7 +48,7 @@
         "interval": [
           [
             "2012-10-03T06Z",
-            "2026-07-31T06Z"
+            "2026-07-30T06Z"
           ]
         ],
         "grid": {
@@ -73,32 +73,119 @@
   },
   "ogc_attempts": [
     {
-      "requested_format": "OGC_API_JSON",
-      "request_url": "https://api.weather.gc.ca/collections/weather:rdpa:10km:6f/coverage?f=json&f=json&bbox=-115.2%2C52.9%2C-113.0%2C54.2&datetime=2026-07-01T00%3A00%3A00Z",
-      "status_code": 200,
-      "content_type": "application/prs.coverage+json",
-      "content_length_header": null,
-      "bytes_received": 5186,
-      "response_prefix_hex": "7b2274797065223a22436f766572616765222c22646f6d61",
-      "json_top_level_keys": [
-        "domain",
-        "parameters",
-        "ranges",
-        "type"
-      ]
+      "source": "OGC_API_JSON",
+      "request_error": "RetryError: HTTPSConnectionPool(host='api.weather.gc.ca', port=443): Max retries exceeded with url: /collections/weather:rdpa:10km:6f/coverage?f=json&f=json&bbox=-115.2%2C52.9%2C-113.0%2C54.2&datetime=2026-07-01T00%3A00%3A00Z (Caused by ResponseError('too many 500 error responses'))"
+    },
+    {
+      "source": "OGC_API_GRIB",
+      "request_error": "RetryError: HTTPSConnectionPool(host='api.weather.gc.ca', port=443): Max retries exceeded with url: /collections/weather:rdpa:10km:6f/coverage?f=GRIB&f=GRIB&bbox=-115.2%2C52.9%2C-113.0%2C54.2&datetime=2026-07-01T00%3A00%3A00Z (Caused by ResponseError('too many 500 error responses'))"
     }
   ],
-  "wcs_attempts": [],
+  "wcs_attempts": [
+    {
+      "requested_format": "WCS_TIFF_NATIVE",
+      "request_url": "https://geo.weather.gc.ca/geomet?SERVICE=WCS&VERSION=2.0.1&REQUEST=GetCoverage&COVERAGEID=RDPA.6F_PR&SUBSETTINGCRS=EPSG%3A4326&OUTPUTCRS=EPSG%3A4326&SUBSET=x%28-115.2%2C-113.0%29&SUBSET=y%2852.9%2C54.2%29&FORMAT=image%2Ftiff&TIME=2026-07-01T00%3A00%3A00Z",
+      "status_code": 200,
+      "content_type": "image/tiff",
+      "content_length_header": null,
+      "bytes_received": 778,
+      "response_prefix_hex": "49492a000800000013000001030001000000060000000101",
+      "raster": {
+        "open_succeeded": true,
+        "driver": "GTiff",
+        "width": 6,
+        "height": 15,
+        "band_count": 1,
+        "crs": "EPSG:4326",
+        "bounds": [
+          -115.19999999999999,
+          52.9,
+          -113.0,
+          54.199999999999996
+        ],
+        "transform": [
+          0.3666666666666657,
+          0.0,
+          -115.19999999999999,
+          0.0,
+          -0.08666666666666652,
+          54.199999999999996,
+          0.0,
+          0.0,
+          1.0
+        ],
+        "descriptions": [
+          null
+        ],
+        "dataset_tags": {
+          "TIFFTAG_XRESOLUTION": "72",
+          "TIFFTAG_YRESOLUTION": "72",
+          "TIFFTAG_RESOLUTIONUNIT": "2 (pixels/inch)",
+          "AREA_OR_POINT": "Area"
+        },
+        "bands": [
+          {
+            "band": 1,
+            "description": null,
+            "tags": {},
+            "valid_cells": 90,
+            "minimum": 0.0,
+            "maximum": 2.4375998973846436,
+            "mean": 0.4931344281636282
+          }
+        ]
+      }
+    }
+  ],
   "selected": {
-    "source": "OGC_API_JSON",
-    "content_type": "application/prs.coverage+json",
-    "bytes_received": 5186,
-    "coverage_json_top_level_keys": [
-      "domain",
-      "parameters",
-      "ranges",
-      "type"
-    ]
+    "source": "WCS_TIFF_NATIVE",
+    "content_type": "image/tiff",
+    "bytes_received": 778,
+    "raster": {
+      "open_succeeded": true,
+      "driver": "GTiff",
+      "width": 6,
+      "height": 15,
+      "band_count": 1,
+      "crs": "EPSG:4326",
+      "bounds": [
+        -115.19999999999999,
+        52.9,
+        -113.0,
+        54.199999999999996
+      ],
+      "transform": [
+        0.3666666666666657,
+        0.0,
+        -115.19999999999999,
+        0.0,
+        -0.08666666666666652,
+        54.199999999999996,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "descriptions": [
+        null
+      ],
+      "dataset_tags": {
+        "TIFFTAG_XRESOLUTION": "72",
+        "TIFFTAG_YRESOLUTION": "72",
+        "TIFFTAG_RESOLUTIONUNIT": "2 (pixels/inch)",
+        "AREA_OR_POINT": "Area"
+      },
+      "bands": [
+        {
+          "band": 1,
+          "description": null,
+          "tags": {},
+          "valid_cells": 90,
+          "minimum": 0.0,
+          "maximum": 2.4375998973846436,
+          "mean": 0.4931344281636282
+        }
+      ]
+    }
   },
   "fatal_error": null,
   "next_step": "Build basin-clipped archived RDPA retrieval and multi-event hindcasting."
