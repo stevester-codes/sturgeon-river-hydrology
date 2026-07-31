@@ -1,0 +1,48 @@
+name: Apply complete GEPS cycle selection
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'apply_complete_geps_selection.py'
+      - '.github/workflows/sturgeon-apply-complete-geps-selection.yml'
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-apply-complete-geps-selection
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply complete-cycle patch
+        run: python apply_complete_geps_selection.py
+      - name: Compile patched code
+        run: python -m py_compile medium_range_qpf.py operational_update_probe.py
+      - name: Validate patch semantics
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          medium = Path('medium_range_qpf.py').read_text()
+          probe = Path('operational_update_probe.py').read_text()
+          assert 'newest GEPS cycle that is complete at every required horizon' in medium
+          assert 'reasons = candidate_reasons' in probe
+          assert 'reasons = [] if publication_block else candidate_reasons' not in probe
+          print('Complete GEPS selection patch validated.')
+          PY
+      - name: Commit patched retrieval logic
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add medium_range_qpf.py operational_update_probe.py
+          git commit -m 'Use latest complete GEPS cycle for live updates [skip ci]'
+          git push origin HEAD:main
