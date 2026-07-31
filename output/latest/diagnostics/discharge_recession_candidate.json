@@ -1,103 +1,653 @@
 {
-  "generated_utc": "2026-07-30T22:23:07.563795+00:00",
+  "generated_utc": "2026-07-31T10:04:18.906957+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 75,
+  "dry_hourly_points": 99,
   "data_range_utc": [
-    "2026-07-16T00:00:00+00:00",
-    "2026-07-30T22:00:00+00:00"
+    "2026-07-17T00:00:00+00:00",
+    "2026-07-31T09:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -0.1178958043762709,
-    "coefficient_per_day": -0.03462019652319048,
-    "n": 52,
+    "intercept_m3s_per_day": 1.121743541793082,
+    "coefficient_per_day": -0.1225757892258775,
+    "n": 69,
     "discharge_range_m3s": [
-      12.8,
-      15.1
+      13.1,
+      15.9
     ],
-    "rate_rmse_m3s_per_day": 0.2320911909268452
+    "rate_rmse_m3s_per_day": 0.2445238390582251
   },
   "holdout": {
-    "train_points": 52,
-    "test_points": 23,
+    "train_points": 69,
+    "test_points": 30,
     "official_stage_recession_then_rating": {
-      "n": 23,
-      "rmse_m3s": 0.37212406216695043,
-      "mae_m3s": 0.24126677206135513,
-      "bias_m3s": -0.13567060366252054
+      "n": 30,
+      "rmse_m3s": 0.32692832510763536,
+      "mae_m3s": 0.1983483768311291,
+      "bias_m3s": -0.0999663869350926
     },
     "direct_discharge_candidate": {
-      "n": 23,
-      "rmse_m3s": 0.3671936960796243,
-      "mae_m3s": 0.24137039666771554,
-      "bias_m3s": -0.12463740229236564
+      "n": 30,
+      "rmse_m3s": 0.31151771315032006,
+      "mae_m3s": 0.19934735996304045,
+      "bias_m3s": -0.05744666377093169
     },
-    "rmse_improvement_fraction": 0.013249253645721382,
+    "rmse_improvement_fraction": 0.047137585745259725,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 11.3,
+    "current_discharge_m3s": 11.1,
     "candidate_rain_free": {
-      "reached": true,
-      "hours": 256,
-      "days": 10.666666666666666,
+      "reached": false,
+      "hours": null,
+      "days": null,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 10.799252755679754,
-          "rate_m3s_per_day": -0.4917680570815104
+          "discharge_m3s": 10.874669203091669,
+          "rate_m3s_per_day": -0.2112276183462236
         },
         {
           "day": 2,
-          "discharge_m3s": 10.315556914961217,
-          "rate_m3s_per_day": -0.47502241201838474
+          "discharge_m3s": 10.675395423768322,
+          "rate_m3s_per_day": -0.18680147757364085
         },
         {
           "day": 3,
-          "discharge_m3s": 9.848331844864203,
-          "rate_m3s_per_day": -0.4588469882710647
+          "discharge_m3s": 10.499165455780567,
+          "rate_m3s_per_day": -0.16519995016229072
         },
         {
           "day": 4,
-          "discharge_m3s": 9.397016684074584,
-          "rate_m3s_per_day": -0.4432223687106328
+          "discharge_m3s": 10.343314536896894,
+          "rate_m3s_per_day": -0.14609640077854635
         },
         {
           "day": 5,
-          "discharge_m3s": 8.961069669681136,
-          "rate_m3s_per_day": -0.42812979739863344
+          "discharge_m3s": 10.205486055202048,
+          "rate_m3s_per_day": -0.12920196585699606
         },
         {
           "day": 6,
-          "discharge_m3s": 8.539967486838325,
-          "rate_m3s_per_day": -0.41355115707227086
+          "discharge_m3s": 10.083595914916849,
+          "rate_m3s_per_day": -0.11426118571268495
         },
         {
           "day": 7,
-          "discharge_m3s": 8.133204640574313,
-          "rate_m3s_per_day": -0.3994689473962784
+          "discharge_m3s": 9.975801022917395,
+          "rate_m3s_per_day": -0.10104814175133359
         },
         {
           "day": 8,
-          "discharge_m3s": 7.740292848990081,
-          "rate_m3s_per_day": -0.38586626395535345
+          "discharge_m3s": 9.880471419440147,
+          "rate_m3s_per_day": -0.08936304036851994
         },
         {
           "day": 9,
-          "discharge_m3s": 7.360760457121304,
-          "rate_m3s_per_day": -0.37272677796193987
+          "discharge_m3s": 9.796165631563156,
+          "rate_m3s_per_day": -0.07902919188318847
         },
         {
           "day": 10,
-          "discharge_m3s": 6.994151870759358,
-          "rate_m3s_per_day": -0.36003471665500025
+          "discharge_m3s": 9.72160887678491,
+          "rate_m3s_per_day": -0.06989033882412476
+        },
+        {
+          "day": 11,
+          "discharge_m3s": 9.655673787118536,
+          "rate_m3s_per_day": -0.06180829317058989
+        },
+        {
+          "day": 12,
+          "discharge_m3s": 9.597363362231578,
+          "rate_m3s_per_day": -0.05466084681997474
+        },
+        {
+          "day": 13,
+          "discharge_m3s": 9.545795893866828,
+          "rate_m3s_per_day": -0.04833992368678519
+        },
+        {
+          "day": 14,
+          "discharge_m3s": 9.500191633587384,
+          "rate_m3s_per_day": -0.04274994549096989
+        },
+        {
+          "day": 15,
+          "discharge_m3s": 9.45986100224973,
+          "rate_m3s_per_day": -0.03780638652477908
+        },
+        {
+          "day": 16,
+          "discharge_m3s": 9.42419416292097,
+          "rate_m3s_per_day": -0.03343449554486355
+        },
+        {
+          "day": 17,
+          "discharge_m3s": 9.392651799573034,
+          "rate_m3s_per_day": -0.02956816546344121
+        },
+        {
+          "day": 18,
+          "discharge_m3s": 9.364756962119058,
+          "rate_m3s_per_day": -0.026148933747192515
+        },
+        {
+          "day": 19,
+          "discharge_m3s": 9.340087854481167,
+          "rate_m3s_per_day": -0.023125098408979916
+        },
+        {
+          "day": 20,
+          "discharge_m3s": 9.318271456638593,
+          "rate_m3s_per_day": -0.02045093622536065
+        },
+        {
+          "day": 21,
+          "discharge_m3s": 9.29897788421546,
+          "rate_m3s_per_day": -0.018086011358608545
+        },
+        {
+          "day": 22,
+          "discharge_m3s": 9.281915400319974,
+          "rate_m3s_per_day": -0.015994563928965366
+        },
+        {
+          "day": 23,
+          "discharge_m3s": 9.26682600420924,
+          "rate_m3s_per_day": -0.014144969291750131
+        },
+        {
+          "day": 24,
+          "discharge_m3s": 9.253481530076318,
+          "rate_m3s_per_day": -0.012509259843103138
+        },
+        {
+          "day": 25,
+          "discharge_m3s": 9.241680196969451,
+          "rate_m3s_per_day": -0.011062702123611379
+        },
+        {
+          "day": 26,
+          "discharge_m3s": 9.231243557675022,
+          "rate_m3s_per_day": -0.009783422825230925
+        },
+        {
+          "day": 27,
+          "discharge_m3s": 9.22201380042847,
+          "rate_m3s_per_day": -0.008652078046371692
+        },
+        {
+          "day": 28,
+          "discharge_m3s": 9.21385136265258,
+          "rate_m3s_per_day": -0.0076515607939846575
+        },
+        {
+          "day": 29,
+          "discharge_m3s": 9.206632820640522,
+          "rate_m3s_per_day": -0.0067667423097965695
+        },
+        {
+          "day": 30,
+          "discharge_m3s": 9.200249023273784,
+          "rate_m3s_per_day": -0.005984243309310688
+        },
+        {
+          "day": 31,
+          "discharge_m3s": 9.19460344155501,
+          "rate_m3s_per_day": -0.0052922316744927755
+        },
+        {
+          "day": 32,
+          "discharge_m3s": 9.189610708999068,
+          "rate_m3s_per_day": -0.00468024354105423
+        },
+        {
+          "day": 33,
+          "discharge_m3s": 9.185195330811869,
+          "rate_m3s_per_day": -0.004139025075027725
+        },
+        {
+          "day": 34,
+          "discharge_m3s": 9.181290542338314,
+          "rate_m3s_per_day": -0.0036603925461216047
+        },
+        {
+          "day": 35,
+          "discharge_m3s": 9.177837299518156,
+          "rate_m3s_per_day": -0.0032371085820521728
+        },
+        {
+          "day": 36,
+          "discharge_m3s": 9.17478338608451,
+          "rate_m3s_per_day": -0.002862772732695529
+        },
+        {
+          "day": 37,
+          "discharge_m3s": 9.17208262400494,
+          "rate_m3s_per_day": -0.0025317246892808676
+        },
+        {
+          "day": 38,
+          "discharge_m3s": 9.169694175226367,
+          "rate_m3s_per_day": -0.0022389586952216156
+        },
+        {
+          "day": 39,
+          "discharge_m3s": 9.167581924165454,
+          "rate_m3s_per_day": -0.0019800478543869904
+        },
+        {
+          "day": 40,
+          "discharge_m3s": 9.165713931607122,
+          "rate_m3s_per_day": -0.0017510771922815138
+        },
+        {
+          "day": 41,
+          "discharge_m3s": 9.164061951753704,
+          "rate_m3s_per_day": -0.0015485844579634644
+        },
+        {
+          "day": 42,
+          "discharge_m3s": 9.162601005122028,
+          "rate_m3s_per_day": -0.0013695077715689674
+        },
+        {
+          "day": 43,
+          "discharge_m3s": 9.16130900083021,
+          "rate_m3s_per_day": -0.0012111393258160685
+        },
+        {
+          "day": 44,
+          "discharge_m3s": 9.160166402562842,
+          "rate_m3s_per_day": -0.0010710844414254517
+        },
+        {
+          "day": 45,
+          "discharge_m3s": 9.159145260630405,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 46,
+          "discharge_m3s": 9.158145260630414,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 47,
+          "discharge_m3s": 9.157145260630424,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 48,
+          "discharge_m3s": 9.156145260630433,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 49,
+          "discharge_m3s": 9.155145260630443,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 50,
+          "discharge_m3s": 9.154145260630452,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 51,
+          "discharge_m3s": 9.153145260630462,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 52,
+          "discharge_m3s": 9.152145260630471,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 53,
+          "discharge_m3s": 9.15114526063048,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 54,
+          "discharge_m3s": 9.15014526063049,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 55,
+          "discharge_m3s": 9.1491452606305,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 56,
+          "discharge_m3s": 9.148145260630509,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 57,
+          "discharge_m3s": 9.147145260630518,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 58,
+          "discharge_m3s": 9.146145260630528,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 59,
+          "discharge_m3s": 9.145145260630537,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 60,
+          "discharge_m3s": 9.144145260630546,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 61,
+          "discharge_m3s": 9.143145260630556,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 62,
+          "discharge_m3s": 9.142145260630565,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 63,
+          "discharge_m3s": 9.141145260630575,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 64,
+          "discharge_m3s": 9.140145260630584,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 65,
+          "discharge_m3s": 9.139145260630594,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 66,
+          "discharge_m3s": 9.138145260630603,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 67,
+          "discharge_m3s": 9.137145260630612,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 68,
+          "discharge_m3s": 9.136145260630622,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 69,
+          "discharge_m3s": 9.135145260630631,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 70,
+          "discharge_m3s": 9.13414526063064,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 71,
+          "discharge_m3s": 9.13314526063065,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 72,
+          "discharge_m3s": 9.13214526063066,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 73,
+          "discharge_m3s": 9.13114526063067,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 74,
+          "discharge_m3s": 9.130145260630679,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 75,
+          "discharge_m3s": 9.129145260630688,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 76,
+          "discharge_m3s": 9.128145260630697,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 77,
+          "discharge_m3s": 9.127145260630707,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 78,
+          "discharge_m3s": 9.126145260630716,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 79,
+          "discharge_m3s": 9.125145260630726,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 80,
+          "discharge_m3s": 9.124145260630735,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 81,
+          "discharge_m3s": 9.123145260630745,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 82,
+          "discharge_m3s": 9.122145260630754,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 83,
+          "discharge_m3s": 9.121145260630763,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 84,
+          "discharge_m3s": 9.120145260630773,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 85,
+          "discharge_m3s": 9.119145260630782,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 86,
+          "discharge_m3s": 9.118145260630792,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 87,
+          "discharge_m3s": 9.117145260630801,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 88,
+          "discharge_m3s": 9.11614526063081,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 89,
+          "discharge_m3s": 9.11514526063082,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 90,
+          "discharge_m3s": 9.11414526063083,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 91,
+          "discharge_m3s": 9.113145260630839,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 92,
+          "discharge_m3s": 9.112145260630848,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 93,
+          "discharge_m3s": 9.111145260630858,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 94,
+          "discharge_m3s": 9.110145260630867,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 95,
+          "discharge_m3s": 9.109145260630877,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 96,
+          "discharge_m3s": 9.108145260630886,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 97,
+          "discharge_m3s": 9.107145260630896,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 98,
+          "discharge_m3s": 9.106145260630905,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 99,
+          "discharge_m3s": 9.105145260630914,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 100,
+          "discharge_m3s": 9.104145260630924,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 101,
+          "discharge_m3s": 9.103145260630933,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 102,
+          "discharge_m3s": 9.102145260630943,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 103,
+          "discharge_m3s": 9.101145260630952,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 104,
+          "discharge_m3s": 9.100145260630962,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 105,
+          "discharge_m3s": 9.099145260630971,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 106,
+          "discharge_m3s": 9.09814526063098,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 107,
+          "discharge_m3s": 9.09714526063099,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 108,
+          "discharge_m3s": 9.096145260631,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 109,
+          "discharge_m3s": 9.095145260631009,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 110,
+          "discharge_m3s": 9.094145260631018,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 111,
+          "discharge_m3s": 9.093145260631028,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 112,
+          "discharge_m3s": 9.092145260631037,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 113,
+          "discharge_m3s": 9.091145260631047,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 114,
+          "discharge_m3s": 9.090145260631056,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 115,
+          "discharge_m3s": 9.089145260631065,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 116,
+          "discharge_m3s": 9.088145260631075,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 117,
+          "discharge_m3s": 9.087145260631084,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 118,
+          "discharge_m3s": 9.086145260631094,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 119,
+          "discharge_m3s": 9.085145260631103,
+          "rate_m3s_per_day": -0.001
+        },
+        {
+          "day": 120,
+          "discharge_m3s": 9.084145260631113,
+          "rate_m3s_per_day": -0.001
         }
       ]
     },
-    "official_stage_based_rain_free_days": 7.875,
-    "candidate_minus_official_days": 2.791666666666666,
+    "official_stage_based_rain_free_days": 7.708333333333333,
+    "candidate_minus_official_days": null,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
