@@ -1,9 +1,9 @@
 {
-  "generated_utc": "2026-07-31T16:49:34.859016+00:00",
+  "generated_utc": "2026-07-31T16:56:20.840193+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
-    "score_out_of_100": 50.0,
+    "score_out_of_100": 58.0,
     "tier": "low_to_moderate",
     "components": {
       "uncensored_peak_events": 14.0,
@@ -13,7 +13,7 @@
       "current_rating_support": 2.0,
       "meteorological_ensemble": 8.0,
       "project_transfer_support": 8.0,
-      "historical_recession_validation": 0.0,
+      "historical_recession_validation": 8.0,
       "operational_integrity_controls": 8.0
     },
     "warning": "This is a transparent engineering evidence diagnostic, not a probability. Version 3 no longer awards full feature-coverage points when a complete HRDPS forecast is dry or when feature inputs are missing. A dry forecast can reduce near-term timing risk without increasing calibration evidence."
@@ -218,9 +218,37 @@
     "interpretation": "The high-flow RS18883 transfer is constrained by the complete 2- to 1,000-year design profile. Remaining transfer uncertainty is concentrated in the reconstructed 6.77 m3/s low-flow anchor and the segment to 14 m3/s."
   },
   "historical_recession_validation": {
-    "status": "unavailable",
-    "score_out_of_9": 0.0,
-    "reason": "historical RDPA model-selection output is missing"
+    "status": "screened_event_block_validation_available",
+    "score_out_of_9": 8.0,
+    "preferred_model": "rdpa_moderate",
+    "rdpa_coverage_fraction": 0.9991142604074402,
+    "screened_points": 827,
+    "independent_event_blocks": 8,
+    "rain_free_days_to_6_77_m3s": 8.958333333333334,
+    "event_block_rmse_per_day": 0.24969981446116865,
+    "event_block_mae_per_day": 0.19007871104622034,
+    "skill_improvement_vs_gauge_only_pct": 1.8715339090006198,
+    "operational_use": {
+      "replace_live_central_forecast": false,
+      "include_as_independent_schedule_sensitivity": true,
+      "reason": "The selected RDPA-screened direct-discharge model is a more defensible independent sensitivity than the unscreened gauge-only fit, but its skill gain and event diversity are not sufficient for automatic operational promotion."
+    },
+    "promotion_recommendation": {
+      "promote_now": false,
+      "reasons_not_to_promote": [
+        "event_block_skill_gain_is_less_than_5_percent",
+        "fewer_than_10_independent_dry_event_blocks",
+        "10_km_rdpa_screen_may_miss_sub_grid_convective_rain",
+        "wsc_discharge_is_provisional_and_rating_derived",
+        "manual_engineering_review_is_required"
+      ],
+      "next_evidence_needed": [
+        "additional independent summer falling-limb recession blocks",
+        "surveyed RS18883 WSE observations near 650.20 m",
+        "material out-of-sample skill improvement over the live recession model"
+      ]
+    },
+    "interpretation": "This is independent precipitation-screened validation of direct-discharge recession timing. It remains shadow-only because skill gain and event diversity are not sufficient for promotion."
   },
   "ensemble_date_spread": {
     "member_count": 21,
