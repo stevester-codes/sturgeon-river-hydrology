@@ -1,0 +1,105 @@
+{
+  "generated_utc": "2026-07-31T19:29:17.956005+00:00",
+  "status": "provisional_date_level_field_evidence_available",
+  "mode": "shadow_only_no_automatic_threshold_or_transfer_replacement",
+  "project_threshold_wse_m": 650.2,
+  "existing_operational_target_discharge_m3s": 6.77,
+  "observations": [
+    {
+      "observed_local_date": "2026-07-16",
+      "reported_site_wse_m": 651.748,
+      "source": "contractor report",
+      "datum_status": "requires confirmation against project CGVD28 benchmark",
+      "measurement_location_status": "reported as construction site; exact shot location not yet documented",
+      "exact_time_status": "date only",
+      "gauge_pairing_method": "median of available 05EA002 hourly pairs over the same America/Edmonton calendar date",
+      "hourly_pair_count": 17,
+      "stage_05EA002_median_m": 2.483,
+      "stage_05EA002_range_m": [
+        2.468,
+        2.499
+      ],
+      "discharge_05EA002_median_m3s": 16.1,
+      "discharge_05EA002_range_m3s": [
+        15.9,
+        16.3
+      ],
+      "steady_state_design_profile_wse_at_daily_median_q_m": 650.6747032307638,
+      "observed_minus_design_profile_m": 1.073296769236208,
+      "notes": "Direct contractor-reported water elevation. Treat as provisional field evidence until survey datum, exact location, method and time are confirmed."
+    },
+    {
+      "observed_local_date": "2026-07-23",
+      "reported_site_wse_m": 651.336,
+      "source": "contractor report",
+      "datum_status": "requires confirmation against project CGVD28 benchmark",
+      "measurement_location_status": "reported as construction site; exact shot location not yet documented",
+      "exact_time_status": "date only",
+      "gauge_pairing_method": "median of available 05EA002 hourly pairs over the same America/Edmonton calendar date",
+      "hourly_pair_count": 24,
+      "stage_05EA002_median_m": 2.3045,
+      "stage_05EA002_range_m": [
+        2.283,
+        2.3155
+      ],
+      "discharge_05EA002_median_m3s": 13.649999999999999,
+      "discharge_05EA002_range_m3s": [
+        13.4,
+        13.8
+      ],
+      "steady_state_design_profile_wse_at_daily_median_q_m": 650.5185007159199,
+      "observed_minus_design_profile_m": 0.8174992840800996,
+      "notes": "Direct contractor-reported water elevation. Treat as provisional field evidence until survey datum, exact location, method and time are confirmed."
+    }
+  ],
+  "date_recession_fit": {
+    "observation_count": 2,
+    "first_observation_local_date": "2026-07-16",
+    "last_observation_local_date": "2026-07-23",
+    "elapsed_days": 7,
+    "wse_change_m": -0.41200000000003456,
+    "slope_m_per_day": -0.05885714285714779,
+    "projected_threshold_crossing_local_date": "2026-08-11",
+    "projected_threshold_crossing_basis": "linear continuation of the two contractor-reported site elevations"
+  },
+  "discharge_wse_fit": {
+    "observation_count": 2,
+    "form": "reported_site_wse_m = slope_m_per_m3s * Q05EA002 + intercept_m",
+    "slope_m_per_m3s": 0.1681632653061719,
+    "intercept_m": 649.0405714285707,
+    "extrapolated_q_at_650_20_m_m3s": 6.89466019417716,
+    "difference_from_existing_6_77_anchor_m3s": 0.12466019417716012,
+    "interpretation": "The two date-level field observations independently extrapolate toward the current operational discharge anchor, but this is not a validated rating curve."
+  },
+  "current_site_state": {
+    "current_05EA002_discharge_m3s": 11.0,
+    "direct_current_site_measurement_available": false,
+    "date_recession_estimated_project_wse_m": 650.8651428571428,
+    "date_recession_estimated_depth_over_650_20_m": 0.6651428571427687,
+    "discharge_relation_estimated_project_wse_m": 650.8903673469387,
+    "discharge_relation_estimated_depth_over_650_20_m": 0.6903673469386149,
+    "steady_state_design_profile_equivalent_wse_m": 650.4204648063379,
+    "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.2204648063378727,
+    "status": "provisional_site_recession_estimate_not_direct_measurement"
+  },
+  "comparison_with_design_profile": {
+    "observed_minus_design_profile_residuals_m": [
+      1.073296769236208,
+      0.8174992840800996
+    ],
+    "mean_observed_minus_design_profile_m": 0.9453980266581539,
+    "minimum_observed_minus_design_profile_m": 0.8174992840800996,
+    "maximum_observed_minus_design_profile_m": 1.073296769236208,
+    "classification": "material_2026_site_wse_above_steady_state_design_profile",
+    "design_profile_current_use": "design_event_context_and_threshold_translation_only_not_actual_2026_site_depth",
+    "interpretation": "The contractor elevations indicate that the 2026 site water surface was materially higher than the steady-state RS18883 design-profile transfer at comparable gauge discharge."
+  },
+  "operational_interpretation": "The contractor elevations are treated as provisional direct site evidence. They alter how current site depth is reported, but they do not automatically replace the 6.77 m3/s scheduling anchor because exact survey time, datum and shot location have not yet been documented.",
+  "limitations": [
+    "Both elevations are date-only observations, so gauge pairing uses the same-day median rather than a concurrent reading.",
+    "The project datum and exact measurement location require confirmation before the observations can become authoritative calibration points.",
+    "Two observations define an exact two-point line and cannot establish curvature, hysteresis or formal uncertainty.",
+    "The date recession assumes the observed July 16 to July 23 decline continued without a new hydraulic control or rainfall response.",
+    "This diagnostic does not authorize construction release; a direct site survey and bearing-capacity inspection remain required."
+  ]
+}
