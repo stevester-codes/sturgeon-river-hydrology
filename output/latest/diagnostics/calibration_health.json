@@ -1,9 +1,9 @@
 {
-  "generated_utc": "2026-07-31T15:32:25.925238+00:00",
+  "generated_utc": "2026-07-31T16:46:14.162082+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
-    "score_out_of_100": 58.0,
+    "score_out_of_100": 50.0,
     "tier": "low_to_moderate",
     "components": {
       "uncensored_peak_events": 14.0,
@@ -13,7 +13,7 @@
       "current_rating_support": 2.0,
       "meteorological_ensemble": 8.0,
       "project_transfer_support": 8.0,
-      "historical_recession_validation": 8.0,
+      "historical_recession_validation": 0.0,
       "operational_integrity_controls": 8.0
     },
     "warning": "This is a transparent engineering evidence diagnostic, not a probability. Version 3 no longer awards full feature-coverage points when a complete HRDPS forecast is dry or when feature inputs are missing. A dry forecast can reduce near-term timing risk without increasing calibration evidence."
@@ -21,8 +21,8 @@
   "short_range_forecast_input": {
     "status": "material_short_range_qpf_feature_vector_available",
     "feature_vector_required": true,
-    "basin_mm": 16.27137832891256,
-    "run_time_utc": "2026-07-31T06:00:00+00:00",
+    "basin_mm": 4.257679185908709,
+    "run_time_utc": "2026-07-31T12:00:00+00:00",
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "calibration_sample": {
@@ -42,89 +42,89 @@
     "short_range_input_status": "material_short_range_qpf_feature_vector_available",
     "available_feature_count": 7,
     "required_feature_count": 7,
-    "outside_feature_count": 5,
-    "materially_outside_feature_count": 2,
-    "nearest_analogue_distance": 3.9361785880541027,
-    "storm_type": "widespread_basin",
+    "outside_feature_count": 4,
+    "materially_outside_feature_count": 3,
+    "nearest_analogue_distance": 4.434352180242038,
+    "storm_type": "lower_basin_concentrated",
     "horizon_h": 48,
-    "run_time_utc": "2026-07-31T06:00:00+00:00",
-    "basin_mm": 16.27137832891256,
+    "run_time_utc": "2026-07-31T12:00:00+00:00",
+    "basin_mm": 4.257679185908709,
     "features": [
       {
         "feature": "basin_mm",
-        "current": 16.27137832891256,
+        "current": 4.257679185908709,
         "training_min": 1.952859654092426,
         "training_max": 26.846894577404903,
         "training_mean": 14.399877115748664,
         "training_standard_deviation": 12.447017461656237,
-        "z_score": 0.15035740240014656,
+        "z_score": -0.8148295735169961,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "lower_ratio",
-        "current": 1.1856194573229624,
+        "current": 2.0491755741586983,
         "training_min": 0.6433245128726464,
         "training_max": 1.1049891548057453,
         "training_mean": 0.8741568338391958,
         "training_standard_deviation": 0.2308323209665495,
-        "z_score": 1.3493024814705277,
-        "normalized_distance_outside_range": 0.1746512407352638,
-        "status": "outside_training_range"
+        "z_score": 5.0903562178789405,
+        "normalized_distance_outside_range": 2.0451781089394703,
+        "status": "material_extrapolation"
       },
       {
         "feature": "upper_ratio",
-        "current": 0.2466906350671729,
+        "current": 0.21354436565447465,
         "training_min": 0.8684102567270844,
         "training_max": 1.0110260499381822,
         "training_mean": 0.9397181533326333,
         "training_standard_deviation": 0.07130789660554893,
-        "z_score": -9.718804666179587,
-        "normalized_distance_outside_range": 4.359402333089793,
+        "z_score": -10.183637749057521,
+        "normalized_distance_outside_range": 4.5918188745287605,
         "status": "material_extrapolation"
       },
       {
         "feature": "duration_h",
-        "current": 6.0,
+        "current": 12.0,
         "training_min": 12.0,
         "training_max": 48.0,
         "training_mean": 30.0,
         "training_standard_deviation": 18.0,
-        "z_score": -1.3333333333333333,
-        "normalized_distance_outside_range": 0.16666666666666666,
-        "status": "outside_training_range"
+        "z_score": -1.0,
+        "normalized_distance_outside_range": 0.0,
+        "status": "inside_training_range"
       },
       {
         "feature": "antecedent_168h_mm",
-        "current": 27.564462308137138,
+        "current": 27.529594964133743,
         "training_min": 5.438034463943035,
         "training_max": 21.91926277396547,
         "training_mean": 13.678648618954252,
         "training_standard_deviation": 8.240614155011219,
-        "z_score": 1.6850459720576472,
-        "normalized_distance_outside_range": 0.3425229860288236,
+        "z_score": 1.6808148136333454,
+        "normalized_distance_outside_range": 0.34040740681667275,
         "status": "outside_training_range"
       },
       {
         "feature": "basin_pct_gt_10mm",
-        "current": 71.1864406779661,
+        "current": 11.62227602905569,
         "training_min": 0.0,
         "training_max": 100.0,
         "training_mean": 50.0,
         "training_standard_deviation": 50.0,
-        "z_score": 0.42372881355932207,
+        "z_score": -0.7675544794188862,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "pre_stage_m",
-        "current": 2.104,
+        "current": 2.098,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -5.313588850174216,
-        "normalized_distance_outside_range": 2.156794425087108,
+        "z_score": -5.355400696864113,
+        "normalized_distance_outside_range": 2.1777003484320563,
         "status": "material_extrapolation"
       }
     ],
@@ -144,32 +144,32 @@
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.11800000000000033,
-        "change_72h_m": -0.09800000000000075,
+        "change_24h_m": -0.11399999999999899,
+        "change_72h_m": -0.11399999999999899,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.041999999999999815,
-        "change_72h_m": -0.120000000000001,
+        "change_24h_m": -0.038000000000000256,
+        "change_72h_m": -0.11700000000000088,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": -0.05600000000000005,
-        "change_72h_m": -0.15900000000000003,
+        "change_24h_m": -0.05500000000000016,
+        "change_72h_m": -0.16000000000000014,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": -0.05700000000000005,
-        "change_72h_m": -0.08200000000000007,
+        "change_24h_m": -0.05500000000000005,
+        "change_72h_m": -0.08399999999999996,
         "rising_24h": false,
         "higher_than_72h_ago": false
       }
@@ -177,22 +177,22 @@
   },
   "current_limb_rating_support": {
     "status": "material_target_extrapolation",
-    "fit_r2": 0.9926904284189111,
-    "fit_rmse_m3s": 0.02792220629260035,
+    "fit_r2": 0.9929108208749017,
+    "fit_rmse_m3s": 0.02784556303660586,
     "fit_hourly_points": 93,
     "observed_stage_range_m": [
-      2.099,
+      2.0985,
       2.1975
     ],
-    "target_stage_m": 1.7452601101105085,
-    "extrapolation_distance_m": 0.3537398898894917,
-    "extrapolation_as_observed_span": 3.591267917659829,
+    "target_stage_m": 1.7456451822294679,
+    "extrapolation_distance_m": 0.3528548177705322,
+    "extrapolation_as_observed_span": 3.564190078490233,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
     "status": "approximate_low_flow_anchor_plus_complete_design_profile",
     "score_out_of_10": 8.0,
-    "current_discharge_m3s": 11.1,
+    "current_discharge_m3s": 11.0,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
@@ -218,73 +218,45 @@
     "interpretation": "The high-flow RS18883 transfer is constrained by the complete 2- to 1,000-year design profile. Remaining transfer uncertainty is concentrated in the reconstructed 6.77 m3/s low-flow anchor and the segment to 14 m3/s."
   },
   "historical_recession_validation": {
-    "status": "screened_event_block_validation_available",
-    "score_out_of_9": 8.0,
-    "preferred_model": "rdpa_moderate",
-    "rdpa_coverage_fraction": 0.9991142604074402,
-    "screened_points": 827,
-    "independent_event_blocks": 8,
-    "rain_free_days_to_6_77_m3s": 8.958333333333334,
-    "event_block_rmse_per_day": 0.24969981446116865,
-    "event_block_mae_per_day": 0.19007871104622034,
-    "skill_improvement_vs_gauge_only_pct": 1.8715339090006198,
-    "operational_use": {
-      "replace_live_central_forecast": false,
-      "include_as_independent_schedule_sensitivity": true,
-      "reason": "The selected RDPA-screened direct-discharge model is a more defensible independent sensitivity than the unscreened gauge-only fit, but its skill gain and event diversity are not sufficient for automatic operational promotion."
-    },
-    "promotion_recommendation": {
-      "promote_now": false,
-      "reasons_not_to_promote": [
-        "event_block_skill_gain_is_less_than_5_percent",
-        "fewer_than_10_independent_dry_event_blocks",
-        "10_km_rdpa_screen_may_miss_sub_grid_convective_rain",
-        "wsc_discharge_is_provisional_and_rating_derived",
-        "manual_engineering_review_is_required"
-      ],
-      "next_evidence_needed": [
-        "additional independent summer falling-limb recession blocks",
-        "surveyed RS18883 WSE observations near 650.20 m",
-        "material out-of-sample skill improvement over the live recession model"
-      ]
-    },
-    "interpretation": "This is independent precipitation-screened validation of direct-discharge recession timing. It remains shadow-only because skill gain and event diversity are not sufficient for promotion."
+    "status": "unavailable",
+    "score_out_of_9": 0.0,
+    "reason": "historical RDPA model-selection output is missing"
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 1.0209882607256437,
+    "standard_deviation_days": 1.0209882941650408,
     "earliest": {
-      "days": 9.905906484084657,
+      "days": 9.860934457855752,
       "date_utc": "2026-08-10"
     },
     "latest": {
-      "days": 12.176187427354463,
+      "days": 12.131207623508995,
       "date_utc": "2026-08-12"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 9.906978817909208,
+        "days": 9.862006041608623,
         "date_utc": "2026-08-10"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 9.908773240519613,
+        "days": 9.863799202509913,
         "date_utc": "2026-08-10"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 12.163440316577926,
+        "days": 12.11847051419537,
         "date_utc": "2026-08-12"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 12.16996638574972,
+        "days": 12.124991785581734,
         "date_utc": "2026-08-12"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 12.172469231906497,
+        "days": 12.127492528569789,
         "date_utc": "2026-08-12"
       }
     },
