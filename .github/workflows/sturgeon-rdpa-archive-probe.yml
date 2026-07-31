@@ -23,12 +23,14 @@ permissions:
 
 concurrency:
   group: sturgeon-historical-archive-probes
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
+    env:
+      CANDIDATE: output/archive_probe_candidate
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -57,10 +59,10 @@ jobs:
             historical_rdpa_wcs_pairing.py \
             historical_rdpa_model_selection.py \
             spatial_qpf.py
-      - name: Prepare archive output
+      - name: Prepare isolated archive candidate
         run: |
-          rm -rf output/archive_probe
-          mkdir -p output/archive_probe
+          rm -rf "$CANDIDATE"
+          mkdir -p "$CANDIDATE"
       - name: Probe archived RDPA coverage
         continue-on-error: true
         run: |
@@ -68,9 +70,9 @@ jobs:
           python rdpa_archive_probe.py \
             --datetime '2026-07-01T00:00:00Z' \
             --bbox=-115.2,52.9,-113.0,54.2 \
-            --output output/archive_probe/rdpa_probe.json
+            --output "$CANDIDATE/rdpa_probe.json"
           CODE=$?
-          echo "$CODE" > output/archive_probe/rdpa_probe.exitcode
+          echo "$CODE" > "$CANDIDATE/rdpa_probe.exitcode"
           exit "$CODE"
       - name: Probe 18 month WaterOffice unit values
         continue-on-error: true
@@ -79,9 +81,9 @@ jobs:
           python wateroffice_archive_probe.py \
             --station 05EA002 \
             --months 18 \
-            --output output/archive_probe/wateroffice_probe.json
+            --output "$CANDIDATE/wateroffice_probe.json"
           CODE=$?
-          echo "$CODE" > output/archive_probe/wateroffice_probe.exitcode
+          echo "$CODE" > "$CANDIDATE/wateroffice_probe.exitcode"
           exit "$CODE"
       - name: Analyze historical target stage and recession
         continue-on-error: true
@@ -89,9 +91,9 @@ jobs:
           set +e
           python historical_gauge_analysis.py \
             --months 18 \
-            --output output/archive_probe/historical_gauge_analysis.json
+            --output "$CANDIDATE/historical_gauge_analysis.json"
           CODE=$?
-          echo "$CODE" > output/archive_probe/historical_gauge_analysis.exitcode
+          echo "$CODE" > "$CANDIDATE/historical_gauge_analysis.exitcode"
           exit "$CODE"
       - name: Pair historical recessions with archived RDPA
         continue-on-error: true
@@ -102,53 +104,79 @@ jobs:
             --workers 4 \
             --lookback-hours 168 \
             --cache archive_cache/historical_rdpa_05EA002.csv \
-            --output output/archive_probe/historical_rdpa_pairing.json \
-            --pairs-output output/archive_probe/historical_rdpa_pairs.csv
+            --output "$CANDIDATE/historical_rdpa_pairing.json" \
+            --pairs-output "$CANDIDATE/historical_rdpa_pairs.csv"
           CODE=$?
-          echo "$CODE" > output/archive_probe/historical_rdpa_pairing.exitcode
+          echo "$CODE" > "$CANDIDATE/historical_rdpa_pairing.exitcode"
           exit "$CODE"
       - name: Select precipitation-screened recession sensitivity
         continue-on-error: true
         run: |
           set +e
           python historical_rdpa_model_selection.py \
-            --pairing output/archive_probe/historical_rdpa_pairing.json \
-            --output output/archive_probe/historical_rdpa_model_selection.json
+            --pairing "$CANDIDATE/historical_rdpa_pairing.json" \
+            --output "$CANDIDATE/historical_rdpa_model_selection.json"
           CODE=$?
-          echo "$CODE" > output/archive_probe/historical_rdpa_model_selection.exitcode
+          echo "$CODE" > "$CANDIDATE/historical_rdpa_model_selection.exitcode"
           exit "$CODE"
-      - name: Summarize archive status
+      - name: Summarize candidate status
         if: always()
         run: |
-          RDPA=$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo missing)
-          WATER=$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo missing)
-          ANALYSIS=$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo missing)
-          PAIRING=$(cat output/archive_probe/historical_rdpa_pairing.exitcode 2>/dev/null || echo missing)
-          SELECTION=$(cat output/archive_probe/historical_rdpa_model_selection.exitcode 2>/dev/null || echo missing)
-          cat > output/archive_probe/probe_status.json <<EOF
+          RDPA=$(cat "$CANDIDATE/rdpa_probe.exitcode" 2>/dev/null || echo missing)
+          WATER=$(cat "$CANDIDATE/wateroffice_probe.exitcode" 2>/dev/null || echo missing)
+          ANALYSIS=$(cat "$CANDIDATE/historical_gauge_analysis.exitcode" 2>/dev/null || echo missing)
+          PAIRING=$(cat "$CANDIDATE/historical_rdpa_pairing.exitcode" 2>/dev/null || echo missing)
+          SELECTION=$(cat "$CANDIDATE/historical_rdpa_model_selection.exitcode" 2>/dev/null || echo missing)
+          cat > "$CANDIDATE/probe_status.json" <<EOF
           {
             "rdpa_exitcode": "${RDPA}",
             "wateroffice_exitcode": "${WATER}",
             "historical_gauge_analysis_exitcode": "${ANALYSIS}",
             "historical_rdpa_pairing_exitcode": "${PAIRING}",
             "historical_rdpa_model_selection_exitcode": "${SELECTION}",
-            "all_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && [ "$ANALYSIS" = "0" ] && [ "$PAIRING" = "0" ] && [ "$SELECTION" = "0" ] && echo true || echo false)
+            "all_passed": $([ "$RDPA" = "0" ] && [ "$WATER" = "0" ] && [ "$ANALYSIS" = "0" ] && [ "$PAIRING" = "0" ] && [ "$SELECTION" = "0" ] && echo true || echo false),
+            "publication_policy": "candidate_only; failed candidates never replace output/archive_probe"
           }
           EOF
-      - name: Upload archive results
+      - name: Upload candidate diagnostics
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: sturgeon-historical-archive-probes
-          path: output/archive_probe
+          name: sturgeon-historical-archive-candidate
+          path: output/archive_probe_candidate
           retention-days: 14
-      - name: Publish archive results
-        if: ${{ always() && !cancelled() }}
+          if-no-files-found: warn
+      - name: Validate candidate before publication
+        run: |
+          test "$(cat "$CANDIDATE/rdpa_probe.exitcode" 2>/dev/null || echo 1)" = "0"
+          test "$(cat "$CANDIDATE/wateroffice_probe.exitcode" 2>/dev/null || echo 1)" = "0"
+          test "$(cat "$CANDIDATE/historical_gauge_analysis.exitcode" 2>/dev/null || echo 1)" = "0"
+          test "$(cat "$CANDIDATE/historical_rdpa_pairing.exitcode" 2>/dev/null || echo 1)" = "0"
+          test "$(cat "$CANDIDATE/historical_rdpa_model_selection.exitcode" 2>/dev/null || echo 1)" = "0"
+          test -s "$CANDIDATE/historical_gauge_analysis.json"
+          test -s "$CANDIDATE/historical_rdpa_pairing.json"
+          test -s "$CANDIDATE/historical_rdpa_pairs.csv"
+          test -s "$CANDIDATE/historical_rdpa_model_selection.json"
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('output/archive_probe_candidate')
+          status = json.loads((root / 'probe_status.json').read_text())
+          pairing = json.loads((root / 'historical_rdpa_pairing.json').read_text())
+          if status.get('all_passed') is not True:
+              raise RuntimeError('archive candidate did not pass all component checks')
+          if pairing.get('status') != 'historical_rdpa_pairing_complete':
+              raise RuntimeError('historical RDPA pairing candidate is incomplete')
+          if float(pairing.get('rdpa_retrieval', {}).get('coverage_fraction', 0)) < 0.90:
+              raise RuntimeError('historical RDPA candidate coverage is below 90 percent')
+          print('Historical archive candidate is eligible for publication.')
+          PY
+      - name: Publish validated archive candidate
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           rm -rf /tmp/sturgeon-archive-probe
-          cp -a output/archive_probe /tmp/sturgeon-archive-probe
+          cp -a "$CANDIDATE" /tmp/sturgeon-archive-probe
           for attempt in 1 2 3 4; do
             git fetch origin main
             git reset --hard origin/main
@@ -159,7 +187,7 @@ jobs:
             if git diff --cached --quiet; then
               break
             fi
-            git commit -m 'Update historical archive probes [skip ci]'
+            git commit -m 'Update validated historical archive [skip ci]'
             if git push origin HEAD:main; then
               break
             fi
@@ -168,11 +196,3 @@ jobs:
             fi
             sleep $((attempt * 2))
           done
-      - name: Enforce archive success
-        if: ${{ always() && !cancelled() }}
-        run: |
-          test "$(cat output/archive_probe/rdpa_probe.exitcode 2>/dev/null || echo 1)" = "0"
-          test "$(cat output/archive_probe/wateroffice_probe.exitcode 2>/dev/null || echo 1)" = "0"
-          test "$(cat output/archive_probe/historical_gauge_analysis.exitcode 2>/dev/null || echo 1)" = "0"
-          test "$(cat output/archive_probe/historical_rdpa_pairing.exitcode 2>/dev/null || echo 1)" = "0"
-          test "$(cat output/archive_probe/historical_rdpa_model_selection.exitcode 2>/dev/null || echo 1)" = "0"
