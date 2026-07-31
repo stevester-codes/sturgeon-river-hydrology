@@ -1,0 +1,29 @@
+{
+  "generated_utc": "2026-07-31T16:55:53+00:00",
+  "status": "historical_response_refresh_complete",
+  "mode": "shadow_only_no_effect_on_operational_forecast",
+  "checks": {
+    "backfill": {
+      "path": "output/historical_event_backfill/historical_spatial_event_backfill.json",
+      "status": "historical_spatial_event_backfill_complete"
+    },
+    "peak": {
+      "path": "output/historical_event_backfill/historical_spatial_peak_reanalysis.json",
+      "status": "historical_spatial_peak_reanalysis_complete"
+    },
+    "target": {
+      "path": "output/historical_event_backfill/historical_response_target_diagnostics.json",
+      "status": "historical_response_target_diagnostics_complete"
+    },
+    "censored": {
+      "path": "output/historical_event_backfill/historical_censored_response_model.json",
+      "status": "historical_censored_response_model_evaluated"
+    }
+  },
+  "sequence": [
+    "spatial_event_backfill",
+    "peak_response_reanalysis",
+    "response_target_diagnostics",
+    "censored_response_model"
+  ]
+}
