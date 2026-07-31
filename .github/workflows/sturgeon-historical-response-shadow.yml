@@ -2,25 +2,20 @@ name: Sturgeon historical response shadow
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: '37 * * * *'
-  push:
-    branches: [main]
-    paths:
-      - 'historical_response_shadow_forecast.py'
-      - 'historical_censored_response_model.py'
-      - '.github/workflows/sturgeon-historical-response-shadow.yml'
-      - 'requirements.txt'
+  workflow_run:
+    workflows: ['Sturgeon operational forecast']
+    types: [completed]
 
 permissions:
   contents: write
 
 concurrency:
   group: sturgeon-historical-response-shadow
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   compare:
+    if: ${{ github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
