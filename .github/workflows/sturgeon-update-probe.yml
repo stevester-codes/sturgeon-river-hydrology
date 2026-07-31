@@ -3,49 +3,31 @@ name: Sturgeon operational update detector
 on:
   workflow_dispatch:
   schedule:
-    - cron: '*/10 * * * *'
+    - cron: '3,13,23,33,43,53 * * * *'
   push:
     branches: [main]
     paths:
       - 'operational_update_probe.py'
-      - 'apply_workflow_orchestration_fix.py'
       - '.github/workflows/sturgeon-update-probe.yml'
 
 permissions:
-  contents: write
+  contents: read
   actions: write
 
 concurrency:
   group: sturgeon-operational-update-detector
-  cancel-in-progress: true
+  cancel-in-progress: false
 
 jobs:
   detect:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
-      - name: Apply pending orchestration migration once
-        run: |
-          if grep -q "cron: '17 \* \* \* \*'" .github/workflows/sturgeon-operational.yml; then
-            python apply_workflow_orchestration_fix.py
-            git config user.name 'github-actions[bot]'
-            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-            git add .github/workflows/sturgeon-operational.yml \
-              .github/workflows/sturgeon-historical-response-shadow.yml \
-              .github/workflows/sturgeon-historical-event-backfill.yml \
-              .github/workflows/sturgeon-historical-peak-reanalysis.yml \
-              .github/workflows/sturgeon-historical-target-diagnostics.yml \
-              .github/workflows/sturgeon-historical-censored-response.yml
-            git commit -m 'Consolidate Sturgeon workflow orchestration [skip ci]'
-            git push origin HEAD:main
-          else
-            echo 'Orchestration migration is already applied.'
-          fi
       - name: Install lightweight dependency
         run: pip install requests
       - name: Check upstream observations and complete weather cycles
