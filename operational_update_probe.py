@@ -266,7 +266,8 @@ def main() -> None:
         elif completed and (datetime.now(timezone.utc) - completed).total_seconds() >= 2 * 3600:
             candidate_reasons.append("published operational package is at least two hours old")
 
-    reasons = [] if publication_block else candidate_reasons
+    # Gauge and HRDPS updates may proceed using the last complete GEPS cycle.
+    reasons = candidate_reasons
     waiting_reason = None
     if publication_block:
         waiting_reason = (
@@ -299,8 +300,8 @@ def main() -> None:
         "interpretation": (
             "The detector runs every ten minutes. It dispatches for complete new weather "
             "cycles, meaningful newer gauge observations, or a two-hour safety refresh. "
-            "It temporarily waits while a newer GEPS cycle is only partly published, then "
-            "dispatches on the first check after PT384 becomes available."
+            "A partially published newer GEPS cycle is reported but does not block gauge or "
+            "HRDPS updates; the operational retriever uses the previous complete cycle."
         ),
     }
     Path(args.json_output).write_text(json.dumps(result, indent=2))

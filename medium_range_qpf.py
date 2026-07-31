@@ -98,17 +98,37 @@ def geps_run_time(filename: str) -> datetime | None:
 
 
 def latest_geps_run(session) -> tuple[str, datetime, str] | None:
+    """Select the newest GEPS cycle that is complete at every required horizon.
+
+    A newer PT024 file may appear hours before PT384. During that publication
+    window, continue using the previous complete cycle rather than failing the
+    live forecast or delaying a gauge-driven update.
+    """
     found: list[tuple[datetime, str, str]] = []
     for hour in ["00", "12"]:
-        directory = f"{GEPS_BASE}/{hour}/024/"
-        try:
-            candidate = geps_candidate(get_links(session, directory))
-        except Exception:
-            continue
-        if candidate:
+        run_times: list[datetime] = []
+        probe: str | None = None
+        complete = True
+        for horizon in GEPS_HORIZONS:
+            directory = f"{GEPS_BASE}/{hour}/{horizon:03d}/"
+            try:
+                candidate = geps_candidate(get_links(session, directory))
+            except Exception:
+                complete = False
+                break
+            if not candidate:
+                complete = False
+                break
             run_time = geps_run_time(candidate)
-            if run_time:
-                found.append((run_time, hour, candidate))
+            if not run_time:
+                complete = False
+                break
+            run_times.append(run_time)
+            if horizon == GEPS_HORIZONS[0]:
+                probe = candidate
+        if complete and probe and len(run_times) == len(GEPS_HORIZONS):
+            if all(value == run_times[0] for value in run_times):
+                found.append((run_times[0], hour, probe))
     if not found:
         return None
     run_time, hour, candidate = max(found, key=lambda item: item[0])
