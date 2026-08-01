@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "status": "operational_forecast_synthesis",
+  "run_id": "20260801T191638Z",
+  "generated_utc": "2026-08-01T19:16:38+00:00",
+  "decision": {
+    "status": "not_ready",
+    "headline": "Not ready; use the consensus inspection window and retain a separate schedule contingency date.",
+    "release_rule": "Release floodplain work only after a verified current project-site survey or direct drainage inspection confirms the work area is at or below 650.20 m, access has adequate bearing, and no renewed rise is forecast. Do not release from the steady-state design-profile equivalent WSE alone."
+  },
+  "working_forecast": {
+    "consensus_status": "three_method_consensus",
+    "consensus_method_count": 3,
+    "consensus_inputs": [
+      {
+        "name": "official_weather_ensemble_median",
+        "date_utc": "2026-08-10",
+        "role": "primary"
+      },
+      {
+        "name": "precipitation_screened_direct_q",
+        "date_utc": "2026-08-12",
+        "role": "independent_check"
+      },
+      {
+        "name": "contractor_site_recession",
+        "date_utc": "2026-08-11",
+        "role": "field_check"
+      }
+    ],
+    "consensus_spread_days": 2,
+    "inspection_window_start_date": "2026-08-10",
+    "inspection_window_end_date": "2026-08-12",
+    "official_threshold_median_date": "2026-08-10",
+    "weather_ensemble_upper_date": "2026-08-13",
+    "engineering_schedule_contingency_date": "2026-08-20",
+    "terminology": {
+      "weather_ensemble_upper_date": "Actual percentile of the same GEPS threshold distribution.",
+      "engineering_schedule_contingency_date": "Sensitivity envelope for schedule protection; not a calibrated p90 probability."
+    }
+  },
+  "current_state": {
+    "latest_stage_utc": "2026-08-01T18:05:00+00:00",
+    "observation_age_hours": 0.5013350580555556,
+    "hydrograph_limb": "falling",
+    "stage_05EA002_m": 2.062,
+    "stage_change_24h_m": -0.03400000000000025,
+    "discharge_05EA002_m3s": 10.6,
+    "provisional_site_wse_range_m": [
+      650.8062857142857,
+      650.8231020408161
+    ],
+    "provisional_depth_over_650_20_range_m": [
+      0.6062857142856046,
+      0.623102040816093
+    ],
+    "actual_current_site_measurement_available": false
+  },
+  "weather": {
+    "hrdps_48h": {
+      "run_time_utc": "2026-08-01T12:00:00+00:00",
+      "basin_mm": 8.556712021801031,
+      "lower_basin_mm": 9.498298166984313,
+      "direct_local_mm": 10.923620959848394,
+      "storm_type": "widespread_basin",
+      "official_short_range_response_days_lost": 1.1246005042803957,
+      "feature_support_status": "material_extrapolation"
+    },
+    "geps": {
+      "run_time_utc": "2026-08-01T12:00:00+00:00",
+      "member_count": 21,
+      "weather_ensemble_upper_date": "2026-08-13"
+    },
+    "central_total_weather_shift_from_dry_days": 2.1252858713742526
+  },
+  "evidence_reconciliation": {
+    "rule": "The official GEPS median is primary. The precipitation-screened direct-Q date and contractor-site recession date are independent checks. When available methods agree within two days, their minimum-to-maximum range is reported as the consensus inspection window. Methods are not averaged.",
+    "historical_response_shadow": {
+      "status": "current_cycle_comparison_available",
+      "official_analogue_response_days_lost": 1.1246005042803957,
+      "historical_censored_model_days_lost": 5.280656925700221,
+      "historical_minus_official_days": 4.156056421419825,
+      "operational_effect": "none_shadow_only"
+    }
+  },
+  "confidence": {
+    "overall_inspection_timing": "moderate",
+    "live_river_state": "high",
+    "meteorological_forecast": "moderate",
+    "dry_recession_timing": "moderate",
+    "rain_response_estimate": "low",
+    "current_site_wse": "low",
+    "threshold_translation": "low_to_moderate",
+    "construction_release": "requires_field_verification_not_remotely_forecastable",
+    "key_reasons": [
+      "3 timing methods span 2 day(s).",
+      "Rain-response calibration has 2 uncensored live peak-training events.",
+      "Current forecast feature support is material_extrapolation.",
+      "Screened direct-discharge validation contains 8 independent event blocks.",
+      "Only two date-level contractor site elevations are available and their datum, exact location and time remain unverified."
+    ]
+  },
+  "change_since_previous_issued_forecast": {
+    "previous_run_available": false,
+    "official_median_date_change_days": null,
+    "stage_change_since_previous_run_m": null,
+    "discharge_change_since_previous_run_m3s": null,
+    "hrdps_48h_basin_rain_change_mm": null,
+    "causal_attribution_available": false,
+    "interpretation": "These are observed input and output changes between issued forecasts. They are not a causal decomposition; counterfactual one-input-at-a-time attribution has not yet been implemented."
+  },
+  "conditions_that_invalidate_or_widen_the_forecast": [
+    "05EA002 observations become older than six hours or the hydrograph reverses into a sustained rise.",
+    "A newer HRDPS or GEPS cycle materially increases rainfall or moves the weather-ensemble upper date.",
+    "The official median, screened direct-Q check and contractor-site recession projection diverge by more than two days.",
+    "A verified site survey differs from the provisional field-informed WSE range by more than 0.15 m.",
+    "The current-cycle historical response comparison becomes available and materially exceeds the official rain-response delay.",
+    "Access, drainage or bearing conditions remain unsuitable even after the water elevation reaches 650.20 m."
+  ],
+  "field_release_checklist": [
+    "Verify current project-site water elevation or directly confirm the work area is drained to 650.20 m or lower.",
+    "Confirm the river and project water surface are not beginning a renewed rise.",
+    "Confirm construction access has adequate bearing capacity.",
+    "Confirm the 649.60 m low pocket is drained, isolated or otherwise managed.",
+    "Record the field observation time, exact location, method and vertical datum."
+  ],
+  "reporting_contract": {
+    "official_working_date": "official_threshold_median_date",
+    "inspection_window": "consensus range of agreeing independent methods",
+    "weather_upper_date": "GEPS percentile for the same 650.20 m threshold",
+    "schedule_contingency": "engineering sensitivity envelope, not a formal percentile",
+    "actual_site_depth": "not reported without a current verified field observation"
+  }
+}
