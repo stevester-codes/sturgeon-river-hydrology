@@ -1,103 +1,103 @@
 {
-  "generated_utc": "2026-08-01T06:21:13.020427+00:00",
+  "generated_utc": "2026-08-01T08:40:21.720373+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 87,
+  "dry_hourly_points": 88,
   "data_range_utc": [
     "2026-07-18T00:00:00+00:00",
-    "2026-08-01T05:00:00+00:00"
+    "2026-08-01T08:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -0.08638475792574367,
-    "coefficient_per_day": -0.03683417385805493,
-    "n": 60,
+    "intercept_m3s_per_day": -0.03432544282083675,
+    "coefficient_per_day": -0.04046113437120095,
+    "n": 61,
     "discharge_range_m3s": [
       12.7,
       15.1
     ],
-    "rate_rmse_m3s_per_day": 0.22730644464242275
+    "rate_rmse_m3s_per_day": 0.2262647398050333
   },
   "holdout": {
-    "train_points": 60,
+    "train_points": 61,
     "test_points": 27,
     "official_stage_recession_then_rating": {
       "n": 27,
-      "rmse_m3s": 0.34817846610821923,
-      "mae_m3s": 0.23064803839271672,
-      "bias_m3s": -0.15368777779362638
+      "rmse_m3s": 0.34673470881327906,
+      "mae_m3s": 0.22629248613721387,
+      "bias_m3s": -0.16038136616101165
     },
     "direct_discharge_candidate": {
       "n": 27,
-      "rmse_m3s": 0.34217653303958556,
-      "mae_m3s": 0.22233564382958612,
-      "bias_m3s": -0.13936278589754875
+      "rmse_m3s": 0.33982452038229893,
+      "mae_m3s": 0.21579132798429665,
+      "bias_m3s": -0.14376543346751866
     },
-    "rmse_improvement_fraction": 0.017238093830789003,
+    "rmse_improvement_fraction": 0.01992932422205629,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 10.850000000000001,
+    "current_discharge_m3s": 10.8,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 241,
-      "days": 10.041666666666666,
+      "hours": 252,
+      "days": 10.5,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 10.372447065728672,
-          "rate_m3s_per_day": -0.4684452764782653
+          "discharge_m3s": 10.337719830038276,
+          "rate_m3s_per_day": -0.4526013139558441
         },
         {
           "day": 2,
-          "discharge_m3s": 9.91217740241312,
-          "rate_m3s_per_day": -0.45149162367811185
+          "discharge_m3s": 9.89378585047729,
+          "rate_m3s_per_day": -0.43463924155688505
         },
         {
           "day": 3,
-          "discharge_m3s": 9.468565505667362,
-          "rate_m3s_per_day": -0.4351515459478771
+          "discharge_m3s": 9.46746996886555,
+          "rate_m3s_per_day": -0.41739001738641546
         },
         {
           "day": 4,
-          "discharge_m3s": 9.041008508934656,
-          "rate_m3s_per_day": -0.41940283719599675
+          "discharge_m3s": 9.058072988048439,
+          "rate_m3s_per_day": -0.4008253511344103
         },
         {
           "day": 5,
-          "discharge_m3s": 8.6289253641946,
-          "rate_m3s_per_day": -0.40422409499866757
+          "discharge_m3s": 8.664923459420717,
+          "rate_m3s_per_day": -0.38491807522862975
         },
         {
           "day": 6,
-          "discharge_m3s": 8.231756052321517,
-          "rate_m3s_per_day": -0.38959469151405035
+          "discharge_m3s": 8.287376581689218,
+          "rate_m3s_per_day": -0.3696421002773082
         },
         {
           "day": 7,
-          "discharge_m3s": 7.848960822020979,
-          "rate_m3s_per_day": -0.3754947454491262
+          "discharge_m3s": 7.924813143339596,
+          "rate_m3s_per_day": -0.3549723722801595
         },
         {
           "day": 8,
-          "discharge_m3s": 7.480019456310261,
-          "rate_m3s_per_day": -0.36190509504110935
+          "discharge_m3s": 7.576638507072611,
+          "rate_m3s_per_day": -0.34088483153751703
         },
         {
           "day": 9,
-          "discharge_m3s": 7.12443056554581,
-          "rate_m3s_per_day": -0.34880727201669864
+          "discharge_m3s": 7.242281634544418,
+          "rate_m3s_per_day": -0.3273563731902193
         },
         {
           "day": 10,
-          "discharge_m3s": 6.781710906037004,
-          "rate_m3s_per_day": -0.3361834764937779
+          "discharge_m3s": 6.921194149811304,
+          "rate_m3s_per_day": -0.31436480932552185
         }
       ]
     },
-    "official_stage_based_rain_free_days": 7.375,
-    "candidate_minus_official_days": 2.666666666666666,
+    "official_stage_based_rain_free_days": 7.25,
+    "candidate_minus_official_days": 3.25,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
