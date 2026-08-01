@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-07-31T17:06:58+00:00",
+  "generated_utc": "2026-08-01T01:04:08+00:00",
   "status": "historical_spatial_event_backfill_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "requested_months": 18,
@@ -7,25 +7,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-01-31T17:05:21+00:00",
-        "end_utc": "2025-02-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-01-31+17%3A05%3A21&end_date=2025-02-01+00%3A00%3A00",
-        "status_code": 200,
-        "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 150,
-        "availability": "no_station_data_returned",
-        "rows": 0,
-        "stage_rows": 0,
-        "discharge_rows": 0,
-        "first_timestamp_utc": null,
-        "last_timestamp_utc": null,
-        "error": null,
-        "note": "HTTP request succeeded but the station reported no unit values; this can represent seasonal gauge shutdown rather than a retrieval failure."
-      },
-      {
-        "start_utc": "2025-02-01T00:00:00+00:00",
+        "start_utc": "2025-02-01T01:02:22+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+00%3A00%3A00&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+01%3A02%3A22&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -426,17 +410,43 @@
       },
       {
         "start_utc": "2026-07-01T00:00:00+00:00",
-        "end_utc": "2026-07-31T17:05:21+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-07-01+00%3A00%3A00&end_date=2026-07-31+17%3A05%3A21",
+        "end_utc": "2026-08-01T00:00:00+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-07-01+00%3A00%3A00&end_date=2026-08-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 1154915,
+        "bytes_received": 1167360,
         "availability": "data_returned",
-        "rows": 17630,
-        "stage_rows": 8815,
-        "discharge_rows": 8815,
+        "rows": 17820,
+        "stage_rows": 8910,
+        "discharge_rows": 8910,
         "first_timestamp_utc": "2026-07-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-07-31T16:05:00+00:00",
+        "last_timestamp_utc": "2026-08-01T00:00:00+00:00",
+        "error": null,
+        "columns": [
+          "ID",
+          "Date",
+          "Parameter/Param\u00e8tre",
+          "Value/Valeur",
+          "Qualifier/Qualificatif",
+          "Symbol/Symbole",
+          "Approval/Approbation",
+          "Grade/Classification",
+          "Qualifiers/Qualificatifs"
+        ]
+      },
+      {
+        "start_utc": "2026-08-01T00:00:00+00:00",
+        "end_utc": "2026-08-01T01:02:22+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-01+01%3A02%3A22",
+        "status_code": 200,
+        "content_type": "text/csv; charset=utf-8",
+        "bytes_received": 412,
+        "availability": "data_returned",
+        "rows": 4,
+        "stage_rows": 2,
+        "discharge_rows": 2,
+        "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
+        "last_timestamp_utc": "2026-08-01T00:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -451,18 +461,18 @@
         ]
       }
     ],
-    "hourly_points": 9540,
+    "hourly_points": 9548,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-07-31T16:00:00+00:00"
+    "last_utc": "2026-08-01T00:00:00+00:00"
   },
   "continuous_rdpa_retrieval": {
-    "requested_periods": 2070,
-    "retrieved_periods": 2069,
-    "coverage_fraction": 0.9995169082125603,
+    "requested_periods": 2072,
+    "retrieved_periods": 2070,
+    "coverage_fraction": 0.999034749034749,
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 947,
+      "periods_fetched_this_run": 949,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
