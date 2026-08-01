@@ -15,13 +15,17 @@ on:
       - 'sturgeon_pipeline.py'
       - 'summarize_output.py'
       - 'qpf_forecast_v2.py'
+      - 'qpf_forecast_v2_base.py'
       - 'medium_range_qpf.py'
+      - 'medium_range_qpf_base.py'
       - 'geps_ensemble_impacts.py'
       - 'run_geps_ensemble_impacts.py'
       - 'project_threshold_ensemble.py'
       - 'starkey_wse_transfer.py'
       - 'forecast_starkey_wse.py'
       - 'operational_readiness.py'
+      - 'forecast_synthesis.py'
+      - 'historical_response_shadow_forecast.py'
       - 'calibration_health.py'
       - 'hysteresis_diagnostics.py'
       - 'uncertainty_sensitivity.py'
@@ -44,14 +48,19 @@ jobs:
   update:
     runs-on: ubuntu-latest
     timeout-minutes: 120
+    env:
+      TRIGGER_REASON: ${{ inputs.trigger_reason || 'code change' }}
     steps:
       - uses: actions/checkout@v4
+
       - name: Show refresh trigger
-        run: echo "${{ inputs.trigger_reason || 'code change' }}"
+        run: echo "$TRIGGER_REASON"
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
           cache: pip
+
       - name: Restore forecast grid cache
         uses: actions/cache@v4
         with:
@@ -61,8 +70,10 @@ jobs:
             sturgeon-operational-grid-v2-${{ runner.os }}
             sturgeon-operational-grid-v1-${{ runner.os }}
             sturgeon-grid-cache-v3-${{ runner.os }}
+
       - name: Install dependencies
         run: pip install -r requirements.txt
+
       - name: Compile-check operational scripts
         run: |
           python -m py_compile \
@@ -70,13 +81,17 @@ jobs:
             summarize_output.py \
             refresh_operational_base.py \
             qpf_forecast_v2.py \
+            qpf_forecast_v2_base.py \
             medium_range_qpf.py \
+            medium_range_qpf_base.py \
             geps_ensemble_impacts.py \
             run_geps_ensemble_impacts.py \
             project_threshold_ensemble.py \
             starkey_wse_transfer.py \
             forecast_starkey_wse.py \
             operational_readiness.py \
+            historical_response_shadow_forecast.py \
+            forecast_synthesis.py \
             calibration_health.py \
             hysteresis_diagnostics.py \
             uncertainty_sensitivity.py \
@@ -85,7 +100,8 @@ jobs:
             validate_qpf.py \
             aggregate_qpf_horizons.py \
             forecast_impacts_v2.py
-      - name: Seed working directory from calibrated output
+
+      - name: Seed working directory from last validated output
         run: |
           test -f output/latest/calibration_v2/calibration_v2.json
           test -f output/latest/calibration_v2/event_response_v2.csv
@@ -93,173 +109,136 @@ jobs:
           test -f output/latest/spatial/derived_subareas.geojson
           rm -rf sturgeon_pipeline_output
           cp -a output/latest sturgeon_pipeline_output
-      - name: Refresh recent gauges and observed basin rainfall
+          mkdir -p sturgeon_pipeline_output/logs sturgeon_pipeline_output/diagnostics
+
+      - name: Refresh gauges, weather, forecasts, diagnostics and synthesis
+        shell: bash
         run: |
+          set -uo pipefail
+
+          run_stage() {
+            local name="$1"
+            shift
+            echo "=== ${name} ==="
+            set +e
+            "$@" 2>&1 | tee "sturgeon_pipeline_output/logs/${name}.log"
+            local code=${PIPESTATUS[0]}
+            set -e
+            echo "$code" > "sturgeon_pipeline_output/logs/${name}.exitcode"
+            return 0
+          }
+
+          skip_stage() {
+            local name="$1"
+            shift
+            printf '%s\n' "$*" | tee "sturgeon_pipeline_output/logs/${name}.log"
+            echo 3 > "sturgeon_pipeline_output/logs/${name}.exitcode"
+          }
+
+          code_of() {
+            cat "sturgeon_pipeline_output/logs/$1.exitcode" 2>/dev/null || echo 1
+          }
+
+          set +e
           START=$(date -u -d '14 days ago' +%F)
           python sturgeon_pipeline.py \
             --start-date "$START" \
             --output-dir sturgeon_pipeline_output \
-            --contact stevester-codes@users.noreply.github.com
-      - name: Refresh current summary and rain-free projection
-        run: |
-          python summarize_output.py
-          python refresh_operational_base.py
-      - name: Estimate current project WSE from discharge
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python starkey_wse_transfer.py 2>&1 | tee sturgeon_pipeline_output/logs/starkey_wse_transfer.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/starkey_wse_transfer.exitcode
-          exit "$CODE"
-      - name: Retrieve high-resolution short-range QPF
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python qpf_forecast_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/qpf_forecast_v2.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/qpf_forecast_v2.exitcode
-          exit "$CODE"
-      - name: Validate short-range QPF accumulation semantics
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python validate_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/validate_qpf.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/validate_qpf.exitcode
-          exit "$CODE"
-      - name: Aggregate short-range cumulative QPF footprints
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping horizon aggregation because QPF validation failed.' | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
-            echo 3 > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
-            exit 3
+            --contact stevester-codes@users.noreply.github.com \
+            2>&1 | tee sturgeon_pipeline_output/logs/sturgeon_pipeline.log
+          CORE_CODE=${PIPESTATUS[0]}
+          echo "$CORE_CODE" > sturgeon_pipeline_output/logs/sturgeon_pipeline.exitcode
+          if [ "$CORE_CODE" != "0" ]; then
+            echo 'Gauge and observed-rain refresh failed.' >&2
+            exit "$CORE_CODE"
           fi
-          set +e
-          set -o pipefail
-          python aggregate_qpf_horizons.py 2>&1 | tee sturgeon_pipeline_output/logs/aggregate_qpf_horizons.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode
-          exit "$CODE"
-      - name: Retrieve 10-day deterministic and 16-day ensemble QPF
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python medium_range_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/medium_range_qpf.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/medium_range_qpf.exitcode
-          exit "$CODE"
-      - name: Translate short-range QPF with calibrated censor-aware model
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/validate_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/aggregate_qpf_horizons.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping operational forecast because validated cumulative QPF is unavailable.' | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
-            echo 3 > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
-            exit 3
+
+          python summarize_output.py 2>&1 | tee sturgeon_pipeline_output/logs/summarize_output.log
+          SUMMARY_CODE=${PIPESTATUS[0]}
+          echo "$SUMMARY_CODE" > sturgeon_pipeline_output/logs/summarize_output.exitcode
+          if [ "$SUMMARY_CODE" != "0" ]; then exit "$SUMMARY_CODE"; fi
+
+          python refresh_operational_base.py 2>&1 | tee sturgeon_pipeline_output/logs/refresh_operational_base.log
+          BASE_CODE=${PIPESTATUS[0]}
+          echo "$BASE_CODE" > sturgeon_pipeline_output/logs/refresh_operational_base.exitcode
+          if [ "$BASE_CODE" != "0" ]; then exit "$BASE_CODE"; fi
+          set -e
+
+          run_stage starkey_wse_transfer python starkey_wse_transfer.py
+          run_stage qpf_forecast_v2 python qpf_forecast_v2.py
+
+          if [ "$(code_of qpf_forecast_v2)" = "0" ]; then
+            run_stage validate_qpf python validate_qpf.py
+          else
+            skip_stage validate_qpf 'Skipped because short-range QPF retrieval failed.'
           fi
-          set +e
-          set -o pipefail
-          python forecast_impacts_v2.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_impacts_v2.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode
-          exit "$CODE"
-      - name: Integrate GEPS dry central and wet river paths
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/medium_range_qpf.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_impacts_v2.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping GEPS impact integration because medium-range QPF or short-range impacts failed.' | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
-            echo 3 > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
-            exit 3
+
+          if [ "$(code_of validate_qpf)" = "0" ]; then
+            run_stage aggregate_qpf_horizons python aggregate_qpf_horizons.py
+          else
+            skip_stage aggregate_qpf_horizons 'Skipped because QPF validation failed.'
           fi
-          set +e
-          set -o pipefail
-          python run_geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
-          exit "$CODE"
-      - name: Forecast project WSE and main floodplain crossing
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/starkey_wse_transfer.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping project WSE forecast because transfer or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
-            echo 3 > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
-            exit 3
+
+          run_stage medium_range_qpf python medium_range_qpf.py
+
+          if [ "$(code_of validate_qpf)" = "0" ] && [ "$(code_of aggregate_qpf_horizons)" = "0" ]; then
+            run_stage forecast_impacts_v2 python forecast_impacts_v2.py
+          else
+            skip_stage forecast_impacts_v2 'Skipped because validated cumulative short-range QPF is unavailable.'
           fi
-          set +e
-          set -o pipefail
-          python forecast_starkey_wse.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
-          exit "$CODE"
-      - name: Calculate all-member project-threshold probabilities
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping all-member threshold probabilities because project WSE or GEPS paths failed.' | tee sturgeon_pipeline_output/logs/project_threshold_ensemble.log
-            echo 3 > sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode
-            exit 3
+
+          if [ "$(code_of medium_range_qpf)" = "0" ] && [ "$(code_of forecast_impacts_v2)" = "0" ]; then
+            run_stage geps_ensemble_impacts python run_geps_ensemble_impacts.py
+          else
+            skip_stage geps_ensemble_impacts 'Skipped because medium-range QPF or short-range impacts failed.'
           fi
-          set +e
-          set -o pipefail
-          python project_threshold_ensemble.py 2>&1 | tee sturgeon_pipeline_output/logs/project_threshold_ensemble.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode
-          exit "$CODE"
-      - name: Calculate limb-aware construction readiness dates
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          if [ "$(cat sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode 2>/dev/null || echo 1)" != "0" ] || [ "$(cat sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode 2>/dev/null || echo 1)" != "0" ]; then
-            echo 'Skipping construction readiness because project-threshold ensemble or project WSE failed.' | tee sturgeon_pipeline_output/logs/operational_readiness.log
-            echo 3 > sturgeon_pipeline_output/logs/operational_readiness.exitcode
-            exit 3
+
+          if [ "$(code_of starkey_wse_transfer)" = "0" ] && [ "$(code_of geps_ensemble_impacts)" = "0" ]; then
+            run_stage forecast_starkey_wse python forecast_starkey_wse.py
+          else
+            skip_stage forecast_starkey_wse 'Skipped because project transfer or GEPS paths failed.'
           fi
-          set +e
-          set -o pipefail
-          python operational_readiness.py 2>&1 | tee sturgeon_pipeline_output/logs/operational_readiness.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/operational_readiness.exitcode
-          exit "$CODE"
-      - name: Screen new calibration candidates
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python assimilation_candidates.py 2>&1 | tee sturgeon_pipeline_output/logs/assimilation_candidates.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/assimilation_candidates.exitcode
-          exit "$CODE"
-      - name: Test storage-state candidate in shadow mode
-        continue-on-error: true
-        run: |
-          mkdir -p sturgeon_pipeline_output/logs
-          set +e
-          set -o pipefail
-          python storage_state_candidate.py 2>&1 | tee sturgeon_pipeline_output/logs/storage_state_candidate.log
-          CODE=${PIPESTATUS[0]}
-          echo "$CODE" > sturgeon_pipeline_output/logs/storage_state_candidate.exitcode
-          exit "$CODE"
+
+          if [ "$(code_of forecast_starkey_wse)" = "0" ] && [ "$(code_of geps_ensemble_impacts)" = "0" ]; then
+            run_stage project_threshold_ensemble python project_threshold_ensemble.py
+          else
+            skip_stage project_threshold_ensemble 'Skipped because project WSE or GEPS paths failed.'
+          fi
+
+          if [ "$(code_of project_threshold_ensemble)" = "0" ] && [ "$(code_of forecast_starkey_wse)" = "0" ]; then
+            run_stage operational_readiness python operational_readiness.py
+          else
+            skip_stage operational_readiness 'Skipped because project-threshold ensemble or project WSE failed.'
+          fi
+
+          if [ -f sturgeon_pipeline_output/forecast_v2/forecast_impacts_v2.json ] && \
+             [ -f output/historical_event_backfill/historical_censored_response_model.json ]; then
+            run_stage historical_response_shadow_current \
+              python historical_response_shadow_forecast.py \
+              --forecast sturgeon_pipeline_output/forecast_v2/forecast_impacts_v2.json \
+              --model output/historical_event_backfill/historical_censored_response_model.json \
+              --output sturgeon_pipeline_output/diagnostics/historical_response_shadow_current.json
+          else
+            skip_stage historical_response_shadow_current 'Current-cycle historical response comparison unavailable.'
+          fi
+
+          if [ "$(code_of operational_readiness)" = "0" ]; then
+            run_stage forecast_synthesis python forecast_synthesis.py
+          else
+            skip_stage forecast_synthesis 'Skipped because construction readiness failed.'
+          fi
+
+          run_stage assimilation_candidates python assimilation_candidates.py
+          run_stage storage_state_candidate python storage_state_candidate.py
+
       - name: Validate operational package consistency
         if: always()
+        shell: bash
         run: |
           mkdir -p sturgeon_pipeline_output/logs
           : > sturgeon_pipeline_output/logs/operational_validation.log
           STATUS=0
+
           for name in \
             qpf_forecast_v2 \
             validate_qpf \
@@ -270,14 +249,16 @@ jobs:
             starkey_wse_transfer \
             forecast_starkey_wse \
             project_threshold_ensemble \
-            operational_readiness; do
+            operational_readiness \
+            forecast_synthesis; do
             CODE=$(cat "sturgeon_pipeline_output/logs/${name}.exitcode" 2>/dev/null || echo missing)
             if [ "$CODE" != "0" ]; then
               echo "${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
               STATUS=1
             fi
           done
-          for name in assimilation_candidates storage_state_candidate; do
+
+          for name in assimilation_candidates storage_state_candidate historical_response_shadow_current; do
             CODE=$(cat "sturgeon_pipeline_output/logs/${name}.exitcode" 2>/dev/null || echo missing)
             echo "shadow diagnostic ${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
           done
@@ -298,6 +279,8 @@ jobs:
               'health': root / 'diagnostics/calibration_health.json',
               'hysteresis': root / 'diagnostics/hysteresis_diagnostics.json',
               'uncertainty': root / 'diagnostics/uncertainty_sensitivity.json',
+              'synthesis': root / 'forecast_v2/forecast_synthesis.json',
+              'manifest': root / 'run_manifest.json',
           }
           data = {}
           for name, path in files.items():
@@ -306,15 +289,24 @@ jobs:
               data[name] = json.loads(path.read_text())
 
           if data['ensemble'].get('official_outlook', {}).get('status') != 'operational_geps_integrated':
-              raise RuntimeError('ensemble_paths_v2 is not operational_geps_integrated')
+              raise RuntimeError('ensemble paths are not operational')
           if data['probability'].get('status') != 'operational_project_threshold_ensemble':
-              raise RuntimeError('project_threshold_ensemble is not operational')
+              raise RuntimeError('project-threshold ensemble is not operational')
           if data['uncertainty'].get('status') != 'operational_sensitivity_not_calibrated_probability':
               raise RuntimeError('uncertainty sensitivity output is unavailable')
+          if data['synthesis'].get('status') != 'operational_forecast_synthesis':
+              raise RuntimeError('forecast synthesis is unavailable')
+          if data['synthesis'].get('run_id') != data['manifest'].get('run_id'):
+              raise RuntimeError('synthesis and manifest run IDs do not match')
+          if data['manifest'].get('cycle_consistency', {}).get('status') not in {
+              'consistent', 'operational_consistent_shadow_pending'
+          }:
+              raise RuntimeError('run-manifest cycle consistency failed')
           if data['transfer'].get('project_location', {}).get('river_station') != 18883:
               raise RuntimeError('transfer is not referenced to RS18883')
           if data['project_wse'].get('project_location', {}).get('river_station') != 18883:
               raise RuntimeError('project WSE is not referenced to RS18883')
+
           threshold = data['readiness'].get('authoritative_operational_threshold', {})
           if abs(float(threshold.get('main_floodplain_elevation_m')) - 650.20) > 0.001:
               raise RuntimeError('readiness threshold is not 650.20 m')
@@ -343,44 +335,72 @@ jobs:
           else
             echo 'Operational package validation failed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
           fi
-      - name: Prepare latest operational output
+
+      - name: Prepare attempted and validated outputs
         if: ${{ always() && !cancelled() }}
+        shell: bash
         run: |
-          rm -rf output/latest
-          mkdir -p output/latest
+          rm -rf output/latest_attempt
+          mkdir -p output/latest_attempt
           if [ -d sturgeon_pipeline_output ]; then
-            rsync -a --exclude='sturgeon_pipeline_latest.zip' sturgeon_pipeline_output/ output/latest/
+            rsync -a --exclude='sturgeon_pipeline_latest.zip' sturgeon_pipeline_output/ output/latest_attempt/
           fi
-          date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
-          if [ "$(cat output/latest/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0" ]; then
-            echo operational > output/latest/workflow_mode.txt
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest_attempt/workflow_completed_utc.txt
+
+          if [ "$(cat output/latest_attempt/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0" ]; then
+            echo operational > output/latest_attempt/workflow_mode.txt
+            rm -rf output/latest output/latest_valid
+            cp -a output/latest_attempt output/latest
+            cp -a output/latest_attempt output/latest_valid
+            mkdir -p output/history
+            cp output/latest_attempt/history/forecast_history.csv output/history/forecast_history.csv
           else
-            echo degraded > output/latest/workflow_mode.txt
+            echo degraded > output/latest_attempt/workflow_mode.txt
+            echo 'Attempt failed validation; authoritative latest and latest_valid remain unchanged.'
           fi
-      - name: Upload operational package
+
+      - name: Upload operational attempt
         if: ${{ always() && !cancelled() }}
         uses: actions/upload-artifact@v4
         with:
-          name: sturgeon-operational-latest
-          path: output/latest
+          name: sturgeon-operational-attempt
+          path: output/latest_attempt
           retention-days: 14
           if-no-files-found: warn
-      - name: Commit latest operational outputs
+
+      - name: Commit attempted and validated outputs
         if: ${{ always() && !cancelled() }}
+        shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
 
-          rm -rf /tmp/sturgeon-operational-latest
-          cp -a output/latest /tmp/sturgeon-operational-latest
+          rm -rf /tmp/sturgeon-operational-attempt /tmp/sturgeon-operational-valid /tmp/sturgeon-operational-latest /tmp/sturgeon-forecast-history.csv
+          cp -a output/latest_attempt /tmp/sturgeon-operational-attempt
+          VALID=0
+          if [ "$(cat output/latest_attempt/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0" ]; then
+            VALID=1
+            cp -a output/latest_valid /tmp/sturgeon-operational-valid
+            cp -a output/latest /tmp/sturgeon-operational-latest
+            cp output/history/forecast_history.csv /tmp/sturgeon-forecast-history.csv
+          fi
 
           for attempt in 1 2 3 4; do
             echo "Publish attempt ${attempt}"
             git fetch origin main
             git reset --hard origin/main
-            rm -rf output/latest
-            cp -a /tmp/sturgeon-operational-latest output/latest
-            git add -f output/latest
+            rm -rf output/latest_attempt
+            cp -a /tmp/sturgeon-operational-attempt output/latest_attempt
+            git add -f output/latest_attempt
+
+            if [ "$VALID" = "1" ]; then
+              rm -rf output/latest output/latest_valid
+              cp -a /tmp/sturgeon-operational-latest output/latest
+              cp -a /tmp/sturgeon-operational-valid output/latest_valid
+              mkdir -p output/history
+              cp /tmp/sturgeon-forecast-history.csv output/history/forecast_history.csv
+              git add -f output/latest output/latest_valid output/history/forecast_history.csv
+            fi
 
             if git diff --cached --quiet; then
               echo 'No operational output changes to publish.'
@@ -399,7 +419,7 @@ jobs:
             echo 'Another run updated main first; retrying from the new branch head.'
             sleep $((attempt * 2))
           done
+
       - name: Enforce operational validation
         if: ${{ always() && !cancelled() }}
-        run: |
-          test "$(cat output/latest/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0"
+        run: test "$(cat output/latest_attempt/logs/operational_validation.exitcode 2>/dev/null || echo 1)" = "0"
