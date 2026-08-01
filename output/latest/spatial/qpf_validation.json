@@ -1,8 +1,63 @@
 {
-  "passed": false,
-  "checks": [],
-  "errors": [
-    "deterministic_qpf_by_subarea.csv is missing or empty"
+  "passed": true,
+  "checks": [
+    {
+      "name": "required_columns",
+      "passed": true,
+      "missing": []
+    },
+    {
+      "name": "six_hour_source_files",
+      "passed": true,
+      "bad_files": []
+    },
+    {
+      "name": "six_hour_intervals",
+      "passed": true,
+      "bad_row_count": 0
+    },
+    {
+      "name": "accumulation_semantics",
+      "passed": true,
+      "values": [
+        "independent_6h_interval"
+      ]
+    },
+    {
+      "name": "physical_range",
+      "passed": true,
+      "min_mm": 0.0,
+      "max_mm": 11.70508313179016
+    },
+    {
+      "name": "unique_model_hour_subarea",
+      "passed": true,
+      "duplicate_count": 0
+    },
+    {
+      "name": "coverage",
+      "passed": true,
+      "models": {
+        "HRDPS": {
+          "hours": [
+            6,
+            12,
+            18,
+            24,
+            30,
+            36,
+            42,
+            48
+          ],
+          "subarea_count": 8,
+          "rows": 64,
+          "expected_rows": 64,
+          "complete": true
+        }
+      }
+    }
   ],
-  "warnings": []
+  "errors": [],
+  "warnings": [],
+  "qpf_metadata_generated_utc": "2026-08-01T03:50:23.467127+00:00"
 }
