@@ -1,0 +1,187 @@
+{
+  "generated_utc": "2026-07-29T04:42:28.086392+00:00",
+  "basin_source": {
+    "source": "https://collaboration.cmc.ec.gc.ca/cmc/hydrometrics/www/HydrometricNetworkBasinPolygons/shp/MDA_ADP_05.zip",
+    "source_shapefile": "grid_cache/basins/mda05/MDA_ADP_05_DrainageBasin_BassinDeDrainage.shp",
+    "station_field": "StationNum",
+    "crs": "PROJCS[\"Canada_Albers_Equal_Area_Conic\",GEOGCS[\"NAD83\",DATUM[\"North_American_Datum_1983\",SPHEROID[\"GRS 1980\",6378137,298.257222101,AUTHORITY[\"EPSG\",\"7019\"]],AUTHORITY[\"EPSG\",\"6269\"]],PRIMEM[\"Greenwich\",0,AUTHORITY[\"EPSG\",\"8901\"]],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]],AUTHORITY[\"EPSG\",\"4269\"]],PROJECTION[\"Albers_Conic_Equal_Area\"],PARAMETER[\"latitude_of_center\",40],PARAMETER[\"longitude_of_center\",-96],PARAMETER[\"standard_parallel_1\",50],PARAMETER[\"standard_parallel_2\",70],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"metre\",1,AUTHORITY[\"EPSG\",\"9001\"]],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH],AUTHORITY[\"ESRI\",\"102001\"]]",
+    "stations_found": [
+      "05EA002",
+      "05EA004",
+      "05EA005",
+      "05EA006",
+      "05EA010",
+      "05EA011",
+      "05EA012"
+    ]
+  },
+  "subarea_derivation": {
+    "upper_lake_polygon_station": "05EA006",
+    "containment_checks": {
+      "05EA005_within_05EA002": true,
+      "05EA012_within_05EA002": true,
+      "05EA011_within_05EA002": true,
+      "05EA006_within_05EA005": true
+    },
+    "subareas": [
+      {
+        "subarea": "basin_to_05EA002",
+        "source_station": "05EA002",
+        "area_km2": 2515.14741937944
+      },
+      {
+        "subarea": "basin_to_05EA005_villeneuve",
+        "source_station": "05EA005",
+        "area_km2": 1864.3364719205176
+      },
+      {
+        "subarea": "lower_incremental_05EA005_to_05EA002",
+        "source_station": "difference",
+        "area_km2": 650.8109474589244
+      },
+      {
+        "subarea": "upper_lake_chain_isle_lac_ste_anne",
+        "source_station": "05EA006",
+        "area_km2": 664.3375421282439
+      },
+      {
+        "subarea": "lac_ste_anne_to_villeneuve_mainstem",
+        "source_station": "05EA005-05EA006",
+        "area_km2": 1199.998929784617
+      },
+      {
+        "subarea": "atim_creek_big_lake_tributary",
+        "source_station": "05EA012",
+        "area_km2": 280.67014704059505
+      },
+      {
+        "subarea": "carrot_creek",
+        "source_station": "05EA011",
+        "area_km2": 78.30707442980844
+      },
+      {
+        "subarea": "direct_big_lake_and_local_to_05EA002",
+        "source_station": "lower-minus-tributaries",
+        "area_km2": 291.83372599071157
+      }
+    ]
+  },
+  "observed_event_rows": 72,
+  "deterministic_qpf_rows": 64,
+  "qpf_models": [
+    {
+      "model": "HRDPS",
+      "run_hour_utc": "00",
+      "files": [
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT006H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT012H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT018H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT024H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT030H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT036H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT042H.grib2",
+        "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT048H.grib2"
+      ],
+      "candidates": {
+        "6": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT006H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT006H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT006H.grib2"
+        ],
+        "12": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT012H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT012H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT012H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT012H.grib2"
+        ],
+        "18": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT018H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT018H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT018H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT018H.grib2"
+        ],
+        "24": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT024H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT024H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum24h_Sfc_RLatLon0.0225_PT024H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT024H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT024H.grib2"
+        ],
+        "30": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT030H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT030H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum24h_Sfc_RLatLon0.0225_PT030H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT030H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT030H.grib2"
+        ],
+        "36": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT036H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT036H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum24h_Sfc_RLatLon0.0225_PT036H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT036H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT036H.grib2"
+        ],
+        "42": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT042H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT042H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum24h_Sfc_RLatLon0.0225_PT042H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT042H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT042H.grib2"
+        ],
+        "48": [
+          "20260729T00Z_MSC_HRDPS_APCP-Accum12h_Sfc_RLatLon0.0225_PT048H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum1h_Sfc_RLatLon0.0225_PT048H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum24h_Sfc_RLatLon0.0225_PT048H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum3h_Sfc_RLatLon0.0225_PT048H.grib2",
+          "20260729T00Z_MSC_HRDPS_APCP-Accum6h_Sfc_RLatLon0.0225_PT048H.grib2"
+        ]
+      },
+      "status": "processed"
+    },
+    {
+      "model": "RDPS",
+      "status": "no run discovered"
+    }
+  ],
+  "reps": {
+    "model": "REPS",
+    "run_hour_utc": "00",
+    "forecast_hours": {
+      "6": [
+        "20260729T00Z_MSC_REPS_TPRATE-Accum3h-Prob_SFC_RLatLon0.09x0.09_PT006H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum6h-Prob_SFC_RLatLon0.09x0.09_PT006H.grib2"
+      ],
+      "12": [
+        "20260729T00Z_MSC_REPS_TPRATE-Accum12h-Prob_SFC_RLatLon0.09x0.09_PT012H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum3h-Prob_SFC_RLatLon0.09x0.09_PT012H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum6h-Prob_SFC_RLatLon0.09x0.09_PT012H.grib2"
+      ],
+      "24": [
+        "20260729T00Z_MSC_REPS_TPRATE-Accum12h-Prob_SFC_RLatLon0.09x0.09_PT024H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum24h-Prob_SFC_RLatLon0.09x0.09_PT024H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum3h-Prob_SFC_RLatLon0.09x0.09_PT024H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum6h-Prob_SFC_RLatLon0.09x0.09_PT024H.grib2"
+      ],
+      "36": [
+        "20260729T00Z_MSC_REPS_TPRATE-Accum12h-Prob_SFC_RLatLon0.09x0.09_PT036H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum24h-Prob_SFC_RLatLon0.09x0.09_PT036H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum3h-Prob_SFC_RLatLon0.09x0.09_PT036H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum6h-Prob_SFC_RLatLon0.09x0.09_PT036H.grib2"
+      ],
+      "48": [
+        "20260729T00Z_MSC_REPS_TPRATE-Accum12h-Prob_SFC_RLatLon0.09x0.09_PT048H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum24h-Prob_SFC_RLatLon0.09x0.09_PT048H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum3h-Prob_SFC_RLatLon0.09x0.09_PT048H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum48h-Prob_SFC_RLatLon0.09x0.09_PT048H.grib2",
+        "20260729T00Z_MSC_REPS_TPRATE-Accum6h-Prob_SFC_RLatLon0.09x0.09_PT048H.grib2"
+      ]
+    },
+    "status": "discovered"
+  },
+  "limitations": [
+    "Grid-cell coverage percentages are based on valid HRDPA/forecast cell centres within official WSC basin polygons.",
+    "The 05EA002-to-Starkey local reach is not yet a separately delineated drainage polygon.",
+    "REPS is discovered here; ensemble-band extraction and probabilistic basin statistics are handled in the next model stage."
+  ],
+  "warning_count": 3
+}

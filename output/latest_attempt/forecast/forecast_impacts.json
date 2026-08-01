@@ -1,0 +1,295 @@
+{
+  "generated_utc": "2026-07-29T04:44:16.770386+00:00",
+  "latest_stage_m": 2.155,
+  "rain_free_days_to_1_70": 9.791666666666666,
+  "training": {
+    "spatial_grid_features_used": true,
+    "events_total": 9,
+    "events_fitted": 8,
+    "excluded_event_ids": [
+      2
+    ]
+  },
+  "features": [
+    "basin_mm",
+    "lower_mm",
+    "duration_h",
+    "lower_ratio",
+    "spread_ratio"
+  ],
+  "targets": [
+    "departure_m",
+    "days_lost",
+    "lag_h"
+  ],
+  "cross_validation": {
+    "leave_one_event_out": [
+      {
+        "event_id": 1,
+        "departure_m_observed": 0.900885867433248,
+        "departure_m_predicted": 0.1070761172798409,
+        "departure_m_error": -0.7938097501534072,
+        "days_lost_observed": 17.961636494352838,
+        "days_lost_predicted": 2.594895054063094,
+        "days_lost_error": -15.366741440289744,
+        "lag_h_observed": 149.0,
+        "lag_h_predicted": 17.246863031812005,
+        "lag_h_error": -131.753136968188
+      },
+      {
+        "event_id": 3,
+        "departure_m_observed": 0.4516954748429898,
+        "departure_m_predicted": 0.20613036612819058,
+        "departure_m_error": -0.2455651087147992,
+        "days_lost_observed": 8.53408594400081,
+        "days_lost_predicted": 3.4002218522961143,
+        "days_lost_error": -5.1338640917046945,
+        "lag_h_observed": 130.0,
+        "lag_h_predicted": 88.13925006538179,
+        "lag_h_error": -41.86074993461821
+      },
+      {
+        "event_id": 4,
+        "departure_m_observed": 0.04770935704831469,
+        "departure_m_predicted": 0.2757566575605419,
+        "departure_m_error": 0.2280473005122272,
+        "days_lost_observed": 0.8771935345598197,
+        "days_lost_predicted": 4.943192260542749,
+        "days_lost_error": 4.065998725982929,
+        "lag_h_observed": 121.0,
+        "lag_h_predicted": 85.30840693636212,
+        "lag_h_error": -35.69159306363788
+      },
+      {
+        "event_id": 5,
+        "departure_m_observed": 0.14551923076923368,
+        "departure_m_predicted": 0.18605316015069662,
+        "departure_m_error": 0.04053392938146294,
+        "days_lost_observed": 2.5062930577636684,
+        "days_lost_predicted": 3.694916247113065,
+        "days_lost_error": 1.1886231893493968,
+        "lag_h_observed": 105.0,
+        "lag_h_predicted": 45.10062107336533,
+        "lag_h_error": -59.89937892663467
+      },
+      {
+        "event_id": 6,
+        "departure_m_observed": 0.2680384615384641,
+        "departure_m_predicted": 0.3239656877424554,
+        "departure_m_error": 0.055927226203991265,
+        "days_lost_observed": 4.3281413027276745,
+        "days_lost_predicted": 6.148629755706707,
+        "days_lost_error": 1.8204884529790322,
+        "lag_h_observed": 100.0,
+        "lag_h_predicted": 91.44048401454685,
+        "lag_h_error": -8.559515985453146
+      },
+      {
+        "event_id": 7,
+        "departure_m_observed": 0.17065230769230766,
+        "departure_m_predicted": 0.1713611046126114,
+        "departure_m_error": 0.0007087969203037336,
+        "days_lost_observed": 4.6229890806035625,
+        "days_lost_predicted": 2.9035668985146055,
+        "days_lost_error": -1.719422182088957,
+        "lag_h_observed": 4.0,
+        "lag_h_predicted": 91.69892105431146,
+        "lag_h_error": 87.69892105431146
+      },
+      {
+        "event_id": 8,
+        "departure_m_observed": 0.15029692307692422,
+        "departure_m_predicted": 0.2788195222914104,
+        "departure_m_error": 0.12852259921448617,
+        "days_lost_observed": 2.641922224025083,
+        "days_lost_predicted": 4.972002019229712,
+        "days_lost_error": 2.330079795204629,
+        "lag_h_observed": 44.0,
+        "lag_h_predicted": 115.94631654423407,
+        "lag_h_error": 71.94631654423407
+      },
+      {
+        "event_id": 9,
+        "departure_m_observed": 0.06732307692307682,
+        "departure_m_predicted": 0.7850307158994904,
+        "departure_m_error": 0.7177076389764135,
+        "days_lost_observed": 1.9872842870117988,
+        "days_lost_predicted": 15.491677161821528,
+        "days_lost_error": 13.50439287480973,
+        "lag_h_observed": 2.0,
+        "lag_h_predicted": 141.6695448890424,
+        "lag_h_error": 139.6695448890424
+      }
+    ],
+    "departure_m": {
+      "mae": 0.2763527937596364,
+      "rmse": 0.39981798723554096,
+      "bias": 0.01650907904258482,
+      "n": 8
+    },
+    "days_lost": {
+      "mae": 5.641201344051138,
+      "rmse": 7.701517410125172,
+      "bias": 0.08619441553029006,
+      "n": 8
+    },
+    "lag_h": {
+      "mae": 72.13489467076498,
+      "rmse": 83.98009972536245,
+      "bias": 2.6938009511320047,
+      "n": 8
+    }
+  },
+  "scenarios": [
+    {
+      "model": "HRDPS",
+      "horizon_h": 24,
+      "basin_mm": 9.42805484735166,
+      "lower_incremental_mm": 14.008338509926128,
+      "duration_h": 6,
+      "first_wet_forecast_hour": 0,
+      "last_wet_forecast_hour": 6,
+      "lower_ratio": 1.485814278420439,
+      "spread_ratio": 0.02058275248958122,
+      "subarea_totals_mm": {
+        "atim_creek_big_lake_tributary": 10.469467979007296,
+        "basin_to_05EA002": 9.42805484735166,
+        "basin_to_05EA005_villeneuve": 7.8465888270490725,
+        "carrot_creek": 21.277647634882594,
+        "direct_big_lake_and_local_to_05EA002": 15.47808268118878,
+        "lac_ste_anne_to_villeneuve_mainstem": 12.109899073606147,
+        "lower_incremental_05EA005_to_05EA002": 14.008338509926128,
+        "upper_lake_chain_isle_lac_ste_anne": 0.3185815448401823
+      },
+      "analog_prediction": {
+        "departure_m": 0.34897580687887636,
+        "departure_m_analog_min": 0.06732307692307682,
+        "departure_m_analog_max": 0.900885867433248,
+        "days_lost": 7.020725472718178,
+        "days_lost_analog_min": 1.9872842870117988,
+        "days_lost_analog_max": 17.961636494352838,
+        "lag_h": 66.8104107627521,
+        "lag_h_analog_min": 2.0,
+        "lag_h_analog_max": 149.0,
+        "analog_event_ids": [
+          9,
+          1,
+          6
+        ],
+        "analog_distances": [
+          0.7873982885199045,
+          1.029965339370068,
+          1.107548438997802
+        ],
+        "nearest_distance": 0.7873982885199045
+      },
+      "stage_departure_range_m": [
+        0.0,
+        0.900885867433248
+      ],
+      "estimated_days_lost_range": [
+        0.0,
+        17.961636494352838
+      ],
+      "lag_to_max_effect_range_h_from_rain_start": [
+        0.0,
+        150.79051048811453
+      ],
+      "estimated_peak_stage_m": 2.370724356249348,
+      "estimated_peak_stage_range_m": [
+        2.0217485493704714,
+        2.9226344168037195
+      ],
+      "projected_1_70_days_central": 16.812392139384844,
+      "projected_1_70_days_range": [
+        9.791666666666666,
+        27.753303161019502
+      ],
+      "confidence": "low-moderate",
+      "threshold_flags": {
+        "rise_or_departure_ge_0_05": true,
+        "delay_ge_2_days": true,
+        "credible_2_5_path": true,
+        "credible_3_0_path": false
+      }
+    },
+    {
+      "model": "HRDPS",
+      "horizon_h": 48,
+      "basin_mm": 9.437193999673376,
+      "lower_incremental_mm": 14.008338509926128,
+      "duration_h": 6,
+      "first_wet_forecast_hour": 0,
+      "last_wet_forecast_hour": 6,
+      "lower_ratio": 1.4843753885329645,
+      "spread_ratio": 0.020709243466840156,
+      "subarea_totals_mm": {
+        "atim_creek_big_lake_tributary": 10.469467979007296,
+        "basin_to_05EA002": 9.437193999673376,
+        "basin_to_05EA005_villeneuve": 7.858883517305975,
+        "carrot_creek": 21.277647634882594,
+        "direct_big_lake_and_local_to_05EA002": 15.47808268118878,
+        "lac_ste_anne_to_villeneuve_mainstem": 12.128047797649904,
+        "lower_incremental_05EA005_to_05EA002": 14.008338509926128,
+        "upper_lake_chain_isle_lac_ste_anne": 0.3205393826446205
+      },
+      "analog_prediction": {
+        "departure_m": 0.3488812741123128,
+        "departure_m_analog_min": 0.06732307692307682,
+        "departure_m_analog_max": 0.900885867433248,
+        "days_lost": 7.018158609005141,
+        "days_lost_analog_min": 1.9872842870117988,
+        "days_lost_analog_max": 17.961636494352838,
+        "lag_h": 66.82514225500474,
+        "lag_h_analog_min": 2.0,
+        "lag_h_analog_max": 149.0,
+        "analog_event_ids": [
+          9,
+          1,
+          6
+        ],
+        "analog_distances": [
+          0.7878127677754578,
+          1.0306511433847318,
+          1.1066746854965053
+        ],
+        "nearest_distance": 0.7878127677754578
+      },
+      "stage_departure_range_m": [
+        0.0,
+        0.900885867433248
+      ],
+      "estimated_days_lost_range": [
+        0.0,
+        17.961636494352838
+      ],
+      "lag_to_max_effect_range_h_from_rain_start": [
+        0.0,
+        150.80524198036719
+      ],
+      "estimated_peak_stage_m": 2.3706298234827843,
+      "estimated_peak_stage_range_m": [
+        2.0217485493704714,
+        2.9226344168037195
+      ],
+      "projected_1_70_days_central": 16.809825275671805,
+      "projected_1_70_days_range": [
+        9.791666666666666,
+        27.753303161019502
+      ],
+      "confidence": "low-moderate",
+      "threshold_flags": {
+        "rise_or_departure_ge_0_05": true,
+        "delay_ge_2_days": true,
+        "credible_2_5_path": true,
+        "credible_3_0_path": false
+      }
+    }
+  ],
+  "interpretation": [
+    "Predicted departure is stage above the fitted rain-free recession path, not necessarily raw rise from the pre-storm level.",
+    "Ranges combine nearest observed-event outcomes with leave-one-event-out residual error.",
+    "Only July 2026 events are available, so forecasts outside the observed rainfall/location envelope remain low confidence.",
+    "Starkey Road timing remains operationally anchored to 05EA002 until a separate downstream reach calibration is available."
+  ]
+}

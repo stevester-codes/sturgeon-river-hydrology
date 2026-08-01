@@ -1,0 +1,72 @@
+{
+  "generated_utc": "2026-08-01T19:17:56+00:00",
+  "status": "historical_response_shadow_available",
+  "mode": "shadow_only_no_effect_on_operational_forecast",
+  "hrdps": {
+    "run_time_utc": "2026-08-01T12:00:00+00:00",
+    "horizon_h": 48,
+    "complete_horizon": true,
+    "basin_mm": 8.556712021801031,
+    "storm_type": "widespread_basin",
+    "feature_vector": {
+      "basin_mm": 8.556712021801031,
+      "lower_ratio": 1.1100406491166563,
+      "upper_ratio": 1.0066808944286056,
+      "duration_h": 30.0,
+      "antecedent_168h_mm": 27.52386288632196,
+      "basin_pct_gt_10mm": 11.138014527845035,
+      "pre_stage_m": 2.062
+    }
+  },
+  "official_analogue_response_days_lost": 1.1246005042947074,
+  "historical_censored_model_days_lost": 5.280656925593162,
+  "historical_model_minus_official_days": 4.156056421298454,
+  "historical_model_rmse_sensitivity_days": 4.040135623521664,
+  "historical_model_upper_rmse_sensitivity_days": 9.320792549114826,
+  "prediction_detail": {
+    "status": "prediction_available",
+    "transformed_features": {
+      "log_basin_mm": 2.2572437371316063,
+      "log_antecedent_168h_mm": 3.350741031196222,
+      "pre_stage_m": 2.062
+    },
+    "standardized_features": {
+      "log_basin_mm": 0.0007822322149052753,
+      "log_antecedent_168h_mm": 1.570539604916306,
+      "pre_stage_m": 1.376878087292416
+    },
+    "prediction_log1p_days": 1.837474580995455
+  },
+  "historical_model": {
+    "status": "historical_censored_response_model_evaluated",
+    "target": "stage_exact_recession_equivalent_days",
+    "resolved_peak_events": 10,
+    "censored_lower_bound_events": 26,
+    "preferred_feature_set": "amount_only",
+    "preferred_exact_rmse_days": 4.040135623521664,
+    "constraint_satisfaction_pct": 65.38461538461539,
+    "combined_screen_passed": false,
+    "promotion_screen": {
+      "candidate_passes_minimum_screen": false,
+      "automatic_promotion_enabled": false,
+      "reasons_not_to_promote": [
+        "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds",
+        "spatial_features_are_not_selected"
+      ],
+      "requirements": [
+        "at least ten resolved response peaks",
+        "at least fifteen unresolved censored lower bounds",
+        "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
+        "at least 75 percent of censored lower bounds satisfied",
+        "spatial model selected over amount-only model",
+        "manual engineering review and operational hindcast"
+      ]
+    }
+  },
+  "interpretation": "This is an independent historical response comparison using all resolved peaks and censored lower bounds. It does not alter the official forecast. A difference is diagnostic evidence, not a calibrated probability.",
+  "limitations": [
+    "The historical candidate is amount-only because 10 km spatial features did not improve leave-one-event-out skill.",
+    "The candidate satisfies only about 65 percent of censored lower bounds and has not passed promotion gates.",
+    "The RMSE-based upper sensitivity is not a p90 confidence bound."
+  ]
+}
