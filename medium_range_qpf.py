@@ -1,17 +1,22 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 
 import medium_range_qpf_base as _base
 from medium_range_qpf_base import *  # noqa: F401,F403 - compatibility re-export
 from qpf_forecast_v2 import get_links, http, parse_run_time
 
-DAY_BUCKETS = ("today", "yesterday")
-
 
 def _bases(base: str) -> list[str]:
-    return [base.replace("/today/", f"/{bucket}/", 1) for bucket in DAY_BUCKETS]
+    now = datetime.now(timezone.utc)
+    candidates = [base]
+    for days_back in (0, 1, 2):
+        date_bucket = (now - timedelta(days=days_back)).strftime("%Y%m%d")
+        candidates.append(
+            base.replace("/today/", f"/{date_bucket}/WXO-DD/", 1)
+        )
+    return list(dict.fromkeys(candidates))
 
 
 def _select_gdps_base(session) -> str | None:
@@ -71,5 +76,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-
-# Combined-entry-point rebuild trigger after both wrappers were committed.
