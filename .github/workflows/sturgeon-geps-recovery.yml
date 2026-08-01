@@ -1,0 +1,166 @@
+name: Sturgeon GEPS recovery
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/sturgeon-geps-recovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-hydrology-operational
+  cancel-in-progress: true
+
+jobs:
+  recover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Seed latest package
+        run: |
+          rm -rf sturgeon_pipeline_output
+          cp -a output/latest sturgeon_pipeline_output
+          mkdir -p sturgeon_pipeline_output/logs
+      - name: Restore or retrieve validated GEPS
+        run: |
+          set -o pipefail
+          python medium_range_qpf.py 2>&1 | tee sturgeon_pipeline_output/logs/medium_range_qpf.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/medium_range_qpf.exitcode
+          exit "$CODE"
+      - name: Rebuild GEPS river paths
+        run: |
+          set -o pipefail
+          python run_geps_ensemble_impacts.py 2>&1 | tee sturgeon_pipeline_output/logs/geps_ensemble_impacts.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/geps_ensemble_impacts.exitcode
+          exit "$CODE"
+      - name: Rebuild project WSE forecast
+        run: |
+          set -o pipefail
+          python forecast_starkey_wse.py 2>&1 | tee sturgeon_pipeline_output/logs/forecast_starkey_wse.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/forecast_starkey_wse.exitcode
+          exit "$CODE"
+      - name: Rebuild project ensemble
+        run: |
+          set -o pipefail
+          python project_threshold_ensemble.py 2>&1 | tee sturgeon_pipeline_output/logs/project_threshold_ensemble.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/project_threshold_ensemble.exitcode
+          exit "$CODE"
+      - name: Rebuild construction readiness
+        run: |
+          set -o pipefail
+          python operational_readiness.py 2>&1 | tee sturgeon_pipeline_output/logs/operational_readiness.log
+          CODE=${PIPESTATUS[0]}
+          echo "$CODE" > sturgeon_pipeline_output/logs/operational_readiness.exitcode
+          exit "$CODE"
+      - name: Validate recovered package
+        run: |
+          : > sturgeon_pipeline_output/logs/operational_validation.log
+          STATUS=0
+          for name in \
+            qpf_forecast_v2 \
+            validate_qpf \
+            aggregate_qpf_horizons \
+            medium_range_qpf \
+            forecast_impacts_v2 \
+            geps_ensemble_impacts \
+            starkey_wse_transfer \
+            forecast_starkey_wse \
+            project_threshold_ensemble \
+            operational_readiness; do
+            CODE=$(cat "sturgeon_pipeline_output/logs/${name}.exitcode" 2>/dev/null || echo missing)
+            if [ "$CODE" != "0" ]; then
+              echo "${name} exit code is ${CODE}" | tee -a sturgeon_pipeline_output/logs/operational_validation.log
+              STATUS=1
+            fi
+          done
+          python - <<'PY' || STATUS=1
+          import json
+          from datetime import datetime, timezone
+          from pathlib import Path
+          root = Path('sturgeon_pipeline_output')
+          files = {
+              'forecast': root / 'forecast_v2/forecast_impacts_v2.json',
+              'ensemble': root / 'forecast_v2/ensemble_paths_v2.json',
+              'transfer': root / 'routing/starkey_wse_transfer.json',
+              'project_wse': root / 'routing/forecast_starkey_wse.json',
+              'probability': root / 'forecast_v2/project_threshold_ensemble.json',
+              'readiness': root / 'forecast_v2/construction_readiness.json',
+              'health': root / 'diagnostics/calibration_health.json',
+              'hysteresis': root / 'diagnostics/hysteresis_diagnostics.json',
+              'uncertainty': root / 'diagnostics/uncertainty_sensitivity.json',
+          }
+          data = {}
+          for name, path in files.items():
+              if not path.exists():
+                  raise RuntimeError(f'missing required output: {path}')
+              data[name] = json.loads(path.read_text())
+          if data['ensemble'].get('official_outlook', {}).get('status') != 'operational_geps_integrated':
+              raise RuntimeError('ensemble paths are not operational')
+          if data['probability'].get('status') != 'operational_project_threshold_ensemble':
+              raise RuntimeError('project ensemble is not operational')
+          if int(data['readiness'].get('probabilistic_exposure', {}).get('member_count', 0)) < 20:
+              raise RuntimeError('fewer than 20 GEPS members reached readiness')
+          threshold = data['readiness'].get('authoritative_operational_threshold', {})
+          if abs(float(threshold.get('main_floodplain_elevation_m')) - 650.20) > 0.001:
+              raise RuntimeError('project threshold is not 650.20 m')
+          if abs(float(threshold.get('calibrated_05EA002_discharge_m3s')) - 6.77) > 0.01:
+              raise RuntimeError('target discharge is not 6.77 m3/s')
+          times = []
+          for name, item in data.items():
+              value = item.get('generated_utc')
+              if not value:
+                  raise RuntimeError(f'{name} missing generated_utc')
+              times.append(datetime.fromisoformat(value.replace('Z', '+00:00')).astimezone(timezone.utc))
+          now = datetime.now(timezone.utc)
+          if any((now - value).total_seconds() > 6 * 3600 for value in times):
+              raise RuntimeError('one or more operational outputs are older than six hours')
+          if (max(times) - min(times)).total_seconds() > 3 * 3600:
+              raise RuntimeError('operational output timestamps span more than three hours')
+          print('Recovered package integrity checks passed.')
+          PY
+          echo "$STATUS" > sturgeon_pipeline_output/logs/operational_validation.exitcode
+          if [ "$STATUS" = "0" ]; then
+            echo 'Operational package validation passed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
+          else
+            echo 'Operational package validation failed.' | tee -a sturgeon_pipeline_output/logs/operational_validation.log
+            exit 1
+          fi
+      - name: Prepare recovered latest package
+        run: |
+          rm -rf output/latest
+          cp -a sturgeon_pipeline_output output/latest
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > output/latest/workflow_completed_utc.txt
+          echo operational > output/latest/workflow_mode.txt
+      - name: Publish recovered package
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/sturgeon-recovered-latest
+          cp -a output/latest /tmp/sturgeon-recovered-latest
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/latest
+            cp -a /tmp/sturgeon-recovered-latest output/latest
+            git add -f output/latest
+            git commit -m 'Recover Sturgeon operational forecast [skip ci]' || exit 0
+            if git push origin HEAD:main; then
+              exit 0
+            fi
+            sleep $((attempt * 2))
+          done
+          exit 1
