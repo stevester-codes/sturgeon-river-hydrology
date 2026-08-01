@@ -1,653 +1,103 @@
 {
-  "generated_utc": "2026-07-31T21:57:11.141733+00:00",
+  "generated_utc": "2026-08-01T05:07:48.093753+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 105,
+  "dry_hourly_points": 87,
   "data_range_utc": [
-    "2026-07-17T00:00:00+00:00",
-    "2026-07-31T21:00:00+00:00"
+    "2026-07-18T00:00:00+00:00",
+    "2026-08-01T04:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": 0.7937015043071947,
-    "coefficient_per_day": -0.1008793516270733,
-    "n": 73,
+    "intercept_m3s_per_day": -0.08638475792574367,
+    "coefficient_per_day": -0.03683417385805493,
+    "n": 60,
     "discharge_range_m3s": [
-      12.9,
-      15.9
+      12.7,
+      15.1
     ],
-    "rate_rmse_m3s_per_day": 0.24606326696721192
+    "rate_rmse_m3s_per_day": 0.22730644464242275
   },
   "holdout": {
-    "train_points": 73,
-    "test_points": 32,
+    "train_points": 60,
+    "test_points": 27,
     "official_stage_recession_then_rating": {
-      "n": 32,
-      "rmse_m3s": 0.31903798348896834,
-      "mae_m3s": 0.19597608215344547,
-      "bias_m3s": -0.11627342760780851
+      "n": 27,
+      "rmse_m3s": 0.3483065800939299,
+      "mae_m3s": 0.23074302725319024,
+      "bias_m3s": -0.15397773205580043
     },
     "direct_discharge_candidate": {
-      "n": 32,
-      "rmse_m3s": 0.3050291178206688,
-      "mae_m3s": 0.18675128606214253,
-      "bias_m3s": -0.07985872823205302
+      "n": 27,
+      "rmse_m3s": 0.34217653303958556,
+      "mae_m3s": 0.22233564382958612,
+      "bias_m3s": -0.13936278589754875
     },
-    "rmse_improvement_fraction": 0.04390971104788188,
+    "rmse_improvement_fraction": 0.017599572918465145,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 11.0,
+    "current_discharge_m3s": 10.9,
     "candidate_rain_free": {
-      "reached": false,
-      "hours": null,
-      "days": null,
+      "reached": true,
+      "hours": 244,
+      "days": 10.166666666666666,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 10.698841492104355,
-          "rate_m3s_per_day": -0.2855906885771222
+          "discharge_m3s": 10.420637499739705,
+          "rate_m3s_per_day": -0.4702203313029228
         },
         {
           "day": 2,
-          "discharge_m3s": 10.426639401815526,
-          "rate_m3s_per_day": -0.258131118197251
+          "discharge_m3s": 9.95862376101656,
+          "rate_m3s_per_day": -0.4532024369259845
         },
         {
           "day": 3,
-          "discharge_m3s": 10.180609566977582,
-          "rate_m3s_per_day": -0.2333117879778832
+          "discharge_m3s": 9.513330909254,
+          "rate_m3s_per_day": -0.4368004426064133
         },
         {
           "day": 4,
-          "discharge_m3s": 9.958235522876159,
-          "rate_m3s_per_day": -0.2108788385902416
+          "discharge_m3s": 9.084153793485036,
+          "rate_m3s_per_day": -0.4209920581082807
         },
         {
           "day": 5,
-          "discharge_m3s": 9.75724276310541,
-          "rate_m3s_per_day": -0.1906028193028323
+          "discharge_m3s": 8.670509163954852,
+          "rate_m3s_per_day": -0.40575579990871524
         },
         {
           "day": 6,
-          "discharge_m3s": 9.575575475254865,
-          "rate_m3s_per_day": -0.17227634109262047
+          "discharge_m3s": 8.27183487948701,
+          "rate_m3s_per_day": -0.39107096200189106
         },
         {
           "day": 7,
-          "discharge_m3s": 9.411375513462136,
-          "rate_m3s_per_day": -0.15571195540977978
+          "discharge_m3s": 7.887589143536148,
+          "rate_m3s_per_day": -0.3769175877596607
         },
         {
           "day": 8,
-          "discharge_m3s": 9.262963392756538,
-          "rate_m3s_per_day": -0.14074023689939996
+          "discharge_m3s": 7.517249767888935,
+          "rate_m3s_per_day": -0.3632764428105878
         },
         {
           "day": 9,
-          "discharge_m3s": 9.128821110798288,
-          "rate_m3s_per_day": -0.12720805046967576
+          "discharge_m3s": 7.160313463012658,
+          "rate_m3s_per_day": -0.3501289889005233
         },
         {
           "day": 10,
-          "discharge_m3s": 9.00757662130905,
-          "rate_m3s_per_day": -0.11497698498164599
-        },
-        {
-          "day": 11,
-          "discharge_m3s": 8.897989800383476,
-          "rate_m3s_per_day": -0.10392193753980183
-        },
-        {
-          "day": 12,
-          "discharge_m3s": 8.798939762141208,
-          "rate_m3s_per_day": -0.09392983390328491
-        },
-        {
-          "day": 13,
-          "discharge_m3s": 8.70941339398004,
-          "rate_m3s_per_day": -0.0848984719296596
-        },
-        {
-          "day": 14,
-          "discharge_m3s": 8.628494994165544,
-          "rate_m3s_per_day": -0.0767354762216731
-        },
-        {
-          "day": 15,
-          "discharge_m3s": 8.555356905767374,
-          "rate_m3s_per_day": -0.06935735328482207
-        },
-        {
-          "day": 16,
-          "discharge_m3s": 8.489251051143434,
-          "rate_m3s_per_day": -0.06268863753160547
-        },
-        {
-          "day": 17,
-          "discharge_m3s": 8.429501280384176,
-          "rate_m3s_per_day": -0.056661119397545257
-        },
-        {
-          "day": 18,
-          "discharge_m3s": 8.37549645545463,
-          "rate_m3s_per_day": -0.051213147673919046
-        },
-        {
-          "day": 19,
-          "discharge_m3s": 8.326684199296821,
-          "rate_m3s_per_day": -0.0462889989212647
-        },
-        {
-          "day": 20,
-          "discharge_m3s": 8.282565245956565,
-          "rate_m3s_per_day": -0.04183830751383455
-        },
-        {
-          "day": 21,
-          "discharge_m3s": 8.242688333946047,
-          "rate_m3s_per_day": -0.03781555048532359
-        },
-        {
-          "day": 22,
-          "discharge_m3s": 8.20664559061008,
-          "rate_m3s_per_day": -0.034179581906730205
-        },
-        {
-          "day": 23,
-          "discharge_m3s": 8.174068360285924,
-          "rate_m3s_per_day": -0.03089321203382356
-        },
-        {
-          "day": 24,
-          "discharge_m3s": 8.144623433585968,
-          "rate_m3s_per_day": -0.027922826919625332
-        },
-        {
-          "day": 25,
-          "discharge_m3s": 8.118009639235167,
-          "rate_m3s_per_day": -0.025238044601180176
-        },
-        {
-          "day": 26,
-          "discharge_m3s": 8.093954763603643,
-          "rate_m3s_per_day": -0.022811404344002195
-        },
-        {
-          "day": 27,
-          "discharge_m3s": 8.0722127664265,
-          "rate_m3s_per_day": -0.02061808576569435
-        },
-        {
-          "day": 28,
-          "discharge_m3s": 8.052561264232441,
-          "rate_m3s_per_day": -0.018635654965859727
-        },
-        {
-          "day": 29,
-          "discharge_m3s": 8.034799255740914,
-          "rate_m3s_per_day": -0.01684383506563991
-        },
-        {
-          "day": 30,
-          "discharge_m3s": 8.018745065962564,
-          "rate_m3s_per_day": -0.015224298809901948
-        },
-        {
-          "day": 31,
-          "discharge_m3s": 8.00423448797459,
-          "rate_m3s_per_day": -0.01376048111074113
-        },
-        {
-          "day": 32,
-          "discharge_m3s": 7.991119103364589,
-          "rate_m3s_per_day": -0.012437409614944439
-        },
-        {
-          "day": 33,
-          "discharge_m3s": 7.979264764163848,
-          "rate_m3s_per_day": -0.01124155156240636
-        },
-        {
-          "day": 34,
-          "discharge_m3s": 7.9685502207429035,
-          "rate_m3s_per_day": -0.010160675369121241
-        },
-        {
-          "day": 35,
-          "discharge_m3s": 7.958865881635069,
-          "rate_m3s_per_day": -0.009183725518986274
-        },
-        {
-          "day": 36,
-          "discharge_m3s": 7.950112692603025,
-          "rate_m3s_per_day": -0.008300709484764468
-        },
-        {
-          "day": 37,
-          "discharge_m3s": 7.9422011234832794,
-          "rate_m3s_per_day": -0.007502595521611699
-        },
-        {
-          "day": 38,
-          "discharge_m3s": 7.93505025244561,
-          "rate_m3s_per_day": -0.006781220287762735
-        },
-        {
-          "day": 39,
-          "discharge_m3s": 7.928586938301039,
-          "rate_m3s_per_day": -0.0061292053474963915
-        },
-        {
-          "day": 40,
-          "discharge_m3s": 7.9227450723924875,
-          "rate_m3s_per_day": -0.005539881702349425
-        },
-        {
-          "day": 41,
-          "discharge_m3s": 7.9174649024162,
-          "rate_m3s_per_day": -0.005007221578660848
-        },
-        {
-          "day": 42,
-          "discharge_m3s": 7.912692421257793,
-          "rate_m3s_per_day": -0.0045257767737482135
-        },
-        {
-          "day": 43,
-          "discharge_m3s": 7.90837881459179,
-          "rate_m3s_per_day": -0.004090622930107646
-        },
-        {
-          "day": 44,
-          "discharge_m3s": 7.904479961594493,
-          "rate_m3s_per_day": -0.003697309167651097
-        },
-        {
-          "day": 45,
-          "discharge_m3s": 7.900955983663375,
-          "rate_m3s_per_day": -0.0033418125588118297
-        },
-        {
-          "day": 46,
-          "discharge_m3s": 7.897770836527122,
-          "rate_m3s_per_day": -0.0030204969808697024
-        },
-        {
-          "day": 47,
-          "discharge_m3s": 7.894891941574349,
-          "rate_m3s_per_day": -0.002730075924631481
-        },
-        {
-          "day": 48,
-          "discharge_m3s": 7.892289852630081,
-          "rate_m3s_per_day": -0.002467578879057797
-        },
-        {
-          "day": 49,
-          "discharge_m3s": 7.889937954771723,
-          "rate_m3s_per_day": -0.0022303209480135644
-        },
-        {
-          "day": 50,
-          "discharge_m3s": 7.887812192103866,
-          "rate_m3s_per_day": -0.0020158753883671165
-        },
-        {
-          "day": 51,
-          "discharge_m3s": 7.885890821707619,
-          "rate_m3s_per_day": -0.0018220487885582948
-        },
-        {
-          "day": 52,
-          "discharge_m3s": 7.884154191247694,
-          "rate_m3s_per_day": -0.0016468586337451407
-        },
-        {
-          "day": 53,
-          "discharge_m3s": 7.8825845379626065,
-          "rate_m3s_per_day": -0.0014885130280662962
-        },
-        {
-          "day": 54,
-          "discharge_m3s": 7.881165806981983,
-          "rate_m3s_per_day": -0.0013453923666076895
-        },
-        {
-          "day": 55,
-          "discharge_m3s": 7.879883487112685,
-          "rate_m3s_per_day": -0.0012160327696144613
-        },
-        {
-          "day": 56,
-          "discharge_m3s": 7.878724462414092,
-          "rate_m3s_per_day": -0.0010991111095005612
-        },
-        {
-          "day": 57,
-          "discharge_m3s": 7.877676779077802,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 58,
-          "discharge_m3s": 7.876676779077812,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 59,
-          "discharge_m3s": 7.875676779077821,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 60,
-          "discharge_m3s": 7.874676779077831,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 61,
-          "discharge_m3s": 7.87367677907784,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 62,
-          "discharge_m3s": 7.87267677907785,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 63,
-          "discharge_m3s": 7.871676779077859,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 64,
-          "discharge_m3s": 7.8706767790778684,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 65,
-          "discharge_m3s": 7.869676779077878,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 66,
-          "discharge_m3s": 7.868676779077887,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 67,
-          "discharge_m3s": 7.867676779077897,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 68,
-          "discharge_m3s": 7.866676779077906,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 69,
-          "discharge_m3s": 7.865676779077916,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 70,
-          "discharge_m3s": 7.864676779077925,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 71,
-          "discharge_m3s": 7.8636767790779345,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 72,
-          "discharge_m3s": 7.862676779077944,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 73,
-          "discharge_m3s": 7.861676779077953,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 74,
-          "discharge_m3s": 7.860676779077963,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 75,
-          "discharge_m3s": 7.859676779077972,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 76,
-          "discharge_m3s": 7.858676779077982,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 77,
-          "discharge_m3s": 7.857676779077991,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 78,
-          "discharge_m3s": 7.8566767790780005,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 79,
-          "discharge_m3s": 7.85567677907801,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 80,
-          "discharge_m3s": 7.854676779078019,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 81,
-          "discharge_m3s": 7.853676779078029,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 82,
-          "discharge_m3s": 7.852676779078038,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 83,
-          "discharge_m3s": 7.851676779078048,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 84,
-          "discharge_m3s": 7.850676779078057,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 85,
-          "discharge_m3s": 7.849676779078067,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 86,
-          "discharge_m3s": 7.848676779078076,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 87,
-          "discharge_m3s": 7.8476767790780855,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 88,
-          "discharge_m3s": 7.846676779078095,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 89,
-          "discharge_m3s": 7.845676779078104,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 90,
-          "discharge_m3s": 7.844676779078114,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 91,
-          "discharge_m3s": 7.843676779078123,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 92,
-          "discharge_m3s": 7.842676779078133,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 93,
-          "discharge_m3s": 7.841676779078142,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 94,
-          "discharge_m3s": 7.8406767790781515,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 95,
-          "discharge_m3s": 7.839676779078161,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 96,
-          "discharge_m3s": 7.83867677907817,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 97,
-          "discharge_m3s": 7.83767677907818,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 98,
-          "discharge_m3s": 7.836676779078189,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 99,
-          "discharge_m3s": 7.835676779078199,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 100,
-          "discharge_m3s": 7.834676779078208,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 101,
-          "discharge_m3s": 7.833676779078218,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 102,
-          "discharge_m3s": 7.832676779078227,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 103,
-          "discharge_m3s": 7.8316767790782365,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 104,
-          "discharge_m3s": 7.830676779078246,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 105,
-          "discharge_m3s": 7.829676779078255,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 106,
-          "discharge_m3s": 7.828676779078265,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 107,
-          "discharge_m3s": 7.827676779078274,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 108,
-          "discharge_m3s": 7.826676779078284,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 109,
-          "discharge_m3s": 7.825676779078293,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 110,
-          "discharge_m3s": 7.8246767790783025,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 111,
-          "discharge_m3s": 7.823676779078312,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 112,
-          "discharge_m3s": 7.822676779078321,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 113,
-          "discharge_m3s": 7.821676779078331,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 114,
-          "discharge_m3s": 7.82067677907834,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 115,
-          "discharge_m3s": 7.81967677907835,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 116,
-          "discharge_m3s": 7.818676779078359,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 117,
-          "discharge_m3s": 7.8176767790783686,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 118,
-          "discharge_m3s": 7.816676779078378,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 119,
-          "discharge_m3s": 7.815676779078387,
-          "rate_m3s_per_day": -0.001
-        },
-        {
-          "day": 120,
-          "discharge_m3s": 7.814676779078397,
-          "rate_m3s_per_day": -0.001
+          "discharge_m3s": 6.81629515408702,
+          "rate_m3s_per_day": -0.3374573586992023
         }
       ]
     },
-    "official_stage_based_rain_free_days": 7.5,
-    "candidate_minus_official_days": null,
+    "official_stage_based_rain_free_days": 7.375,
+    "candidate_minus_official_days": 2.791666666666666,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
