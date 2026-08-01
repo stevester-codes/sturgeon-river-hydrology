@@ -6,7 +6,7 @@ import csv
 import json
 import math
 import os
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -179,7 +179,7 @@ def main() -> None:
         for item in (
             date_item("official_weather_ensemble_median", official_p50, "primary"),
             date_item("precipitation_screened_direct_q", screened_direct_q, "independent_check"),
-            date_item("contractor_site_recession", field_crossing, "field_check"),
+            date_item("contractor_site_rain_free_recession", field_crossing, "field_check"),
         )
         if item is not None
     ]
@@ -231,6 +231,29 @@ def main() -> None:
         shadow_status = "historical_response_shadow_unavailable"
         shadow_difference = None
         shadow_historical_days = None
+
+    material_shadow_disagreement = bool(
+        shadow_aligned
+        and shadow_difference is not None
+        and abs(shadow_difference) >= 2.0
+    )
+    official_p50_days = finite(
+        nested(readiness, "probabilistic_exposure", "quantiles", "p50", "days")
+    )
+    shadow_sensitivity_days = (
+        official_p50_days + shadow_difference
+        if material_shadow_disagreement
+        and official_p50_days is not None
+        and shadow_difference is not None
+        else None
+    )
+    shadow_sensitivity_date = (
+        (generated + timedelta(days=shadow_sensitivity_days)).date().isoformat()
+        if shadow_sensitivity_days is not None
+        else None
+    )
+    if material_shadow_disagreement and overall_confidence == "moderate":
+        overall_confidence = "low_to_moderate"
 
     event_blocks = int(
         finite(nested(health, "historical_recession_validation", "independent_event_blocks"), 0)
@@ -302,7 +325,7 @@ def main() -> None:
         "A newer HRDPS or GEPS cycle materially increases rainfall or moves the weather-ensemble upper date.",
         "The official median, screened direct-Q check and contractor-site recession projection diverge by more than two days.",
         "A verified site survey differs from the provisional field-informed WSE range by more than 0.15 m.",
-        "The current-cycle historical response comparison becomes available and materially exceeds the official rain-response delay.",
+        "The current-cycle historical response disagreement persists, grows, or is later validated for operational use.",
         "Access, drainage or bearing conditions remain unsuitable even after the water elevation reaches 650.20 m.",
     ]
     release_checklist = [
@@ -377,7 +400,9 @@ def main() -> None:
         "decision": {
             "status": decision_status,
             "headline": (
-                "Not ready; use the consensus inspection window and retain a separate schedule contingency date."
+                "Not ready; timing methods agree on an inspection window, but the historical rain-response shadow is materially later. Retain the schedule contingency date."
+                if decision_status == "not_ready" and material_shadow_disagreement
+                else "Not ready; use the consensus inspection window and retain a separate schedule contingency date."
                 if decision_status == "not_ready"
                 else "Inspection window is approaching; field verification remains mandatory."
             ),
@@ -396,6 +421,7 @@ def main() -> None:
             "official_threshold_median_date": official_p50,
             "weather_ensemble_upper_date": weather_p90,
             "engineering_schedule_contingency_date": contingency_date,
+            "historical_response_shadow_sensitivity_date": shadow_sensitivity_date,
             "terminology": {
                 "weather_ensemble_upper_date": "Actual percentile of the same GEPS threshold distribution.",
                 "engineering_schedule_contingency_date": "Sensitivity envelope for schedule protection; not a calibrated p90 probability.",
@@ -441,6 +467,9 @@ def main() -> None:
                 ),
                 "historical_censored_model_days_lost": shadow_historical_days,
                 "historical_minus_official_days": shadow_difference,
+                "shadow_adjusted_threshold_sensitivity_days": shadow_sensitivity_days,
+                "shadow_adjusted_threshold_sensitivity_date": shadow_sensitivity_date,
+                "material_disagreement": material_shadow_disagreement,
                 "operational_effect": "none_shadow_only",
             },
         },
@@ -458,6 +487,11 @@ def main() -> None:
                 f"Rain-response calibration has {uncensored_events} uncensored live peak-training events.",
                 f"Current forecast feature support is {feature_status}.",
                 f"Screened direct-discharge validation contains {event_blocks} independent event blocks.",
+                (
+                    f"The current-cycle historical rain-response shadow is {abs(shadow_difference):.2f} days later than the official response."
+                    if material_shadow_disagreement and shadow_difference is not None
+                    else "No material current-cycle historical rain-response disagreement is available."
+                ),
                 "Only two date-level contractor site elevations are available and their datum, exact location and time remain unverified.",
             ],
         },
@@ -514,9 +548,10 @@ Run ID: `{run_id}`
 - **Consensus inspection window:** **{window}**
 - Official weather-ensemble median threshold date: **{official_p50 or 'unavailable'}**
 - Independent precipitation-screened direct-Q date: **{screened_direct_q or 'unavailable'}**
-- Contractor-site recession projection: **{field_crossing or 'unavailable'}**
+- Contractor-site rain-free recession projection: **{field_crossing or 'unavailable'}**
 - Weather-ensemble upper date: **{weather_p90 or 'unavailable'}**
 - Engineering schedule contingency: **{contingency_date or 'unavailable'}** — sensitivity envelope, not a formal p90 probability.
+- Historical response shadow sensitivity: **{shadow_sensitivity_date or 'not applicable'}** — shadow only and excluded from the consensus window.
 
 ## 3. Current river and site state
 
