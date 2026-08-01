@@ -49,10 +49,14 @@ jobs:
           assert synthesis['run_id'] == manifest['run_id']
           assert (root / 'forecast_v2/forecast_brief.md').exists()
           assert (root / 'history/forecast_history.csv').exists()
+          shadow = synthesis['evidence_reconciliation']['historical_response_shadow']
+          assert 'material_disagreement' in shadow
+          assert 'historical_response_shadow_sensitivity_date' in synthesis['working_forecast']
           print(json.dumps({
               'run_id': synthesis['run_id'],
               'decision': synthesis['decision'],
               'working_forecast': synthesis['working_forecast'],
+              'historical_response_shadow': shadow,
           }, indent=2))
           PY
       - name: Publish verification marker
@@ -67,4 +71,4 @@ jobs:
           git commit -m 'Verify forecast synthesis [skip ci]' || exit 0
           git push
 
-# Trigger after workflow registration on the default branch.
+# Refined caution verification trigger.
