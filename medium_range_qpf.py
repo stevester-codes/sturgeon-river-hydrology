@@ -71,3 +71,5 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+# Combined-entry-point rebuild trigger after both wrappers were committed.
