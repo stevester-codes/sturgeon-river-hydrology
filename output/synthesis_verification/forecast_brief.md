@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-01T19:17:01+00:00  
-Run ID: `20260801T191701Z`
+Generated: 2026-08-01T19:22:34+00:00  
+Run ID: `20260801T192234Z`
 
 ## 1. Decision
 
@@ -9,18 +9,19 @@ Run ID: `20260801T191701Z`
 
 ## 2. Working inspection window
 
-- **Consensus inspection window:** **2026-08-10 to 2026-08-12**
+- **Consensus inspection window:** **2026-08-10 to 2026-08-13**
 - Official weather-ensemble median threshold date: **2026-08-10**
-- Independent precipitation-screened direct-Q date: **2026-08-12**
-- Contractor-site recession projection: **2026-08-11**
+- Independent precipitation-screened direct-Q date: **2026-08-13**
+- Contractor-site rain-free recession projection: **2026-08-11**
 - Weather-ensemble upper date: **2026-08-13**
 - Engineering schedule contingency: **2026-08-20** — sensitivity envelope, not a formal p90 probability.
+- Historical response shadow sensitivity: **2026-08-15** — shadow only and excluded from the consensus window.
 
 ## 3. Current river and site state
 
 - 05EA002 stage: **2.062 m**, 24-hour change **-0.034 m**
 - 05EA002 discharge: **10.60 m³/s**
-- Observation age: **0.50 h**
+- Observation age: **1.22 h**
 - Provisional field-informed project WSE: **650.806–650.823 m**
 - Provisional depth above 650.20 m: **0.606–0.623 m**
 - No direct current construction-site measurement is available.
@@ -36,13 +37,13 @@ Run ID: `20260801T191701Z`
 
 ## 5. Evidence agreement
 
-The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **2 day(s)**, the synthesis status is **three method consensus**.
+The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **3 day(s)**, the synthesis status is **weak consensus widened window**.
 
 Current-cycle historical shadow: 5.28 d versus official 1.12 d; difference 4.16 d. Shadow only.
 
 ## 6. Confidence by component
 
-- Overall inspection timing: **moderate**
+- Overall inspection timing: **low_to_moderate**
 - Live river state: **high**
 - Meteorological forecast: **moderate**
 - Dry recession timing: **moderate**
@@ -53,10 +54,10 @@ Current-cycle historical shadow: 5.28 d versus official 1.12 d; difference 4.16 
 
 ## 7. What changed since the previous issued forecast
 
-- Official median date movement: **unavailable**
-- Stage change since previous run: **unavailable**
-- Discharge change since previous run: **unavailable**
-- HRDPS 48-hour basin-rain change: **unavailable**
+- Official median date movement: **0 day(s)**
+- Stage change since previous run: **0.000 m**
+- Discharge change since previous run: **0.00 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 
@@ -66,7 +67,7 @@ These are observed changes, not a causal decomposition.
 - A newer HRDPS or GEPS cycle materially increases rainfall or moves the weather-ensemble upper date.
 - The official median, screened direct-Q check and contractor-site recession projection diverge by more than two days.
 - A verified site survey differs from the provisional field-informed WSE range by more than 0.15 m.
-- The current-cycle historical response comparison becomes available and materially exceeds the official rain-response delay.
+- The current-cycle historical response disagreement persists, grows, or is later validated for operational use.
 - Access, drainage or bearing conditions remain unsuitable even after the water elevation reaches 650.20 m.
 
 ## 9. Field release checklist
