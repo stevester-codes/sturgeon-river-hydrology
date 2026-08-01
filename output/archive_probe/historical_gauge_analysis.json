@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-01T01:01:21+00:00",
+  "generated_utc": "2026-08-01T14:12:44+00:00",
   "status": "historical_gauge_candidate_ready_for_rdpa_pairing",
   "mode": "shadow_only_no_operational_promotion",
   "station": "05EA002",
@@ -7,9 +7,9 @@
   "retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-01T01:01:21+00:00",
+        "start_utc": "2025-02-01T14:12:44+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+01%3A01%3A21&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+14%3A12%3A44&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -436,17 +436,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-01T01:01:21+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-01+01%3A01%3A21",
+        "end_utc": "2026-08-01T14:12:44+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-01+14%3A12%3A44",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 412,
+        "bytes_received": 20848,
         "availability": "data_returned",
-        "rows": 4,
-        "stage_rows": 2,
-        "discharge_rows": 2,
+        "rows": 316,
+        "stage_rows": 158,
+        "discharge_rows": 158,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-01T00:05:00+00:00",
+        "last_timestamp_utc": "2026-08-01T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -461,9 +461,9 @@
         ]
       }
     ],
-    "hourly_paired_points": 9548,
+    "hourly_paired_points": 9561,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-01T00:00:00+00:00",
+    "last_utc": "2026-08-01T13:00:00+00:00",
     "stage_range_m": [
       0.532,
       3.014
@@ -474,8 +474,8 @@
     ]
   },
   "current": {
-    "stage_m": 2.092,
-    "discharge_m3s": 11.0,
+    "stage_m": 2.065,
+    "discharge_m3s": 10.7,
     "season": "summer",
     "limb": "falling",
     "operational_target_stage_m": null
@@ -1423,11 +1423,11 @@
         "target_stage_m": 1.3788209310946067
       },
       "summer_falling": {
-        "n": 1727,
-        "slope_m3s_per_m": 9.67984977577865,
-        "intercept_m3s": -7.209362023444826,
-        "r2": 0.9766572495478011,
-        "rmse_m3s": 1.1994368115975005,
+        "n": 1740,
+        "slope_m3s_per_m": 9.662065336546059,
+        "intercept_m3s": -7.201044998103429,
+        "r2": 0.9762026383331602,
+        "rmse_m3s": 1.2083751988074547,
         "stage_range_m": [
           0.62,
           3.01
@@ -1436,7 +1436,7 @@
           0.049,
           26.3
         ],
-        "target_stage_m": 1.4441713815047632
+        "target_stage_m": 1.4459687977123243
       },
       "summer_rising": {
         "n": 883,
@@ -1457,186 +1457,181 @@
     }
   },
   "gauge_only_recession_screen": {
-    "points": 1626,
+    "points": 1639,
     "stage_fit": {
-      "n": 1483,
-      "intercept_per_day": -0.01666140067387428,
-      "coefficient_per_day": -0.011303961354768594,
+      "n": 1496,
+      "intercept_per_day": -0.016623647153870727,
+      "coefficient_per_day": -0.011362922226383443,
       "value_range": [
         0.532,
         2.98
       ],
-      "rate_rmse_per_day": 0.016144048328362665
+      "rate_rmse_per_day": 0.01610419129545617
     },
     "discharge_fit": {
-      "n": 1499,
-      "intercept_per_day": -0.11631453920685457,
-      "coefficient_per_day": -0.039783969559542075,
+      "n": 1526,
+      "intercept_per_day": -0.11459125056745591,
+      "coefficient_per_day": -0.03993484487013317,
       "value_range": [
         0.06,
         25.6
       ],
-      "rate_rmse_per_day": 0.19266856230139376
+      "rate_rmse_per_day": 0.19205093187943548
     },
     "year_holdout": {
       "train_years": [
         2025
       ],
       "test_year": 2026,
-      "test_points": 857,
+      "test_points": 870,
       "stage_candidate": {
-        "n": 857,
-        "rmse_per_day": 0.02111752963900389,
-        "mae_per_day": 0.016618582014465328,
-        "bias_per_day": 0.0030590507392786203
+        "n": 870,
+        "rmse_per_day": 0.02099838182719673,
+        "mae_per_day": 0.016499147700531628,
+        "bias_per_day": 0.0030773870588779494
       },
       "discharge_candidate": {
-        "n": 857,
-        "rmse_per_day": 0.4685769905726484,
-        "mae_per_day": 0.35961792401012194,
-        "bias_per_day": -0.28327948090730504
+        "n": 870,
+        "rmse_per_day": 0.46781026627722616,
+        "mae_per_day": 0.35922118944960146,
+        "bias_per_day": -0.2840234357264818
       }
     },
     "projections": {
       "historical_gauge_only_stage_recession": {
         "reached": true,
-        "days": 17.791666666666668,
+        "days": 17.083333333333332,
         "path_daily": [
           {
             "day": 1,
-            "value": 2.051908294419468,
-            "rate_per_day": -0.03987487373884484
+            "value": 2.025129431421453,
+            "rate_per_day": -0.039653809679613204
           },
           {
             "day": 2,
-            "value": 2.0122673376643063,
-            "rate_per_day": -0.03942656274186074
+            "value": 1.985709450840297,
+            "rate_per_day": -0.03920567133272138
           },
           {
             "day": 3,
-            "value": 1.9730720619904374,
-            "rate_per_day": -0.038983292080586124
+            "value": 1.946734966040627,
+            "rate_per_day": -0.03876259751757512
           },
           {
             "day": 4,
-            "value": 1.9343174566301473,
-            "rate_per_day": -0.038545005086805764
+            "value": 1.908200942355039,
+            "rate_per_day": -0.03832453099854176
           },
           {
             "day": 5,
-            "value": 1.8959985671515067,
-            "rate_per_day": -0.038111645729422036
+            "value": 1.870102402014256,
+            "rate_per_day": -0.037891415186823894
           },
           {
             "day": 6,
-            "value": 1.8581104948249907,
-            "rate_per_day": -0.037683158607291864
+            "value": 1.8324344235041086,
+            "rate_per_day": -0.037463194133149316
           },
           {
             "day": 7,
-            "value": 1.8206483959972188,
-            "rate_per_day": -0.03725948894214412
+            "value": 1.7951921409297786,
+            "rate_per_day": -0.03703981252054353
           },
           {
             "day": 8,
-            "value": 1.7836074814717364,
-            "rate_per_day": -0.03684058257157677
+            "value": 1.7583707433872324,
+            "rate_per_day": -0.03662121565718406
           },
           {
             "day": 9,
-            "value": 1.7469830158967603,
-            "rate_per_day": -0.03642638594213267
+            "value": 1.7219654743417532,
+            "rate_per_day": -0.036207349469335355
           },
           {
             "day": 10,
-            "value": 1.7107703171598057,
-            "rate_per_day": -0.03601684610245322
+            "value": 1.6859716310134998,
+            "rate_per_day": -0.03579816049436368
           },
           {
             "day": 11,
-            "value": 1.6749647557891176,
-            "rate_per_day": -0.035611910696509
+            "value": 1.6503845637700096,
+            "rate_per_day": -0.035393595873830876
           },
           {
             "day": 12,
-            "value": 1.6395617543618364,
-            "rate_per_day": -0.035211527956906546
+            "value": 1.6151996755255638,
+            "rate_per_day": -0.034993603346666194
           },
           {
             "day": 13,
-            "value": 1.604556786918814,
-            "rate_per_day": -0.03481564669827032
+            "value": 1.5804124211473427,
+            "rate_per_day": -0.034598131242415245
           },
           {
             "day": 14,
-            "value": 1.5699453783860107,
-            "rate_per_day": -0.03442421631069915
+            "value": 1.546018306868293,
+            "rate_per_day": -0.034207128474565335
           },
           {
             "day": 15,
-            "value": 1.5357231040023955,
-            "rate_per_day": -0.034037186753296145
+            "value": 1.5120128897066278,
+            "rate_per_day": -0.03382054453394614
           },
           {
             "day": 16,
-            "value": 1.5018855887542817,
-            "rate_per_day": -0.03365450854777147
+            "value": 1.4783917768918926,
+            "rate_per_day": -0.03343832948220506
           },
           {
             "day": 17,
-            "value": 1.4684285068160186,
-            "rate_per_day": -0.03327613277211694
+            "value": 1.4451506252975093,
+            "rate_per_day": -0.03306043394535621
           }
         ]
       },
       "historical_gauge_only_discharge_recession": {
         "reached": true,
-        "days": 9.125,
+        "days": 8.583333333333334,
         "path_daily": [
           {
             "day": 1,
-            "value": 10.456494346372667,
-            "rate_per_day": -0.5331992579427671
+            "value": 10.168349862229798,
+            "rate_per_day": -0.5215305265956194
           },
           {
             "day": 2,
-            "value": 9.934204273622337,
-            "rate_per_day": -0.5123859841434141
+            "value": 9.657529733006635,
+            "rate_per_day": -0.5010970035797264
           },
           {
             "day": 3,
-            "value": 9.432301637885287,
-            "rate_per_day": -0.49238515027114993
+            "value": 9.16672349431371,
+            "rate_per_day": -0.4814640643102278
           },
           {
             "day": 4,
-            "value": 8.949990621646206,
-            "rate_per_day": -0.47316504297604756
+            "value": 8.695147003570805,
+            "rate_per_day": -0.46260034198197264
           },
           {
             "day": 5,
-            "value": 8.486506471888822,
-            "rate_per_day": -0.4546951868293233
+            "value": 8.242046840839324,
+            "rate_per_day": -0.44447569873864845
           },
           {
             "day": 6,
-            "value": 8.041114287502468,
-            "rate_per_day": -0.43694629600145485
+            "value": 7.8066991051117105,
+            "rate_per_day": -0.4270611775226672
           },
           {
             "day": 7,
-            "value": 7.613107854021869,
-            "rate_per_day": -0.4198902278265296
+            "value": 7.388408257762187,
+            "rate_per_day": -0.41032895581156886
           },
           {
             "day": 8,
-            "value": 7.201808523852487,
-            "rate_per_day": -0.40349993817919416
-          },
-          {
-            "day": 9,
-            "value": 6.806564140205979,
-            "rate_per_day": -0.38774943859345207
+            "value": 6.986506011310961,
+            "rate_per_day": -0.3942523011670286
           }
         ]
       }
