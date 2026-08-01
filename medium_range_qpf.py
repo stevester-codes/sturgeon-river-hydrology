@@ -1,11 +1,15 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import json
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 
 import medium_range_qpf_base as _base
 from medium_range_qpf_base import *  # noqa: F401,F403 - compatibility re-export
 from qpf_forecast_v2 import get_links, http, parse_run_time
+
+MAX_GEPS_CARRY_FORWARD_HOURS = 24.0
 
 
 def _bases(base: str) -> list[str]:
@@ -59,6 +63,64 @@ def _select_complete_geps_base(session) -> str | None:
     return max(found, key=lambda item: item[0])[1] if found else None
 
 
+def _parse_utc(value: str | None) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
+    except ValueError:
+        return None
+
+
+def _carry_forward_valid_geps() -> dict | None:
+    spatial = Path("sturgeon_pipeline_output") / "spatial"
+    metadata_path = spatial / "medium_range_qpf.json"
+    geps_path = spatial / "geps_qpf_by_subarea.csv"
+    if not metadata_path.exists() or not geps_path.exists() or geps_path.stat().st_size <= 100:
+        return None
+    try:
+        data = json.loads(metadata_path.read_text())
+    except Exception:
+        return None
+    geps = data.get("geps", {})
+    run_time = _parse_utc(geps.get("run_time_utc"))
+    now = datetime.now(timezone.utc)
+    age_hours = None if run_time is None else (now - run_time).total_seconds() / 3600.0
+    horizons = sorted(int(value) for value in geps.get("horizons_processed_h", []))
+    valid = (
+        geps.get("status") == "processed"
+        and geps.get("validation", {}).get("passed") is True
+        and horizons == sorted(_base.GEPS_HORIZONS)
+        and age_hours is not None
+        and -0.25 <= age_hours <= MAX_GEPS_CARRY_FORWARD_HOURS
+    )
+    if not valid:
+        return None
+    geps["carry_forward"] = {
+        "active": True,
+        "reason": "No complete newer GEPS package was discoverable during ECCC publication or UTC-day rollover.",
+        "source_run_time_utc": run_time.isoformat(),
+        "age_hours_at_refresh": age_hours,
+        "maximum_age_hours": MAX_GEPS_CARRY_FORWARD_HOURS,
+        "interpretation": "The last complete ensemble is retained; missing source files are not interpreted as zero rainfall.",
+    }
+    data["generated_utc"] = now.isoformat()
+    data["geps"] = geps
+    data["warning_count"] = int(data.get("warning_count") or 0) + 1
+    data["operational_source_state"] = "validated_geps_carry_forward"
+    metadata_path.write_text(json.dumps(data, indent=2))
+    warning_path = spatial / "medium_range_qpf_warnings.log"
+    existing = warning_path.read_text() if warning_path.exists() else ""
+    warning_path.write_text(
+        existing.rstrip()
+        + "\nCarried forward the last complete GEPS package because no complete newer source package was discoverable.\n"
+    )
+    return geps["carry_forward"]
+
+
 def main() -> None:
     session = http()
     selected: dict[str, str] = {}
@@ -70,6 +132,11 @@ def main() -> None:
     if geps_base:
         _base.GEPS_BASE = geps_base
         selected["GEPS"] = geps_base
+    if geps_base is None:
+        carry = _carry_forward_valid_geps()
+        if carry is not None:
+            print(json.dumps({"rollover_selected_bases": selected, "geps_carry_forward": carry}, indent=2))
+            return
     print({"rollover_selected_bases": selected})
     _base.main()
 
