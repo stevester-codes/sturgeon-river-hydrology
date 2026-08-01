@@ -1,0 +1,47 @@
+name: Apply operational rollover commands
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'patch_operational_rollover_commands.py'
+      - 'qpf_forecast_rollover.py'
+      - 'medium_range_qpf_rollover.py'
+      - '.github/workflows/apply-operational-rollover-commands.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-operational-rollover-commands
+  cancel-in-progress: false
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch operational workflow
+        run: python patch_operational_rollover_commands.py
+      - name: Compile wrappers
+        run: python -m py_compile qpf_forecast_rollover.py medium_range_qpf_rollover.py
+      - name: Commit production workflow
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/sturgeon-operational.yml
+          if git diff --cached --quiet; then
+            echo 'Operational workflow already patched.'
+            exit 0
+          fi
+          git commit -m 'Use rollover-aware weather retrieval in live forecast'
+          for attempt in 1 2 3 4; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep $((attempt * 5))
+          done
+          exit 1
