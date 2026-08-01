@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-01T19:16:38+00:00  
-Run ID: `20260801T191638Z`
+Generated: 2026-08-01T19:17:01+00:00  
+Run ID: `20260801T191701Z`
 
 ## 1. Decision
 
