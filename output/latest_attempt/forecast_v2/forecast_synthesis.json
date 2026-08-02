@@ -1,8 +1,8 @@
 {
   "schema_version": 1,
   "status": "operational_forecast_synthesis",
-  "run_id": "20260802T150751Z",
-  "generated_utc": "2026-08-02T15:07:51+00:00",
+  "run_id": "20260802T161515Z",
+  "generated_utc": "2026-08-02T16:15:15+00:00",
   "decision": {
     "status": "not_ready",
     "headline": "Not ready; timing methods agree on an inspection window, but the historical rain-response shadow is materially later. Retain the schedule contingency date.",
@@ -14,7 +14,7 @@
     "consensus_inputs": [
       {
         "name": "official_weather_ensemble_median",
-        "date_utc": "2026-08-11",
+        "date_utc": "2026-08-12",
         "role": "primary"
       },
       {
@@ -31,7 +31,7 @@
     "consensus_spread_days": 1,
     "inspection_window_start_date": "2026-08-11",
     "inspection_window_end_date": "2026-08-12",
-    "official_threshold_median_date": "2026-08-11",
+    "official_threshold_median_date": "2026-08-12",
     "weather_ensemble_upper_date": "2026-08-14",
     "engineering_schedule_contingency_date": "2026-08-22",
     "historical_response_shadow_sensitivity_date": "2026-08-16",
@@ -41,30 +41,30 @@
     }
   },
   "current_state": {
-    "latest_stage_utc": "2026-08-02T14:05:00+00:00",
-    "observation_age_hours": 1.047469736388889,
-    "hydrograph_limb": "approximately_flat",
-    "stage_05EA002_m": 2.069,
-    "stage_change_24h_m": 0.0040000000000000036,
-    "discharge_05EA002_m3s": 10.7,
+    "latest_stage_utc": "2026-08-02T15:05:00+00:00",
+    "observation_age_hours": 1.1706978883333332,
+    "hydrograph_limb": "rising",
+    "stage_05EA002_m": 2.086,
+    "stage_change_24h_m": 0.016999999999999904,
+    "discharge_05EA002_m3s": 10.9,
     "provisional_site_wse_range_m": [
       650.7474285714285,
-      650.8399183673467
+      650.8735510204081
     ],
     "provisional_depth_over_650_20_range_m": [
       0.5474285714284406,
-      0.639918367346695
+      0.6735510204080128
     ],
     "actual_current_site_measurement_available": false
   },
   "weather": {
     "hrdps_48h": {
-      "run_time_utc": "2026-08-02T06:00:00+00:00",
-      "basin_mm": 12.8658628928577,
-      "lower_basin_mm": 13.478495227309052,
-      "direct_local_mm": 14.77456876717688,
-      "storm_type": "widespread_basin",
-      "official_short_range_response_days_lost": 1.184413494461695,
+      "run_time_utc": "2026-08-02T12:00:00+00:00",
+      "basin_mm": 8.71498060297751,
+      "lower_basin_mm": 9.83419737697968,
+      "direct_local_mm": 11.593576018242947,
+      "storm_type": "mixed_or_weak",
+      "official_short_range_response_days_lost": 1.137866414008311,
       "feature_support_status": "material_extrapolation"
     },
     "geps": {
@@ -78,10 +78,10 @@
     "rule": "The official GEPS median is primary. The precipitation-screened direct-Q date and contractor-site recession date are independent checks. When available methods agree within two days, their minimum-to-maximum range is reported as the consensus inspection window. Methods are not averaged.",
     "historical_response_shadow": {
       "status": "current_cycle_comparison_available",
-      "official_analogue_response_days_lost": 1.184413494461695,
-      "historical_censored_model_days_lost": 5.443900082453004,
-      "historical_minus_official_days": 4.259486587991309,
-      "shadow_adjusted_threshold_sensitivity_days": 13.622635475229071,
+      "official_analogue_response_days_lost": 1.137866414008311,
+      "historical_censored_model_days_lost": 4.9595423166475365,
+      "historical_minus_official_days": 3.8216759026392255,
+      "shadow_adjusted_threshold_sensitivity_days": 13.513315585009387,
       "shadow_adjusted_threshold_sensitivity_date": "2026-08-16",
       "material_disagreement": true,
       "operational_effect": "none_shadow_only"
@@ -101,16 +101,16 @@
       "Rain-response calibration has 2 uncensored live peak-training events.",
       "Current forecast feature support is material_extrapolation.",
       "Screened direct-discharge validation contains 8 independent event blocks.",
-      "The current-cycle historical rain-response shadow is 4.26 days later than the official response.",
+      "The current-cycle historical rain-response shadow is 3.82 days later than the official response.",
       "Only two date-level contractor site elevations are available and their datum, exact location and time remain unverified."
     ]
   },
   "change_since_previous_issued_forecast": {
     "previous_run_available": true,
-    "official_median_date_change_days": 0,
-    "stage_change_since_previous_run_m": 0.01100000000000012,
-    "discharge_change_since_previous_run_m3s": 0.09999999999999964,
-    "hrdps_48h_basin_rain_change_mm": 0.0,
+    "official_median_date_change_days": 1,
+    "stage_change_since_previous_run_m": 0.016999999999999904,
+    "discharge_change_since_previous_run_m3s": 0.20000000000000107,
+    "hrdps_48h_basin_rain_change_mm": -4.15088228988019,
     "causal_attribution_available": false,
     "interpretation": "These are observed input and output changes between issued forecasts. They are not a causal decomposition; counterfactual one-input-at-a-time attribution has not yet been implemented."
   },
