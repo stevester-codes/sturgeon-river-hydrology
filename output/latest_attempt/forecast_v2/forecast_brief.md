@@ -1,11 +1,11 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-02T17:19:01+00:00  
-Run ID: `20260802T171901Z`
+Generated: 2026-08-02T18:19:33+00:00  
+Run ID: `20260802T181933Z`
 
 ## 1. Decision
 
-**Not Ready.** The river is approximately_flat. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
+**Not Ready.** The river is falling. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
 
 ## 2. Working inspection window
 
@@ -19,11 +19,11 @@ Run ID: `20260802T171901Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.063 m**, 24-hour change **-0.002 m**
-- 05EA002 discharge: **10.60 m³/s**
-- Observation age: **1.23 h**
-- Provisional field-informed project WSE: **650.747–650.823 m**
-- Provisional depth above 650.20 m: **0.547–0.623 m**
+- 05EA002 stage: **2.053 m**, 24-hour change **-0.013 m**
+- 05EA002 discharge: **10.50 m³/s**
+- Observation age: **1.24 h**
+- Provisional field-informed project WSE: **650.747–650.806 m**
+- Provisional depth above 650.20 m: **0.547–0.606 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and added delay
@@ -33,13 +33,13 @@ Run ID: `20260802T171901Z`
 - Lower-basin rain: **9.83 mm**
 - Direct-local rain: **11.59 mm**
 - Official short-range response delay: **1.14 days**
-- Central forecast shift versus the dry trace: **-0.13 days**
+- Central forecast shift versus the dry trace: **-1.25 days**
 
 ## 5. Evidence agreement
 
 The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **1 day(s)**, the synthesis status is **three method consensus**.
 
-Current-cycle historical shadow: 5.04 d versus official 1.14 d; difference 3.90 d. Shadow only.
+Current-cycle historical shadow: 5.08 d versus official 1.14 d; difference 3.94 d. Shadow only.
 
 ## 6. Confidence by component
 
@@ -54,9 +54,9 @@ Current-cycle historical shadow: 5.04 d versus official 1.14 d; difference 3.90 
 
 ## 7. What changed since the previous issued forecast
 
-- Official median date movement: **-1 day(s)**
-- Stage change since previous run: **-0.023 m**
-- Discharge change since previous run: **-0.30 m³/s**
+- Official median date movement: **0 day(s)**
+- Stage change since previous run: **-0.010 m**
+- Discharge change since previous run: **-0.10 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
