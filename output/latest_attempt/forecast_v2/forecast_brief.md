@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-02T21:38:58+00:00  
-Run ID: `20260802T213858Z`
+Generated: 2026-08-02T22:40:13+00:00  
+Run ID: `20260802T224013Z`
 
 ## 1. Decision
 
@@ -19,9 +19,9 @@ Run ID: `20260802T213858Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.080 m**, 24-hour change **0.023 m**
+- 05EA002 stage: **2.077 m**, 24-hour change **0.023 m**
 - 05EA002 discharge: **10.80 m³/s**
-- Observation age: **0.57 h**
+- Observation age: **0.59 h**
 - Provisional field-informed project WSE: **650.747–650.857 m**
 - Provisional depth above 650.20 m: **0.547–0.657 m**
 - No direct current construction-site measurement is available.
@@ -33,13 +33,13 @@ Run ID: `20260802T213858Z`
 - Lower-basin rain: **6.87 mm**
 - Direct-local rain: **6.12 mm**
 - Official short-range response delay: **1.12 days**
-- Central forecast shift versus the dry trace: **-0.12 days**
+- Central forecast shift versus the dry trace: **-0.17 days**
 
 ## 5. Evidence agreement
 
 The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **1 day(s)**, the synthesis status is **three method consensus**.
 
-Current-cycle historical shadow: 4.77 d versus official 1.12 d; difference 3.65 d. Shadow only.
+Current-cycle historical shadow: 4.78 d versus official 1.12 d; difference 3.66 d. Shadow only.
 
 ## 6. Confidence by component
 
@@ -55,9 +55,9 @@ Current-cycle historical shadow: 4.77 d versus official 1.12 d; difference 3.65 
 ## 7. What changed since the previous issued forecast
 
 - Official median date movement: **0 day(s)**
-- Stage change since previous run: **-0.016 m**
-- Discharge change since previous run: **-0.20 m³/s**
-- HRDPS 48-hour basin-rain change: **-2.46 mm**
+- Stage change since previous run: **-0.003 m**
+- Discharge change since previous run: **0.00 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 
