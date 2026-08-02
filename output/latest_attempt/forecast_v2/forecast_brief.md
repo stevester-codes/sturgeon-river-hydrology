@@ -1,29 +1,29 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-02T16:15:15+00:00  
-Run ID: `20260802T161515Z`
+Generated: 2026-08-02T17:19:01+00:00  
+Run ID: `20260802T171901Z`
 
 ## 1. Decision
 
-**Not Ready.** The river is rising. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
+**Not Ready.** The river is approximately_flat. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
 
 ## 2. Working inspection window
 
 - **Consensus inspection window:** **2026-08-11 to 2026-08-12**
-- Official weather-ensemble median threshold date: **2026-08-12**
+- Official weather-ensemble median threshold date: **2026-08-11**
 - Independent precipitation-screened direct-Q date: **2026-08-12**
 - Contractor-site rain-free recession projection: **2026-08-11**
 - Weather-ensemble upper date: **2026-08-14**
-- Engineering schedule contingency: **2026-08-22** — sensitivity envelope, not a formal p90 probability.
-- Historical response shadow sensitivity: **2026-08-16** — shadow only and excluded from the consensus window.
+- Engineering schedule contingency: **2026-08-21** — sensitivity envelope, not a formal p90 probability.
+- Historical response shadow sensitivity: **2026-08-15** — shadow only and excluded from the consensus window.
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.086 m**, 24-hour change **0.017 m**
-- 05EA002 discharge: **10.90 m³/s**
-- Observation age: **1.17 h**
-- Provisional field-informed project WSE: **650.747–650.874 m**
-- Provisional depth above 650.20 m: **0.547–0.674 m**
+- 05EA002 stage: **2.063 m**, 24-hour change **-0.002 m**
+- 05EA002 discharge: **10.60 m³/s**
+- Observation age: **1.23 h**
+- Provisional field-informed project WSE: **650.747–650.823 m**
+- Provisional depth above 650.20 m: **0.547–0.623 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and added delay
@@ -33,13 +33,13 @@ Run ID: `20260802T161515Z`
 - Lower-basin rain: **9.83 mm**
 - Direct-local rain: **11.59 mm**
 - Official short-range response delay: **1.14 days**
-- Central forecast shift versus the dry trace: **1.00 days**
+- Central forecast shift versus the dry trace: **-0.13 days**
 
 ## 5. Evidence agreement
 
 The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **1 day(s)**, the synthesis status is **three method consensus**.
 
-Current-cycle historical shadow: 4.96 d versus official 1.14 d; difference 3.82 d. Shadow only.
+Current-cycle historical shadow: 5.04 d versus official 1.14 d; difference 3.90 d. Shadow only.
 
 ## 6. Confidence by component
 
@@ -54,10 +54,10 @@ Current-cycle historical shadow: 4.96 d versus official 1.14 d; difference 3.82 
 
 ## 7. What changed since the previous issued forecast
 
-- Official median date movement: **1 day(s)**
-- Stage change since previous run: **0.017 m**
-- Discharge change since previous run: **0.20 m³/s**
-- HRDPS 48-hour basin-rain change: **-4.15 mm**
+- Official median date movement: **-1 day(s)**
+- Stage change since previous run: **-0.023 m**
+- Discharge change since previous run: **-0.30 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 
