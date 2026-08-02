@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-01T19:26:19+00:00",
+  "generated_utc": "2026-08-02T14:14:36+00:00",
   "status": "historical_rdpa_pairing_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "station": "05EA002",
@@ -8,9 +8,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-01T19:26:07+00:00",
+        "start_utc": "2025-02-02T14:14:24+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-01+19%3A26%3A07&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-02+14%3A14%3A24&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -437,17 +437,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-01T19:26:07+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-01+19%3A26%3A07",
+        "end_utc": "2026-08-02T14:14:24+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-02+14%3A14%3A24",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 30280,
+        "bytes_received": 58576,
         "availability": "data_returned",
-        "rows": 460,
-        "stage_rows": 230,
-        "discharge_rows": 230,
+        "rows": 892,
+        "stage_rows": 446,
+        "discharge_rows": 446,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-01T19:05:00+00:00",
+        "last_timestamp_utc": "2026-08-02T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -462,22 +462,22 @@
         ]
       }
     ],
-    "hourly_points": 9567,
+    "hourly_points": 9585,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-01T19:00:00+00:00"
+    "last_utc": "2026-08-02T13:00:00+00:00"
   },
   "rdpa_retrieval": {
     "product": "RDPA 6-hour 10 km WCS",
-    "requested_periods": 1138,
-    "retrieved_periods": 1136,
-    "missing_periods": 2,
-    "coverage_fraction": 0.9982425307557118,
+    "requested_periods": 1139,
+    "retrieved_periods": 1139,
+    "missing_periods": 0,
+    "coverage_fraction": 1.0,
     "first_valid_utc": "2025-04-10T12:00:00+00:00",
-    "last_valid_utc": "2026-08-01T18:00:00+00:00",
+    "last_valid_utc": "2026-08-02T00:00:00+00:00",
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 15,
+      "periods_fetched_this_run": 16,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -501,32 +501,11 @@
       },
       "method": "WCS 10 km RDPA clipped to the official WSC 05EA002 drainage-basin polygon"
     },
-    "missing_examples": [
-      {
-        "index": "2026-08-01 12:00:00+00:00",
-        "status": "missing",
-        "station": "05EA002",
-        "precip_mm": NaN,
-        "source_type": "wcs_official_basin_clip",
-        "source_url": NaN,
-        "valid_cells": 0,
-        "error": "RasterioIOError: '/vsimem/60d90675-171d-4de9-835b-0d6bf9f95db1/60d90675-171d-4de9-835b-0d6bf9f95db1.tif' not recognized as being in a supported file format."
-      },
-      {
-        "index": "2026-08-01 18:00:00+00:00",
-        "status": "missing",
-        "station": "05EA002",
-        "precip_mm": NaN,
-        "source_type": "wcs_official_basin_clip",
-        "source_url": NaN,
-        "valid_cells": 0,
-        "error": "RasterioIOError: '/vsimem/be42a65e-f071-408e-874c-9f1b3e5810d5/be42a65e-f071-408e-874c-9f1b3e5810d5.tif' not recognized as being in a supported file format."
-      }
-    ]
+    "missing_examples": []
   },
   "pairing": {
-    "gauge_only_candidate_points": 1645,
-    "complete_168h_coverage_points": 1637,
+    "gauge_only_candidate_points": 1654,
+    "complete_168h_coverage_points": 1654,
     "strict_dry_points": 576,
     "moderate_dry_points": 827,
     "strict_thresholds_mm": {
@@ -544,61 +523,61 @@
   "models": {
     "gauge_only": {
       "label": "gauge_only_with_rdpa_metrics",
-      "points": 1645,
+      "points": 1654,
       "events": 20,
       "fit": {
-        "n": 1530,
-        "intercept_per_day": -0.11455583414529508,
-        "coefficient_per_day": -0.039923649315327894,
+        "n": 1539,
+        "intercept_per_day": -0.11447268298711549,
+        "coefficient_per_day": -0.03989274478501514,
         "value_range": [
           0.06,
           25.6
         ],
-        "rate_rmse_per_day": 0.19201381297068096
+        "rate_rmse_per_day": 0.1924647629158949
       },
       "projection": {
         "reached": true,
-        "days": 8.375,
+        "days": 8.416666666666666,
         "path_daily": [
           {
             "day": 1,
-            "value": 10.072416215100949,
-            "rate_per_day": -0.5175443743795014
+            "value": 10.072811426274436,
+            "rate_per_day": -0.5171644079721962
           },
           {
             "day": 2,
-            "value": 9.565497434715997,
-            "rate_per_day": -0.4972726049678508
+            "value": 9.56625669631198,
+            "rate_per_day": -0.49692290402887523
           },
           {
             "day": 3,
-            "value": 9.078434228336118,
-            "rate_per_day": -0.47779486338342164
+            "value": 9.079528213875422,
+            "rate_per_day": -0.4774736403781411
           },
           {
             "day": 4,
-            "value": 8.610448870151322,
-            "rate_per_day": -0.459080048237006
+            "value": 8.611849991558655,
+            "rate_per_day": -0.45878560921133743
           },
           {
             "day": 5,
-            "value": 8.160794097204791,
-            "rate_per_day": -0.44109827635414534
+            "value": 8.162476413636018,
+            "rate_per_day": -0.44082901634679245
           },
           {
             "day": 6,
-            "value": 7.72875191618905,
-            "rate_per_day": -0.4238208350587041
+            "value": 7.730691047332987,
+            "rate_per_day": -0.42357523372918887
           },
           {
             "day": 7,
-            "value": 7.313632456978872,
-            "rate_per_day": -0.4072201363254527
+            "value": 7.315805500623037,
+            "rate_per_day": -0.4069967537880801
           },
           {
             "day": 8,
-            "value": 6.914772871070354,
-            "rate_per_day": -0.3912696727284565
+            "value": 6.9171583247296,
+            "rate_per_day": -0.3910671455827854
           }
         ]
       },
@@ -607,210 +586,210 @@
         "folds": [
           {
             "n": 35,
-            "rmse_per_day": 0.08262210519482505,
-            "mae_per_day": 0.06966589049009153,
-            "bias_per_day": 0.010005719780914722,
+            "rmse_per_day": 0.08264339258035665,
+            "mae_per_day": 0.0696615176585476,
+            "bias_per_day": 0.010175084994891887,
             "held_out_event": 8,
-            "train_points": 1247,
+            "train_points": 1256,
             "test_first_utc": "2025-05-18T14:00:00+00:00",
             "test_last_utc": "2025-05-20T06:00:00+00:00"
           },
           {
             "n": 30,
-            "rmse_per_day": 0.054717677589637484,
-            "mae_per_day": 0.04577076835065739,
-            "bias_per_day": -0.0377918225704176,
+            "rmse_per_day": 0.05459853663829124,
+            "mae_per_day": 0.04565531736475343,
+            "bias_per_day": -0.037619153674943714,
             "held_out_event": 11,
-            "train_points": 1252,
+            "train_points": 1261,
             "test_first_utc": "2025-06-03T03:00:00+00:00",
             "test_last_utc": "2025-06-04T12:00:00+00:00"
           },
           {
             "n": 53,
-            "rmse_per_day": 0.05525195754850094,
-            "mae_per_day": 0.04660696604579843,
-            "bias_per_day": -0.041575376177711995,
+            "rmse_per_day": 0.05511216501983559,
+            "mae_per_day": 0.0464698229274412,
+            "bias_per_day": -0.04138976410528924,
             "held_out_event": 13,
-            "train_points": 1229,
+            "train_points": 1238,
             "test_first_utc": "2025-06-17T07:00:00+00:00",
             "test_last_utc": "2025-06-19T11:00:00+00:00"
           },
           {
             "n": 29,
-            "rmse_per_day": 0.06219169491802491,
-            "mae_per_day": 0.05608905943038565,
-            "bias_per_day": 0.044656651523841996,
+            "rmse_per_day": 0.06231867369622184,
+            "mae_per_day": 0.05620471388336203,
+            "bias_per_day": 0.04483199612296306,
             "held_out_event": 15,
-            "train_points": 1253,
+            "train_points": 1262,
             "test_first_utc": "2025-06-22T07:00:00+00:00",
             "test_last_utc": "2025-06-23T11:00:00+00:00"
           },
           {
             "n": 29,
-            "rmse_per_day": 0.08622714743305866,
-            "mae_per_day": 0.08539427103052157,
-            "bias_per_day": -0.08539427103052157,
+            "rmse_per_day": 0.08605441529514055,
+            "mae_per_day": 0.08521979573479471,
+            "bias_per_day": -0.08521979573479471,
             "held_out_event": 17,
-            "train_points": 1253,
+            "train_points": 1262,
             "test_first_utc": "2025-07-03T12:00:00+00:00",
             "test_last_utc": "2025-07-04T17:00:00+00:00"
           },
           {
             "n": 117,
-            "rmse_per_day": 0.07660325670372446,
-            "mae_per_day": 0.06721179785185116,
-            "bias_per_day": -0.04062667351758449,
+            "rmse_per_day": 0.07649740399333695,
+            "mae_per_day": 0.06711789896233837,
+            "bias_per_day": -0.040421516335930906,
             "held_out_event": 19,
-            "train_points": 1165,
+            "train_points": 1174,
             "test_first_utc": "2025-07-07T18:00:00+00:00",
             "test_last_utc": "2025-07-13T11:00:00+00:00"
           },
           {
             "n": 47,
-            "rmse_per_day": 0.09335979265367847,
-            "mae_per_day": 0.09285557172877704,
-            "bias_per_day": -0.09285557172877704,
+            "rmse_per_day": 0.0931884650257825,
+            "mae_per_day": 0.09268328105349595,
+            "bias_per_day": -0.09268328105349595,
             "held_out_event": 20,
-            "train_points": 1235,
+            "train_points": 1244,
             "test_first_utc": "2025-07-14T18:00:00+00:00",
             "test_last_utc": "2025-07-16T18:00:00+00:00"
           },
           {
             "n": 52,
-            "rmse_per_day": 0.08189547892769479,
-            "mae_per_day": 0.08000374598582513,
-            "bias_per_day": -0.08000374598582513,
+            "rmse_per_day": 0.08172683525894939,
+            "mae_per_day": 0.07983094362784879,
+            "bias_per_day": -0.07983094362784879,
             "held_out_event": 22,
-            "train_points": 1230,
+            "train_points": 1239,
             "test_first_utc": "2025-07-21T05:00:00+00:00",
             "test_last_utc": "2025-07-23T08:00:00+00:00"
           },
           {
             "n": 28,
-            "rmse_per_day": 0.093961560426958,
-            "mae_per_day": 0.09311953613119901,
-            "bias_per_day": -0.09311953613119901,
+            "rmse_per_day": 0.09573875215197276,
+            "mae_per_day": 0.09491234060014117,
+            "bias_per_day": -0.09491234060014117,
             "held_out_event": 24,
-            "train_points": 1254,
+            "train_points": 1263,
             "test_first_utc": "2025-07-28T07:00:00+00:00",
             "test_last_utc": "2025-07-29T10:00:00+00:00"
           },
           {
             "n": 37,
-            "rmse_per_day": 0.09649178660812492,
-            "mae_per_day": 0.09567735021288631,
-            "bias_per_day": -0.09567735021288631,
+            "rmse_per_day": 0.0963263917848269,
+            "mae_per_day": 0.09551055102187742,
+            "bias_per_day": -0.09551055102187742,
             "held_out_event": 25,
-            "train_points": 1245,
+            "train_points": 1254,
             "test_first_utc": "2025-08-05T01:00:00+00:00",
             "test_last_utc": "2025-08-06T13:00:00+00:00"
           },
           {
             "n": 42,
-            "rmse_per_day": 0.09529996041983234,
-            "mae_per_day": 0.09108283210182266,
-            "bias_per_day": -0.08984697869955119,
+            "rmse_per_day": 0.0951401890671707,
+            "mae_per_day": 0.09092136141810758,
+            "bias_per_day": -0.08967739699896807,
             "held_out_event": 42,
-            "train_points": 1240,
+            "train_points": 1249,
             "test_first_utc": "2025-10-29T04:00:00+00:00",
             "test_last_utc": "2025-10-31T09:00:00+00:00"
           },
           {
             "n": 341,
-            "rmse_per_day": 0.27484636423074443,
-            "mae_per_day": 0.21793047522825426,
-            "bias_per_day": 0.08442797677451559,
+            "rmse_per_day": 0.27491609468050127,
+            "mae_per_day": 0.2179550816684108,
+            "bias_per_day": 0.08470610650625839,
             "held_out_event": 45,
-            "train_points": 941,
+            "train_points": 950,
             "test_first_utc": "2026-04-26T11:00:00+00:00",
             "test_last_utc": "2026-05-11T11:00:00+00:00"
           },
           {
             "n": 34,
-            "rmse_per_day": 0.24167372261332898,
-            "mae_per_day": 0.19285180476897035,
-            "bias_per_day": 0.11691488464177771,
+            "rmse_per_day": 0.24180637964106325,
+            "mae_per_day": 0.19293267544039305,
+            "bias_per_day": 0.11718645613138202,
             "held_out_event": 46,
-            "train_points": 1248,
+            "train_points": 1257,
             "test_first_utc": "2026-05-12T20:00:00+00:00",
             "test_last_utc": "2026-05-14T05:00:00+00:00"
           },
           {
             "n": 31,
-            "rmse_per_day": 0.09808429600831692,
-            "mae_per_day": 0.08072851593210933,
-            "bias_per_day": 0.006579562211213569,
+            "rmse_per_day": 0.09809632857837368,
+            "mae_per_day": 0.08068427177833931,
+            "bias_per_day": 0.006769930772161556,
             "held_out_event": 52,
-            "train_points": 1251,
+            "train_points": 1260,
             "test_first_utc": "2026-05-28T05:00:00+00:00",
             "test_last_utc": "2026-05-29T20:00:00+00:00"
           },
           {
             "n": 31,
-            "rmse_per_day": 0.2155630499120936,
-            "mae_per_day": 0.15537728433194195,
-            "bias_per_day": 0.11480290214994093,
+            "rmse_per_day": 0.21566711444289546,
+            "mae_per_day": 0.15545994708337746,
+            "bias_per_day": 0.11500154131386395,
             "held_out_event": 55,
-            "train_points": 1251,
+            "train_points": 1260,
             "test_first_utc": "2026-06-19T00:00:00+00:00",
             "test_last_utc": "2026-06-20T10:00:00+00:00"
           },
           {
             "n": 95,
-            "rmse_per_day": 0.4988416702503196,
-            "mae_per_day": 0.4127075117307485,
-            "bias_per_day": 0.19385939522528228,
+            "rmse_per_day": 0.4999653636092701,
+            "mae_per_day": 0.41405647579269056,
+            "bias_per_day": 0.19696016130062655,
             "held_out_event": 56,
-            "train_points": 1187,
+            "train_points": 1196,
             "test_first_utc": "2026-07-06T14:00:00+00:00",
             "test_last_utc": "2026-07-10T12:00:00+00:00"
           },
           {
             "n": 57,
-            "rmse_per_day": 0.3827735466795006,
-            "mae_per_day": 0.2869109993722264,
-            "bias_per_day": 0.2269568242857485,
+            "rmse_per_day": 0.383136089517126,
+            "mae_per_day": 0.28723480228013526,
+            "bias_per_day": 0.22756415392146248,
             "held_out_event": 57,
-            "train_points": 1225,
+            "train_points": 1234,
             "test_first_utc": "2026-07-12T23:00:00+00:00",
             "test_last_utc": "2026-07-15T07:00:00+00:00"
           },
           {
             "n": 60,
-            "rmse_per_day": 0.30153121966838037,
-            "mae_per_day": 0.24433506145321876,
-            "bias_per_day": -0.058391570314074784,
+            "rmse_per_day": 0.3013789321343276,
+            "mae_per_day": 0.2444289573710029,
+            "bias_per_day": -0.05764056083061831,
             "held_out_event": 58,
-            "train_points": 1222,
+            "train_points": 1231,
             "test_first_utc": "2026-07-16T13:00:00+00:00",
             "test_last_utc": "2026-07-19T02:00:00+00:00"
           },
           {
             "n": 81,
-            "rmse_per_day": 0.3458320879369088,
-            "mae_per_day": 0.29707475972799724,
-            "bias_per_day": -0.10938162660179468,
+            "rmse_per_day": 0.34560424829492115,
+            "mae_per_day": 0.2968914119763329,
+            "bias_per_day": -0.10885561424293233,
             "held_out_event": 60,
-            "train_points": 1201,
+            "train_points": 1210,
             "test_first_utc": "2026-07-22T17:00:00+00:00",
             "test_last_utc": "2026-07-26T03:00:00+00:00"
           },
           {
-            "n": 53,
-            "rmse_per_day": 0.3003926536420707,
-            "mae_per_day": 0.2522977791570445,
-            "bias_per_day": -0.16698444196367557,
+            "n": 62,
+            "rmse_per_day": 0.294732869196311,
+            "mae_per_day": 0.2444598649969986,
+            "bias_per_day": -0.14994780989394058,
             "held_out_event": 63,
             "train_points": 1229,
             "test_first_utc": "2026-07-30T14:00:00+00:00",
-            "test_last_utc": "2026-08-01T19:00:00+00:00"
+            "test_last_utc": "2026-08-02T04:00:00+00:00"
           }
         ],
         "aggregate": {
-          "n": 1282,
-          "rmse_per_day": 0.2569427927949248,
-          "mae_per_day": 0.1814292552673659,
-          "bias_per_day": 0.015054877347311705
+          "n": 1291,
+          "rmse_per_day": 0.25713967912745106,
+          "mae_per_day": 0.1816602180984103,
+          "bias_per_day": 0.015044174540762862
         }
       },
       "event_sizes_hours": {
@@ -833,7 +812,7 @@
         "57": 57,
         "58": 60,
         "60": 81,
-        "63": 53
+        "63": 62
       }
     },
     "rdpa_strict": {
@@ -906,9 +885,9 @@
           },
           {
             "n": 296,
-            "rmse_per_day": 0.26965364119494434,
-            "mae_per_day": 0.21450583841186396,
-            "bias_per_day": -0.059569397432209716,
+            "rmse_per_day": 0.2696536411949443,
+            "mae_per_day": 0.21450583841186388,
+            "bias_per_day": -0.05956939743220949,
             "held_out_event": 22,
             "train_points": 92,
             "test_first_utc": "2026-04-28T18:00:00+00:00",
@@ -916,9 +895,9 @@
           },
           {
             "n": 34,
-            "rmse_per_day": 0.21632082685033352,
+            "rmse_per_day": 0.2163208268503335,
             "mae_per_day": 0.17971919255638932,
-            "bias_per_day": 0.04457995896013342,
+            "bias_per_day": 0.04457995896013336,
             "held_out_event": 23,
             "train_points": 354,
             "test_first_utc": "2026-05-12T20:00:00+00:00",
@@ -926,7 +905,7 @@
           },
           {
             "n": 31,
-            "rmse_per_day": 0.17763650374549275,
+            "rmse_per_day": 0.17763650374549272,
             "mae_per_day": 0.15690940851933075,
             "bias_per_day": -0.14851386247591505,
             "held_out_event": 29,
@@ -937,9 +916,9 @@
         ],
         "aggregate": {
           "n": 388,
-          "rmse_per_day": 0.2550494851604168,
-          "mae_per_day": 0.20597816753640474,
-          "bias_per_day": -0.06745337472999928
+          "rmse_per_day": 0.25504948516041676,
+          "mae_per_day": 0.20597816753640472,
+          "bias_per_day": -0.0674533747299991
         }
       },
       "event_sizes_hours": {
@@ -955,13 +934,13 @@
       "events": 8,
       "fit": {
         "n": 762,
-        "intercept_per_day": -0.1308619100186823,
+        "intercept_per_day": -0.13086191001868228,
         "coefficient_per_day": -0.043169313522551926,
         "value_range": [
           0.076,
           25.1
         ],
-        "rate_rmse_per_day": 0.1974247433692534
+        "rate_rmse_per_day": 0.19742474336925342
       },
       "projection": {
         "reached": true,
@@ -990,7 +969,7 @@
           {
             "day": 5,
             "value": 7.951457678408614,
-            "rate_per_day": -0.47497522760403516
+            "rate_per_day": -0.4749752276040351
           },
           {
             "day": 6,
@@ -1000,7 +979,7 @@
           {
             "day": 7,
             "value": 7.042214593254947,
-            "rate_per_day": -0.4356530982373656
+            "rate_per_day": -0.43565309823736553
           }
         ]
       },
@@ -1019,9 +998,9 @@
           },
           {
             "n": 29,
-            "rmse_per_day": 0.12305746333794412,
-            "mae_per_day": 0.12247695918677245,
-            "bias_per_day": -0.12247695918677245,
+            "rmse_per_day": 0.12305746333794419,
+            "mae_per_day": 0.12247695918677251,
+            "bias_per_day": -0.12247695918677251,
             "held_out_event": 11,
             "train_points": 550,
             "test_first_utc": "2025-07-03T12:00:00+00:00",
@@ -1039,7 +1018,7 @@
           },
           {
             "n": 34,
-            "rmse_per_day": 0.14491816965442084,
+            "rmse_per_day": 0.1449181696544208,
             "mae_per_day": 0.14442489184624763,
             "bias_per_day": -0.14442489184624763,
             "held_out_event": 27,
@@ -1070,8 +1049,8 @@
           {
             "n": 31,
             "rmse_per_day": 0.10086262830141919,
-            "mae_per_day": 0.08997176736272205,
-            "bias_per_day": -0.024162316861185387,
+            "mae_per_day": 0.08997176736272208,
+            "bias_per_day": -0.02416231686118545,
             "held_out_event": 36,
             "train_points": 548,
             "test_first_utc": "2026-05-28T05:00:00+00:00",
@@ -1079,9 +1058,9 @@
           },
           {
             "n": 60,
-            "rmse_per_day": 0.3981429755449632,
-            "mae_per_day": 0.2778201910608142,
-            "bias_per_day": 0.09740920830712141,
+            "rmse_per_day": 0.39814297554496314,
+            "mae_per_day": 0.2778201910608141,
+            "bias_per_day": 0.09740920830712121,
             "held_out_event": 37,
             "train_points": 519,
             "test_first_utc": "2026-07-07T06:00:00+00:00",
@@ -1092,7 +1071,7 @@
           "n": 579,
           "rmse_per_day": 0.24969981446116865,
           "mae_per_day": 0.19007871104622034,
-          "bias_per_day": 0.019443530544019885
+          "bias_per_day": 0.01944353054401986
         }
       },
       "event_sizes_hours": {
