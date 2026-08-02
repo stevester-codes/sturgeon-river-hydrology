@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-02T19:43:37+00:00  
-Run ID: `20260802T194337Z`
+Generated: 2026-08-02T21:38:58+00:00  
+Run ID: `20260802T213858Z`
 
 ## 1. Decision
 
@@ -19,27 +19,27 @@ Run ID: `20260802T194337Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.096 m**, 24-hour change **0.037 m**
-- 05EA002 discharge: **11.00 m³/s**
-- Observation age: **0.64 h**
-- Provisional field-informed project WSE: **650.747–650.890 m**
-- Provisional depth above 650.20 m: **0.547–0.690 m**
+- 05EA002 stage: **2.080 m**, 24-hour change **0.023 m**
+- 05EA002 discharge: **10.80 m³/s**
+- Observation age: **0.57 h**
+- Provisional field-informed project WSE: **650.747–650.857 m**
+- Provisional depth above 650.20 m: **0.547–0.657 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and added delay
 
-- HRDPS cycle: **2026-08-02T12:00:00+00:00**
-- 48-hour basin rain: **8.71 mm**
-- Lower-basin rain: **9.83 mm**
-- Direct-local rain: **11.59 mm**
-- Official short-range response delay: **1.13 days**
-- Central forecast shift versus the dry trace: **-0.13 days**
+- HRDPS cycle: **2026-08-02T18:00:00+00:00**
+- 48-hour basin rain: **6.25 mm**
+- Lower-basin rain: **6.87 mm**
+- Direct-local rain: **6.12 mm**
+- Official short-range response delay: **1.12 days**
+- Central forecast shift versus the dry trace: **-0.12 days**
 
 ## 5. Evidence agreement
 
 The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **1 day(s)**, the synthesis status is **three method consensus**.
 
-Current-cycle historical shadow: 5.01 d versus official 1.13 d; difference 3.88 d. Shadow only.
+Current-cycle historical shadow: 4.77 d versus official 1.12 d; difference 3.65 d. Shadow only.
 
 ## 6. Confidence by component
 
@@ -54,10 +54,10 @@ Current-cycle historical shadow: 5.01 d versus official 1.13 d; difference 3.88 
 
 ## 7. What changed since the previous issued forecast
 
-- Official median date movement: **1 day(s)**
-- Stage change since previous run: **0.043 m**
-- Discharge change since previous run: **0.50 m³/s**
-- HRDPS 48-hour basin-rain change: **0.00 mm**
+- Official median date movement: **0 day(s)**
+- Stage change since previous run: **-0.016 m**
+- Discharge change since previous run: **-0.20 m³/s**
+- HRDPS 48-hour basin-rain change: **-2.46 mm**
 
 These are observed changes, not a causal decomposition.
 
