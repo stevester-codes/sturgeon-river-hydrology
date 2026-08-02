@@ -1,12 +1,12 @@
 {
-  "generated_utc": "2026-08-02T09:29:18.412412+00:00",
+  "generated_utc": "2026-08-02T11:05:50.121431+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 93,
+  "dry_hourly_points": 94,
   "data_range_utc": [
     "2026-07-19T00:00:00+00:00",
-    "2026-08-02T09:00:00+00:00"
+    "2026-08-02T10:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
@@ -21,58 +21,58 @@
   },
   "holdout": {
     "train_points": 65,
-    "test_points": 28,
+    "test_points": 29,
     "official_stage_recession_then_rating": {
-      "n": 28,
-      "rmse_m3s": 0.15131352600359116,
-      "mae_m3s": 0.10202049750796156,
-      "bias_m3s": -0.07858762570896596
+      "n": 29,
+      "rmse_m3s": 0.13440775207913844,
+      "mae_m3s": 0.09642105538044718,
+      "bias_m3s": -0.0737618426518538
     },
     "direct_discharge_candidate": {
-      "n": 28,
-      "rmse_m3s": 0.16461397168477382,
-      "mae_m3s": 0.11814945104869097,
-      "bias_m3s": -0.10088675925707648
+      "n": 29,
+      "rmse_m3s": 0.1485129115297652,
+      "mae_m3s": 0.1129418934078456,
+      "bias_m3s": -0.09627446685042472
     },
-    "rmse_improvement_fraction": -0.08789991240351513,
+    "rmse_improvement_fraction": -0.10494305002825821,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 10.649999999999999,
+    "current_discharge_m3s": 10.350000000000001,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 132,
-      "days": 5.5,
+      "hours": 121,
+      "days": 5.041666666666667,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 9.979700098932234,
-          "rate_m3s_per_day": -0.6792375075226762
+          "discharge_m3s": 9.671956813093356,
+          "rate_m3s_per_day": -0.6870840403430784
         },
         {
           "day": 2,
-          "discharge_m3s": 9.292099118758657,
-          "rate_m3s_per_day": -0.6967692747668118
+          "discharge_m3s": 8.976412685495616,
+          "rate_m3s_per_day": -0.7048183340754559
         },
         {
           "day": 3,
-          "discharge_m3s": 8.586750502143138,
-          "rate_m3s_per_day": -0.7147535536277213
+          "discharge_m3s": 8.262915901252711,
+          "rate_m3s_per_day": -0.7230103668262355
         },
         {
           "day": 4,
-          "discharge_m3s": 7.863196165679226,
-          "rate_m3s_per_day": -0.7332020238613851
+          "discharge_m3s": 7.531003085191413,
+          "rate_m3s_per_day": -0.741671953275614
         },
         {
           "day": 5,
-          "discharge_m3s": 7.120966202391298,
-          "rate_m3s_per_day": -0.7521266666894137
+          "discharge_m3s": 6.780198901983761,
+          "rate_m3s_per_day": -0.7608152130519411
         }
       ]
     },
-    "official_stage_based_rain_free_days": 6.958333333333333,
-    "candidate_minus_official_days": -1.458333333333333,
+    "official_stage_based_rain_free_days": 6.458333333333333,
+    "candidate_minus_official_days": -1.416666666666666,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
