@@ -1,73 +1,78 @@
 {
-  "generated_utc": "2026-08-02T07:20:19.995971+00:00",
+  "generated_utc": "2026-08-02T09:29:18.412412+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 90,
+  "dry_hourly_points": 93,
   "data_range_utc": [
     "2026-07-19T00:00:00+00:00",
-    "2026-08-02T06:00:00+00:00"
+    "2026-08-02T09:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -1.585802627454331,
-    "coefficient_per_day": 0.07546094440169829,
-    "n": 62,
+    "intercept_m3s_per_day": -0.9336899942782799,
+    "coefficient_per_day": 0.025497007348229694,
+    "n": 65,
     "discharge_range_m3s": [
-      11.1,
+      11.0,
       13.6
     ],
-    "rate_rmse_m3s_per_day": 0.2585220351678235
+    "rate_rmse_m3s_per_day": 0.26050619047164275
   },
   "holdout": {
-    "train_points": 62,
+    "train_points": 65,
     "test_points": 28,
     "official_stage_recession_then_rating": {
       "n": 28,
-      "rmse_m3s": 0.08634917376757173,
-      "mae_m3s": 0.07349694616502665,
-      "bias_m3s": -0.05003641307396706
+      "rmse_m3s": 0.15131352600359116,
+      "mae_m3s": 0.10202049750796156,
+      "bias_m3s": -0.07858762570896596
     },
     "direct_discharge_candidate": {
       "n": 28,
-      "rmse_m3s": 0.12265358777343711,
-      "mae_m3s": 0.10961479744501038,
-      "bias_m3s": -0.1003879708675809
+      "rmse_m3s": 0.16461397168477382,
+      "mae_m3s": 0.11814945104869097,
+      "bias_m3s": -0.10088675925707648
     },
-    "rmse_improvement_fraction": -0.42043730613551555,
+    "rmse_improvement_fraction": -0.08789991240351513,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 10.5,
+    "current_discharge_m3s": 10.649999999999999,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 97,
-      "days": 4.041666666666667,
+      "hours": 132,
+      "days": 5.5,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 9.677174385200015,
-          "rate_m3s_per_day": -0.855553909207214
+          "discharge_m3s": 9.979700098932234,
+          "rate_m3s_per_day": -0.6792375075226762
         },
         {
           "day": 2,
-          "discharge_m3s": 8.789959823798743,
-          "rate_m3s_per_day": -0.9225039578974925
+          "discharge_m3s": 9.292099118758657,
+          "rate_m3s_per_day": -0.6967692747668118
         },
         {
           "day": 3,
-          "discharge_m3s": 7.833317658309276,
-          "rate_m3s_per_day": -0.9946930791598134
+          "discharge_m3s": 8.586750502143138,
+          "rate_m3s_per_day": -0.7147535536277213
         },
         {
           "day": 4,
-          "discharge_m3s": 6.801814938891606,
-          "rate_m3s_per_day": -1.072531248519991
+          "discharge_m3s": 7.863196165679226,
+          "rate_m3s_per_day": -0.7332020238613851
+        },
+        {
+          "day": 5,
+          "discharge_m3s": 7.120966202391298,
+          "rate_m3s_per_day": -0.7521266666894137
         }
       ]
     },
-    "official_stage_based_rain_free_days": 6.75,
-    "candidate_minus_official_days": -2.708333333333333,
+    "official_stage_based_rain_free_days": 6.958333333333333,
+    "candidate_minus_official_days": -1.458333333333333,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
