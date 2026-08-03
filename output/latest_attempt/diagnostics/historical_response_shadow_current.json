@@ -1,52 +1,63 @@
 {
-  "generated_utc": "2026-08-03T14:09:54+00:00",
-  "status": "historical_response_shadow_feature_unavailable",
+  "generated_utc": "2026-08-03T16:43:16+00:00",
+  "status": "historical_response_shadow_available",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "hrdps": {
-    "run_time_utc": "2026-08-03T06:00:00+00:00",
+    "run_time_utc": "2026-08-03T12:00:00+00:00",
     "horizon_h": 48,
     "complete_horizon": true,
-    "basin_mm": 0.4920010635557929,
-    "storm_type": "upper_lake_chain_concentrated",
+    "basin_mm": 1.6864806417853215,
+    "storm_type": "mixed_or_weak",
     "feature_vector": {
-      "basin_mm": 0.4920010635557929,
+      "basin_mm": 1.6864806417853215,
+      "lower_ratio": 1.0174923133940623,
+      "upper_ratio": 1.3148283919523718,
+      "duration_h": 6.0,
       "antecedent_168h_mm": 26.312645690024723,
-      "pre_stage_m": null,
-      "duration_h": 0.0,
-      "basin_pct_gt_10mm": 0.0
+      "basin_pct_gt_10mm": 0.0,
+      "pre_stage_m": 1.993
     }
   },
-  "official_analogue_response_days_lost": null,
-  "historical_censored_model_days_lost": null,
-  "historical_model_minus_official_days": null,
-  "historical_model_rmse_sensitivity_days": 4.040135623521664,
-  "historical_model_upper_rmse_sensitivity_days": null,
+  "official_analogue_response_days_lost": 1.0674301016300876,
+  "historical_censored_model_days_lost": 2.895322640420214,
+  "historical_model_minus_official_days": 1.8278925387901264,
+  "historical_model_rmse_sensitivity_days": 3.6438875270731423,
+  "historical_model_upper_rmse_sensitivity_days": 6.539210167493357,
   "prediction_detail": {
-    "status": "feature_unavailable",
-    "missing_feature": "pre_stage_m"
+    "status": "prediction_available",
+    "transformed_features": {
+      "log_basin_mm": 0.9882320254229484,
+      "log_antecedent_168h_mm": 3.3073498070301306,
+      "pre_stage_m": 1.993
+    },
+    "standardized_features": {
+      "log_basin_mm": -1.5288519386854507,
+      "log_antecedent_168h_mm": 1.5101424969142014,
+      "pre_stage_m": 1.2243988093207285
+    },
+    "prediction_log1p_days": 1.3597765104030892
   },
   "historical_model": {
     "status": "historical_censored_response_model_evaluated",
     "target": "stage_exact_recession_equivalent_days",
-    "resolved_peak_events": 10,
+    "resolved_peak_events": 11,
     "censored_lower_bound_events": 26,
     "preferred_feature_set": "amount_only",
-    "preferred_exact_rmse_days": 4.040135623521664,
-    "constraint_satisfaction_pct": 65.38461538461539,
+    "preferred_exact_rmse_days": 3.6438875270731423,
+    "constraint_satisfaction_pct": 61.53846153846154,
     "combined_screen_passed": false,
     "promotion_screen": {
       "candidate_passes_minimum_screen": false,
       "automatic_promotion_enabled": false,
       "reasons_not_to_promote": [
-        "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds",
-        "spatial_features_are_not_selected"
+        "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds"
       ],
       "requirements": [
         "at least ten resolved response peaks",
         "at least fifteen unresolved censored lower bounds",
         "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
         "at least 75 percent of censored lower bounds satisfied",
-        "spatial model selected over amount-only model",
+        "best-performing feature set selected by out-of-sample validation",
         "manual engineering review and operational hindcast"
       ]
     }

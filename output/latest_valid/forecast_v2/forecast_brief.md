@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-03T14:09:54+00:00  
-Run ID: `20260803T140954Z`
+Generated: 2026-08-03T16:43:16+00:00  
+Run ID: `20260803T164316Z`
 
 ## 1. Decision
 
@@ -9,40 +9,40 @@ Run ID: `20260803T140954Z`
 
 ## 2. Practical inspection window
 
-- **Practical risk-adjusted inspection window:** **2026-08-10 to 2026-08-12**
-- Official GEPS-integrated point forecast: **2026-08-10**
-- Core eligible-method window: **2026-08-10 to 2026-08-12** (two method consensus)
+- **Practical risk-adjusted inspection window:** **2026-08-11 to 2026-08-12**
+- Official GEPS-integrated point forecast: **2026-08-11**
+- Core eligible-method window: **2026-08-11 to 2026-08-12** (two method consensus)
 - Independent precipitation-screened direct-Q date: **2026-08-12**
-- Weather-ensemble upper date: **2026-08-11**
+- Weather-ensemble upper date: **2026-08-12**
 - Historical response risk bound: **not active**
-- Engineering schedule contingency: **2026-08-19** — sensitivity envelope, not a formal p90 probability.
+- Engineering schedule contingency: **2026-08-22** — sensitivity envelope, not a formal p90 probability.
 - Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption).
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.001 m**, 24-hour change **-0.057 m**
-- 05EA002 discharge: **9.91 m³/s**
+- 05EA002 stage: **1.993 m**, 24-hour change **-0.070 m**
+- 05EA002 discharge: **9.82 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **1.08 h**
-- Provisional field-informed project WSE method span: **650.689–650.707 m**
-- Provisional depth above 650.20 m: **0.489–0.507 m**
+- Observation age: **0.64 h**
+- Provisional field-informed project WSE method span: **650.689–650.692 m**
+- Provisional depth above 650.20 m: **0.489–0.492 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
 
-- HRDPS cycle: **2026-08-03T06:00:00+00:00**
-- 48-hour basin rain: **0.49 mm**
-- Lower-basin rain: **0.21 mm**
-- Direct-local rain: **0.16 mm**
-- Official short-range response delay: **unavailable**
-- Current official feature support: **not_applicable_negligible_short_range_qpf**
-- Central forecast shift versus the dry trace: **0.00 days**
+- HRDPS cycle: **2026-08-03T12:00:00+00:00**
+- 48-hour basin rain: **1.69 mm**
+- Lower-basin rain: **1.72 mm**
+- Direct-local rain: **1.40 mm**
+- Official short-range response delay: **1.07 days**
+- Current official feature support: **material_extrapolation**
+- Central forecast shift versus the dry trace: **1.00 days**
 
 ## 5. Evidence reconciliation
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: unavailable versus official unavailable; no operational risk adjustment is active.
+Aligned historical response: 2.90 d versus official 1.07 d; no operational risk adjustment is active.
 
 ## 6. Confidence by component
 
@@ -57,12 +57,12 @@ Aligned historical response: unavailable versus official unavailable; no operati
 
 ## 7. What changed since the previous issued forecast
 
-- Official point-date movement: **-1 day(s)**
-- Practical-window start movement: **-1 day(s)**
-- Practical-window end movement: **-3 day(s)**
-- Stage change since previous run: **-0.036 m**
-- Discharge change since previous run: **-0.39 m³/s**
-- HRDPS 48-hour basin-rain change: **-5.18 mm**
+- Official point-date movement: **1 day(s)**
+- Practical-window start movement: **1 day(s)**
+- Practical-window end movement: **0 day(s)**
+- Stage change since previous run: **-0.008 m**
+- Discharge change since previous run: **-0.09 m³/s**
+- HRDPS 48-hour basin-rain change: **1.19 mm**
 
 These are observed changes, not a causal decomposition.
 
