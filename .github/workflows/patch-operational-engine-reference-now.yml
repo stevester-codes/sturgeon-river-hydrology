@@ -1,0 +1,45 @@
+name: Patch operational engine reference now
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'patch_operational_engine_reference.trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: patch-operational-engine-reference-now
+  cancel-in-progress: true
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Patch workflow
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('.github/workflows/sturgeon-operational.yml')
+          s = p.read_text()
+          if "      - 'forecast_synthesis_engine.py'\n" not in s:
+              s = s.replace("      - 'forecast_synthesis.py'\n", "      - 'forecast_synthesis.py'\n      - 'forecast_synthesis_engine.py'\n", 1)
+          if "            forecast_synthesis_engine.py \\\n" not in s:
+              s = s.replace("            forecast_synthesis.py \\\n", "            forecast_synthesis.py \\\n            forecast_synthesis_engine.py \\\n", 1)
+          p.write_text(s)
+          PY
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/sturgeon-operational.yml
+          git commit -m 'Track and compile risk-integrated synthesis engine' || exit 0
+          git pull --rebase origin main
+          git push
