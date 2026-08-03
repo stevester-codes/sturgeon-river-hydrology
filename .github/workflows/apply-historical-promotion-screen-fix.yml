@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apply_historical_promotion_screen_fix.py'
+      - 'revise_historical_selection_rule.py'
   workflow_dispatch:
 
 permissions:
@@ -23,8 +23,8 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Apply patch
-        run: python apply_historical_promotion_screen_fix.py
+      - name: Apply selection-rule revision
+        run: python revise_historical_selection_rule.py
       - name: Compile
         run: python -m py_compile historical_censored_response_model.py
       - name: Commit
