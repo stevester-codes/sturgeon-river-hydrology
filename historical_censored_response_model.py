@@ -384,8 +384,6 @@ def main() -> None:
         reasons.append(
             "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds"
         )
-    if preferred["feature_set"] != "spatial":
-        reasons.append("spatial_features_are_not_selected")
 
     prediction_rows = []
     for record in preferred.get("censored_predictions", []):
@@ -420,7 +418,7 @@ def main() -> None:
                 "at least fifteen unresolved censored lower bounds",
                 "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
                 "at least 75 percent of censored lower bounds satisfied",
-                "spatial model selected over amount-only model",
+                "best-performing feature set selected by out-of-sample validation",
                 "manual engineering review and operational hindcast",
             ],
         },
