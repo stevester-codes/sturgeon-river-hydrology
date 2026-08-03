@@ -1,45 +1,48 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-03T01:18:29+00:00  
-Run ID: `20260803T011829Z`
+Generated: 2026-08-03T02:49:48+00:00  
+Run ID: `20260803T024948Z`
 
 ## 1. Decision
 
-**Not Ready.** The river is rising. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
+**Not Ready.** Not ready; the earliest supported timing is retained, but historical rain-response evidence widens the practical inspection window. Retain the separate schedule contingency date. Final construction release still requires a verified current site elevation or drainage inspection, suitable access and bearing capacity, and no renewed rise.
 
-## 2. Working inspection window
+## 2. Practical inspection window
 
-- **Consensus inspection window:** **2026-08-11 to 2026-08-12**
-- Official weather-ensemble median threshold date: **2026-08-12**
-- Independent precipitation-screened direct-Q date: **2026-08-12**
-- Contractor-site rain-free recession projection: **2026-08-11**
-- Weather-ensemble upper date: **2026-08-14**
-- Engineering schedule contingency: **2026-08-22** — sensitivity envelope, not a formal p90 probability.
-- Historical response shadow sensitivity: **2026-08-16** — shadow only and excluded from the consensus window.
+- **Practical risk-adjusted inspection window:** **2026-08-11 to 2026-08-15**
+- Official GEPS-integrated point forecast: **2026-08-11**
+- Core eligible-method window: **2026-08-11 to 2026-08-13** (two method consensus)
+- Independent precipitation-screened direct-Q date: **2026-08-13**
+- Weather-ensemble upper date: **2026-08-12**
+- Historical response risk bound: **2026-08-15**
+- Engineering schedule contingency: **2026-08-21** — sensitivity envelope, not a formal p90 probability.
+- Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption).
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.065 m**, 24-hour change **0.013 m**
-- 05EA002 discharge: **10.70 m³/s**
-- Observation age: **1.22 h**
-- Provisional field-informed project WSE: **650.747–650.840 m**
-- Provisional depth above 650.20 m: **0.547–0.640 m**
+- 05EA002 stage: **2.032 m**, 24-hour change **-0.024 m**
+- 05EA002 discharge: **10.30 m³/s**
+- Hydrograph limb: **falling**
+- Observation age: **0.75 h**
+- Provisional field-informed project WSE method span: **650.747–650.773 m**
+- Provisional depth above 650.20 m: **0.547–0.573 m**
 - No direct current construction-site measurement is available.
 
-## 4. Expected rainfall and added delay
+## 4. Expected rainfall and response
 
 - HRDPS cycle: **2026-08-02T18:00:00+00:00**
 - 48-hour basin rain: **6.25 mm**
 - Lower-basin rain: **6.87 mm**
 - Direct-local rain: **6.12 mm**
 - Official short-range response delay: **1.11 days**
-- Central forecast shift versus the dry trace: **-0.13 days**
+- Current official feature support: **material_extrapolation**
+- Central forecast shift versus the dry trace: **-0.12 days**
 
-## 5. Evidence agreement
+## 5. Evidence reconciliation
 
-The official GEPS median is primary. Independent methods are not averaged. Because the available timing methods span **1 day(s)**, the synthesis status is **three method consensus**.
+The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Current-cycle historical shadow: 4.87 d versus official 1.11 d; difference 3.76 d. Shadow only.
+Aligned historical response: 4.99 d versus official 1.11 d; difference 3.88 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -54,9 +57,11 @@ Current-cycle historical shadow: 4.87 d versus official 1.11 d; difference 3.76 
 
 ## 7. What changed since the previous issued forecast
 
-- Official median date movement: **0 day(s)**
-- Stage change since previous run: **-0.012 m**
-- Discharge change since previous run: **-0.10 m³/s**
+- Official point-date movement: **-1 day(s)**
+- Practical-window start movement: **0 day(s)**
+- Practical-window end movement: **3 day(s)**
+- Stage change since previous run: **-0.033 m**
+- Discharge change since previous run: **-0.40 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
@@ -65,9 +70,9 @@ These are observed changes, not a causal decomposition.
 
 - 05EA002 observations become older than six hours or the hydrograph reverses into a sustained rise.
 - A newer HRDPS or GEPS cycle materially increases rainfall or moves the weather-ensemble upper date.
-- The official median, screened direct-Q check and contractor-site recession projection diverge by more than two days.
+- The official median and screened direct-Q check diverge by more than two days.
 - A verified site survey differs from the provisional field-informed WSE range by more than 0.15 m.
-- The current-cycle historical response disagreement persists, grows, or is later validated for operational use.
+- The aligned historical rain-response disagreement persists, grows, or later validates differently.
 - Access, drainage or bearing conditions remain unsuitable even after the water elevation reaches 650.20 m.
 
 ## 9. Field release checklist
