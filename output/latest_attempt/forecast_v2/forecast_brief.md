@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-03T02:49:48+00:00  
-Run ID: `20260803T024948Z`
+Generated: 2026-08-03T02:50:05+00:00  
+Run ID: `20260803T025005Z`
 
 ## 1. Decision
 
@@ -9,23 +9,23 @@ Run ID: `20260803T024948Z`
 
 ## 2. Practical inspection window
 
-- **Practical risk-adjusted inspection window:** **2026-08-11 to 2026-08-15**
-- Official GEPS-integrated point forecast: **2026-08-11**
-- Core eligible-method window: **2026-08-11 to 2026-08-13** (two method consensus)
-- Independent precipitation-screened direct-Q date: **2026-08-13**
-- Weather-ensemble upper date: **2026-08-12**
-- Historical response risk bound: **2026-08-15**
-- Engineering schedule contingency: **2026-08-21** — sensitivity envelope, not a formal p90 probability.
-- Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption).
+- **Practical risk-adjusted inspection window:** **2026-08-12 to 2026-08-16**
+- Official GEPS-integrated point forecast: **2026-08-12**
+- Core eligible-method window: **2026-08-12** (two method consensus)
+- Independent precipitation-screened direct-Q date: **2026-08-12**
+- Weather-ensemble upper date: **2026-08-14**
+- Historical response risk bound: **2026-08-16**
+- Engineering schedule contingency: **2026-08-22** — sensitivity envelope, not a formal p90 probability.
+- Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption, rising_limb_breaks_rain_free_linear_recession_assumption).
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **2.032 m**, 24-hour change **-0.024 m**
-- 05EA002 discharge: **10.30 m³/s**
-- Hydrograph limb: **falling**
-- Observation age: **0.75 h**
-- Provisional field-informed project WSE method span: **650.747–650.773 m**
-- Provisional depth above 650.20 m: **0.547–0.573 m**
+- 05EA002 stage: **2.065 m**, 24-hour change **0.013 m**
+- 05EA002 discharge: **10.70 m³/s**
+- Hydrograph limb: **rising**
+- Observation age: **1.22 h**
+- Provisional field-informed project WSE method span: **650.747–650.840 m**
+- Provisional depth above 650.20 m: **0.547–0.640 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -36,13 +36,13 @@ Run ID: `20260803T024948Z`
 - Direct-local rain: **6.12 mm**
 - Official short-range response delay: **1.11 days**
 - Current official feature support: **material_extrapolation**
-- Central forecast shift versus the dry trace: **-0.12 days**
+- Central forecast shift versus the dry trace: **-0.13 days**
 
 ## 5. Evidence reconciliation
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 4.99 d versus official 1.11 d; difference 3.88 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
+Aligned historical response: 4.87 d versus official 1.11 d; difference 3.76 d. It widens the practical window to 2026-08-16 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -57,11 +57,11 @@ Aligned historical response: 4.99 d versus official 1.11 d; difference 3.88 d. I
 
 ## 7. What changed since the previous issued forecast
 
-- Official point-date movement: **-1 day(s)**
-- Practical-window start movement: **0 day(s)**
-- Practical-window end movement: **3 day(s)**
-- Stage change since previous run: **-0.033 m**
-- Discharge change since previous run: **-0.40 m³/s**
+- Official point-date movement: **0 day(s)**
+- Practical-window start movement: **1 day(s)**
+- Practical-window end movement: **4 day(s)**
+- Stage change since previous run: **0.000 m**
+- Discharge change since previous run: **0.00 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
