@@ -1,27 +1,26 @@
 {
   "status": "historical_censored_response_model_evaluated",
-  "resolved_events": 10,
+  "resolved_events": 11,
   "censored_events": 26,
-  "baseline_rmse_days": 5.036708587698892,
+  "baseline_rmse_days": 4.925695101030642,
   "preferred_feature_set": "amount_only",
-  "preferred_ridge_penalty": 10.0,
-  "preferred_censored_weight": 1.0,
-  "preferred_exact_rmse": 4.040135623521664,
-  "preferred_constraint_satisfaction_pct": 65.38461538461539,
+  "preferred_ridge_penalty": 3.0,
+  "preferred_censored_weight": 0.5,
+  "preferred_exact_rmse": 3.6438875270731423,
+  "preferred_constraint_satisfaction_pct": 61.53846153846154,
   "combined_screen_passed": false,
   "promotion_screen": {
     "candidate_passes_minimum_screen": false,
     "automatic_promotion_enabled": false,
     "reasons_not_to_promote": [
-      "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds",
-      "spatial_features_are_not_selected"
+      "no_candidate_preserves_exact_event_skill_and_satisfies_75_percent_of_censored_bounds"
     ],
     "requirements": [
       "at least ten resolved response peaks",
       "at least fifteen unresolved censored lower bounds",
       "leave-one-event-out exact-event RMSE no more than 15 percent worse than exact-only amount model",
       "at least 75 percent of censored lower bounds satisfied",
-      "spatial model selected over amount-only model",
+      "best-performing feature set selected by out-of-sample validation",
       "manual engineering review and operational hindcast"
     ]
   }
