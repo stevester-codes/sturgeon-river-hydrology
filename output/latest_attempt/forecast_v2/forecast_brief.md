@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-03T02:50:05+00:00  
-Run ID: `20260803T025005Z`
+Generated: 2026-08-03T02:50:39+00:00  
+Run ID: `20260803T025039Z`
 
 ## 1. Decision
 
@@ -58,8 +58,8 @@ Aligned historical response: 4.87 d versus official 1.11 d; difference 3.76 d. I
 ## 7. What changed since the previous issued forecast
 
 - Official point-date movement: **0 day(s)**
-- Practical-window start movement: **1 day(s)**
-- Practical-window end movement: **4 day(s)**
+- Practical-window start movement: **0 day(s)**
+- Practical-window end movement: **0 day(s)**
 - Stage change since previous run: **0.000 m**
 - Discharge change since previous run: **0.00 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
