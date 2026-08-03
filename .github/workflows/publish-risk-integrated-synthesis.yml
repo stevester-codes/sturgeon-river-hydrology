@@ -1,0 +1,73 @@
+name: Publish risk-integrated synthesis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'publish_risk_synthesis.trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sturgeon-hydrology-operational
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Rebuild synthesis from last validated inputs
+        run: |
+          test "$(cat output/latest/workflow_mode.txt)" = "operational"
+          test "$(cat output/latest/logs/operational_validation.exitcode)" = "0"
+          rm -rf sturgeon_pipeline_output
+          cp -a output/latest sturgeon_pipeline_output
+          python -m py_compile forecast_synthesis.py forecast_synthesis_engine.py
+          python forecast_synthesis.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('sturgeon_pipeline_output')
+          synthesis = json.loads((root / 'forecast_v2/forecast_synthesis.json').read_text())
+          manifest = json.loads((root / 'run_manifest.json').read_text())
+          wf = synthesis['working_forecast']
+          field = wf['contractor_rain_free_projection']
+          shadow = synthesis['evidence_reconciliation']['historical_response_shadow']
+          assert synthesis['schema_version'] == 2
+          assert synthesis['run_id'] == manifest['run_id']
+          assert manifest['cycle_consistency']['status'] == 'consistent'
+          assert field['excluded_from_consensus'] is True
+          assert shadow['risk_adjustment_active'] is True
+          assert wf['practical_inspection_window_start_date'] == '2026-08-12'
+          assert wf['practical_inspection_window_end_date'] == '2026-08-16'
+          PY
+          date -u +'%Y-%m-%dT%H:%M:%SZ' > sturgeon_pipeline_output/workflow_completed_utc.txt
+          echo operational > sturgeon_pipeline_output/workflow_mode.txt
+      - name: Publish authoritative synthesis
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          rm -rf /tmp/risk-synthesis-package
+          cp -a sturgeon_pipeline_output /tmp/risk-synthesis-package
+          for attempt in 1 2 3 4; do
+            git fetch origin main
+            git reset --hard origin/main
+            rm -rf output/latest output/latest_valid output/latest_attempt
+            cp -a /tmp/risk-synthesis-package output/latest
+            cp -a /tmp/risk-synthesis-package output/latest_valid
+            cp -a /tmp/risk-synthesis-package output/latest_attempt
+            mkdir -p output/history
+            cp /tmp/risk-synthesis-package/history/forecast_history.csv output/history/forecast_history.csv
+            git add -f output/latest output/latest_valid output/latest_attempt output/history/forecast_history.csv
+            git commit -m 'Publish risk-integrated Sturgeon forecast synthesis [skip ci]'
+            if git push origin HEAD:main; then exit 0; fi
+            sleep $((attempt * 3))
+          done
+          exit 1
