@@ -13,3 +13,4 @@ s = s.replace('''                "at least 75 percent of censored lower bounds s
                 "manual engineering review and operational hindcast",
 ''')
 p.write_text(s)
+print('historical selection rule revised')
