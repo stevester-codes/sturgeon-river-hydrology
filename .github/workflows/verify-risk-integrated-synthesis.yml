@@ -1,0 +1,59 @@
+name: Verify risk-integrated synthesis
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'risk_synthesis_verify.trigger'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: verify-risk-integrated-synthesis
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run synthesis against current validated package
+        run: |
+          rm -rf sturgeon_pipeline_output
+          cp -a output/latest sturgeon_pipeline_output
+          python -m py_compile forecast_synthesis.py forecast_synthesis_engine.py
+          python forecast_synthesis.py
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          root = Path('sturgeon_pipeline_output')
+          data = json.loads((root / 'forecast_v2/forecast_synthesis.json').read_text())
+          wf = data['working_forecast']
+          field = wf['contractor_rain_free_projection']
+          shadow = data['evidence_reconciliation']['historical_response_shadow']
+          assert data['schema_version'] == 2
+          assert wf['practical_inspection_window_end_date'] >= wf['official_point_forecast_date']
+          assert field['excluded_from_consensus'] is True
+          assert shadow['risk_adjustment_active'] is True
+          assert shadow['operational_effect'] == 'widens_practical_inspection_window_only_no_point_forecast_replacement'
+          print(json.dumps(data, indent=2))
+          PY
+      - name: Publish verification result
+        run: |
+          rm -rf output/risk_synthesis_verification
+          mkdir -p output/risk_synthesis_verification
+          cp sturgeon_pipeline_output/forecast_v2/forecast_synthesis.json output/risk_synthesis_verification/
+          cp sturgeon_pipeline_output/forecast_v2/forecast_brief.md output/risk_synthesis_verification/
+          cp sturgeon_pipeline_output/run_manifest.json output/risk_synthesis_verification/
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f output/risk_synthesis_verification
+          git commit -m 'Verify risk-integrated synthesis [skip ci]' || exit 0
+          git pull --rebase origin main
+          git push
