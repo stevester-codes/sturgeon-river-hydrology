@@ -1,0 +1,37 @@
+name: Apply historical promotion screen fix
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apply_historical_promotion_screen_fix.py'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-historical-promotion-screen-fix
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply patch
+        run: python apply_historical_promotion_screen_fix.py
+      - name: Compile
+        run: python -m py_compile historical_censored_response_model.py
+      - name: Commit
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add historical_censored_response_model.py
+          git commit -m 'Use validation skill rather than spatial feature selection for promotion' || exit 0
+          git pull --rebase origin main
+          git push
