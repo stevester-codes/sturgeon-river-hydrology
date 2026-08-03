@@ -40,6 +40,18 @@ def nested(data: dict[str, Any], *keys: str, default: Any = None) -> Any:
     return default if current is None else current
 
 
+def parse_datetime(value: Any) -> datetime | None:
+    if not value:
+        return None
+    try:
+        parsed = datetime.fromisoformat(str(value).replace("Z", "+00:00"))
+        if parsed.tzinfo is None:
+            parsed = parsed.replace(tzinfo=timezone.utc)
+        return parsed.astimezone(timezone.utc)
+    except (TypeError, ValueError):
+        return None
+
+
 def parse_date(value: Any) -> date | None:
     if not value:
         return None
@@ -147,7 +159,13 @@ def main() -> None:
     stage = finite(current.get("stage_05EA002_m"))
     discharge = finite(current.get("observed_discharge_05EA002_m3s"))
     stage_change_24h = finite(current.get("stage_change_24h_m"))
-    freshness_age = finite(nested(readiness, "observation_freshness", "age_hours"))
+    stored_freshness_age = finite(nested(readiness, "observation_freshness", "age_hours"))
+    stage_time = parse_datetime(latest_stage_utc)
+    freshness_age = (
+        max(0.0, (generated - stage_time).total_seconds() / 3600.0)
+        if stage_time is not None
+        else stored_freshness_age
+    )
     freshness_status = nested(readiness, "observation_freshness", "status")
 
     date_wse = finite(current.get("provisional_field_recession_estimated_project_wse_m"))
