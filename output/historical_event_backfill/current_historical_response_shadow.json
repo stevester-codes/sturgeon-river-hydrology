@@ -1,38 +1,50 @@
 {
-  "generated_utc": "2026-08-03T15:36:18+00:00",
-  "status": "historical_response_shadow_feature_unavailable",
+  "generated_utc": "2026-08-04T15:13:45+00:00",
+  "status": "historical_response_shadow_available",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "hrdps": {
-    "run_time_utc": "2026-08-03T06:00:00+00:00",
+    "run_time_utc": "2026-08-04T06:00:00+00:00",
     "horizon_h": 48,
     "complete_horizon": true,
-    "basin_mm": 0.4920010635557929,
-    "storm_type": "upper_lake_chain_concentrated",
+    "basin_mm": 1.663338188750161,
+    "storm_type": "mixed_or_weak",
     "feature_vector": {
-      "basin_mm": 0.4920010635557929,
-      "antecedent_168h_mm": 26.312645690024723,
-      "pre_stage_m": null,
-      "duration_h": 0.0,
-      "basin_pct_gt_10mm": 0.0
+      "basin_mm": 1.663338188750161,
+      "lower_ratio": 1.142135016594235,
+      "upper_ratio": 1.3186617970339782,
+      "duration_h": 6.0,
+      "antecedent_168h_mm": 19.27054117095463,
+      "basin_pct_gt_10mm": 0.0,
+      "pre_stage_m": 1.958
     }
   },
-  "official_analogue_response_days_lost": null,
-  "historical_censored_model_days_lost": null,
-  "historical_model_minus_official_days": null,
-  "historical_model_rmse_sensitivity_days": 3.6438875270731423,
-  "historical_model_upper_rmse_sensitivity_days": null,
+  "official_analogue_response_days_lost": 1.0786813514702567,
+  "historical_censored_model_days_lost": 4.248379378602484,
+  "historical_model_minus_official_days": 3.1696980271322275,
+  "historical_model_rmse_sensitivity_days": 4.044411183176048,
+  "historical_model_upper_rmse_sensitivity_days": 8.292790561778531,
   "prediction_detail": {
-    "status": "feature_unavailable",
-    "missing_feature": "pre_stage_m"
+    "status": "prediction_available",
+    "transformed_features": {
+      "log_basin_mm": 0.9795802941685474,
+      "log_antecedent_168h_mm": 3.0091686582305903,
+      "pre_stage_m": 1.958
+    },
+    "standardized_features": {
+      "log_basin_mm": -1.5392096025933455,
+      "log_antecedent_168h_mm": 1.2485574733758198,
+      "pre_stage_m": 1.1731695612166175
+    },
+    "prediction_log1p_days": 1.657919339159029
   },
   "historical_model": {
     "status": "historical_censored_response_model_evaluated",
     "target": "stage_exact_recession_equivalent_days",
-    "resolved_peak_events": 11,
-    "censored_lower_bound_events": 26,
+    "resolved_peak_events": 10,
+    "censored_lower_bound_events": 27,
     "preferred_feature_set": "amount_only",
-    "preferred_exact_rmse_days": 3.6438875270731423,
-    "constraint_satisfaction_pct": 61.53846153846154,
+    "preferred_exact_rmse_days": 4.044411183176048,
+    "constraint_satisfaction_pct": 66.66666666666666,
     "combined_screen_passed": false,
     "promotion_screen": {
       "candidate_passes_minimum_screen": false,
