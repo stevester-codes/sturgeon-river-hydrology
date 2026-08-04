@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-03T23:49:45+00:00  
-Run ID: `20260803T234945Z`
+Generated: 2026-08-04T01:13:49+00:00  
+Run ID: `20260804T011349Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260803T234945Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.982 m**, 24-hour change **-0.095 m**
-- 05EA002 discharge: **9.70 m³/s**
+- 05EA002 stage: **1.978 m**, 24-hour change **-0.087 m**
+- 05EA002 discharge: **9.65 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.75 h**
-- Provisional field-informed project WSE method span: **650.672–650.689 m**
-- Provisional depth above 650.20 m: **0.472–0.489 m**
+- Observation age: **1.15 h**
+- Provisional field-informed project WSE method span: **650.663–650.689 m**
+- Provisional depth above 650.20 m: **0.463–0.489 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -42,7 +42,7 @@ Run ID: `20260803T234945Z`
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 2.75 d versus official 1.07 d; no operational risk adjustment is active.
+Aligned historical response: 2.76 d versus official 1.07 d; no operational risk adjustment is active.
 
 ## 6. Confidence by component
 
@@ -60,9 +60,9 @@ Aligned historical response: 2.75 d versus official 1.07 d; no operational risk 
 - Official point-date movement: **0 day(s)**
 - Practical-window start movement: **0 day(s)**
 - Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.012 m**
-- Discharge change since previous run: **-0.13 m³/s**
-- HRDPS 48-hour basin-rain change: **-0.50 mm**
+- Stage change since previous run: **-0.004 m**
+- Discharge change since previous run: **-0.05 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 

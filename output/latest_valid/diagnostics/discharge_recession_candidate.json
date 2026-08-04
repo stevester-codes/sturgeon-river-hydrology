@@ -1,73 +1,73 @@
 {
-  "generated_utc": "2026-08-03T23:49:45.331383+00:00",
+  "generated_utc": "2026-08-04T01:13:49.182630+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 96,
+  "dry_hourly_points": 99,
   "data_range_utc": [
-    "2026-07-20T00:00:00+00:00",
-    "2026-08-03T23:00:00+00:00"
+    "2026-07-21T00:00:00+00:00",
+    "2026-08-04T00:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -0.6683061665251882,
-    "coefficient_per_day": 0.005153993001457509,
-    "n": 67,
+    "intercept_m3s_per_day": -0.9618714253658323,
+    "coefficient_per_day": 0.028615915354718312,
+    "n": 69,
     "discharge_range_m3s": [
       11.0,
-      13.6
+      13.8
     ],
-    "rate_rmse_m3s_per_day": 0.2596868386844914
+    "rate_rmse_m3s_per_day": 0.25720849387949735
   },
   "holdout": {
-    "train_points": 67,
-    "test_points": 29,
+    "train_points": 69,
+    "test_points": 30,
     "official_stage_recession_then_rating": {
-      "n": 29,
-      "rmse_m3s": 0.1584464742743434,
-      "mae_m3s": 0.1118297063677636,
-      "bias_m3s": -0.08850155107282903
+      "n": 30,
+      "rmse_m3s": 0.15592769112690522,
+      "mae_m3s": 0.10941913073815399,
+      "bias_m3s": -0.08685216319882792
     },
     "direct_discharge_candidate": {
-      "n": 29,
-      "rmse_m3s": 0.1664109324657832,
-      "mae_m3s": 0.12144317547029815,
-      "bias_m3s": -0.10162545423646678
+      "n": 30,
+      "rmse_m3s": 0.17126728795747437,
+      "mae_m3s": 0.12731603605794875,
+      "bias_m3s": -0.11083733869360693
     },
-    "rmse_improvement_fraction": -0.050265922469500124,
+    "rmse_improvement_fraction": -0.09837634816310259,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 9.684999999999999,
+    "current_discharge_m3s": 9.65,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 112,
-      "days": 4.666666666666667,
+      "hours": 96,
+      "days": 4.0,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 9.065080659217102,
-          "rate_m3s_per_day": -0.6215848042499353
+          "discharge_m3s": 8.954786869001424,
+          "rate_m3s_per_day": -0.7056220023029445
         },
         {
           "day": 2,
-          "discharge_m3s": 8.44195835546078,
-          "rate_m3s_per_day": -0.6247963722425476
+          "discharge_m3s": 8.23940439312904,
+          "rate_m3s_per_day": -0.7260933266787575
         },
         {
           "day": 3,
-          "discharge_m3s": 7.815616539849368,
-          "rate_m3s_per_day": -0.6280245335767289
+          "discharge_m3s": 7.503267424527462,
+          "rate_m3s_per_day": -0.7471585598617392
         },
         {
           "day": 4,
-          "discharge_m3s": 7.186038577997413,
-          "rate_m3s_per_day": -0.6312693739859858
+          "discharge_m3s": 6.74577383918195,
+          "rate_m3s_per_day": -0.7688349321817284
         }
       ]
     },
-    "official_stage_based_rain_free_days": 5.333333333333333,
-    "candidate_minus_official_days": -0.6666666666666661,
+    "official_stage_based_rain_free_days": 5.291666666666667,
+    "candidate_minus_official_days": -1.291666666666667,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
