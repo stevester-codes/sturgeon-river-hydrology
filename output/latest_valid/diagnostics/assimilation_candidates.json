@@ -1,15 +1,15 @@
 {
-  "generated_utc": "2026-08-05T11:40:47.143497+00:00",
+  "generated_utc": "2026-08-05T13:24:41.398605+00:00",
   "status": "diagnostic_candidate_gate",
   "recent_data_range": {
     "stage_start_utc": "2026-07-22T00:00:00+00:00",
-    "stage_end_utc": "2026-08-05T11:00:00+00:00",
+    "stage_end_utc": "2026-08-05T13:00:00+00:00",
     "precip_start_utc": "2026-07-22T00:00:00+00:00",
-    "precip_end_utc": "2026-08-05T00:00:00+00:00"
+    "precip_end_utc": "2026-08-05T06:00:00+00:00"
   },
   "counts": {
-    "detected_recent_events": 3,
-    "new_events_not_in_calibration": 1,
+    "detected_recent_events": 4,
+    "new_events_not_in_calibration": 2,
     "clean_peak_candidates": 1,
     "complete_recovery_candidates": 1
   },
@@ -70,20 +70,40 @@
     {
       "rain_start_utc": "2026-08-02T06:00:00+00:00",
       "rain_end_utc": "2026-08-04T06:00:00+00:00",
-      "analysis_end_utc": "2026-08-05T11:00:00+00:00",
+      "analysis_end_utc": "2026-08-05T00:00:00+00:00",
       "status": "recovery_candidate_ready_for_full_spatial_backfill",
       "already_calibrated": false,
-      "censor_reason": "dataset_right_edge",
+      "censor_reason": "next_rain_event",
       "basin_rain_mm": 13.640323818417516,
       "pre_event_stage_m": 2.0549999999999997,
       "departure_peak_m": 0.06717462817504227,
       "departure_peak_utc": "2026-08-02T19:00:00+00:00",
-      "departure_at_analysis_end_m": 0.023117142277932823,
-      "hours_observed_after_peak": 64.0,
-      "peak_decline_after_peak_m": 0.04405748589710945,
+      "departure_at_analysis_end_m": 0.00981371867491787,
+      "hours_observed_after_peak": 53.0,
+      "peak_decline_after_peak_m": 0.0573609095001244,
       "clean_peak_observed": true,
       "complete_recovery_observed": true,
       "recovery_utc": "2026-08-03T18:00:00+00:00",
+      "full_grid_spatial_backfill_required": true,
+      "automatic_promotion_allowed": false
+    },
+    {
+      "rain_start_utc": "2026-08-05T00:00:00+00:00",
+      "rain_end_utc": "2026-08-05T12:00:00+00:00",
+      "analysis_end_utc": "2026-08-05T13:00:00+00:00",
+      "status": "continue_observing_response",
+      "already_calibrated": false,
+      "censor_reason": "dataset_right_edge",
+      "basin_rain_mm": 6.508308687268116,
+      "pre_event_stage_m": 1.9355,
+      "departure_peak_m": 0.030706896896950386,
+      "departure_peak_utc": "2026-08-05T05:00:00+00:00",
+      "departure_at_analysis_end_m": 0.00920755231942838,
+      "hours_observed_after_peak": 8.0,
+      "peak_decline_after_peak_m": 0.021499344577522006,
+      "clean_peak_observed": false,
+      "complete_recovery_observed": false,
+      "recovery_utc": null,
       "full_grid_spatial_backfill_required": true,
       "automatic_promotion_allowed": false
     }

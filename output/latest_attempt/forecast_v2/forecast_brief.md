@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-05T11:40:46+00:00  
-Run ID: `20260805T114046Z`
+Generated: 2026-08-05T13:24:41+00:00  
+Run ID: `20260805T132441Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260805T114046Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.927 m**, 24-hour change **-0.031 m**
-- 05EA002 discharge: **9.09 m³/s**
+- 05EA002 stage: **1.919 m**, 24-hour change **-0.037 m**
+- 05EA002 discharge: **9.00 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.60 h**
-- Provisional field-informed project WSE method span: **650.569–650.571 m**
-- Provisional depth above 650.20 m: **0.369–0.371 m**
+- Observation age: **0.33 h**
+- Provisional field-informed project WSE method span: **650.554–650.571 m**
+- Provisional depth above 650.20 m: **0.354–0.371 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -42,7 +42,7 @@ Run ID: `20260805T114046Z`
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 4.37 d versus official 1.08 d; difference 3.30 d. It widens the practical window to 2026-08-16 but does not replace the official point forecast.
+Aligned historical response: 4.42 d versus official 1.08 d; difference 3.35 d. It widens the practical window to 2026-08-16 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -60,9 +60,9 @@ Aligned historical response: 4.37 d versus official 1.08 d; difference 3.30 d. I
 - Official point-date movement: **0 day(s)**
 - Practical-window start movement: **0 day(s)**
 - Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.009 m**
-- Discharge change since previous run: **-0.10 m³/s**
-- HRDPS 48-hour basin-rain change: **-1.34 mm**
+- Stage change since previous run: **-0.008 m**
+- Discharge change since previous run: **-0.09 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 
