@@ -1,58 +1,63 @@
 {
-  "generated_utc": "2026-08-05T22:47:07.945426+00:00",
+  "generated_utc": "2026-08-06T01:06:22.427383+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 115,
+  "dry_hourly_points": 104,
   "data_range_utc": [
-    "2026-07-22T00:00:00+00:00",
-    "2026-08-05T22:00:00+00:00"
+    "2026-07-23T00:00:00+00:00",
+    "2026-08-06T00:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -2.176704860491783,
-    "coefficient_per_day": 0.12156273733264106,
-    "n": 80,
+    "intercept_m3s_per_day": -1.3787147548915077,
+    "coefficient_per_day": 0.060983273775245504,
+    "n": 72,
     "discharge_range_m3s": [
-      11.1,
-      14.0
+      11.0,
+      13.8
     ],
-    "rate_rmse_m3s_per_day": 0.23914742813579937
+    "rate_rmse_m3s_per_day": 0.2519494093898314
   },
   "holdout": {
-    "train_points": 80,
-    "test_points": 35,
+    "train_points": 72,
+    "test_points": 32,
     "official_stage_recession_then_rating": {
-      "n": 35,
-      "rmse_m3s": 0.14728508468210436,
-      "mae_m3s": 0.103967478628296,
-      "bias_m3s": -0.08336932404873042
+      "n": 32,
+      "rmse_m3s": 0.1518282591635868,
+      "mae_m3s": 0.10716495436236756,
+      "bias_m3s": -0.08460045801269306
     },
     "direct_discharge_candidate": {
-      "n": 35,
-      "rmse_m3s": 0.20860618694855107,
-      "mae_m3s": 0.17145806798100374,
-      "bias_m3s": -0.16700292290622934
+      "n": 32,
+      "rmse_m3s": 0.1836384238040614,
+      "mae_m3s": 0.14300686331353282,
+      "bias_m3s": -0.1317628256959612
     },
-    "rmse_improvement_fraction": -0.4163429202542832,
+    "rmse_improvement_fraction": -0.20951412349528975,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 8.86,
+    "current_discharge_m3s": 8.844999999999999,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 42,
-      "days": 1.75,
+      "hours": 56,
+      "days": 2.3333333333333335,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 7.69384336482143,
-          "rate_m3s_per_day": -1.2414202004555124
+          "discharge_m3s": 7.980693303714944,
+          "rate_m3s_per_day": -0.8920259502347907
+        },
+        {
+          "day": 2,
+          "discharge_m3s": 7.062109073257128,
+          "rate_m3s_per_day": -0.9480442238464231
         }
       ]
     },
     "official_stage_based_rain_free_days": 4.0,
-    "candidate_minus_official_days": -2.25,
+    "candidate_minus_official_days": -1.6666666666666665,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
