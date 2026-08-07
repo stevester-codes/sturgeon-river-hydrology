@@ -1,11 +1,11 @@
 {
   "schema_version": 2,
   "status": "operational_forecast_synthesis",
-  "run_id": "20260806T142355Z",
-  "generated_utc": "2026-08-06T14:23:55+00:00",
+  "run_id": "20260807T001630Z",
+  "generated_utc": "2026-08-07T00:16:30+00:00",
   "decision": {
     "status": "not_ready",
-    "headline": "Not ready; use the practical inspection window and retain a separate schedule contingency date.",
+    "headline": "Not ready; the earliest supported timing is retained, but historical rain-response evidence widens the practical inspection window. Retain the separate schedule contingency date.",
     "release_rule": "Release floodplain work only after a verified current project-site survey or direct drainage inspection confirms the work area is at or below 650.20 m, access has adequate bearing, and no renewed rise is forecast. Do not release from the steady-state design-profile equivalent WSE alone."
   },
   "working_forecast": {
@@ -28,15 +28,15 @@
     "core_consensus_spread_days": 1,
     "core_consensus_window_start_date": "2026-08-13",
     "core_consensus_window_end_date": "2026-08-14",
-    "practical_window_status": "weather_and_core_method_window",
+    "practical_window_status": "historical_rain_response_risk_adjusted_window",
     "inspection_window_start_date": "2026-08-13",
-    "inspection_window_end_date": "2026-08-14",
+    "inspection_window_end_date": "2026-08-15",
     "practical_inspection_window_start_date": "2026-08-13",
-    "practical_inspection_window_end_date": "2026-08-14",
-    "practical_window_spread_days": 1,
+    "practical_inspection_window_end_date": "2026-08-15",
+    "practical_window_spread_days": 2,
     "weather_ensemble_upper_date": "2026-08-13",
-    "engineering_schedule_contingency_date": "2026-08-23",
-    "historical_response_shadow_sensitivity_date": null,
+    "engineering_schedule_contingency_date": "2026-08-22",
+    "historical_response_shadow_sensitivity_date": "2026-08-15",
     "contractor_rain_free_projection": {
       "date": "2026-08-11",
       "status": "counterfactual_suspended_from_consensus",
@@ -54,40 +54,40 @@
     }
   },
   "current_state": {
-    "latest_stage_utc": "2026-08-06T14:05:00+00:00",
-    "observation_age_hours": 0.31527777777777777,
+    "latest_stage_utc": "2026-08-06T23:05:00+00:00",
+    "observation_age_hours": 1.1916666666666667,
     "hydrograph_limb": "falling",
-    "stage_05EA002_m": 1.88,
-    "stage_change_24h_m": -0.03600000000000003,
-    "discharge_05EA002_m3s": 8.58,
+    "stage_05EA002_m": 1.853,
+    "stage_change_24h_m": -0.052000000000000046,
+    "discharge_05EA002_m3s": 8.29,
     "provisional_site_wse_range_m": [
-      650.4834122448979,
+      650.4346448979591,
       650.512
     ],
     "provisional_depth_over_650_20_range_m": [
-      0.2834122448978178,
+      0.234644897959015,
       0.31199999999989814
     ],
     "actual_current_site_measurement_available": false
   },
   "weather": {
     "hrdps_48h": {
-      "run_time_utc": "2026-08-06T06:00:00+00:00",
-      "basin_mm": 1.030074937706028,
-      "lower_basin_mm": 1.2833299473252582,
-      "direct_local_mm": 1.5874848603218237,
-      "storm_type": "mixed_or_weak",
-      "official_short_range_response_days_lost": 1.1463477465902963,
+      "run_time_utc": "2026-08-06T18:00:00+00:00",
+      "basin_mm": 2.2249571849670446,
+      "lower_basin_mm": 1.9793436300352143,
+      "direct_local_mm": 3.370737874750654,
+      "storm_type": "tributary_localized_direct_local",
+      "official_short_range_response_days_lost": 1.0924818945427561,
       "feature_support_status": "material_extrapolation",
       "input_status": "material_short_range_qpf_feature_vector_available",
       "material_rainfall": true
     },
     "geps": {
-      "run_time_utc": "2026-08-06T00:00:00+00:00",
+      "run_time_utc": "2026-08-06T12:00:00+00:00",
       "member_count": 21,
       "weather_ensemble_upper_date": "2026-08-13"
     },
-    "central_total_weather_shift_from_dry_days": -0.12469553982507975
+    "central_total_weather_shift_from_dry_days": 2.1251722455547304
   },
   "evidence_reconciliation": {
     "rule": "The official GEPS median remains the point forecast. The screened direct-Q date is an independent check. The contractor linear recession date participates only under rain-free falling-limb conditions. When the aligned historical response model is materially later and the official response is extrapolating, the historical date widens the practical inspection window without replacing the point forecast or being averaged with it.",
@@ -102,15 +102,15 @@
     },
     "historical_response_shadow": {
       "status": "current_cycle_comparison_available",
-      "official_analogue_response_days_lost": 1.1463477465902963,
-      "historical_censored_model_days_lost": 2.942748603151005,
-      "historical_minus_official_days": 1.7964008565607088,
-      "shadow_adjusted_threshold_sensitivity_days": null,
-      "shadow_adjusted_threshold_sensitivity_date": null,
-      "material_later_disagreement": false,
+      "official_analogue_response_days_lost": 1.0924818945427561,
+      "historical_censored_model_days_lost": 3.4536617107163,
+      "historical_minus_official_days": 2.3611798161735438,
+      "shadow_adjusted_threshold_sensitivity_days": 8.723570846534475,
+      "shadow_adjusted_threshold_sensitivity_date": "2026-08-15",
+      "material_later_disagreement": true,
       "official_feature_support_status": "material_extrapolation",
-      "risk_adjustment_active": false,
-      "operational_effect": "none_shadow_only",
+      "risk_adjustment_active": true,
+      "operational_effect": "widens_practical_inspection_window_only_no_point_forecast_replacement",
       "point_forecast_replaced": false
     }
   },
@@ -125,11 +125,11 @@
     "construction_release": "requires_field_verification_not_remotely_forecastable",
     "key_reasons": [
       "2 eligible core timing methods span 1 day(s).",
-      "The practical inspection window spans 1 day(s).",
+      "The practical inspection window spans 2 day(s).",
       "Rain-response calibration has 2 uncensored live peak-training events.",
       "Current forecast feature support is material_extrapolation.",
       "Screened direct-discharge validation contains 8 independent event blocks.",
-      "No aligned historical response risk adjustment is active.",
+      "The aligned historical rain-response model is 2.36 days later and therefore widens the practical inspection window.",
       "The contractor rain-free projection is suspended from consensus because material rainfall or a rising limb invalidates its linear continuation.",
       "Only two date-level contractor site elevations are available and their datum, exact location and time remain unverified."
     ]
@@ -138,10 +138,10 @@
     "previous_run_available": true,
     "official_median_date_change_days": 0,
     "practical_window_start_change_days": 0,
-    "practical_window_end_change_days": 0,
-    "stage_change_since_previous_run_m": -0.008000000000000007,
-    "discharge_change_since_previous_run_m3s": -0.08999999999999986,
-    "hrdps_48h_basin_rain_change_mm": 0.0,
+    "practical_window_end_change_days": 1,
+    "stage_change_since_previous_run_m": -0.026999999999999913,
+    "discharge_change_since_previous_run_m3s": -0.2900000000000009,
+    "hrdps_48h_basin_rain_change_mm": 1.1948822472610166,
     "causal_attribution_available": false,
     "interpretation": "These are observed input and output changes between issued forecasts. They are not a causal decomposition; counterfactual one-input-at-a-time attribution has not yet been implemented."
   },
