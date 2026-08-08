@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-08T08:03:59+00:00  
-Run ID: `20260808T080359Z`
+Generated: 2026-08-08T08:53:24+00:00  
+Run ID: `20260808T085324Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260808T080359Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.799 m**, 24-hour change **-0.042 m**
-- 05EA002 discharge: **7.74 m³/s**
+- 05EA002 stage: **1.801 m**, 24-hour change **-0.039 m**
+- 05EA002 discharge: **7.76 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.98 h**
-- Provisional field-informed project WSE method span: **650.342–650.394 m**
-- Provisional depth above 650.20 m: **0.142–0.194 m**
+- Observation age: **0.81 h**
+- Provisional field-informed project WSE method span: **650.346–650.394 m**
+- Provisional depth above 650.20 m: **0.146–0.194 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -42,7 +42,7 @@ Run ID: `20260808T080359Z`
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 3.96 d versus official 1.08 d; difference 2.89 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
+Aligned historical response: 3.96 d versus official 1.08 d; difference 2.88 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
