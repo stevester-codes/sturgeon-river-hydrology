@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-08T16:49:46+00:00  
-Run ID: `20260808T164946Z`
+Generated: 2026-08-08T17:19:59+00:00  
+Run ID: `20260808T171959Z`
 
 ## 1. Decision
 
@@ -11,8 +11,8 @@ Run ID: `20260808T164946Z`
 
 - **Practical risk-adjusted inspection window:** **2026-08-12 to 2026-08-17**
 - Official GEPS-integrated point forecast: **2026-08-12**
-- Core eligible-method window: **2026-08-12** (two method consensus)
-- Independent precipitation-screened direct-Q date: **2026-08-12**
+- Core eligible-method window: **2026-08-12 to 2026-08-13** (two method consensus)
+- Independent precipitation-screened direct-Q date: **2026-08-13**
 - Weather-ensemble upper date: **2026-08-12**
 - Historical response risk bound: **2026-08-17**
 - Engineering schedule contingency: **2026-08-23** — sensitivity envelope, not a formal p90 probability.
@@ -23,7 +23,7 @@ Run ID: `20260808T164946Z`
 - 05EA002 stage: **1.778 m**, 24-hour change **-0.047 m**
 - 05EA002 discharge: **7.53 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.75 h**
+- Observation age: **1.25 h**
 - Provisional field-informed project WSE method span: **650.307–650.394 m**
 - Provisional depth above 650.20 m: **0.107–0.194 m**
 - No direct current construction-site measurement is available.
@@ -60,9 +60,9 @@ Aligned historical response: 6.04 d versus official 1.16 d; difference 4.88 d. I
 - Official point-date movement: **0 day(s)**
 - Practical-window start movement: **0 day(s)**
 - Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.011 m**
-- Discharge change since previous run: **-0.11 m³/s**
-- HRDPS 48-hour basin-rain change: **0.15 mm**
+- Stage change since previous run: **0.000 m**
+- Discharge change since previous run: **0.00 m³/s**
+- HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
 

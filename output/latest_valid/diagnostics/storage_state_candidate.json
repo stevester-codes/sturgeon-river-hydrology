@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-08T16:49:47.643997+00:00",
+  "generated_utc": "2026-08-08T17:20:00.875575+00:00",
   "status": "not_ready_for_operational_promotion",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "method": "A ridge-regression correction to the existing stage-dependent recession curve uses decaying rainfall-memory states and recent upstream gauge movement. The final 30 percent of observations are held out chronologically.",
@@ -38,13 +38,13 @@
     },
     "storage_candidate": {
       "n": 97,
-      "rmse_m": 0.0070123943639987885,
-      "mae_m": 0.005138883451581083,
-      "bias_m": -0.0017429352601671646,
-      "correlation": 0.4455932853275618
+      "rmse_m": 0.007012394363998791,
+      "mae_m": 0.0051388834515810845,
+      "bias_m": -0.001742935260167161,
+      "correlation": 0.44559328532756115
     },
-    "rmse_improvement_fraction": 0.07950534246828012,
-    "mae_improvement_fraction": 0.0886369248326262,
+    "rmse_improvement_fraction": 0.07950534246827967,
+    "mae_improvement_fraction": 0.08863692483262597,
     "promotion_screen": {
       "minimum_rmse_improvement_fraction": 0.1,
       "minimum_mae_improvement_fraction": 0.05,
@@ -55,8 +55,8 @@
   "current_state": {
     "timestamp_utc": "2026-08-08T10:00:00+00:00",
     "baseline_expected_change_next_6h_m": -0.01139957313147475,
-    "storage_memory_correction_next_6h_m": 0.0017133975331036356,
-    "candidate_expected_change_next_6h_m": -0.009686175598371113,
+    "storage_memory_correction_next_6h_m": 0.0017133975331036482,
+    "candidate_expected_change_next_6h_m": -0.009686175598371101,
     "rain_24h_mm": 0.338828414158809,
     "rain_72h_mm": 1.74429250281836,
     "rain_168h_mm": 22.463768700370753,
@@ -78,97 +78,97 @@
   "coefficients": [
     {
       "feature": "intercept",
-      "standardized_coefficient_m_per_6h": 0.005325731232211751
+      "standardized_coefficient_m_per_6h": 0.005325731232211752
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.002449233634476913
+      "standardized_coefficient_m_per_6h": -0.00244923363447693
     },
     {
       "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.005965323619540663
+      "standardized_coefficient_m_per_6h": -0.005965323619540661
     },
     {
       "feature": "05EA005_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0012637672146459055
+      "standardized_coefficient_m_per_6h": -0.0012637672146459035
     },
     {
       "feature": "05EA005_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.00023897838941934965
+      "standardized_coefficient_m_per_6h": -0.00023897838941936325
     },
     {
       "feature": "05EA010_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0030645322838569267
+      "standardized_coefficient_m_per_6h": -0.00306453228385693
     },
     {
       "feature": "05EA011_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0007833644296892042
+      "standardized_coefficient_m_per_6h": -0.0007833644296891967
     },
     {
       "feature": "05EA012_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.0015098742719802211
+      "standardized_coefficient_m_per_6h": 0.0015098742719802296
     },
     {
       "feature": "05EA012_change_24h_m",
-      "standardized_coefficient_m_per_6h": 0.000518442117248961
+      "standardized_coefficient_m_per_6h": 0.0005184421172489655
     },
     {
       "feature": "rain_24h_mm",
-      "standardized_coefficient_m_per_6h": -0.004551015709041271
+      "standardized_coefficient_m_per_6h": -0.004551015709041316
     },
     {
       "feature": "rain_72h_mm",
-      "standardized_coefficient_m_per_6h": 0.00015142366545222878
+      "standardized_coefficient_m_per_6h": 0.00015142366545219945
     },
     {
       "feature": "rain_memory_12h_mm",
-      "standardized_coefficient_m_per_6h": 0.0032479722876492074
+      "standardized_coefficient_m_per_6h": 0.0032479722876492044
     },
     {
       "feature": "rain_memory_36h_mm",
-      "standardized_coefficient_m_per_6h": 0.0013242702381520693
+      "standardized_coefficient_m_per_6h": 0.0013242702381521397
     },
     {
       "feature": "rain_memory_96h_mm",
-      "standardized_coefficient_m_per_6h": 0.0019589188460058704
+      "standardized_coefficient_m_per_6h": 0.001958918846005874
     },
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.0114615334206355
+      "standardized_coefficient_m_per_6h": -0.011461533420635531
     }
   ],
   "largest_standardized_effects": [
     {
       "feature": "rain_memory_240h_mm",
-      "standardized_coefficient_m_per_6h": -0.0114615334206355
+      "standardized_coefficient_m_per_6h": -0.011461533420635531
     },
     {
       "feature": "target_change_24h_m",
-      "standardized_coefficient_m_per_6h": -0.005965323619540663
+      "standardized_coefficient_m_per_6h": -0.005965323619540661
     },
     {
       "feature": "rain_24h_mm",
-      "standardized_coefficient_m_per_6h": -0.004551015709041271
+      "standardized_coefficient_m_per_6h": -0.004551015709041316
     },
     {
       "feature": "rain_memory_12h_mm",
-      "standardized_coefficient_m_per_6h": 0.0032479722876492074
+      "standardized_coefficient_m_per_6h": 0.0032479722876492044
     },
     {
       "feature": "05EA010_change_6h_m",
-      "standardized_coefficient_m_per_6h": -0.0030645322838569267
+      "standardized_coefficient_m_per_6h": -0.00306453228385693
     },
     {
       "feature": "target_stage_m",
-      "standardized_coefficient_m_per_6h": -0.002449233634476913
+      "standardized_coefficient_m_per_6h": -0.00244923363447693
     },
     {
       "feature": "rain_memory_96h_mm",
-      "standardized_coefficient_m_per_6h": 0.0019589188460058704
+      "standardized_coefficient_m_per_6h": 0.001958918846005874
     },
     {
       "feature": "05EA012_change_6h_m",
-      "standardized_coefficient_m_per_6h": 0.0015098742719802211
+      "standardized_coefficient_m_per_6h": 0.0015098742719802296
     }
   ],
   "promotion_policy": {
