@@ -1,70 +1,115 @@
 {
-  "generated_utc": "2026-08-07T23:28:19.686231+00:00",
+  "generated_utc": "2026-08-08T03:46:42.254388+00:00",
   "status": "not_ready_for_extended_historical_testing",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 84,
+  "dry_hourly_points": 61,
   "data_range_utc": [
-    "2026-07-24T00:00:00+00:00",
-    "2026-08-07T23:00:00+00:00"
+    "2026-07-25T00:00:00+00:00",
+    "2026-08-08T03:00:00+00:00"
   ],
   "candidate_fit": {
     "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -0.17018618933695062,
-    "coefficient_per_day": -0.034623890303412286,
-    "n": 58,
+    "intercept_m3s_per_day": 0.766366848478628,
+    "coefficient_per_day": -0.11860999622654596,
+    "n": 42,
     "discharge_range_m3s": [
-      10.9,
-      13.4
+      10.7,
+      12.8
     ],
-    "rate_rmse_m3s_per_day": 0.2689153329389123
+    "rate_rmse_m3s_per_day": 0.27253432650016535
   },
   "holdout": {
-    "train_points": 58,
-    "test_points": 26,
+    "train_points": 42,
+    "test_points": 19,
     "official_stage_recession_then_rating": {
-      "n": 26,
-      "rmse_m3s": 0.16001039994962543,
-      "mae_m3s": 0.11130533081999741,
-      "bias_m3s": -0.08139901393390546
+      "n": 19,
+      "rmse_m3s": 0.1819758963736212,
+      "mae_m3s": 0.12933108057618925,
+      "bias_m3s": -0.11111236140587472
     },
     "direct_discharge_candidate": {
-      "n": 26,
-      "rmse_m3s": 0.16295473887782458,
-      "mae_m3s": 0.11567088657795432,
-      "bias_m3s": -0.08829582539440056
+      "n": 19,
+      "rmse_m3s": 0.17668934745973963,
+      "mae_m3s": 0.12395716315590835,
+      "bias_m3s": -0.10529661345913896
     },
-    "rmse_improvement_fraction": -0.018400922247092,
+    "rmse_improvement_fraction": 0.029050819472418277,
     "minimum_improvement_required": 0.1
   },
   "current_projection": {
-    "current_discharge_m3s": 7.890000000000001,
+    "current_discharge_m3s": 7.705,
     "candidate_rain_free": {
       "reached": true,
-      "hours": 64,
-      "days": 2.6666666666666665,
+      "hours": 282,
+      "days": 11.75,
       "path_daily": [
         {
           "day": 1,
-          "discharge_m3s": 7.453909840520693,
-          "rate_m3s_per_day": -0.4282695459866645
+          "discharge_m3s": 7.565565019467275,
+          "rate_m3s_per_day": -0.13098478993207363
         },
         {
           "day": 2,
-          "discharge_m3s": 7.032670945171246,
-          "rate_m3s_per_day": -0.41368461668255463
+          "discharge_m3s": 7.441761678396673,
+          "rate_m3s_per_day": -0.11630047611485561
+        },
+        {
+          "day": 3,
+          "discharge_m3s": 7.331837560347642,
+          "rate_m3s_per_day": -0.10326237688785378
+        },
+        {
+          "day": 4,
+          "discharge_m3s": 7.234236707055916,
+          "rate_m3s_per_day": -0.09168594004721442
+        },
+        {
+          "day": 5,
+          "discharge_m3s": 7.14757759409379,
+          "rate_m3s_per_day": -0.08140730298578092
+        },
+        {
+          "day": 6,
+          "discharge_m3s": 7.070633575613377,
+          "rate_m3s_per_day": -0.07228097324416383
+        },
+        {
+          "day": 7,
+          "discharge_m3s": 7.002315521371334,
+          "rate_m3s_per_day": -0.06417776908831008
+        },
+        {
+          "day": 8,
+          "discharge_m3s": 6.941656400264901,
+          "rate_m3s_per_day": -0.056982990962770486
+        },
+        {
+          "day": 9,
+          "discharge_m3s": 6.8877975921617205,
+          "rate_m3s_per_day": -0.05059479793688604
+        },
+        {
+          "day": 10,
+          "discharge_m3s": 6.839976734269542,
+          "rate_m3s_per_day": -0.04492276616274449
+        },
+        {
+          "day": 11,
+          "discharge_m3s": 6.797516930013145,
+          "rate_m3s_per_day": -0.03988660894011331
         }
       ]
     },
-    "official_stage_based_rain_free_days": 2.2916666666666665,
-    "candidate_minus_official_days": 0.375,
+    "official_stage_based_rain_free_days": 1.9166666666666667,
+    "candidate_minus_official_days": 9.833333333333334,
     "target_outside_candidate_fit_range": true
   },
   "promotion_recommendation": {
     "recommended": false,
     "automatic_promotion_enabled": false,
     "holdout_improvement_check": false,
-    "bias_check": false,
+    "bias_check": true,
     "target_inside_fit_range_check": false,
     "reason": "One or more holdout, bias, target-range or projection checks are not met."
   },
