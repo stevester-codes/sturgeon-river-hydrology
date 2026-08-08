@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-08T13:58:57.263829+00:00",
+  "generated_utc": "2026-08-08T16:49:46.460797+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -21,8 +21,8 @@
   "short_range_forecast_input": {
     "status": "material_short_range_qpf_feature_vector_available",
     "feature_vector_required": true,
-    "basin_mm": 20.0581116910749,
-    "run_time_utc": "2026-08-08T06:00:00+00:00",
+    "basin_mm": 20.207839106505563,
+    "run_time_utc": "2026-08-08T12:00:00+00:00",
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "calibration_sample": {
@@ -44,43 +44,43 @@
     "required_feature_count": 7,
     "outside_feature_count": 4,
     "materially_outside_feature_count": 2,
-    "nearest_analogue_distance": 3.349882123939863,
+    "nearest_analogue_distance": 3.004911961743889,
     "storm_type": "widespread_basin",
     "horizon_h": 48,
-    "run_time_utc": "2026-08-08T06:00:00+00:00",
-    "basin_mm": 20.0581116910749,
+    "run_time_utc": "2026-08-08T12:00:00+00:00",
+    "basin_mm": 20.207839106505563,
     "features": [
       {
         "feature": "basin_mm",
-        "current": 20.0581116910749,
+        "current": 20.207839106505563,
         "training_min": 1.952859654092426,
         "training_max": 26.846894577404903,
         "training_mean": 14.399877115748664,
         "training_standard_deviation": 12.447017461656237,
-        "z_score": 0.4545855738337924,
+        "z_score": 0.46661475398814733,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "lower_ratio",
-        "current": 0.490366147211971,
+        "current": 0.6400969224644892,
         "training_min": 0.6433245128726464,
         "training_max": 1.1049891548057453,
         "training_mean": 0.8741568338391958,
         "training_standard_deviation": 0.2308323209665495,
-        "z_score": -1.6626384252439281,
-        "normalized_distance_outside_range": 0.33131921262196407,
+        "z_score": -1.0139824024410553,
+        "normalized_distance_outside_range": 0.0069912012205276056,
         "status": "outside_training_range"
       },
       {
         "feature": "upper_ratio",
-        "current": 1.2069796933416683,
+        "current": 0.6516972190463027,
         "training_min": 0.8684102567270844,
         "training_max": 1.0110260499381822,
         "training_mean": 0.9397181533326333,
         "training_standard_deviation": 0.07130789660554893,
-        "z_score": 3.7479935986253405,
-        "normalized_distance_outside_range": 1.3739967993126703,
+        "z_score": -4.039116956142523,
+        "normalized_distance_outside_range": 1.5195584780712619,
         "status": "material_extrapolation"
       },
       {
@@ -107,24 +107,24 @@
       },
       {
         "feature": "basin_pct_gt_10mm",
-        "current": 76.99757869249395,
+        "current": 76.75544794188862,
         "training_min": 0.0,
         "training_max": 100.0,
         "training_mean": 50.0,
         "training_standard_deviation": 50.0,
-        "z_score": 0.5399515738498789,
+        "z_score": 0.5351089588377724,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "pre_stage_m",
-        "current": 1.789,
+        "current": 1.778,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -7.50871080139373,
-        "normalized_distance_outside_range": 3.254355400696865,
+        "z_score": -7.585365853658537,
+        "normalized_distance_outside_range": 3.2926829268292686,
         "status": "material_extrapolation"
       }
     ],
@@ -133,7 +133,7 @@
   "hydrologic_memory_and_storage_proxies": {
     "status": "elevated_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.04100000000000015,
+    "target_change_24h_m": -0.04699999999999993,
     "antecedent_rain_mm": {
       "24h": 0.338828414158809,
       "72h": 1.74429250281836,
@@ -144,16 +144,16 @@
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.03599999999999959,
-        "change_72h_m": -0.03200000000000003,
+        "change_24h_m": -0.02800000000000047,
+        "change_72h_m": -0.03300000000000125,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.014000000000001123,
-        "change_72h_m": -0.05600000000000094,
+        "change_24h_m": -0.019000000000000128,
+        "change_72h_m": -0.06199999999999939,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
@@ -161,15 +161,15 @@
         "name": "middle_basin_05EA005",
         "station": "05EA005",
         "change_24h_m": -0.019000000000000017,
-        "change_72h_m": -0.051000000000000045,
+        "change_72h_m": -0.05500000000000005,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.015000000000000013,
-        "change_72h_m": 0.0050000000000000044,
+        "change_24h_m": 0.018000000000000016,
+        "change_72h_m": 0.0040000000000000036,
         "rising_24h": true,
         "higher_than_72h_ago": false
       }
@@ -177,22 +177,22 @@
   },
   "current_limb_rating_support": {
     "status": "mild_target_extrapolation",
-    "fit_r2": 0.9997807276407218,
-    "fit_rmse_m3s": 0.008219511891472513,
+    "fit_r2": 0.9997740222118803,
+    "fit_rmse_m3s": 0.00837773999622977,
     "fit_hourly_points": 91,
     "observed_stage_range_m": [
-      1.7894999999999999,
-      1.956
+      1.778,
+      1.955
     ],
-    "target_stage_m": 1.708542231634176,
-    "extrapolation_distance_m": 0.0809577683658238,
-    "extrapolation_as_observed_span": 0.48623284303798053,
+    "target_stage_m": 1.7079262835612692,
+    "extrapolation_distance_m": 0.07007371643873084,
+    "extrapolation_as_observed_span": 0.39589670304367697,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
     "status": "approximate_low_flow_anchor_plus_complete_design_profile",
     "score_out_of_10": 8.0,
-    "current_discharge_m3s": 7.64,
+    "current_discharge_m3s": 7.53,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
@@ -252,39 +252,39 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 0.0034254585931061962,
+    "standard_deviation_days": 0.0034155280714585966,
     "earliest": {
-      "days": 4.0218935812064975,
+      "days": 3.867899365632029,
       "date_utc": "2026-08-12"
     },
     "latest": {
-      "days": 4.036869406864444,
+      "days": 3.8828346202488175,
       "date_utc": "2026-08-12"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 4.026549447058336,
+        "days": 3.872541014185554,
         "date_utc": "2026-08-12"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 4.029370613888873,
+        "days": 3.8753524465955644,
         "date_utc": "2026-08-12"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 4.031272401127478,
+        "days": 3.877248347376688,
         "date_utc": "2026-08-12"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 4.032665908606741,
+        "days": 3.8786374545266504,
         "date_utc": "2026-08-12"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 4.034937742581305,
+        "days": 3.8809034646913103,
         "date_utc": "2026-08-12"
       }
     },
