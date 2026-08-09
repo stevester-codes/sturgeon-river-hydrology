@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-09T13:04:59+00:00  
-Run ID: `20260809T130459Z`
+Generated: 2026-08-09T13:57:56+00:00  
+Run ID: `20260809T135756Z`
 
 ## 1. Decision
 
@@ -9,23 +9,23 @@ Run ID: `20260809T130459Z`
 
 ## 2. Practical inspection window
 
-- **Practical risk-adjusted inspection window:** **2026-08-12 to 2026-08-16**
+- **Practical risk-adjusted inspection window:** **2026-08-12 to 2026-08-17**
 - Official GEPS-integrated point forecast: **2026-08-12**
-- Core eligible-method window: **2026-08-12 to 2026-08-13** (two method consensus)
-- Independent precipitation-screened direct-Q date: **2026-08-13**
+- Core eligible-method window: **2026-08-12** (two method consensus)
+- Independent precipitation-screened direct-Q date: **2026-08-12**
 - Weather-ensemble upper date: **2026-08-12**
-- Historical response risk bound: **2026-08-16**
+- Historical response risk bound: **2026-08-17**
 - Engineering schedule contingency: **2026-08-30** — sensitivity envelope, not a formal p90 probability.
 - Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption).
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.748 m**, 24-hour change **-0.045 m**
-- 05EA002 discharge: **7.23 m³/s**
+- 05EA002 stage: **1.751 m**, 24-hour change **-0.038 m**
+- 05EA002 discharge: **7.26 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **1.00 h**
-- Provisional field-informed project WSE method span: **650.256–650.335 m**
-- Provisional depth above 650.20 m: **0.056–0.135 m**
+- Observation age: **0.88 h**
+- Provisional field-informed project WSE method span: **650.261–650.335 m**
+- Provisional depth above 650.20 m: **0.061–0.135 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -42,7 +42,7 @@ Run ID: `20260809T130459Z`
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 5.35 d versus official 1.08 d; difference 4.27 d. It widens the practical window to 2026-08-16 but does not replace the official point forecast.
+Aligned historical response: 5.33 d versus official 1.08 d; difference 4.25 d. It widens the practical window to 2026-08-17 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -59,9 +59,9 @@ Aligned historical response: 5.35 d versus official 1.08 d; difference 4.27 d. I
 
 - Official point-date movement: **0 day(s)**
 - Practical-window start movement: **0 day(s)**
-- Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.003 m**
-- Discharge change since previous run: **-0.03 m³/s**
+- Practical-window end movement: **1 day(s)**
+- Stage change since previous run: **0.003 m**
+- Discharge change since previous run: **0.03 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
