@@ -1,8 +1,8 @@
 {
   "status": "diagnostic_only",
   "current_limb": "falling",
-  "rising_points": 37,
-  "falling_points": 297,
+  "rising_points": 35,
+  "falling_points": 277,
   "comparison_status": "apparent_loop_quantified",
   "confidence_effect": "small_apparent_hysteresis"
 }
@@ -20,106 +20,32 @@
 {
   "status": "operational_sensitivity_not_calibrated_probability",
   "central_p50": {
-    "days": 3.557478967787559,
+    "days": 3.4742603601012174,
     "date_utc": "2026-08-12"
   },
   "screened_direct_q_p50": {
-    "days": 4.224145634454226,
+    "days": 4.224260360101217,
     "date_utc": "2026-08-13"
   },
   "unscreened_direct_q_p50": {
-    "days": 4.390812301120892,
+    "days": 4.3909270267678835,
     "date_utc": "2026-08-13"
   },
   "protected_schedule_p90": {
-    "days": 14.814426576891076,
+    "days": 14.73101874235099,
     "date_utc": "2026-08-23"
   },
   "protected_schedule_source": "transfer_and_response_sensitivity"
 }
 {
-  "status": "not_ready_for_extended_historical_testing",
-  "dry_hourly_points": 61,
-  "holdout": {
-    "train_points": 42,
-    "test_points": 19,
-    "official_stage_recession_then_rating": {
-      "n": 19,
-      "rmse_m3s": 0.18047932248436657,
-      "mae_m3s": 0.12711984827886588,
-      "bias_m3s": -0.10864093754618091
-    },
-    "direct_discharge_candidate": {
-      "n": 19,
-      "rmse_m3s": 0.17668934745973963,
-      "mae_m3s": 0.12395716315590835,
-      "bias_m3s": -0.10529661345913896
-    },
-    "rmse_improvement_fraction": 0.020999497185918536,
-    "minimum_improvement_required": 0.1
-  },
-  "current_projection": {
-    "current_discharge_m3s": 7.415,
-    "candidate_rain_free": {
-      "reached": true,
-      "hours": 228,
-      "days": 9.5,
-      "path_daily": [
-        {
-          "day": 1,
-          "discharge_m3s": 7.3080760538339495,
-          "rate_m3s_per_day": -0.10044402468992764
-        },
-        {
-          "day": 2,
-          "discharge_m3s": 7.2131390321107425,
-          "rate_m3s_per_day": -0.08918354490157854
-        },
-        {
-          "day": 3,
-          "discharge_m3s": 7.128845116511373,
-          "rate_m3s_per_day": -0.07918544389041648
-        },
-        {
-          "day": 4,
-          "discharge_m3s": 7.054001140177357,
-          "rate_m3s_per_day": -0.07030820013985917
-        },
-        {
-          "day": 5,
-          "discharge_m3s": 6.987547698625182,
-          "rate_m3s_per_day": -0.06242615768811466
-        },
-        {
-          "day": 6,
-          "discharge_m3s": 6.928544154045718,
-          "rate_m3s_per_day": -0.05542774748819168
-        },
-        {
-          "day": 7,
-          "discharge_m3s": 6.876155320726868,
-          "rate_m3s_per_day": -0.04921390816592974
-        },
-        {
-          "day": 8,
-          "discharge_m3s": 6.82963964313374,
-          "rate_m3s_per_day": -0.04369668382213365
-        },
-        {
-          "day": 9,
-          "discharge_m3s": 6.788338699308954,
-          "rate_m3s_per_day": -0.03879797903092297
-        }
-      ]
-    },
-    "official_stage_based_rain_free_days": 1.3333333333333333,
-    "candidate_minus_official_days": 8.166666666666666,
-    "target_outside_candidate_fit_range": true
-  },
+  "status": "insufficient_dry_discharge_observations",
+  "dry_hourly_points": 39,
+  "holdout": {},
+  "current_projection": {},
   "promotion_recommended": false
 }
 {
-  "generated_utc": "2026-08-08T22:51:02.864684+00:00",
+  "generated_utc": "2026-08-09T00:40:35.542773+00:00",
   "status": "provisional_date_level_field_evidence_available",
   "mode": "shadow_only_no_automatic_threshold_or_transfer_replacement",
   "project_threshold_wse_m": 650.2,
@@ -192,14 +118,14 @@
     "interpretation": "The two date-level field observations independently extrapolate toward the current operational discharge anchor, but this is not a validated rating curve."
   },
   "current_site_state": {
-    "current_05EA002_discharge_m3s": 7.41,
+    "current_05EA002_discharge_m3s": 7.36,
     "direct_current_site_measurement_available": false,
     "date_recession_estimated_project_wse_m": 650.3942857142856,
     "date_recession_estimated_depth_over_650_20_m": 0.19428571428557007,
-    "discharge_relation_estimated_project_wse_m": 650.2866612244894,
-    "discharge_relation_estimated_depth_over_650_20_m": 0.08666122448937585,
-    "steady_state_design_profile_equivalent_wse_m": 650.241027362419,
-    "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.041027362418958546,
+    "discharge_relation_estimated_project_wse_m": 650.2782530612242,
+    "discharge_relation_estimated_depth_over_650_20_m": 0.07825306122413167,
+    "steady_state_design_profile_equivalent_wse_m": 650.237952215533,
+    "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.037952215532982336,
     "status": "provisional_site_recession_estimate_not_direct_measurement"
   },
   "comparison_with_design_profile": {
@@ -224,10 +150,10 @@
   ]
 }
 {
-  "generated_utc": "2026-08-08T22:51:02.607104+00:00",
-  "latest_stage_utc": "2026-08-08T22:05:00+00:00",
+  "generated_utc": "2026-08-09T00:40:35.361098+00:00",
+  "latest_stage_utc": "2026-08-09T00:05:00+00:00",
   "observation_freshness": {
-    "age_hours": 0.7673908622222223,
+    "age_hours": 0.5931558605555555,
     "maximum_allowed_age_hours": 6.0,
     "status": "current"
   },
@@ -242,44 +168,44 @@
   },
   "hydrograph_limb": "falling",
   "current_conditions": {
-    "stage_05EA002_m": 1.766,
-    "stage_change_24h_m": -0.050999999999999934,
-    "observed_discharge_05EA002_m3s": 7.41,
+    "stage_05EA002_m": 1.761,
+    "stage_change_24h_m": -0.050000000000000044,
+    "observed_discharge_05EA002_m3s": 7.36,
     "estimated_starkey_wse_m": null,
     "estimated_project_wse_m": null,
     "estimated_starkey_wse_range_m": null,
     "estimated_depth_over_main_floodplain_m": null,
     "estimated_depth_over_low_pocket_m": null,
     "actual_2026_site_wse_status": "not_directly_observed_current_value; steady_state_design_profile_conflicted_by_field_evidence",
-    "steady_state_design_profile_equivalent_wse_m": 650.241027362419,
+    "steady_state_design_profile_equivalent_wse_m": 650.237952215533,
     "steady_state_design_profile_equivalent_wse_range_m": [
-      650.091027362419,
-      650.391027362419
+      650.087952215533,
+      650.387952215533
     ],
-    "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.041027362418958546,
+    "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.037952215532982336,
     "provisional_field_recession_estimated_project_wse_m": 650.3942857142856,
     "provisional_field_recession_estimated_depth_over_650_20_m": 0.19428571428557007,
-    "provisional_field_discharge_relation_estimated_project_wse_m": 650.2866612244894,
-    "provisional_field_discharge_relation_estimated_depth_over_650_20_m": 0.08666122448937585,
+    "provisional_field_discharge_relation_estimated_project_wse_m": 650.2782530612242,
+    "provisional_field_discharge_relation_estimated_depth_over_650_20_m": 0.07825306122413167,
     "site_wse_interpretation": "The steady-state flood-study transfer is retained as design-event context and threshold translation, not as the actual 2026 construction-site water surface. Contractor observations support separate provisional date-recession and discharge-relation estimates until datum, location and time are verified."
   },
   "authoritative_operational_threshold": {
     "main_floodplain_elevation_m": 650.2,
     "calibrated_05EA002_discharge_m3s": 6.77,
-    "equivalent_05EA002_stage_on_current_limb_m": 1.706762821339981,
+    "equivalent_05EA002_stage_on_current_limb_m": 1.706385958950349,
     "basis": "Elevation 650.20 m is the physical project work-area threshold. The corresponding 6.77 m3/s operational anchor was reconstructed from a later 2026 rising-limb condition near 1.70 m at 05EA002, not from a concurrent surveyed project WSE. The original project condition had been understood near 1.50 m. The two contractor date-level observations independently extrapolate close to this discharge anchor but remain provisional until fully documented."
   },
   "forecast_main_floodplain_exposure": {
     "dry": {
-      "days_to_main_floodplain_exposure": 1.3950949413961338,
+      "days_to_main_floodplain_exposure": 1.2931901129337322,
       "date_utc": "2026-08-10"
     },
     "central": {
-      "days_to_main_floodplain_exposure": 3.561788291707836,
+      "days_to_main_floodplain_exposure": 3.46000618439144,
       "date_utc": "2026-08-12"
     },
     "wet": {
-      "days_to_main_floodplain_exposure": 6.561788291707836,
+      "days_to_main_floodplain_exposure": 6.46000618439144,
       "date_utc": "2026-08-15"
     }
   },
@@ -289,64 +215,64 @@
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 3.5547353357707916,
+        "days": 3.471522909306814,
         "date_utc": "2026-08-12"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 3.555738143152598,
+        "days": 3.4725234693596185,
         "date_utc": "2026-08-12"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 3.557478967787559,
+        "days": 3.4742603601012174,
         "date_utc": "2026-08-12"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 3.56026019375588,
+        "days": 3.4770355655712697,
         "date_utc": "2026-08-12"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 3.562265468309392,
+        "days": 3.4790368946395143,
         "date_utc": "2026-08-12"
       }
     },
     "earliest": {
-      "days": 3.5496825281698827,
+      "days": 3.4664812662175892,
       "date_utc": "2026-08-12"
     },
     "latest": {
-      "days": 3.5625798514596223,
+      "days": 3.4793521822427573,
       "date_utc": "2026-08-12"
     },
-    "mean_days": 3.5577899772407457,
-    "standard_deviation_days": 0.0030861427150176,
+    "mean_days": 3.4745709405771548,
+    "standard_deviation_days": 0.0030795816988300534,
     "probability_exposed_by_date": [
       {
         "days_from_run": 3,
-        "date_utc": "2026-08-11",
+        "date_utc": "2026-08-12",
         "probability_exposed_by_date_pct": 0.0
       },
       {
         "days_from_run": 4,
-        "date_utc": "2026-08-12",
-        "probability_exposed_by_date_pct": 100.0
-      },
-      {
-        "days_from_run": 5,
         "date_utc": "2026-08-13",
         "probability_exposed_by_date_pct": 100.0
       },
       {
-        "days_from_run": 6,
+        "days_from_run": 5,
         "date_utc": "2026-08-14",
         "probability_exposed_by_date_pct": 100.0
       },
       {
-        "days_from_run": 7,
+        "days_from_run": 6,
         "date_utc": "2026-08-15",
+        "probability_exposed_by_date_pct": 100.0
+      },
+      {
+        "days_from_run": 7,
+        "date_utc": "2026-08-16",
         "probability_exposed_by_date_pct": 100.0
       }
     ],
@@ -356,83 +282,83 @@
     "status": "operational_sensitivity_not_calibrated_probability",
     "planning_summary": {
       "optimistic_p10": {
-        "days": 0.08932690712039015,
+        "days": 0.08946391941477172,
         "date_utc": "2026-08-09"
       },
       "central_p50": {
-        "days": 3.557478967787559,
+        "days": 3.4742603601012174,
         "date_utc": "2026-08-12"
       },
       "precipitation_screened_direct_q_p50": {
-        "days": 4.224145634454226,
+        "days": 4.224260360101217,
         "date_utc": "2026-08-13"
       },
       "precipitation_screened_direct_q_upper_p90": {
-        "days": 9.270826552207073,
+        "days": 9.27077329242865,
         "date_utc": "2026-08-18"
       },
       "unscreened_direct_q_p50": {
-        "days": 4.390812301120892,
+        "days": 4.3909270267678835,
         "date_utc": "2026-08-13"
       },
       "unscreened_direct_q_upper_p90": {
-        "days": 9.437493218873739,
+        "days": 9.437439959095316,
         "date_utc": "2026-08-18"
       },
       "transfer_conservative_p90": {
-        "days": 14.814426576891076,
+        "days": 14.73101874235099,
         "date_utc": "2026-08-23"
       },
       "protected_schedule_p90": {
-        "days": 14.814426576891076,
+        "days": 14.73101874235099,
         "date_utc": "2026-08-23"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "screened_direct_q_difference_from_live_central_days": 0.666666666666667,
+      "screened_direct_q_difference_from_live_central_days": 0.75,
       "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
     },
     "scenarios": {
       "optimistic_sensitivity": {
         "target_wse_m": 650.35,
         "target_discharge_m3s": 9.419235465419442,
-        "equivalent_05EA002_stage_m": 1.959358784406086,
+        "equivalent_05EA002_stage_m": 1.9596151838659266,
         "rain_free_days": 0.0,
-        "short_range_delay_days": 0.08932690712039015,
+        "short_range_delay_days": 0.08946391941477172,
         "response_mode": "low",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 0.08932690712039015,
+            "days": 0.08946391941477172,
             "date_utc": "2026-08-09"
           },
           "earliest": {
-            "days": 0.08932690712039015,
+            "days": 0.08946391941477172,
             "date_utc": "2026-08-09"
           },
           "latest": {
-            "days": 0.08932690712039015,
+            "days": 0.08946391941477172,
             "date_utc": "2026-08-09"
           },
           "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 0.08932690712039015,
+              "days": 0.08946391941477172,
               "date_utc": "2026-08-09"
             },
             "p25": {
-              "days": 0.08932690712039015,
+              "days": 0.08946391941477172,
               "date_utc": "2026-08-09"
             },
             "p50": {
-              "days": 0.08932690712039015,
+              "days": 0.08946391941477172,
               "date_utc": "2026-08-09"
             },
             "p75": {
-              "days": 0.08932690712039015,
+              "days": 0.08946391941477172,
               "date_utc": "2026-08-09"
             },
             "p90": {
-              "days": 0.08932690712039015,
+              "days": 0.08946391941477172,
               "date_utc": "2026-08-09"
             }
           }
@@ -442,44 +368,44 @@
       "central": {
         "target_wse_m": 650.2,
         "target_discharge_m3s": 6.7700000000000005,
-        "equivalent_05EA002_stage_m": 1.706762821339981,
-        "rain_free_days": 1.3333333333333333,
-        "short_range_delay_days": 1.0893269071203902,
+        "equivalent_05EA002_stage_m": 1.7063859589503492,
+        "rain_free_days": 1.25,
+        "short_range_delay_days": 1.0894639194147717,
         "response_mode": "central",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 3.5577899772407457,
+            "days": 3.4745709405771548,
             "date_utc": "2026-08-12"
           },
           "earliest": {
-            "days": 3.5496825281698827,
+            "days": 3.4664812662175892,
             "date_utc": "2026-08-12"
           },
           "latest": {
-            "days": 3.5625798514596223,
+            "days": 3.4793521822427573,
             "date_utc": "2026-08-12"
           },
-          "standard_deviation_days": 0.0030861427150176,
+          "standard_deviation_days": 0.0030795816988300534,
           "quantiles": {
             "p10": {
-              "days": 3.5547353357707916,
+              "days": 3.471522909306814,
               "date_utc": "2026-08-12"
             },
             "p25": {
-              "days": 3.555738143152598,
+              "days": 3.4725234693596185,
               "date_utc": "2026-08-12"
             },
             "p50": {
-              "days": 3.557478967787559,
+              "days": 3.4742603601012174,
               "date_utc": "2026-08-12"
             },
             "p75": {
-              "days": 3.56026019375588,
+              "days": 3.4770355655712697,
               "date_utc": "2026-08-12"
             },
             "p90": {
-              "days": 3.562265468309392,
+              "days": 3.4790368946395143,
               "date_utc": "2026-08-12"
             }
           }
@@ -489,44 +415,44 @@
       "conservative_sensitivity": {
         "target_wse_m": 650.0500000000001,
         "target_discharge_m3s": 4.865883241613924,
-        "equivalent_05EA002_stage_m": 1.525211497324812,
-        "rain_free_days": 5.416666666666667,
+        "equivalent_05EA002_stage_m": 1.5243794830561699,
+        "rain_free_days": 5.333333333333333,
         "short_range_delay_days": 2.9997309489228625,
         "response_mode": "high",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 14.095080814483605,
+            "days": 14.011700819675449,
             "date_utc": "2026-08-23"
           },
           "earliest": {
-            "days": 12.679418533088757,
+            "days": 12.596039106471494,
             "date_utc": "2026-08-21"
           },
           "latest": {
-            "days": 14.815958128242936,
+            "days": 14.732548080873052,
             "date_utc": "2026-08-23"
           },
-          "standard_deviation_days": 0.9980808561484389,
+          "standard_deviation_days": 0.9980839808407144,
           "quantiles": {
             "p10": {
-              "days": 12.68337918680998,
+              "days": 12.599990380015988,
               "date_utc": "2026-08-21"
             },
             "p25": {
-              "days": 12.684820226601808,
+              "days": 12.601431599858117,
               "date_utc": "2026-08-21"
             },
             "p50": {
-              "days": 14.795347824579203,
+              "days": 14.711983035823245,
               "date_utc": "2026-08-23"
             },
             "p75": {
-              "days": 14.808552958759506,
+              "days": 14.725159545201308,
               "date_utc": "2026-08-23"
             },
             "p90": {
-              "days": 14.814426576891076,
+              "days": 14.73101874235099,
               "date_utc": "2026-08-23"
             }
           }
@@ -541,37 +467,37 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 4.391123310574078,
+            "days": 4.391237607243822,
             "date_utc": "2026-08-13"
           },
           "earliest": {
-            "days": 4.383015861503216,
+            "days": 4.383147932884256,
             "date_utc": "2026-08-13"
           },
           "latest": {
-            "days": 4.395913184792956,
+            "days": 4.396018848909424,
             "date_utc": "2026-08-13"
           },
-          "standard_deviation_days": 0.0030861427150176784,
+          "standard_deviation_days": 0.003079581698830031,
           "quantiles": {
             "p10": {
-              "days": 4.3880686691041255,
+              "days": 4.388189575973481,
               "date_utc": "2026-08-13"
             },
             "p25": {
-              "days": 4.389071476485931,
+              "days": 4.389190136026285,
               "date_utc": "2026-08-13"
             },
             "p50": {
-              "days": 4.390812301120892,
+              "days": 4.3909270267678835,
               "date_utc": "2026-08-13"
             },
             "p75": {
-              "days": 4.393593527089213,
+              "days": 4.393702232237937,
               "date_utc": "2026-08-13"
             },
             "p90": {
-              "days": 4.395598801642725,
+              "days": 4.395703561306181,
               "date_utc": "2026-08-13"
             }
           }
@@ -579,37 +505,37 @@
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 8.923149685264102,
+            "days": 8.923116663447534,
             "date_utc": "2026-08-17"
           },
           "earliest": {
-            "days": 7.298341587629501,
+            "days": 7.298325775828346,
             "date_utc": "2026-08-16"
           },
           "latest": {
-            "days": 9.437713186684798,
+            "days": 9.43766183054499,
             "date_utc": "2026-08-18"
           },
-          "standard_deviation_days": 0.9071367210375811,
+          "standard_deviation_days": 0.9071296337858865,
           "quantiles": {
             "p10": {
-              "days": 7.299096206190077,
+              "days": 7.299078691451385,
               "date_utc": "2026-08-16"
             },
             "p25": {
-              "days": 9.410952841446818,
+              "days": 9.410956705240647,
               "date_utc": "2026-08-18"
             },
             "p50": {
-              "days": 9.429963507307736,
+              "days": 9.429928389158134,
               "date_utc": "2026-08-18"
             },
             "p75": {
-              "days": 9.433997430233793,
+              "days": 9.433953094392773,
               "date_utc": "2026-08-18"
             },
             "p90": {
-              "days": 9.437493218873739,
+              "days": 9.437439959095316,
               "date_utc": "2026-08-18"
             }
           }
@@ -665,37 +591,37 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 4.224456643907412,
+            "days": 4.224570940577155,
             "date_utc": "2026-08-13"
           },
           "earliest": {
-            "days": 4.21634919483655,
+            "days": 4.216481266217589,
             "date_utc": "2026-08-13"
           },
           "latest": {
-            "days": 4.229246518126289,
+            "days": 4.229352182242757,
             "date_utc": "2026-08-13"
           },
-          "standard_deviation_days": 0.003086142715017599,
+          "standard_deviation_days": 0.003079581698830025,
           "quantiles": {
             "p10": {
-              "days": 4.221402002437459,
+              "days": 4.221522909306814,
               "date_utc": "2026-08-13"
             },
             "p25": {
-              "days": 4.222404809819265,
+              "days": 4.2225234693596185,
               "date_utc": "2026-08-13"
             },
             "p50": {
-              "days": 4.224145634454226,
+              "days": 4.224260360101217,
               "date_utc": "2026-08-13"
             },
             "p75": {
-              "days": 4.226926860422546,
+              "days": 4.22703556557127,
               "date_utc": "2026-08-13"
             },
             "p90": {
-              "days": 4.228932134976059,
+              "days": 4.229036894639514,
               "date_utc": "2026-08-13"
             }
           }
@@ -703,37 +629,37 @@
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 8.756483018597438,
+            "days": 8.756449996780868,
             "date_utc": "2026-08-17"
           },
           "earliest": {
-            "days": 7.131674920962835,
+            "days": 7.13165910916168,
             "date_utc": "2026-08-16"
           },
           "latest": {
-            "days": 9.271046520018132,
+            "days": 9.270995163878322,
             "date_utc": "2026-08-18"
           },
-          "standard_deviation_days": 0.9071367210375811,
+          "standard_deviation_days": 0.9071296337858863,
           "quantiles": {
             "p10": {
-              "days": 7.132429539523411,
+              "days": 7.132412024784719,
               "date_utc": "2026-08-16"
             },
             "p25": {
-              "days": 9.244286174780152,
+              "days": 9.244290038573979,
               "date_utc": "2026-08-18"
             },
             "p50": {
-              "days": 9.26329684064107,
+              "days": 9.263261722491468,
               "date_utc": "2026-08-18"
             },
             "p75": {
-              "days": 9.267330763567127,
+              "days": 9.267286427726106,
               "date_utc": "2026-08-18"
             },
             "p90": {
-              "days": 9.270826552207073,
+              "days": 9.27077329242865,
               "date_utc": "2026-08-18"
             }
           }
@@ -874,8 +800,8 @@
     "uncertainty_components": {
       "meteorological": "Full validated GEPS member spread through 16 days.",
       "short_range_hydrologic": {
-        "low_days": 0.08932690712039015,
-        "central_days": 1.0893269071203902,
+        "low_days": 0.08946391941477172,
+        "central_days": 1.0894639194147717,
         "high_days": 2.9997309489228625
       },
       "later_hydrologic": "Later rainfall windows use central days lost minus/plus analogue RMSE.",
@@ -936,7 +862,7 @@
       "required_feature_count": 7,
       "outside_feature_count": 3,
       "materially_outside_feature_count": 2,
-      "nearest_analogue_distance": 4.492161324910008,
+      "nearest_analogue_distance": 4.5017761320541005,
       "storm_type": "widespread_basin",
       "horizon_h": 48,
       "run_time_utc": "2026-08-08T18:00:00+00:00",
@@ -1010,13 +936,13 @@
         },
         {
           "feature": "pre_stage_m",
-          "current": 1.766,
+          "current": 1.761,
           "training_min": 2.723,
           "training_max": 3.01,
           "training_mean": 2.8665,
           "training_standard_deviation": 0.14349999999999996,
-          "z_score": -7.668989547038328,
-          "normalized_distance_outside_range": 3.334494773519164,
+          "z_score": -7.703832752613242,
+          "normalized_distance_outside_range": 3.351916376306621,
           "status": "material_extrapolation"
         }
       ],
@@ -1025,7 +951,7 @@
     "hydrologic_memory_and_storage_proxies": {
       "status": "elevated_residual_storage_signal",
       "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-      "target_change_24h_m": -0.050999999999999934,
+      "target_change_24h_m": -0.050000000000000044,
       "antecedent_rain_mm": {
         "24h": 0.802592877338,
         "72h": 1.992046075623991,
@@ -1036,16 +962,16 @@
         {
           "name": "upper_lake_chain_05EA012",
           "station": "05EA012",
-          "change_24h_m": -0.016000000000000014,
-          "change_72h_m": -0.09999999999999964,
+          "change_24h_m": -0.017000000000001236,
+          "change_72h_m": -0.13900000000000112,
           "rising_24h": false,
           "higher_than_72h_ago": false
         },
         {
           "name": "atim_big_lake_05EA011",
           "station": "05EA011",
-          "change_24h_m": -0.025000000000000355,
-          "change_72h_m": -0.07399999999999984,
+          "change_24h_m": -0.021000000000000796,
+          "change_72h_m": -0.07900000000000063,
           "rising_24h": false,
           "higher_than_72h_ago": false
         },
@@ -1060,8 +986,8 @@
         {
           "name": "lower_tributary_05EA010",
           "station": "05EA010",
-          "change_24h_m": 0.030999999999999972,
-          "change_72h_m": 0.018000000000000016,
+          "change_24h_m": 0.032999999999999974,
+          "change_72h_m": 0.017000000000000015,
           "rising_24h": true,
           "higher_than_72h_ago": false
         }
@@ -1069,22 +995,22 @@
     },
     "current_limb_rating_support": {
       "status": "mild_target_extrapolation",
-      "fit_r2": 0.9997427802434938,
-      "fit_rmse_m3s": 0.008921033018377229,
+      "fit_r2": 0.9997362482963054,
+      "fit_rmse_m3s": 0.009019470937422877,
       "fit_hourly_points": 91,
       "observed_stage_range_m": [
-        1.7665,
-        1.948
+        1.761,
+        1.944
       ],
-      "target_stage_m": 1.706762821339981,
-      "extrapolation_distance_m": 0.05973717866001893,
-      "extrapolation_as_observed_span": 0.3291304609367434,
+      "target_stage_m": 1.706385958950349,
+      "extrapolation_distance_m": 0.05461404104965095,
+      "extrapolation_as_observed_span": 0.2984373827849778,
       "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
     },
     "project_wse_transfer_support": {
       "status": "approximate_low_flow_anchor_plus_complete_design_profile",
       "score_out_of_10": 8.0,
-      "current_discharge_m3s": 7.41,
+      "current_discharge_m3s": 7.36,
       "target_discharge_m3s": 6.77,
       "constraint_discharges_m3s": [
         6.77,
@@ -1183,103 +1109,15 @@
     "interpretation": "Operational integrity and scientific confidence are separate. The new field evidence specifically reduces confidence in absolute current site-depth estimates, while leaving the discharge-based threshold timing as a separate question."
   },
   "direct_discharge_redundancy_check": {
-    "status": "not_ready_for_extended_historical_testing",
+    "status": "insufficient_dry_discharge_observations",
     "mode": "shadow_only_no_effect_on_operational_forecast",
-    "dry_hourly_points": 61,
-    "candidate_fit": {
-      "type": "linear_rate_in_discharge",
-      "intercept_m3s_per_day": 0.766366848478628,
-      "coefficient_per_day": -0.11860999622654596,
-      "n": 42,
-      "discharge_range_m3s": [
-        10.7,
-        12.8
-      ],
-      "rate_rmse_m3s_per_day": 0.27253432650016535
-    },
-    "holdout": {
-      "train_points": 42,
-      "test_points": 19,
-      "official_stage_recession_then_rating": {
-        "n": 19,
-        "rmse_m3s": 0.18047932248436657,
-        "mae_m3s": 0.12711984827886588,
-        "bias_m3s": -0.10864093754618091
-      },
-      "direct_discharge_candidate": {
-        "n": 19,
-        "rmse_m3s": 0.17668934745973963,
-        "mae_m3s": 0.12395716315590835,
-        "bias_m3s": -0.10529661345913896
-      },
-      "rmse_improvement_fraction": 0.020999497185918536,
-      "minimum_improvement_required": 0.1
-    },
-    "current_projection": {
-      "current_discharge_m3s": 7.415,
-      "candidate_rain_free": {
-        "reached": true,
-        "hours": 228,
-        "days": 9.5,
-        "path_daily": [
-          {
-            "day": 1,
-            "discharge_m3s": 7.3080760538339495,
-            "rate_m3s_per_day": -0.10044402468992764
-          },
-          {
-            "day": 2,
-            "discharge_m3s": 7.2131390321107425,
-            "rate_m3s_per_day": -0.08918354490157854
-          },
-          {
-            "day": 3,
-            "discharge_m3s": 7.128845116511373,
-            "rate_m3s_per_day": -0.07918544389041648
-          },
-          {
-            "day": 4,
-            "discharge_m3s": 7.054001140177357,
-            "rate_m3s_per_day": -0.07030820013985917
-          },
-          {
-            "day": 5,
-            "discharge_m3s": 6.987547698625182,
-            "rate_m3s_per_day": -0.06242615768811466
-          },
-          {
-            "day": 6,
-            "discharge_m3s": 6.928544154045718,
-            "rate_m3s_per_day": -0.05542774748819168
-          },
-          {
-            "day": 7,
-            "discharge_m3s": 6.876155320726868,
-            "rate_m3s_per_day": -0.04921390816592974
-          },
-          {
-            "day": 8,
-            "discharge_m3s": 6.82963964313374,
-            "rate_m3s_per_day": -0.04369668382213365
-          },
-          {
-            "day": 9,
-            "discharge_m3s": 6.788338699308954,
-            "rate_m3s_per_day": -0.03879797903092297
-          }
-        ]
-      },
-      "official_stage_based_rain_free_days": 1.3333333333333333,
-      "candidate_minus_official_days": 8.166666666666666,
-      "target_outside_candidate_fit_range": true
-    },
+    "dry_hourly_points": 39,
+    "candidate_fit": null,
+    "holdout": {},
+    "current_projection": {},
     "promotion_recommendation": {
       "recommended": false,
-      "automatic_promotion_enabled": false,
-      "holdout_improvement_check": false,
-      "bias_check": true,
-      "target_inside_fit_range_check": false,
-      "reason": "One or more holdout, bias, target-range or projection checks are not met."
+      "reason": "Insufficient dry discharge observations."
     },
     "interpretation": "This shorter-window shadow model forecasts the 6.77 m3/s threshold directly from discharge recession. It does not estimate actual site depth."
   },
@@ -1287,58 +1125,58 @@
     "status": "diagnostic_only",
     "current_limb": "falling",
     "classification": {
-      "rising_points": 37,
-      "falling_points": 297,
+      "rising_points": 35,
+      "falling_points": 277,
       "approximately_flat_points": 19,
       "limb_threshold_6h_stage_change_m": 0.003
     },
     "rising_fit": {
-      "slope_m3s_per_m": 11.966161245976322,
-      "intercept_m3s": -14.031878480486272,
-      "r2": 0.9989544801435047,
-      "rmse_m3s": 0.03629533882844643,
-      "n": 37,
+      "slope_m3s_per_m": 11.918685585917725,
+      "intercept_m3s": -13.93410295969816,
+      "r2": 0.9989845179489544,
+      "rmse_m3s": 0.034552499521123846,
+      "n": 35,
       "stage_range_m": [
         1.9344999999999999,
-        2.2735000000000003
+        2.239
       ],
       "discharge_range_m3s": [
         9.165,
-        13.25
+        12.8
       ],
-      "start_utc": "2026-07-26T04:00:00+00:00",
+      "start_utc": "2026-07-26T06:00:00+00:00",
       "end_utc": "2026-08-05T09:00:00+00:00"
     },
     "falling_fit": {
-      "slope_m3s_per_m": 11.445159734228584,
-      "intercept_m3s": -12.927347717656698,
-      "r2": 0.9988760397724606,
-      "rmse_m3s": 0.05364978918470635,
-      "n": 297,
+      "slope_m3s_per_m": 11.37647251365432,
+      "intercept_m3s": -12.792793673588008,
+      "r2": 0.998898258323223,
+      "rmse_m3s": 0.05156948977853317,
+      "n": 277,
       "stage_range_m": [
-        1.7665,
-        2.238
+        1.761,
+        2.2165
       ],
       "discharge_range_m3s": [
-        7.415,
-        12.8
+        7.36,
+        12.5
       ],
-      "start_utc": "2026-07-25T06:00:00+00:00",
-      "end_utc": "2026-08-08T22:00:00+00:00"
+      "start_utc": "2026-07-26T10:00:00+00:00",
+      "end_utc": "2026-08-09T00:00:00+00:00"
     },
     "loop_comparison": {
       "status": "apparent_loop_quantified",
       "overlap_discharge_range_m3s": [
         9.165,
-        12.8
+        12.5
       ],
-      "median_rising_minus_falling_stage_m": 0.0013469001348700438,
-      "maximum_absolute_stage_separation_m": 0.008261016651209152,
+      "median_rising_minus_falling_stage_m": 0.0012842194814153274,
+      "maximum_absolute_stage_separation_m": 0.007952284736353787,
       "target_discharge_m3s": 6.77,
       "target_inside_overlap": false,
-      "target_rising_stage_m": 1.7383919581963685,
-      "target_falling_stage_m": 1.721019904925278,
-      "target_rising_minus_falling_stage_m": 0.017372053271090593
+      "target_rising_stage_m": 1.7371129400510963,
+      "target_falling_stage_m": 1.7195834341539755,
+      "target_rising_minus_falling_stage_m": 0.017529505897120767
     },
     "confidence_effect": "small_apparent_hysteresis",
     "interpretation": "Separate recent rising and falling relationships are compared over their common discharge range. The result measures apparent loop separation in the provisional WSC stage-discharge series."
@@ -1414,14 +1252,14 @@
       "interpretation": "The two date-level field observations independently extrapolate toward the current operational discharge anchor, but this is not a validated rating curve."
     },
     "current_site_state": {
-      "current_05EA002_discharge_m3s": 7.41,
+      "current_05EA002_discharge_m3s": 7.36,
       "direct_current_site_measurement_available": false,
       "date_recession_estimated_project_wse_m": 650.3942857142856,
       "date_recession_estimated_depth_over_650_20_m": 0.19428571428557007,
-      "discharge_relation_estimated_project_wse_m": 650.2866612244894,
-      "discharge_relation_estimated_depth_over_650_20_m": 0.08666122448937585,
-      "steady_state_design_profile_equivalent_wse_m": 650.241027362419,
-      "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.041027362418958546,
+      "discharge_relation_estimated_project_wse_m": 650.2782530612242,
+      "discharge_relation_estimated_depth_over_650_20_m": 0.07825306122413167,
+      "steady_state_design_profile_equivalent_wse_m": 650.237952215533,
+      "steady_state_design_profile_equivalent_depth_over_650_20_m": 0.037952215532982336,
       "status": "provisional_site_recession_estimate_not_direct_measurement"
     },
     "comparison_with_design_profile": {
@@ -1477,7 +1315,7 @@
   },
   "uncertainty": {
     "starkey_transfer_m": 0.15,
-    "rating_fit_rmse_m3s": 0.008921033018377229,
+    "rating_fit_rmse_m3s": 0.009019470937422877,
     "confidence": "low_to_moderate_for_scheduling; field verification required",
     "all_member_model_uncertainty": {
       "median_later_window_delay_rmse_days": 1.0,
@@ -1503,39 +1341,39 @@
     },
     "risk_adjusted_sensitivity": {
       "optimistic_p10": {
-        "days": 0.08932690712039015,
+        "days": 0.08946391941477172,
         "date_utc": "2026-08-09"
       },
       "central_p50": {
-        "days": 3.557478967787559,
+        "days": 3.4742603601012174,
         "date_utc": "2026-08-12"
       },
       "precipitation_screened_direct_q_p50": {
-        "days": 4.224145634454226,
+        "days": 4.224260360101217,
         "date_utc": "2026-08-13"
       },
       "precipitation_screened_direct_q_upper_p90": {
-        "days": 9.270826552207073,
+        "days": 9.27077329242865,
         "date_utc": "2026-08-18"
       },
       "unscreened_direct_q_p50": {
-        "days": 4.390812301120892,
+        "days": 4.3909270267678835,
         "date_utc": "2026-08-13"
       },
       "unscreened_direct_q_upper_p90": {
-        "days": 9.437493218873739,
+        "days": 9.437439959095316,
         "date_utc": "2026-08-18"
       },
       "transfer_conservative_p90": {
-        "days": 14.814426576891076,
+        "days": 14.73101874235099,
         "date_utc": "2026-08-23"
       },
       "protected_schedule_p90": {
-        "days": 14.814426576891076,
+        "days": 14.73101874235099,
         "date_utc": "2026-08-23"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "screened_direct_q_difference_from_live_central_days": 0.666666666666667,
+      "screened_direct_q_difference_from_live_central_days": 0.75,
       "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
     },
     "historical_direct_discharge_sensitivities": {
@@ -1545,37 +1383,37 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 4.391123310574078,
+            "days": 4.391237607243822,
             "date_utc": "2026-08-13"
           },
           "earliest": {
-            "days": 4.383015861503216,
+            "days": 4.383147932884256,
             "date_utc": "2026-08-13"
           },
           "latest": {
-            "days": 4.395913184792956,
+            "days": 4.396018848909424,
             "date_utc": "2026-08-13"
           },
-          "standard_deviation_days": 0.0030861427150176784,
+          "standard_deviation_days": 0.003079581698830031,
           "quantiles": {
             "p10": {
-              "days": 4.3880686691041255,
+              "days": 4.388189575973481,
               "date_utc": "2026-08-13"
             },
             "p25": {
-              "days": 4.389071476485931,
+              "days": 4.389190136026285,
               "date_utc": "2026-08-13"
             },
             "p50": {
-              "days": 4.390812301120892,
+              "days": 4.3909270267678835,
               "date_utc": "2026-08-13"
             },
             "p75": {
-              "days": 4.393593527089213,
+              "days": 4.393702232237937,
               "date_utc": "2026-08-13"
             },
             "p90": {
-              "days": 4.395598801642725,
+              "days": 4.395703561306181,
               "date_utc": "2026-08-13"
             }
           }
@@ -1583,37 +1421,37 @@
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 8.923149685264102,
+            "days": 8.923116663447534,
             "date_utc": "2026-08-17"
           },
           "earliest": {
-            "days": 7.298341587629501,
+            "days": 7.298325775828346,
             "date_utc": "2026-08-16"
           },
           "latest": {
-            "days": 9.437713186684798,
+            "days": 9.43766183054499,
             "date_utc": "2026-08-18"
           },
-          "standard_deviation_days": 0.9071367210375811,
+          "standard_deviation_days": 0.9071296337858865,
           "quantiles": {
             "p10": {
-              "days": 7.299096206190077,
+              "days": 7.299078691451385,
               "date_utc": "2026-08-16"
             },
             "p25": {
-              "days": 9.410952841446818,
+              "days": 9.410956705240647,
               "date_utc": "2026-08-18"
             },
             "p50": {
-              "days": 9.429963507307736,
+              "days": 9.429928389158134,
               "date_utc": "2026-08-18"
             },
             "p75": {
-              "days": 9.433997430233793,
+              "days": 9.433953094392773,
               "date_utc": "2026-08-18"
             },
             "p90": {
-              "days": 9.437493218873739,
+              "days": 9.437439959095316,
               "date_utc": "2026-08-18"
             }
           }
@@ -1669,37 +1507,37 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 4.224456643907412,
+            "days": 4.224570940577155,
             "date_utc": "2026-08-13"
           },
           "earliest": {
-            "days": 4.21634919483655,
+            "days": 4.216481266217589,
             "date_utc": "2026-08-13"
           },
           "latest": {
-            "days": 4.229246518126289,
+            "days": 4.229352182242757,
             "date_utc": "2026-08-13"
           },
-          "standard_deviation_days": 0.003086142715017599,
+          "standard_deviation_days": 0.003079581698830025,
           "quantiles": {
             "p10": {
-              "days": 4.221402002437459,
+              "days": 4.221522909306814,
               "date_utc": "2026-08-13"
             },
             "p25": {
-              "days": 4.222404809819265,
+              "days": 4.2225234693596185,
               "date_utc": "2026-08-13"
             },
             "p50": {
-              "days": 4.224145634454226,
+              "days": 4.224260360101217,
               "date_utc": "2026-08-13"
             },
             "p75": {
-              "days": 4.226926860422546,
+              "days": 4.22703556557127,
               "date_utc": "2026-08-13"
             },
             "p90": {
-              "days": 4.228932134976059,
+              "days": 4.229036894639514,
               "date_utc": "2026-08-13"
             }
           }
@@ -1707,37 +1545,37 @@
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 8.756483018597438,
+            "days": 8.756449996780868,
             "date_utc": "2026-08-17"
           },
           "earliest": {
-            "days": 7.131674920962835,
+            "days": 7.13165910916168,
             "date_utc": "2026-08-16"
           },
           "latest": {
-            "days": 9.271046520018132,
+            "days": 9.270995163878322,
             "date_utc": "2026-08-18"
           },
-          "standard_deviation_days": 0.9071367210375811,
+          "standard_deviation_days": 0.9071296337858863,
           "quantiles": {
             "p10": {
-              "days": 7.132429539523411,
+              "days": 7.132412024784719,
               "date_utc": "2026-08-16"
             },
             "p25": {
-              "days": 9.244286174780152,
+              "days": 9.244290038573979,
               "date_utc": "2026-08-18"
             },
             "p50": {
-              "days": 9.26329684064107,
+              "days": 9.263261722491468,
               "date_utc": "2026-08-18"
             },
             "p75": {
-              "days": 9.267330763567127,
+              "days": 9.267286427726106,
               "date_utc": "2026-08-18"
             },
             "p90": {
-              "days": 9.270826552207073,
+              "days": 9.27077329242865,
               "date_utc": "2026-08-18"
             }
           }
@@ -1889,8 +1727,8 @@
     },
     "apparent_hysteresis": {
       "confidence_effect": "small_apparent_hysteresis",
-      "maximum_absolute_stage_separation_m": 0.008261016651209152,
-      "target_rising_minus_falling_stage_m": 0.017372053271090593
+      "maximum_absolute_stage_separation_m": 0.007952284736353787,
+      "target_rising_minus_falling_stage_m": 0.017529505897120767
     }
   },
   "limitations": [

@@ -1,107 +1,19 @@
 {
-  "generated_utc": "2026-08-08T22:51:02.790474+00:00",
-  "status": "not_ready_for_extended_historical_testing",
+  "generated_utc": "2026-08-09T00:40:35.490480+00:00",
+  "status": "insufficient_dry_discharge_observations",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 61,
+  "dry_hourly_points": 39,
   "data_range_utc": [
-    "2026-07-25T00:00:00+00:00",
-    "2026-08-08T22:00:00+00:00"
+    "2026-07-26T00:00:00+00:00",
+    "2026-08-09T00:00:00+00:00"
   ],
-  "candidate_fit": {
-    "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": 0.766366848478628,
-    "coefficient_per_day": -0.11860999622654596,
-    "n": 42,
-    "discharge_range_m3s": [
-      10.7,
-      12.8
-    ],
-    "rate_rmse_m3s_per_day": 0.27253432650016535
-  },
-  "holdout": {
-    "train_points": 42,
-    "test_points": 19,
-    "official_stage_recession_then_rating": {
-      "n": 19,
-      "rmse_m3s": 0.18047932248436657,
-      "mae_m3s": 0.12711984827886588,
-      "bias_m3s": -0.10864093754618091
-    },
-    "direct_discharge_candidate": {
-      "n": 19,
-      "rmse_m3s": 0.17668934745973963,
-      "mae_m3s": 0.12395716315590835,
-      "bias_m3s": -0.10529661345913896
-    },
-    "rmse_improvement_fraction": 0.020999497185918536,
-    "minimum_improvement_required": 0.1
-  },
-  "current_projection": {
-    "current_discharge_m3s": 7.415,
-    "candidate_rain_free": {
-      "reached": true,
-      "hours": 228,
-      "days": 9.5,
-      "path_daily": [
-        {
-          "day": 1,
-          "discharge_m3s": 7.3080760538339495,
-          "rate_m3s_per_day": -0.10044402468992764
-        },
-        {
-          "day": 2,
-          "discharge_m3s": 7.2131390321107425,
-          "rate_m3s_per_day": -0.08918354490157854
-        },
-        {
-          "day": 3,
-          "discharge_m3s": 7.128845116511373,
-          "rate_m3s_per_day": -0.07918544389041648
-        },
-        {
-          "day": 4,
-          "discharge_m3s": 7.054001140177357,
-          "rate_m3s_per_day": -0.07030820013985917
-        },
-        {
-          "day": 5,
-          "discharge_m3s": 6.987547698625182,
-          "rate_m3s_per_day": -0.06242615768811466
-        },
-        {
-          "day": 6,
-          "discharge_m3s": 6.928544154045718,
-          "rate_m3s_per_day": -0.05542774748819168
-        },
-        {
-          "day": 7,
-          "discharge_m3s": 6.876155320726868,
-          "rate_m3s_per_day": -0.04921390816592974
-        },
-        {
-          "day": 8,
-          "discharge_m3s": 6.82963964313374,
-          "rate_m3s_per_day": -0.04369668382213365
-        },
-        {
-          "day": 9,
-          "discharge_m3s": 6.788338699308954,
-          "rate_m3s_per_day": -0.03879797903092297
-        }
-      ]
-    },
-    "official_stage_based_rain_free_days": 1.3333333333333333,
-    "candidate_minus_official_days": 8.166666666666666,
-    "target_outside_candidate_fit_range": true
-  },
+  "candidate_fit": null,
+  "holdout": {},
+  "current_projection": {},
   "promotion_recommendation": {
     "recommended": false,
-    "automatic_promotion_enabled": false,
-    "holdout_improvement_check": false,
-    "bias_check": true,
-    "target_inside_fit_range_check": false,
-    "reason": "One or more holdout, bias, target-range or projection checks are not met."
+    "reason": "Insufficient dry discharge observations."
   },
   "limitations": [
     "WSC discharge is provisional and rating-derived from stage rather than independently measured each hour.",
