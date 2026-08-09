@@ -10,8 +10,8 @@
   "status": "diagnostic_only_no_automatic_recalibration",
   "score": 62.0,
   "tier": "low_to_moderate",
-  "short_range_input": "material_short_range_qpf_feature_vector_available",
-  "feature_coverage": "material_extrapolation",
+  "short_range_input": "valid_negligible_short_range_qpf",
+  "feature_coverage": "not_applicable_negligible_short_range_qpf",
   "rating_support": "mild_target_extrapolation",
   "transfer_support": "approximate_low_flow_anchor_plus_complete_design_profile",
   "historical_validation": "screened_event_block_validation_available",
@@ -20,20 +20,20 @@
 {
   "status": "operational_sensitivity_not_calibrated_probability",
   "central_p50": {
-    "days": 1.8756454727808907,
-    "date_utc": "2026-08-11"
+    "days": 0.75,
+    "date_utc": "2026-08-10"
   },
   "screened_direct_q_p50": {
-    "days": 3.3813655394213713,
-    "date_utc": "2026-08-13"
+    "days": 1.125,
+    "date_utc": "2026-08-11"
   },
   "unscreened_direct_q_p50": {
-    "days": 3.4646988727547043,
-    "date_utc": "2026-08-13"
+    "days": 1.2083333333333333,
+    "date_utc": "2026-08-11"
   },
   "protected_schedule_p90": {
-    "days": 13.476896800944193,
-    "date_utc": "2026-08-23"
+    "days": 9.224548171722706,
+    "date_utc": "2026-08-19"
   },
   "protected_schedule_source": "transfer_and_response_sensitivity"
 }
@@ -45,7 +45,7 @@
   "promotion_recommended": false
 }
 {
-  "generated_utc": "2026-08-09T21:55:40.007958+00:00",
+  "generated_utc": "2026-08-09T22:20:25.053362+00:00",
   "status": "provisional_date_level_field_evidence_available",
   "mode": "shadow_only_no_automatic_threshold_or_transfer_replacement",
   "project_threshold_wse_m": 650.2,
@@ -150,10 +150,10 @@
   ]
 }
 {
-  "generated_utc": "2026-08-09T21:55:39.814398+00:00",
+  "generated_utc": "2026-08-09T22:20:24.802784+00:00",
   "latest_stage_utc": "2026-08-09T21:05:00+00:00",
   "observation_freshness": {
-    "age_hours": 0.8443928883333334,
+    "age_hours": 1.2568896622222223,
     "maximum_allowed_age_hours": 6.0,
     "status": "current"
   },
@@ -197,16 +197,16 @@
   },
   "forecast_main_floodplain_exposure": {
     "dry": {
-      "days_to_main_floodplain_exposure": 0.8424019960054143,
+      "days_to_main_floodplain_exposure": 0.7374345225885186,
       "date_utc": "2026-08-10"
     },
     "central": {
-      "days_to_main_floodplain_exposure": 1.8424019960054143,
-      "date_utc": "2026-08-11"
+      "days_to_main_floodplain_exposure": 0.7374345225885186,
+      "date_utc": "2026-08-10"
     },
     "wet": {
-      "days_to_main_floodplain_exposure": 3.9823587605909094,
-      "date_utc": "2026-08-13"
+      "days_to_main_floodplain_exposure": 0.7374345225885186,
+      "date_utc": "2026-08-10"
     }
   },
   "probabilistic_exposure": {
@@ -215,45 +215,50 @@
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       }
     },
     "earliest": {
-      "days": 1.8756454727808907,
-      "date_utc": "2026-08-11"
+      "days": 0.75,
+      "date_utc": "2026-08-10"
     },
     "latest": {
-      "days": 1.8756454727808907,
-      "date_utc": "2026-08-11"
+      "days": 0.75,
+      "date_utc": "2026-08-10"
     },
-    "mean_days": 1.8756454727808904,
-    "standard_deviation_days": 2.220446049250313e-16,
+    "mean_days": 0.75,
+    "standard_deviation_days": 0.0,
     "probability_exposed_by_date": [
+      {
+        "days_from_run": 0,
+        "date_utc": "2026-08-09",
+        "probability_exposed_by_date_pct": 0.0
+      },
       {
         "days_from_run": 1,
         "date_utc": "2026-08-10",
-        "probability_exposed_by_date_pct": 0.0
+        "probability_exposed_by_date_pct": 100.0
       },
       {
         "days_from_run": 2,
@@ -269,11 +274,6 @@
         "days_from_run": 4,
         "date_utc": "2026-08-13",
         "probability_exposed_by_date_pct": 100.0
-      },
-      {
-        "days_from_run": 5,
-        "date_utc": "2026-08-14",
-        "probability_exposed_by_date_pct": 100.0
       }
     ],
     "interpretation": "These are raw all-member GEPS meteorological probabilities translated to the 6.77 m3/s operational threshold. They are scheduling probabilities, not estimates of actual current 2026 project-site water depth."
@@ -282,39 +282,39 @@
     "status": "operational_sensitivity_not_calibrated_probability",
     "planning_summary": {
       "optimistic_p10": {
-        "days": 0.12564547278089067,
-        "date_utc": "2026-08-10"
+        "days": 0.0,
+        "date_utc": "2026-08-09"
       },
       "central_p50": {
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "precipitation_screened_direct_q_p50": {
-        "days": 3.3813655394213713,
-        "date_utc": "2026-08-13"
+        "days": 1.125,
+        "date_utc": "2026-08-11"
       },
       "precipitation_screened_direct_q_upper_p90": {
-        "days": 7.5173891768445325,
-        "date_utc": "2026-08-17"
+        "days": 1.125,
+        "date_utc": "2026-08-11"
       },
       "unscreened_direct_q_p50": {
-        "days": 3.4646988727547043,
-        "date_utc": "2026-08-13"
+        "days": 1.2083333333333333,
+        "date_utc": "2026-08-11"
       },
       "unscreened_direct_q_upper_p90": {
-        "days": 7.6007225101778655,
-        "date_utc": "2026-08-17"
+        "days": 1.2083333333333333,
+        "date_utc": "2026-08-11"
       },
       "transfer_conservative_p90": {
-        "days": 13.476896800944193,
-        "date_utc": "2026-08-23"
+        "days": 9.224548171722706,
+        "date_utc": "2026-08-19"
       },
       "protected_schedule_p90": {
-        "days": 13.476896800944193,
-        "date_utc": "2026-08-23"
+        "days": 9.224548171722706,
+        "date_utc": "2026-08-19"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "screened_direct_q_difference_from_live_central_days": 1.5057200666404806,
+      "screened_direct_q_difference_from_live_central_days": 0.375,
       "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
     },
     "scenarios": {
@@ -323,43 +323,43 @@
         "target_discharge_m3s": 9.419235465419442,
         "equivalent_05EA002_stage_m": 1.9622787976644176,
         "rain_free_days": 0.0,
-        "short_range_delay_days": 0.12564547278089067,
+        "short_range_delay_days": 0.0,
         "response_mode": "low",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 0.1256454727808906,
-            "date_utc": "2026-08-10"
+            "days": 0.0,
+            "date_utc": "2026-08-09"
           },
           "earliest": {
-            "days": 0.12564547278089067,
-            "date_utc": "2026-08-10"
+            "days": 0.0,
+            "date_utc": "2026-08-09"
           },
           "latest": {
-            "days": 0.12564547278089067,
-            "date_utc": "2026-08-10"
+            "days": 0.0,
+            "date_utc": "2026-08-09"
           },
-          "standard_deviation_days": 5.551115123125783e-17,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 0.12564547278089067,
-              "date_utc": "2026-08-10"
+              "days": 0.0,
+              "date_utc": "2026-08-09"
             },
             "p25": {
-              "days": 0.12564547278089067,
-              "date_utc": "2026-08-10"
+              "days": 0.0,
+              "date_utc": "2026-08-09"
             },
             "p50": {
-              "days": 0.12564547278089067,
-              "date_utc": "2026-08-10"
+              "days": 0.0,
+              "date_utc": "2026-08-09"
             },
             "p75": {
-              "days": 0.12564547278089067,
-              "date_utc": "2026-08-10"
+              "days": 0.0,
+              "date_utc": "2026-08-09"
             },
             "p90": {
-              "days": 0.12564547278089067,
-              "date_utc": "2026-08-10"
+              "days": 0.0,
+              "date_utc": "2026-08-09"
             }
           }
         },
@@ -370,43 +370,43 @@
         "target_discharge_m3s": 6.7700000000000005,
         "equivalent_05EA002_stage_m": 1.7037932701625644,
         "rain_free_days": 0.75,
-        "short_range_delay_days": 1.1256454727808907,
+        "short_range_delay_days": 0.0,
         "response_mode": "central",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 1.8756454727808904,
-            "date_utc": "2026-08-11"
+            "days": 0.75,
+            "date_utc": "2026-08-10"
           },
           "earliest": {
-            "days": 1.8756454727808907,
-            "date_utc": "2026-08-11"
+            "days": 0.75,
+            "date_utc": "2026-08-10"
           },
           "latest": {
-            "days": 1.8756454727808907,
-            "date_utc": "2026-08-11"
+            "days": 0.75,
+            "date_utc": "2026-08-10"
           },
-          "standard_deviation_days": 2.220446049250313e-16,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 1.8756454727808907,
-              "date_utc": "2026-08-11"
+              "days": 0.75,
+              "date_utc": "2026-08-10"
             },
             "p25": {
-              "days": 1.8756454727808907,
-              "date_utc": "2026-08-11"
+              "days": 0.75,
+              "date_utc": "2026-08-10"
             },
             "p50": {
-              "days": 1.8756454727808907,
-              "date_utc": "2026-08-11"
+              "days": 0.75,
+              "date_utc": "2026-08-10"
             },
             "p75": {
-              "days": 1.8756454727808907,
-              "date_utc": "2026-08-11"
+              "days": 0.75,
+              "date_utc": "2026-08-10"
             },
             "p90": {
-              "days": 1.8756454727808907,
-              "date_utc": "2026-08-11"
+              "days": 0.75,
+              "date_utc": "2026-08-10"
             }
           }
         },
@@ -417,43 +417,43 @@
         "target_discharge_m3s": 4.865883241613924,
         "equivalent_05EA002_stage_m": 1.518008868911308,
         "rain_free_days": 4.958333333333333,
-        "short_range_delay_days": 2.1256454727808904,
+        "short_range_delay_days": 0.0,
         "response_mode": "high",
         "distribution": {
           "member_count": 21,
           "mean": {
-            "days": 12.554126536623947,
-            "date_utc": "2026-08-22"
+            "days": 8.710102080306857,
+            "date_utc": "2026-08-18"
           },
           "earliest": {
-            "days": 9.21296134826288,
-            "date_utc": "2026-08-19"
+            "days": 4.958333333333333,
+            "date_utc": "2026-08-14"
           },
           "latest": {
-            "days": 13.47928573669493,
-            "date_utc": "2026-08-23"
+            "days": 9.225615893942962,
+            "date_utc": "2026-08-19"
           },
-          "standard_deviation_days": 1.546605775205576,
+          "standard_deviation_days": 1.2983534010189424,
           "quantiles": {
             "p10": {
-              "days": 9.216174499598146,
-              "date_utc": "2026-08-19"
+              "days": 7.090330739770012,
+              "date_utc": "2026-08-17"
             },
             "p25": {
-              "days": 11.34899087057479,
-              "date_utc": "2026-08-21"
+              "days": 9.210688146129705,
+              "date_utc": "2026-08-19"
             },
             "p50": {
-              "days": 13.456248256357654,
-              "date_utc": "2026-08-23"
+              "days": 9.214746991580679,
+              "date_utc": "2026-08-19"
             },
             "p75": {
-              "days": 13.467648437474484,
-              "date_utc": "2026-08-23"
+              "days": 9.22281717852471,
+              "date_utc": "2026-08-19"
             },
             "p90": {
-              "days": 13.476896800944193,
-              "date_utc": "2026-08-23"
+              "days": 9.224548171722706,
+              "date_utc": "2026-08-19"
             }
           }
         },
@@ -467,76 +467,76 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 3.3572831610581813,
-            "date_utc": "2026-08-13"
+            "days": 1.208333333333333,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 2.333978806114224,
-            "date_utc": "2026-08-12"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 3.4700413434040414,
-            "date_utc": "2026-08-13"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 0.33202251647558384,
+          "standard_deviation_days": 2.220446049250313e-16,
           "quantiles": {
             "p10": {
-              "days": 3.455775362796494,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 3.463867962788701,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 3.4646988727547043,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 3.4672621816455944,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 3.4681438198947507,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             }
           }
         },
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 7.086052441651318,
-            "date_utc": "2026-08-16"
+            "days": 1.208333333333333,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 3.3339788061142235,
-            "date_utc": "2026-08-13"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 7.601810144191017,
-            "date_utc": "2026-08-17"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 1.29845763940363,
+          "standard_deviation_days": 2.220446049250313e-16,
           "quantiles": {
             "p10": {
-              "days": 5.466174499598146,
-              "date_utc": "2026-08-15"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 7.586537844121229,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 7.590685876357017,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 7.598929671584256,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 7.6007225101778655,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             }
           }
         },
@@ -591,76 +591,76 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 3.2739498277248473,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 2.2506454727808904,
-            "date_utc": "2026-08-12"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 3.3867080100707083,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 0.3320225164755839,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 3.372442029463161,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 3.3805346294553678,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 3.3813655394213713,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 3.3839288483122614,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 3.3848104865614177,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             }
           }
         },
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 7.002719108317985,
-            "date_utc": "2026-08-16"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 3.2506454727808904,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 7.518476810857684,
-            "date_utc": "2026-08-17"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 1.29845763940363,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 5.382841166264813,
-              "date_utc": "2026-08-15"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 7.503204510787896,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 7.507352543023684,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 7.515596338250923,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 7.5173891768445325,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             }
           }
         },
@@ -800,9 +800,9 @@
     "uncertainty_components": {
       "meteorological": "Full validated GEPS member spread through 16 days.",
       "short_range_hydrologic": {
-        "low_days": 0.12564547278089067,
-        "central_days": 1.1256454727808907,
-        "high_days": 2.1256454727808904
+        "low_days": 0.0,
+        "central_days": 0.0,
+        "high_days": 0.0
       },
       "later_hydrologic": "Later rainfall windows use central days lost minus/plus analogue RMSE.",
       "project_transfer": {
@@ -856,97 +856,55 @@
       "cross_validation_available": false
     },
     "forecast_feature_coverage": {
-      "status": "material_extrapolation",
-      "short_range_input_status": "material_short_range_qpf_feature_vector_available",
-      "available_feature_count": 7,
-      "required_feature_count": 7,
-      "outside_feature_count": 3,
-      "materially_outside_feature_count": 3,
-      "nearest_analogue_distance": 3.3791130527387843,
-      "storm_type": "tributary_localized_direct_local",
+      "status": "not_applicable_negligible_short_range_qpf",
+      "short_range_input_status": "valid_negligible_short_range_qpf",
+      "available_feature_count": 0,
+      "required_feature_count": 0,
+      "outside_feature_count": 0,
+      "materially_outside_feature_count": 0,
+      "nearest_analogue_distance": null,
+      "storm_type": "upper_lake_chain_concentrated",
       "horizon_h": 48,
-      "run_time_utc": "2026-08-09T12:00:00+00:00",
-      "basin_mm": 6.129386406072294,
+      "run_time_utc": "2026-08-09T18:00:00+00:00",
+      "basin_mm": 0.2993032125470286,
       "features": [
         {
           "feature": "basin_mm",
-          "current": 6.129386406072294,
-          "training_min": 1.952859654092426,
-          "training_max": 26.846894577404903,
-          "training_mean": 14.399877115748664,
-          "training_standard_deviation": 12.447017461656237,
-          "z_score": -0.6644556204049764,
-          "normalized_distance_outside_range": 0.0,
-          "status": "inside_training_range"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "lower_ratio",
-          "current": 1.635606987664365,
-          "training_min": 0.6433245128726464,
-          "training_max": 1.1049891548057453,
-          "training_mean": 0.8741568338391958,
-          "training_standard_deviation": 0.2308323209665495,
-          "z_score": 3.298715494592774,
-          "normalized_distance_outside_range": 1.149357747296387,
-          "status": "material_extrapolation"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "upper_ratio",
-          "current": 1.1688574806666334,
-          "training_min": 0.8684102567270844,
-          "training_max": 1.0110260499381822,
-          "training_mean": 0.9397181533326333,
-          "training_standard_deviation": 0.07130789660554893,
-          "z_score": 3.2133794185729676,
-          "normalized_distance_outside_range": 1.1066897092864838,
-          "status": "material_extrapolation"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "duration_h",
-          "current": 36.0,
-          "training_min": 12.0,
-          "training_max": 48.0,
-          "training_mean": 30.0,
-          "training_standard_deviation": 18.0,
-          "z_score": 0.3333333333333333,
-          "normalized_distance_outside_range": 0.0,
-          "status": "inside_training_range"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "antecedent_168h_mm",
-          "current": 21.805524807503744,
-          "training_min": 5.438034463943035,
-          "training_max": 21.91926277396547,
-          "training_mean": 13.678648618954252,
-          "training_standard_deviation": 8.240614155011219,
-          "z_score": 0.9861978774491509,
-          "normalized_distance_outside_range": 0.0,
-          "status": "inside_training_range"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "basin_pct_gt_10mm",
-          "current": 16.222760290556902,
-          "training_min": 0.0,
-          "training_max": 100.0,
-          "training_mean": 50.0,
-          "training_standard_deviation": 50.0,
-          "z_score": -0.6755447941888619,
-          "normalized_distance_outside_range": 0.0,
-          "status": "inside_training_range"
+          "status": "not_required_negligible_qpf",
+          "current": null
         },
         {
           "feature": "pre_stage_m",
-          "current": 1.74,
-          "training_min": 2.723,
-          "training_max": 3.01,
-          "training_mean": 2.8665,
-          "training_standard_deviation": 0.14349999999999996,
-          "z_score": -7.850174216027876,
-          "normalized_distance_outside_range": 3.425087108013938,
-          "status": "material_extrapolation"
+          "status": "not_required_negligible_qpf",
+          "current": null
         }
       ],
-      "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
+      "interpretation": "The HRDPS input is complete and forecasts negligible basin rainfall. A rainfall-response feature vector is intentionally not required; this is not missing data and does not add new calibration evidence."
     },
     "hydrologic_memory_and_storage_proxies": {
       "status": "elevated_residual_storage_signal",
@@ -1341,39 +1299,39 @@
     },
     "risk_adjusted_sensitivity": {
       "optimistic_p10": {
-        "days": 0.12564547278089067,
-        "date_utc": "2026-08-10"
+        "days": 0.0,
+        "date_utc": "2026-08-09"
       },
       "central_p50": {
-        "days": 1.8756454727808907,
-        "date_utc": "2026-08-11"
+        "days": 0.75,
+        "date_utc": "2026-08-10"
       },
       "precipitation_screened_direct_q_p50": {
-        "days": 3.3813655394213713,
-        "date_utc": "2026-08-13"
+        "days": 1.125,
+        "date_utc": "2026-08-11"
       },
       "precipitation_screened_direct_q_upper_p90": {
-        "days": 7.5173891768445325,
-        "date_utc": "2026-08-17"
+        "days": 1.125,
+        "date_utc": "2026-08-11"
       },
       "unscreened_direct_q_p50": {
-        "days": 3.4646988727547043,
-        "date_utc": "2026-08-13"
+        "days": 1.2083333333333333,
+        "date_utc": "2026-08-11"
       },
       "unscreened_direct_q_upper_p90": {
-        "days": 7.6007225101778655,
-        "date_utc": "2026-08-17"
+        "days": 1.2083333333333333,
+        "date_utc": "2026-08-11"
       },
       "transfer_conservative_p90": {
-        "days": 13.476896800944193,
-        "date_utc": "2026-08-23"
+        "days": 9.224548171722706,
+        "date_utc": "2026-08-19"
       },
       "protected_schedule_p90": {
-        "days": 13.476896800944193,
-        "date_utc": "2026-08-23"
+        "days": 9.224548171722706,
+        "date_utc": "2026-08-19"
       },
       "protected_schedule_source": "transfer_and_response_sensitivity",
-      "screened_direct_q_difference_from_live_central_days": 1.5057200666404806,
+      "screened_direct_q_difference_from_live_central_days": 0.375,
       "recommended_use": "Keep the nominal all-member p50 as the official working inspection forecast. Use the precipitation-screened direct-Q p50 as the preferred independent timing check, retain the unscreened direct-Q result as a conservative diagnostic, and protect the schedule with the latest upper-response/transfer p90. None of these sensitivities is a formal confidence limit."
     },
     "historical_direct_discharge_sensitivities": {
@@ -1383,76 +1341,76 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 3.3572831610581813,
-            "date_utc": "2026-08-13"
+            "days": 1.208333333333333,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 2.333978806114224,
-            "date_utc": "2026-08-12"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 3.4700413434040414,
-            "date_utc": "2026-08-13"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 0.33202251647558384,
+          "standard_deviation_days": 2.220446049250313e-16,
           "quantiles": {
             "p10": {
-              "days": 3.455775362796494,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 3.463867962788701,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 3.4646988727547043,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 3.4672621816455944,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 3.4681438198947507,
-              "date_utc": "2026-08-13"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             }
           }
         },
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 7.086052441651318,
-            "date_utc": "2026-08-16"
+            "days": 1.208333333333333,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 3.3339788061142235,
-            "date_utc": "2026-08-13"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 7.601810144191017,
-            "date_utc": "2026-08-17"
+            "days": 1.2083333333333333,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 1.29845763940363,
+          "standard_deviation_days": 2.220446049250313e-16,
           "quantiles": {
             "p10": {
-              "days": 5.466174499598146,
-              "date_utc": "2026-08-15"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 7.586537844121229,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 7.590685876357017,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 7.598929671584256,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 7.6007225101778655,
-              "date_utc": "2026-08-17"
+              "days": 1.2083333333333333,
+              "date_utc": "2026-08-11"
             }
           }
         },
@@ -1507,76 +1465,76 @@
         "central_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 3.2739498277248473,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 2.2506454727808904,
-            "date_utc": "2026-08-12"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 3.3867080100707083,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 0.3320225164755839,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 3.372442029463161,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 3.3805346294553678,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 3.3813655394213713,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 3.3839288483122614,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 3.3848104865614177,
-              "date_utc": "2026-08-13"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             }
           }
         },
         "upper_response_distribution": {
           "member_count": 21,
           "mean": {
-            "days": 7.002719108317985,
-            "date_utc": "2026-08-16"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "earliest": {
-            "days": 3.2506454727808904,
-            "date_utc": "2026-08-13"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
           "latest": {
-            "days": 7.518476810857684,
-            "date_utc": "2026-08-17"
+            "days": 1.125,
+            "date_utc": "2026-08-11"
           },
-          "standard_deviation_days": 1.29845763940363,
+          "standard_deviation_days": 0.0,
           "quantiles": {
             "p10": {
-              "days": 5.382841166264813,
-              "date_utc": "2026-08-15"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p25": {
-              "days": 7.503204510787896,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p50": {
-              "days": 7.507352543023684,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p75": {
-              "days": 7.515596338250923,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             },
             "p90": {
-              "days": 7.5173891768445325,
-              "date_utc": "2026-08-17"
+              "days": 1.125,
+              "date_utc": "2026-08-11"
             }
           }
         },
