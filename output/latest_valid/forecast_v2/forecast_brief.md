@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-09T19:03:04+00:00  
-Run ID: `20260809T190304Z`
+Generated: 2026-08-09T19:41:18+00:00  
+Run ID: `20260809T194118Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260809T190304Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.743 m**, 24-hour change **-0.030 m**
-- 05EA002 discharge: **7.18 m³/s**
+- 05EA002 stage: **1.740 m**, 24-hour change **-0.032 m**
+- 05EA002 discharge: **7.15 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.97 h**
-- Provisional field-informed project WSE method span: **650.248–650.335 m**
-- Provisional depth above 650.20 m: **0.048–0.135 m**
+- Observation age: **0.60 h**
+- Provisional field-informed project WSE method span: **650.243–650.335 m**
+- Provisional depth above 650.20 m: **0.043–0.135 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -34,15 +34,15 @@ Run ID: `20260809T190304Z`
 - 48-hour basin rain: **6.13 mm**
 - Lower-basin rain: **10.03 mm**
 - Direct-local rain: **15.98 mm**
-- Official short-range response delay: **1.12 days**
+- Official short-range response delay: **1.13 days**
 - Current official feature support: **material_extrapolation**
-- Central forecast shift versus the dry trace: **2.13 days**
+- Central forecast shift versus the dry trace: **2.14 days**
 
 ## 5. Evidence reconciliation
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 4.75 d versus official 1.12 d; difference 3.62 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
+Aligned historical response: 4.74 d versus official 1.13 d; difference 3.62 d. It widens the practical window to 2026-08-15 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -57,9 +57,9 @@ Aligned historical response: 4.75 d versus official 1.12 d; difference 3.62 d. I
 
 ## 7. What changed since the previous issued forecast
 
-- Official point-date movement: **-1 day(s)**
-- Practical-window start movement: **-1 day(s)**
-- Practical-window end movement: **-1 day(s)**
+- Official point-date movement: **0 day(s)**
+- Practical-window start movement: **0 day(s)**
+- Practical-window end movement: **0 day(s)**
 - Stage change since previous run: **-0.003 m**
 - Discharge change since previous run: **-0.03 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
