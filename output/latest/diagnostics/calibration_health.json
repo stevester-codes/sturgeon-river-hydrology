@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-09T00:40:35.482297+00:00",
+  "generated_utc": "2026-08-09T02:53:23.687230+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -44,7 +44,7 @@
     "required_feature_count": 7,
     "outside_feature_count": 3,
     "materially_outside_feature_count": 2,
-    "nearest_analogue_distance": 4.5017761320541005,
+    "nearest_analogue_distance": 4.519128543843346,
     "storm_type": "widespread_basin",
     "horizon_h": 48,
     "run_time_utc": "2026-08-08T18:00:00+00:00",
@@ -96,13 +96,13 @@
       },
       {
         "feature": "antecedent_168h_mm",
-        "current": 22.927532163549948,
+        "current": 22.928800518862708,
         "training_min": 5.438034463943035,
         "training_max": 21.91926277396547,
         "training_mean": 13.678648618954252,
         "training_standard_deviation": 8.240614155011219,
-        "z_score": 1.122353670566087,
-        "normalized_distance_outside_range": 0.06117683528304355,
+        "z_score": 1.1225075857098983,
+        "normalized_distance_outside_range": 0.06125379285494909,
         "status": "outside_training_range"
       },
       {
@@ -118,13 +118,13 @@
       },
       {
         "feature": "pre_stage_m",
-        "current": 1.761,
+        "current": 1.752,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -7.703832752613242,
-        "normalized_distance_outside_range": 3.351916376306621,
+        "z_score": -7.766550522648084,
+        "normalized_distance_outside_range": 3.383275261324042,
         "status": "material_extrapolation"
       }
     ],
@@ -133,43 +133,43 @@
   "hydrologic_memory_and_storage_proxies": {
     "status": "elevated_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.050000000000000044,
+    "target_change_24h_m": -0.04600000000000004,
     "antecedent_rain_mm": {
-      "24h": 0.802592877338,
-      "72h": 1.992046075623991,
-      "168h": 22.927532163549948
+      "24h": 0.803328049717092,
+      "72h": 1.99331594074067,
+      "168h": 22.928800518862708
     },
     "elevated_signal_count": 1,
     "signals": [
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.017000000000001236,
-        "change_72h_m": -0.13900000000000112,
+        "change_24h_m": -0.016000000000000014,
+        "change_72h_m": -0.1639999999999997,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.021000000000000796,
-        "change_72h_m": -0.07900000000000063,
+        "change_24h_m": -0.025000000000000355,
+        "change_72h_m": -0.08699999999999974,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": -0.015000000000000013,
-        "change_72h_m": -0.05400000000000005,
+        "change_24h_m": -0.014000000000000012,
+        "change_72h_m": -0.052000000000000046,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.032999999999999974,
-        "change_72h_m": 0.017000000000000015,
+        "change_24h_m": 0.034999999999999976,
+        "change_72h_m": 0.015000000000000013,
         "rising_24h": true,
         "higher_than_72h_ago": false
       }
@@ -177,22 +177,22 @@
   },
   "current_limb_rating_support": {
     "status": "mild_target_extrapolation",
-    "fit_r2": 0.9997362482963054,
-    "fit_rmse_m3s": 0.009019470937422877,
+    "fit_r2": 0.9997192364009688,
+    "fit_rmse_m3s": 0.009391753078761953,
     "fit_hourly_points": 91,
     "observed_stage_range_m": [
-      1.761,
+      1.752,
       1.944
     ],
-    "target_stage_m": 1.706385958950349,
-    "extrapolation_distance_m": 0.05461404104965095,
-    "extrapolation_as_observed_span": 0.2984373827849778,
+    "target_stage_m": 1.7060279135691425,
+    "extrapolation_distance_m": 0.045972086430857484,
+    "extrapolation_as_observed_span": 0.23943795016071612,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
     "status": "approximate_low_flow_anchor_plus_complete_design_profile",
     "score_out_of_10": 8.0,
-    "current_discharge_m3s": 7.36,
+    "current_discharge_m3s": 7.27,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
@@ -252,39 +252,39 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 0.0030795816988300534,
+    "standard_deviation_days": 0.0030677801277951395,
     "earliest": {
-      "days": 3.4664812662175892,
+      "days": 3.2583813367676484,
       "date_utc": "2026-08-12"
     },
     "latest": {
-      "days": 3.4793521822427573,
+      "days": 3.2712047633167822,
       "date_utc": "2026-08-12"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 3.471522909306814,
+        "days": 3.26340289684195,
         "date_utc": "2026-08-12"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 3.4725234693596185,
+        "days": 3.2643994170097503,
         "date_utc": "2026-08-12"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 3.4742603601012174,
+        "days": 3.266129242077894,
         "date_utc": "2026-08-12"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 3.4770355655712697,
+        "days": 3.26889360345948,
         "date_utc": "2026-08-12"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 3.4790368946395143,
+        "days": 3.2708878381499424,
         "date_utc": "2026-08-12"
       }
     },
