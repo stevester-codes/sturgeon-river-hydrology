@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-10T05:53:09.590159+00:00",
+  "generated_utc": "2026-08-10T11:24:13.343173+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -21,8 +21,8 @@
   "short_range_forecast_input": {
     "status": "material_short_range_qpf_feature_vector_available",
     "feature_vector_required": true,
-    "basin_mm": 5.143444151791232,
-    "run_time_utc": "2026-08-10T00:00:00+00:00",
+    "basin_mm": 10.473335666206696,
+    "run_time_utc": "2026-08-10T06:00:00+00:00",
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "calibration_sample": {
@@ -43,156 +43,156 @@
     "available_feature_count": 7,
     "required_feature_count": 7,
     "outside_feature_count": 3,
-    "materially_outside_feature_count": 1,
-    "nearest_analogue_distance": 3.021884013543986,
+    "materially_outside_feature_count": 2,
+    "nearest_analogue_distance": 3.3119814582033587,
     "storm_type": "tributary_localized_direct_local",
     "horizon_h": 48,
-    "run_time_utc": "2026-08-10T00:00:00+00:00",
-    "basin_mm": 5.143444151791232,
+    "run_time_utc": "2026-08-10T06:00:00+00:00",
+    "basin_mm": 10.473335666206696,
     "features": [
       {
         "feature": "basin_mm",
-        "current": 5.143444151791232,
+        "current": 10.473335666206696,
         "training_min": 1.952859654092426,
         "training_max": 26.846894577404903,
         "training_mean": 14.399877115748664,
         "training_standard_deviation": 12.447017461656237,
-        "z_score": -0.7436667452642702,
+        "z_score": -0.31546042749903,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "lower_ratio",
-        "current": 1.2972091920514701,
+        "current": 1.3137275100223107,
         "training_min": 0.6433245128726464,
         "training_max": 1.1049891548057453,
         "training_mean": 0.8741568338391958,
         "training_standard_deviation": 0.2308323209665495,
-        "z_score": 1.8327258351033948,
-        "normalized_distance_outside_range": 0.4163629175516974,
+        "z_score": 1.9042856491782802,
+        "normalized_distance_outside_range": 0.4521428245891401,
         "status": "outside_training_range"
       },
       {
         "feature": "upper_ratio",
-        "current": 1.0243812590487968,
+        "current": 0.5472170481467888,
         "training_min": 0.8684102567270844,
         "training_max": 1.0110260499381822,
         "training_mean": 0.9397181533326333,
         "training_standard_deviation": 0.07130789660554893,
-        "z_score": 1.187289343065202,
-        "normalized_distance_outside_range": 0.09364467153260102,
-        "status": "outside_training_range"
+        "z_score": -5.504314723473437,
+        "normalized_distance_outside_range": 2.2521573617367183,
+        "status": "material_extrapolation"
       },
       {
         "feature": "duration_h",
-        "current": 48.0,
+        "current": 30.0,
         "training_min": 12.0,
         "training_max": 48.0,
         "training_mean": 30.0,
         "training_standard_deviation": 18.0,
-        "z_score": 1.0,
+        "z_score": 0.0,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "antecedent_168h_mm",
-        "current": 21.119167382069815,
+        "current": 18.765936804522863,
         "training_min": 5.438034463943035,
         "training_max": 21.91926277396547,
         "training_mean": 13.678648618954252,
         "training_standard_deviation": 8.240614155011219,
-        "z_score": 0.9029082812463549,
+        "z_score": 0.6173433302267851,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "basin_pct_gt_10mm",
-        "current": 11.62227602905569,
+        "current": 52.78450363196126,
         "training_min": 0.0,
         "training_max": 100.0,
         "training_mean": 50.0,
         "training_standard_deviation": 50.0,
-        "z_score": -0.7675544794188862,
+        "z_score": 0.05569007263922515,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "pre_stage_m",
-        "current": 1.722,
+        "current": 1.714,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -7.975609756097562,
-        "normalized_distance_outside_range": 3.487804878048781,
+        "z_score": -8.031358885017422,
+        "normalized_distance_outside_range": 3.5156794425087114,
         "status": "material_extrapolation"
       }
     ],
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "hydrologic_memory_and_storage_proxies": {
-    "status": "elevated_residual_storage_signal",
+    "status": "low_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.03600000000000003,
+    "target_change_24h_m": -0.03699999999999992,
     "antecedent_rain_mm": {
-      "24h": 5.481801833523615,
-      "72h": 6.2856910392136225,
-      "168h": 21.119167382069815
+      "24h": 5.482235105601322,
+      "72h": 6.286390531441644,
+      "168h": 18.765936804522863
     },
-    "elevated_signal_count": 1,
+    "elevated_signal_count": 0,
     "signals": [
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.008000000000000895,
-        "change_72h_m": -0.06900000000000084,
+        "change_24h_m": -0.0039999999999995595,
+        "change_72h_m": -0.054999999999999716,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.008000000000000895,
-        "change_72h_m": -0.030000000000001137,
+        "change_24h_m": -0.009999999999999787,
+        "change_72h_m": -0.03999999999999915,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": -0.0010000000000000009,
-        "change_72h_m": -0.03400000000000003,
+        "change_24h_m": 0.0020000000000000018,
+        "change_72h_m": -0.028000000000000025,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.01200000000000001,
-        "change_72h_m": 0.039000000000000035,
-        "rising_24h": true,
+        "change_24h_m": 0.009000000000000008,
+        "change_72h_m": 0.04600000000000004,
+        "rising_24h": false,
         "higher_than_72h_ago": false
       }
     ]
   },
   "current_limb_rating_support": {
     "status": "mild_target_extrapolation",
-    "fit_r2": 0.9998214611449618,
-    "fit_rmse_m3s": 0.006632896557221129,
-    "fit_hourly_points": 92,
+    "fit_r2": 0.9998132134710093,
+    "fit_rmse_m3s": 0.006845930412538912,
+    "fit_hourly_points": 95,
     "observed_stage_range_m": [
-      1.722,
-      1.8895
+      1.7135,
+      1.885
     ],
-    "target_stage_m": 1.7027641729149463,
-    "extrapolation_distance_m": 0.01923582708505367,
-    "extrapolation_as_observed_span": 0.11484075871673834,
+    "target_stage_m": 1.7023058416366226,
+    "extrapolation_distance_m": 0.011194158363377449,
+    "extrapolation_as_observed_span": 0.06527206042785685,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
   },
   "project_wse_transfer_support": {
     "status": "approximate_low_flow_anchor_plus_complete_design_profile",
     "score_out_of_10": 8.0,
-    "current_discharge_m3s": 6.98,
+    "current_discharge_m3s": 6.9,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
@@ -252,39 +252,39 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 2.220446049250313e-16,
+    "standard_deviation_days": 0.0,
     "earliest": {
-      "days": 1.59859001460838,
+      "days": 1.456298840153817,
       "date_utc": "2026-08-11"
     },
     "latest": {
-      "days": 1.59859001460838,
+      "days": 1.456298840153817,
       "date_utc": "2026-08-11"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 1.59859001460838,
+        "days": 1.456298840153817,
         "date_utc": "2026-08-11"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 1.59859001460838,
+        "days": 1.456298840153817,
         "date_utc": "2026-08-11"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 1.59859001460838,
+        "days": 1.456298840153817,
         "date_utc": "2026-08-11"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 1.59859001460838,
+        "days": 1.456298840153817,
         "date_utc": "2026-08-11"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 1.59859001460838,
+        "days": 1.456298840153817,
         "date_utc": "2026-08-11"
       }
     },
