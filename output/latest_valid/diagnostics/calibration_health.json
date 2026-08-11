@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-11T21:26:04.515211+00:00",
+  "generated_utc": "2026-08-11T22:14:37.759132+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -21,8 +21,8 @@
   "short_range_forecast_input": {
     "status": "material_short_range_qpf_feature_vector_available",
     "feature_vector_required": true,
-    "basin_mm": 8.346361539137883,
-    "run_time_utc": "2026-08-11T12:00:00+00:00",
+    "basin_mm": 8.928939244444512,
+    "run_time_utc": "2026-08-11T18:00:00+00:00",
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "calibration_sample": {
@@ -42,55 +42,55 @@
     "short_range_input_status": "material_short_range_qpf_feature_vector_available",
     "available_feature_count": 7,
     "required_feature_count": 7,
-    "outside_feature_count": 3,
+    "outside_feature_count": 2,
     "materially_outside_feature_count": 2,
-    "nearest_analogue_distance": 5.838528288467973,
+    "nearest_analogue_distance": 3.2176431985014715,
     "storm_type": "upper_lake_chain_concentrated",
     "horizon_h": 48,
-    "run_time_utc": "2026-08-11T12:00:00+00:00",
-    "basin_mm": 8.346361539137883,
+    "run_time_utc": "2026-08-11T18:00:00+00:00",
+    "basin_mm": 8.928939244444512,
     "features": [
       {
         "feature": "basin_mm",
-        "current": 8.346361539137883,
+        "current": 8.928939244444512,
         "training_min": 1.952859654092426,
         "training_max": 26.846894577404903,
         "training_mean": 14.399877115748664,
         "training_standard_deviation": 12.447017461656237,
-        "z_score": -0.486342659617775,
+        "z_score": -0.43953805706127547,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "lower_ratio",
-        "current": 0.5159872397483758,
+        "current": 0.7501375259893855,
         "training_min": 0.6433245128726464,
         "training_max": 1.1049891548057453,
         "training_mean": 0.8741568338391958,
         "training_standard_deviation": 0.2308323209665495,
-        "z_score": -1.5516440357705512,
-        "normalized_distance_outside_range": 0.27582201788527555,
-        "status": "outside_training_range"
+        "z_score": -0.5372701159461212,
+        "normalized_distance_outside_range": 0.0,
+        "status": "inside_training_range"
       },
       {
         "feature": "upper_ratio",
-        "current": 1.8918620678902012,
+        "current": 1.123653396146617,
         "training_min": 0.8684102567270844,
         "training_max": 1.0110260499381822,
         "training_mean": 0.9397181533326333,
         "training_standard_deviation": 0.07130789660554893,
-        "z_score": 13.352573275643016,
-        "normalized_distance_outside_range": 6.176286637821508,
+        "z_score": 2.579451246913804,
+        "normalized_distance_outside_range": 0.7897256234569019,
         "status": "material_extrapolation"
       },
       {
         "feature": "duration_h",
-        "current": 42.0,
+        "current": 36.0,
         "training_min": 12.0,
         "training_max": 48.0,
         "training_mean": 30.0,
         "training_standard_deviation": 18.0,
-        "z_score": 0.6666666666666666,
+        "z_score": 0.3333333333333333,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
@@ -107,24 +107,24 @@
       },
       {
         "feature": "basin_pct_gt_10mm",
-        "current": 24.93946731234867,
+        "current": 37.04600484261501,
         "training_min": 0.0,
         "training_max": 100.0,
         "training_mean": 50.0,
         "training_standard_deviation": 50.0,
-        "z_score": -0.5012106537530266,
+        "z_score": -0.25907990314769974,
         "normalized_distance_outside_range": 0.0,
         "status": "inside_training_range"
       },
       {
         "feature": "pre_stage_m",
-        "current": 1.709,
+        "current": 1.699,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -8.066202090592334,
-        "normalized_distance_outside_range": 3.5331010452961675,
+        "z_score": -8.13588850174216,
+        "normalized_distance_outside_range": 3.5679442508710806,
         "status": "material_extrapolation"
       }
     ],
@@ -160,10 +160,10 @@
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": 0.05500000000000005,
-        "change_72h_m": 0.052000000000000046,
+        "change_24h_m": 0.051000000000000045,
+        "change_72h_m": 0.049000000000000044,
         "rising_24h": true,
-        "higher_than_72h_ago": true
+        "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
@@ -252,40 +252,40 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 0.0,
+    "standard_deviation_days": 2.220446049250313e-16,
     "earliest": {
-      "days": 1.0747994688158613,
-      "date_utc": "2026-08-12"
+      "days": 1.1184716295440797,
+      "date_utc": "2026-08-13"
     },
     "latest": {
-      "days": 1.0747994688158613,
-      "date_utc": "2026-08-12"
+      "days": 1.1184716295440797,
+      "date_utc": "2026-08-13"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 1.0747994688158613,
-        "date_utc": "2026-08-12"
+        "days": 1.1184716295440797,
+        "date_utc": "2026-08-13"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 1.0747994688158613,
-        "date_utc": "2026-08-12"
+        "days": 1.1184716295440797,
+        "date_utc": "2026-08-13"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 1.0747994688158613,
-        "date_utc": "2026-08-12"
+        "days": 1.1184716295440797,
+        "date_utc": "2026-08-13"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 1.0747994688158613,
-        "date_utc": "2026-08-12"
+        "days": 1.1184716295440797,
+        "date_utc": "2026-08-13"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 1.0747994688158613,
-        "date_utc": "2026-08-12"
+        "days": 1.1184716295440797,
+        "date_utc": "2026-08-13"
       }
     },
     "interpretation": "GEPS spread measures meteorological uncertainty; hydrologic-response and project-transfer errors are additional."
