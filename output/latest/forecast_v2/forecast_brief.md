@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-12T11:29:04+00:00  
-Run ID: `20260812T112904Z`
+Generated: 2026-08-12T13:51:28+00:00  
+Run ID: `20260812T135128Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260812T112904Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.675 m**, 24-hour change **-0.022 m**
-- 05EA002 discharge: **6.53 m³/s**
+- 05EA002 stage: **1.674 m**, 24-hour change **-0.022 m**
+- 05EA002 discharge: **6.52 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.40 h**
-- Provisional field-informed project WSE method span: **650.139–650.159 m**
-- Provisional depth above 650.20 m: **-0.061–-0.041 m**
+- Observation age: **0.77 h**
+- Provisional field-informed project WSE method span: **650.137–650.159 m**
+- Provisional depth above 650.20 m: **-0.063–-0.041 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -34,7 +34,7 @@ Run ID: `20260812T112904Z`
 - 48-hour basin rain: **6.79 mm**
 - Lower-basin rain: **5.25 mm**
 - Direct-local rain: **5.39 mm**
-- Official short-range response delay: **1.14 days**
+- Official short-range response delay: **1.15 days**
 - Current official feature support: **material_extrapolation**
 - Central forecast shift versus the dry trace: **unavailable**
 
@@ -42,7 +42,7 @@ Run ID: `20260812T112904Z`
 
 The official median remains the point forecast; models are not averaged. The contractor linear date is excluded during material rain or a rising limb. An aligned materially later historical response widens the practical inspection window when the official response is extrapolating.
 
-Aligned historical response: 5.17 d versus official 1.14 d; difference 4.03 d. It widens the practical window to 2026-08-17 but does not replace the official point forecast.
+Aligned historical response: 5.02 d versus official 1.15 d; difference 3.88 d. It widens the practical window to 2026-08-17 but does not replace the official point forecast.
 
 ## 6. Confidence by component
 
@@ -60,8 +60,8 @@ Aligned historical response: 5.17 d versus official 1.14 d; difference 4.03 d. I
 - Official point-date movement: **0 day(s)**
 - Practical-window start movement: **0 day(s)**
 - Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.002 m**
-- Discharge change since previous run: **-0.02 m³/s**
+- Stage change since previous run: **-0.001 m**
+- Discharge change since previous run: **-0.01 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
