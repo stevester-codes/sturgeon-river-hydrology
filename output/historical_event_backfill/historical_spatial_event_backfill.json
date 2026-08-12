@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-11T14:08:33+00:00",
+  "generated_utc": "2026-08-12T14:08:48+00:00",
   "status": "historical_spatial_event_backfill_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "requested_months": 18,
@@ -7,9 +7,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-11T14:06:49+00:00",
+        "start_utc": "2025-02-12T14:07:25+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-11+14%3A06%3A49&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-12+14%3A07%3A25&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -436,17 +436,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-11T14:06:49+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-11+14%3A06%3A49",
+        "end_utc": "2026-08-12T14:07:25+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-12+14%3A07%3A25",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 397271,
+        "bytes_received": 434999,
         "availability": "data_returned",
-        "rows": 6063,
-        "stage_rows": 3026,
-        "discharge_rows": 3037,
+        "rows": 6639,
+        "stage_rows": 3314,
+        "discharge_rows": 3325,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-11T13:05:00+00:00",
+        "last_timestamp_utc": "2026-08-12T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -461,18 +461,18 @@
         ]
       }
     ],
-    "hourly_points": 9801,
+    "hourly_points": 9825,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-11T13:00:00+00:00"
+    "last_utc": "2026-08-12T13:00:00+00:00"
   },
   "continuous_rdpa_retrieval": {
-    "requested_periods": 2114,
-    "retrieved_periods": 2113,
-    "coverage_fraction": 0.9995269631031221,
+    "requested_periods": 2118,
+    "retrieved_periods": 2117,
+    "coverage_fraction": 0.9995278564683664,
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 991,
+      "periods_fetched_this_run": 995,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -498,10 +498,10 @@
     }
   },
   "spatial_grid_retrieval": {
-    "requested_periods": 354,
-    "available_periods": 354,
+    "requested_periods": 357,
+    "available_periods": 357,
     "coverage_fraction": 1.0,
-    "retrieved_this_run": 354,
+    "retrieved_this_run": 357,
     "cache_hits": 0,
     "missing_examples": [],
     "cache_dir": "archive_cache/historical_rdpa_spatial_grids",
@@ -586,10 +586,11 @@
     "storm_type_counts_all": {
       "widespread_basin": 20,
       "upper_lake_chain_concentrated": 14,
-      "tributary_localized_carrot_creek": 10,
+      "tributary_localized_carrot_creek": 9,
       "mixed_or_weak": 7,
       "lower_basin_concentrated": 3,
-      "middle_mainstem_concentrated": 3
+      "middle_mainstem_concentrated": 3,
+      "tributary_localized_direct_local": 1
     },
     "storm_type_counts_training": {
       "widespread_basin": 1
@@ -604,7 +605,7 @@
     },
     "discharge_fit": {
       "n": 762,
-      "intercept_per_day": -0.13086191001868225,
+      "intercept_per_day": -0.1308619100186822,
       "coefficient_per_day": -0.04316931352255193,
       "value_range": [
         0.076,
