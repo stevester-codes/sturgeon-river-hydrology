@@ -1,14 +1,14 @@
 {
-  "generated_utc": "2026-08-12T03:19:18.222675+00:00",
+  "generated_utc": "2026-08-12T05:13:34.298769+00:00",
   "status": "not_ready_for_operational_promotion",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "method": "A ridge-regression correction to the existing stage-dependent recession curve uses decaying rainfall-memory states and recent upstream gauge movement. The final 30 percent of observations are held out chronologically.",
   "data": {
-    "complete_hourly_rows": 310,
+    "complete_hourly_rows": 311,
     "train_rows": 217,
-    "test_rows": 93,
+    "test_rows": 94,
     "start_utc": "2026-07-30T00:00:00+00:00",
-    "end_utc": "2026-08-11T21:00:00+00:00",
+    "end_utc": "2026-08-11T22:00:00+00:00",
     "forecast_horizon_h": 6,
     "ridge_lambda": 4.0,
     "features": [
@@ -30,21 +30,21 @@
   },
   "holdout_performance": {
     "baseline_recession": {
-      "n": 93,
-      "rmse_m": 0.007939703793730846,
-      "mae_m": 0.006157838697454734,
-      "bias_m": -0.003997040664310694,
-      "correlation": 0.3558636965902627
+      "n": 94,
+      "rmse_m": 0.007897390664220032,
+      "mae_m": 0.006094657973812883,
+      "bias_m": -0.003956847153787394,
+      "correlation": 0.3449684462578129
     },
     "storage_candidate": {
-      "n": 93,
-      "rmse_m": 0.014089966207690334,
-      "mae_m": 0.009979963334094349,
-      "bias_m": 0.001278198797189109,
-      "correlation": 0.15272978767119944
+      "n": 94,
+      "rmse_m": 0.014410739119437535,
+      "mae_m": 0.010219807979911278,
+      "bias_m": 0.0009185864691244833,
+      "correlation": 0.16188113349226121
     },
-    "rmse_improvement_fraction": -0.7746211412591624,
-    "mae_improvement_fraction": -0.6206925553635307,
+    "rmse_improvement_fraction": -0.8247468983302195,
+    "mae_improvement_fraction": -0.6768468425665661,
     "promotion_screen": {
       "minimum_rmse_improvement_fraction": 0.1,
       "minimum_mae_improvement_fraction": 0.05,
@@ -53,26 +53,26 @@
     }
   },
   "current_state": {
-    "timestamp_utc": "2026-08-11T21:00:00+00:00",
-    "baseline_expected_change_next_6h_m": -0.011224272348811092,
-    "storage_memory_correction_next_6h_m": -0.035560207925506924,
-    "candidate_expected_change_next_6h_m": -0.046784480274318016,
+    "timestamp_utc": "2026-08-11T22:00:00+00:00",
+    "baseline_expected_change_next_6h_m": -0.011218850675120462,
+    "storage_memory_correction_next_6h_m": -0.032306509365765144,
+    "candidate_expected_change_next_6h_m": -0.043525360040885606,
     "rain_24h_mm": 6.118628643184525,
     "rain_72h_mm": 11.859463843490479,
     "rain_168h_mm": 20.724409461701228,
     "rain_memory_states_mm": {
-      "12h": 1.2478421005546534,
-      "36h": 0.8880892437704214,
-      "96h": 0.7013258612205614,
-      "240h": 0.4915719879632463
+      "12h": 1.1778061049963042,
+      "36h": 0.8711534597495398,
+      "96h": 0.6962803269482392,
+      "240h": 0.4901543205677504
     },
     "upstream_changes": {
-      "05EA005_change_6h_m": -0.016000000000000014,
-      "05EA005_change_24h_m": 0.050000000000000044,
-      "05EA010_change_6h_m": 0.03249999999999997,
-      "05EA011_change_6h_m": 0.0039999999999995595,
-      "05EA012_change_6h_m": 0.016000000000000014,
-      "05EA012_change_24h_m": -0.0030000000000001137
+      "05EA005_change_6h_m": -0.017000000000000015,
+      "05EA005_change_24h_m": 0.04300000000000004,
+      "05EA010_change_6h_m": 0.031000000000000028,
+      "05EA011_change_6h_m": 0.009999999999999787,
+      "05EA012_change_6h_m": 0.015000000000000568,
+      "05EA012_change_24h_m": -0.0009999999999994458
     }
   },
   "coefficients": [
