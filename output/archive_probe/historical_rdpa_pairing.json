@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-12T14:06:29+00:00",
+  "generated_utc": "2026-08-13T14:08:26+00:00",
   "status": "historical_rdpa_pairing_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "station": "05EA002",
@@ -8,9 +8,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-12T14:06:16+00:00",
+        "start_utc": "2025-02-13T14:08:14+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-12+14%3A06%3A16&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-13+14%3A08%3A14&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -437,17 +437,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-12T14:06:16+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-12+14%3A06%3A16",
+        "end_utc": "2026-08-13T14:08:14+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-13+14%3A08%3A14",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 434999,
+        "bytes_received": 472727,
         "availability": "data_returned",
-        "rows": 6639,
-        "stage_rows": 3314,
-        "discharge_rows": 3325,
+        "rows": 7215,
+        "stage_rows": 3602,
+        "discharge_rows": 3613,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-12T13:05:00+00:00",
+        "last_timestamp_utc": "2026-08-13T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -462,22 +462,22 @@
         ]
       }
     ],
-    "hourly_points": 9825,
+    "hourly_points": 9849,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-12T13:00:00+00:00"
+    "last_utc": "2026-08-13T13:00:00+00:00"
   },
   "rdpa_retrieval": {
     "product": "RDPA 6-hour 10 km WCS",
-    "requested_periods": 1174,
-    "retrieved_periods": 1174,
-    "missing_periods": 0,
-    "coverage_fraction": 1.0,
+    "requested_periods": 1185,
+    "retrieved_periods": 1184,
+    "missing_periods": 1,
+    "coverage_fraction": 0.99915611814346,
     "first_valid_utc": "2025-04-10T12:00:00+00:00",
-    "last_valid_utc": "2026-08-10T18:00:00+00:00",
+    "last_valid_utc": "2026-08-13T12:00:00+00:00",
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 51,
+      "periods_fetched_this_run": 62,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -501,11 +501,22 @@
       },
       "method": "WCS 10 km RDPA clipped to the official WSC 05EA002 drainage-basin polygon"
     },
-    "missing_examples": []
+    "missing_examples": [
+      {
+        "index": "2026-08-13 12:00:00+00:00",
+        "status": "missing",
+        "station": "05EA002",
+        "precip_mm": NaN,
+        "source_type": "wcs_official_basin_clip",
+        "source_url": NaN,
+        "valid_cells": 0,
+        "error": "RasterioIOError: '/vsimem/6dec3d56-021b-4ca0-9a93-29ee96f93d57/6dec3d56-021b-4ca0-9a93-29ee96f93d57.tif' not recognized as being in a supported file format."
+      }
+    ]
   },
   "pairing": {
-    "gauge_only_candidate_points": 1764,
-    "complete_168h_coverage_points": 1764,
+    "gauge_only_candidate_points": 1781,
+    "complete_168h_coverage_points": 1779,
     "strict_dry_points": 576,
     "moderate_dry_points": 827,
     "strict_thresholds_mm": {
@@ -523,17 +534,17 @@
   "models": {
     "gauge_only": {
       "label": "gauge_only_with_rdpa_metrics",
-      "points": 1764,
+      "points": 1781,
       "events": 22,
       "fit": {
-        "n": 1632,
-        "intercept_per_day": -0.1177475697953111,
-        "coefficient_per_day": -0.039880530019598084,
+        "n": 1649,
+        "intercept_per_day": -0.11701232446690085,
+        "coefficient_per_day": -0.03987317111309262,
         "value_range": [
           0.06,
           25.6
         ],
-        "rate_rmse_per_day": 0.19426479183030496
+        "rate_rmse_per_day": 0.19380391536414857
       },
       "projection": {
         "reached": true,
