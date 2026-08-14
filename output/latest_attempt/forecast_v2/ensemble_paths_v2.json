@@ -1,6 +1,6 @@
 {
-  "generated_utc": "2026-08-14T09:18:20.109773+00:00",
-  "latest_stage_m": 1.618,
+  "generated_utc": "2026-08-14T10:31:19.268661+00:00",
+  "latest_stage_m": 1.616,
   "rain_free_days_to_1_70": 0.0,
   "geps_run_time_utc": "2026-08-14T00:00:00+00:00",
   "geps_member_count": 21,
@@ -21,12 +21,12 @@
   "official_outlook": {
     "status": "operational_geps_integrated",
     "primary_scenario": "central",
-    "dry_days_to_1_70": 0.1401214482134201,
-    "central_days_to_1_70": 1.14012144821342,
-    "wet_days_to_1_70": 3.2752087326509023,
+    "dry_days_to_1_70": 0.0,
+    "central_days_to_1_70": 0.0,
+    "wet_days_to_1_70": 0.0,
     "dry_date_utc": "2026-08-14",
-    "central_date_utc": "2026-08-15",
-    "wet_date_utc": "2026-08-17",
+    "central_date_utc": "2026-08-14",
+    "wet_date_utc": "2026-08-14",
     "interpretation": "HRDPS governs the first 48 hours. Actual GEPS members selected near the 10th, 50th and 90th percentiles govern later rainfall windows through 16 days. Only windows beginning before the projected 1.70 m crossing are allowed to delay that crossing.",
     "confidence": "low"
   },
@@ -60,104 +60,33 @@
       },
       "short_range": {
         "status": "HRDPS 48 h quantified impact",
-        "delay_days": 0.1401214482134201,
+        "delay_days": 0.0,
         "source": {
           "model": "HRDPS",
           "horizon_h": 48,
-          "run_time_utc": "2026-08-13T18:00:00+00:00",
+          "run_time_utc": "2026-08-14T06:00:00+00:00",
           "complete_horizon": true,
-          "basin_mm": 1.296177281543476,
-          "lower_mm": 1.4464459344908391,
-          "upper_mm": 0.896154640458147,
-          "middle_mm": 1.4414529751559817,
-          "atim_mm": 0.2609887725047075,
-          "carrot_mm": 3.3057868084127526,
-          "direct_local_mm": 2.0797822978033484,
-          "basin_pct_gt_5mm": 2.179176755447941,
+          "basin_mm": 0.6089866426330117,
+          "lower_mm": 1.433322438511102,
+          "upper_mm": 0.1980284182435761,
+          "middle_mm": 0.3959089311235718,
+          "atim_mm": 0.2767652175715031,
+          "carrot_mm": 0.5882418518497919,
+          "direct_local_mm": 2.7024253361073813,
+          "basin_pct_gt_5mm": 1.937046004842615,
           "basin_pct_gt_10mm": 0.0,
           "basin_pct_gt_20mm": 0.0,
           "basin_pct_gt_30mm": 0.0,
           "forecast_timing": {
-            "first_wet_h": 0,
-            "last_wet_h": 6,
-            "duration_h": 6
+            "first_wet_h": 48,
+            "last_wet_h": 48,
+            "duration_h": 0
           },
-          "storm_type": "tributary_localized_carrot_creek",
-          "antecedent_168h_mm": 19.23555609099631,
-          "impact": "quantified from uncensored spatial analogues",
-          "feature_vector": {
-            "basin_mm": 1.296177281543476,
-            "lower_ratio": 1.115932176166847,
-            "upper_ratio": 0.6913827708745321,
-            "duration_h": 6.0,
-            "antecedent_168h_mm": 19.23555609099631,
-            "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.625
-          },
-          "training_pool_event_count": 2,
-          "training_pool_storm_type_matched": false,
-          "analog_prediction": {
-            "analog_event_ids": [
-              5,
-              4
-            ],
-            "analog_storm_types": [
-              "widespread_basin",
-              "upper_lake_chain_concentrated"
-            ],
-            "analog_distances": [
-              3.405323254075398,
-              4.099792802169784
-            ],
-            "nearest_distance": 3.405323254075398,
-            "departure_m": 0.05965170393229197,
-            "departure_m_min": 0.0437288021147654,
-            "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.14012144821342,
-            "days_lost_min": 0.8231220868399143,
-            "days_lost_max": 1.358822694647254,
-            "lag_h": 44.27040676274874,
-            "lag_h_min": 21.0,
-            "lag_h_max": 78.0
-          },
-          "similar_censored_event_lower_bounds": [],
-          "stage_departure_range_m": [
-            0.00965170393229197,
-            0.10965170393229198
-          ],
-          "estimated_days_lost_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "lag_to_max_effect_from_rain_start_h": [
-            15.770406762748742,
-            72.77040676274873
-          ],
-          "estimated_peak_stage_05EA002_m": 1.6038192326675969,
-          "estimated_peak_stage_05EA002_range_m": [
-            1.5538192326675968,
-            1.653819232667597
-          ],
-          "starkey_max_effect_hours_from_now_central": 49.05040887109422,
-          "starkey_max_effect_hours_from_now_range": [
-            18.472147084857056,
-            81.18736699700925
-          ],
-          "projected_1_70_days_central": 1.14012144821342,
-          "projected_1_70_days_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "confidence": "low",
-          "threshold_flags": {
-            "departure_ge_0_05": true,
-            "delay_ge_2_days": true,
-            "credible_2_5_path": false,
-            "credible_3_0_path": false
-          },
-          "input_provenance": "carried_forward_last_valid_hrdps",
-          "carried_forward_from_generated_utc": "2026-08-14T03:18:28.538272+00:00",
-          "carried_forward_age_hours": 5.9949556
+          "storm_type": "lower_basin_concentrated",
+          "antecedent_168h_mm": 20.489618968645644,
+          "impact": "negligible or no material deterministic QPF",
+          "projected_1_70_days": 0.0,
+          "projected_1_70_date_utc": "2026-08-14"
         }
       },
       "later_windows": [
@@ -168,7 +97,7 @@
           "lower_mm": 2.6200003623962402,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.5354371037218844,
+          "pre_stage_m": 1.5280013158870365,
           "feature_vector": {
             "basin_mm": 2.6200003623962402,
             "lower_ratio": 1.0,
@@ -176,7 +105,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 24.5696188923517,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.5354371037218844
+            "pre_stage_m": 1.5280013158870365
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -188,21 +117,21 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.756507993032714,
-              6.763554528477488
+              5.767173414907656,
+              6.774819900943156
             ],
-            "nearest_distance": 5.756507993032714,
-            "departure_m": 0.059333387844240235,
+            "nearest_distance": 5.767173414907656,
+            "departure_m": 0.05933093833880626,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1337842869482389,
+            "days_lost": 1.1337355212353588,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 44.94469793742899,
+            "lag_h": 44.94988674176047,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1337842869482389,
+          "days_lost_central": 1.1337355212353588,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
@@ -215,7 +144,7 @@
           "lower_mm": 1.0,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.4056425476343068,
+          "pre_stage_m": 1.398366305229196,
           "feature_vector": {
             "basin_mm": 1.0,
             "lower_ratio": 1.0,
@@ -223,7 +152,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 27.18961925474794,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.4056425476343068
+            "pre_stage_m": 1.398366305229196
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -235,21 +164,21 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.9743659268108,
-              6.968653760165427
+              5.9855168224904425,
+              6.980291771691097
             ],
-            "nearest_distance": 5.9743659268108,
-            "departure_m": 0.05923792062090809,
+            "nearest_distance": 5.9855168224904425,
+            "departure_m": 0.059235344283724414,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1318836881016718,
+            "days_lost": 1.1318323973726785,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 45.1469268180303,
+            "lag_h": 45.1523842909359,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1318836881016718,
+          "days_lost_central": 1.1318323973726785,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
@@ -262,7 +191,7 @@
           "lower_mm": 3.499999523162842,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.1954774532254901,
+          "pre_stage_m": 1.1884595489303413,
           "feature_vector": {
             "basin_mm": 3.499999523162842,
             "lower_ratio": 1.0,
@@ -270,7 +199,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 28.18961925474794,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.1954774532254901
+            "pre_stage_m": 1.1884595489303413
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -282,133 +211,133 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              6.310397278009058,
-              7.319325403880312
+              6.322198503831086,
+              7.331408482974781
             ],
-            "nearest_distance": 6.310397278009058,
-            "departure_m": 0.05916394969655632,
+            "nearest_distance": 6.322198503831086,
+            "departure_m": 0.059161068438391876,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1304110459885421,
+            "days_lost": 1.130353684773322,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 45.30361993957066,
+            "lag_h": 45.309723328702354,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1304110459885421,
+          "days_lost_central": 1.130353684773322,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
           "applied_delay_days": 0.0
         }
       ],
-      "total_applied_delay_days": 0.1401214482134201,
+      "total_applied_delay_days": 0.0,
       "model_delay_rmse_days": 0.0,
-      "projected_1_70_days": 0.1401214482134201,
+      "projected_1_70_days": 0.0,
       "projected_1_70_date_utc": "2026-08-14",
       "path_daily": [
         {
           "day": 0,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 0.1401214482134201,
+          "stage_05EA002_m": 1.616,
+          "accrued_delay_days": 0.0,
           "effective_recession_days": 0.0
         },
         {
           "day": 1,
-          "stage_05EA002_m": 1.5793313445963661,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 0.8598785517865799
+          "stage_05EA002_m": 1.5718416012973258,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 1.0
         },
         {
           "day": 2,
-          "stage_05EA002_m": 1.5354371037218844,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 1.85987855178658
+          "stage_05EA002_m": 1.5280013158870365,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 2.0
         },
         {
           "day": 3,
-          "stage_05EA002_m": 1.4918590731695958,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 2.85987855178658
+          "stage_05EA002_m": 1.484476852108433,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 3.0
         },
         {
           "day": 4,
-          "stage_05EA002_m": 1.448594974987635,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 3.85987855178658
+          "stage_05EA002_m": 1.4412659348097452,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 4.0
         },
         {
           "day": 5,
-          "stage_05EA002_m": 1.4056425476343068,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 4.85987855178658
+          "stage_05EA002_m": 1.398366305229196,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 5.0
         },
         {
           "day": 6,
-          "stage_05EA002_m": 1.3629995458598652,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 5.85987855178658
+          "stage_05EA002_m": 1.355775720876936,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 6.0
         },
         {
           "day": 7,
-          "stage_05EA002_m": 1.3206637405891501,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 6.85987855178658
+          "stage_05EA002_m": 1.3134919554178184,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 7.0
         },
         {
           "day": 8,
-          "stage_05EA002_m": 1.278632918805067,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 7.85987855178658
+          "stage_05EA002_m": 1.2715127985550223,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 8.0
         },
         {
           "day": 9,
-          "stage_05EA002_m": 1.2369048834329055,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 8.85987855178658
+          "stage_05EA002_m": 1.2298360559145136,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 9.0
         },
         {
           "day": 10,
-          "stage_05EA002_m": 1.1954774532254901,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 9.85987855178658
+          "stage_05EA002_m": 1.1884595489303413,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 10.0
         },
         {
           "day": 11,
-          "stage_05EA002_m": 1.1543484626491645,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 10.85987855178658
+          "stage_05EA002_m": 1.1473811147307544,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 11.0
         },
         {
           "day": 12,
-          "stage_05EA002_m": 1.1135157617705873,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 11.85987855178658
+          "stage_05EA002_m": 1.1065986060251416,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 12.0
         },
         {
           "day": 13,
-          "stage_05EA002_m": 1.0729772161443543,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 12.85987855178658
+          "stage_05EA002_m": 1.0661098909917908,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 13.0
         },
         {
           "day": 14,
-          "stage_05EA002_m": 1.0327307067014178,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 13.85987855178658
+          "stage_05EA002_m": 1.0259128531664474,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 14.0
         },
         {
           "day": 15,
-          "stage_05EA002_m": 0.9927741296383232,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 14.85987855178658
+          "stage_05EA002_m": 0.9860053913316841,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 15.0
         },
         {
           "day": 16,
-          "stage_05EA002_m": 0.9531053963072342,
-          "accrued_delay_days": 0.1401214482134201,
-          "effective_recession_days": 15.85987855178658
+          "stage_05EA002_m": 0.9463854194070609,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 16.0
         }
       ]
     },
@@ -441,104 +370,33 @@
       },
       "short_range": {
         "status": "HRDPS 48 h quantified impact",
-        "delay_days": 1.14012144821342,
+        "delay_days": 0.0,
         "source": {
           "model": "HRDPS",
           "horizon_h": 48,
-          "run_time_utc": "2026-08-13T18:00:00+00:00",
+          "run_time_utc": "2026-08-14T06:00:00+00:00",
           "complete_horizon": true,
-          "basin_mm": 1.296177281543476,
-          "lower_mm": 1.4464459344908391,
-          "upper_mm": 0.896154640458147,
-          "middle_mm": 1.4414529751559817,
-          "atim_mm": 0.2609887725047075,
-          "carrot_mm": 3.3057868084127526,
-          "direct_local_mm": 2.0797822978033484,
-          "basin_pct_gt_5mm": 2.179176755447941,
+          "basin_mm": 0.6089866426330117,
+          "lower_mm": 1.433322438511102,
+          "upper_mm": 0.1980284182435761,
+          "middle_mm": 0.3959089311235718,
+          "atim_mm": 0.2767652175715031,
+          "carrot_mm": 0.5882418518497919,
+          "direct_local_mm": 2.7024253361073813,
+          "basin_pct_gt_5mm": 1.937046004842615,
           "basin_pct_gt_10mm": 0.0,
           "basin_pct_gt_20mm": 0.0,
           "basin_pct_gt_30mm": 0.0,
           "forecast_timing": {
-            "first_wet_h": 0,
-            "last_wet_h": 6,
-            "duration_h": 6
+            "first_wet_h": 48,
+            "last_wet_h": 48,
+            "duration_h": 0
           },
-          "storm_type": "tributary_localized_carrot_creek",
-          "antecedent_168h_mm": 19.23555609099631,
-          "impact": "quantified from uncensored spatial analogues",
-          "feature_vector": {
-            "basin_mm": 1.296177281543476,
-            "lower_ratio": 1.115932176166847,
-            "upper_ratio": 0.6913827708745321,
-            "duration_h": 6.0,
-            "antecedent_168h_mm": 19.23555609099631,
-            "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.625
-          },
-          "training_pool_event_count": 2,
-          "training_pool_storm_type_matched": false,
-          "analog_prediction": {
-            "analog_event_ids": [
-              5,
-              4
-            ],
-            "analog_storm_types": [
-              "widespread_basin",
-              "upper_lake_chain_concentrated"
-            ],
-            "analog_distances": [
-              3.405323254075398,
-              4.099792802169784
-            ],
-            "nearest_distance": 3.405323254075398,
-            "departure_m": 0.05965170393229197,
-            "departure_m_min": 0.0437288021147654,
-            "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.14012144821342,
-            "days_lost_min": 0.8231220868399143,
-            "days_lost_max": 1.358822694647254,
-            "lag_h": 44.27040676274874,
-            "lag_h_min": 21.0,
-            "lag_h_max": 78.0
-          },
-          "similar_censored_event_lower_bounds": [],
-          "stage_departure_range_m": [
-            0.00965170393229197,
-            0.10965170393229198
-          ],
-          "estimated_days_lost_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "lag_to_max_effect_from_rain_start_h": [
-            15.770406762748742,
-            72.77040676274873
-          ],
-          "estimated_peak_stage_05EA002_m": 1.6038192326675969,
-          "estimated_peak_stage_05EA002_range_m": [
-            1.5538192326675968,
-            1.653819232667597
-          ],
-          "starkey_max_effect_hours_from_now_central": 49.05040887109422,
-          "starkey_max_effect_hours_from_now_range": [
-            18.472147084857056,
-            81.18736699700925
-          ],
-          "projected_1_70_days_central": 1.14012144821342,
-          "projected_1_70_days_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "confidence": "low",
-          "threshold_flags": {
-            "departure_ge_0_05": true,
-            "delay_ge_2_days": true,
-            "credible_2_5_path": false,
-            "credible_3_0_path": false
-          },
-          "input_provenance": "carried_forward_last_valid_hrdps",
-          "carried_forward_from_generated_utc": "2026-08-14T03:18:28.538272+00:00",
-          "carried_forward_age_hours": 5.9949556
+          "storm_type": "lower_basin_concentrated",
+          "antecedent_168h_mm": 20.489618968645644,
+          "impact": "negligible or no material deterministic QPF",
+          "projected_1_70_days": 0.0,
+          "projected_1_70_date_utc": "2026-08-14"
         }
       },
       "later_windows": [
@@ -549,7 +407,7 @@
           "lower_mm": 4.18000003695488,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.5793313445963661,
+          "pre_stage_m": 1.5280013158870365,
           "feature_vector": {
             "basin_mm": 4.18000003695488,
             "lower_ratio": 1.0,
@@ -557,7 +415,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 20.769618969837737,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.5793313445963661
+            "pre_stage_m": 1.5280013158870365
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -569,21 +427,21 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.664321640577192,
-              6.697249875672649
+              5.737363040670508,
+              6.774241745255704
             ],
-            "nearest_distance": 5.664321640577192,
-            "departure_m": 0.059415798650930635,
+            "nearest_distance": 5.737363040670508,
+            "departure_m": 0.05939771173823802,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.135424953542212,
+            "days_lost": 1.1350648722053753,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 44.77012655465746,
+            "lag_h": 44.808440187124106,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.135424953542212,
+          "days_lost_central": 1.1350648722053753,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
@@ -596,7 +454,7 @@
           "lower_mm": 2.1399998664855957,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.448594974987635,
+          "pre_stage_m": 1.398366305229196,
           "feature_vector": {
             "basin_mm": 2.1399998664855957,
             "lower_ratio": 1.0,
@@ -604,7 +462,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 24.949619006792616,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.448594974987635
+            "pre_stage_m": 1.398366305229196
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -616,21 +474,21 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.888393034848253,
-              6.897744838908859
+              5.9647989995483135,
+              6.9774316942648005
             ],
-            "nearest_distance": 5.888393034848253,
-            "departure_m": 0.059293957274783204,
+            "nearest_distance": 5.9647989995483135,
+            "departure_m": 0.05927550432145643,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1329992877389419,
+            "days_lost": 1.1326319191218972,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 45.02822398589302,
+            "lag_h": 45.06731300477102,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1329992877389419,
+          "days_lost_central": 1.1326319191218972,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
@@ -643,7 +501,7 @@
           "lower_mm": 12.100000858306885,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.2369048834329055,
+          "pre_stage_m": 1.1884595489303413,
           "feature_vector": {
             "basin_mm": 12.100000858306885,
             "lower_ratio": 1.0,
@@ -651,7 +509,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 27.089618873278212,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.2369048834329055
+            "pre_stage_m": 1.1884595489303413
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -663,133 +521,133 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              6.208878161569928,
-              7.253116908534693
+              6.290100208856058,
+              7.3359260308147185
             ],
-            "nearest_distance": 6.208878161569928,
-            "departure_m": 0.05925771814396805,
+            "nearest_distance": 6.290100208856058,
+            "departure_m": 0.05923611461926529,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1322778249392096,
+            "days_lost": 1.1318477335141244,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 45.10498958777102,
+            "lag_h": 45.15075248382259,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1322778249392096,
+          "days_lost_central": 1.1318477335141244,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
           "applied_delay_days": 0.0
         }
       ],
-      "total_applied_delay_days": 1.14012144821342,
+      "total_applied_delay_days": 0.0,
       "model_delay_rmse_days": 0.0,
-      "projected_1_70_days": 1.14012144821342,
-      "projected_1_70_date_utc": "2026-08-15",
+      "projected_1_70_days": 0.0,
+      "projected_1_70_date_utc": "2026-08-14",
       "path_daily": [
         {
           "day": 0,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 1.14012144821342,
+          "stage_05EA002_m": 1.616,
+          "accrued_delay_days": 0.0,
           "effective_recession_days": 0.0
         },
         {
           "day": 1,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 0.0
+          "stage_05EA002_m": 1.5718416012973258,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 1.0
         },
         {
           "day": 2,
-          "stage_05EA002_m": 1.5793313445963661,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 0.8598785517865799
+          "stage_05EA002_m": 1.5280013158870365,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 2.0
         },
         {
           "day": 3,
-          "stage_05EA002_m": 1.5354371037218844,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 1.85987855178658
+          "stage_05EA002_m": 1.484476852108433,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 3.0
         },
         {
           "day": 4,
-          "stage_05EA002_m": 1.4918590731695958,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 2.85987855178658
+          "stage_05EA002_m": 1.4412659348097452,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 4.0
         },
         {
           "day": 5,
-          "stage_05EA002_m": 1.448594974987635,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 3.85987855178658
+          "stage_05EA002_m": 1.398366305229196,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 5.0
         },
         {
           "day": 6,
-          "stage_05EA002_m": 1.4056425476343068,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 4.85987855178658
+          "stage_05EA002_m": 1.355775720876936,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 6.0
         },
         {
           "day": 7,
-          "stage_05EA002_m": 1.3629995458598652,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 5.85987855178658
+          "stage_05EA002_m": 1.3134919554178184,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 7.0
         },
         {
           "day": 8,
-          "stage_05EA002_m": 1.3206637405891501,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 6.85987855178658
+          "stage_05EA002_m": 1.2715127985550223,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 8.0
         },
         {
           "day": 9,
-          "stage_05EA002_m": 1.278632918805067,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 7.85987855178658
+          "stage_05EA002_m": 1.2298360559145136,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 9.0
         },
         {
           "day": 10,
-          "stage_05EA002_m": 1.2369048834329055,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 8.85987855178658
+          "stage_05EA002_m": 1.1884595489303413,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 10.0
         },
         {
           "day": 11,
-          "stage_05EA002_m": 1.1954774532254901,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 9.85987855178658
+          "stage_05EA002_m": 1.1473811147307544,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 11.0
         },
         {
           "day": 12,
-          "stage_05EA002_m": 1.1543484626491645,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 10.85987855178658
+          "stage_05EA002_m": 1.1065986060251416,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 12.0
         },
         {
           "day": 13,
-          "stage_05EA002_m": 1.1135157617705873,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 11.85987855178658
+          "stage_05EA002_m": 1.0661098909917908,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 13.0
         },
         {
           "day": 14,
-          "stage_05EA002_m": 1.0729772161443543,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 12.85987855178658
+          "stage_05EA002_m": 1.0259128531664474,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 14.0
         },
         {
           "day": 15,
-          "stage_05EA002_m": 1.0327307067014178,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 13.85987855178658
+          "stage_05EA002_m": 0.9860053913316841,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 15.0
         },
         {
           "day": 16,
-          "stage_05EA002_m": 0.9927741296383232,
-          "accrued_delay_days": 1.14012144821342,
-          "effective_recession_days": 14.85987855178658
+          "stage_05EA002_m": 0.9463854194070609,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 16.0
         }
       ]
     },
@@ -822,104 +680,33 @@
       },
       "short_range": {
         "status": "HRDPS 48 h quantified impact",
-        "delay_days": 2.14012144821342,
+        "delay_days": 0.0,
         "source": {
           "model": "HRDPS",
           "horizon_h": 48,
-          "run_time_utc": "2026-08-13T18:00:00+00:00",
+          "run_time_utc": "2026-08-14T06:00:00+00:00",
           "complete_horizon": true,
-          "basin_mm": 1.296177281543476,
-          "lower_mm": 1.4464459344908391,
-          "upper_mm": 0.896154640458147,
-          "middle_mm": 1.4414529751559817,
-          "atim_mm": 0.2609887725047075,
-          "carrot_mm": 3.3057868084127526,
-          "direct_local_mm": 2.0797822978033484,
-          "basin_pct_gt_5mm": 2.179176755447941,
+          "basin_mm": 0.6089866426330117,
+          "lower_mm": 1.433322438511102,
+          "upper_mm": 0.1980284182435761,
+          "middle_mm": 0.3959089311235718,
+          "atim_mm": 0.2767652175715031,
+          "carrot_mm": 0.5882418518497919,
+          "direct_local_mm": 2.7024253361073813,
+          "basin_pct_gt_5mm": 1.937046004842615,
           "basin_pct_gt_10mm": 0.0,
           "basin_pct_gt_20mm": 0.0,
           "basin_pct_gt_30mm": 0.0,
           "forecast_timing": {
-            "first_wet_h": 0,
-            "last_wet_h": 6,
-            "duration_h": 6
+            "first_wet_h": 48,
+            "last_wet_h": 48,
+            "duration_h": 0
           },
-          "storm_type": "tributary_localized_carrot_creek",
-          "antecedent_168h_mm": 19.23555609099631,
-          "impact": "quantified from uncensored spatial analogues",
-          "feature_vector": {
-            "basin_mm": 1.296177281543476,
-            "lower_ratio": 1.115932176166847,
-            "upper_ratio": 0.6913827708745321,
-            "duration_h": 6.0,
-            "antecedent_168h_mm": 19.23555609099631,
-            "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.625
-          },
-          "training_pool_event_count": 2,
-          "training_pool_storm_type_matched": false,
-          "analog_prediction": {
-            "analog_event_ids": [
-              5,
-              4
-            ],
-            "analog_storm_types": [
-              "widespread_basin",
-              "upper_lake_chain_concentrated"
-            ],
-            "analog_distances": [
-              3.405323254075398,
-              4.099792802169784
-            ],
-            "nearest_distance": 3.405323254075398,
-            "departure_m": 0.05965170393229197,
-            "departure_m_min": 0.0437288021147654,
-            "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.14012144821342,
-            "days_lost_min": 0.8231220868399143,
-            "days_lost_max": 1.358822694647254,
-            "lag_h": 44.27040676274874,
-            "lag_h_min": 21.0,
-            "lag_h_max": 78.0
-          },
-          "similar_censored_event_lower_bounds": [],
-          "stage_departure_range_m": [
-            0.00965170393229197,
-            0.10965170393229198
-          ],
-          "estimated_days_lost_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "lag_to_max_effect_from_rain_start_h": [
-            15.770406762748742,
-            72.77040676274873
-          ],
-          "estimated_peak_stage_05EA002_m": 1.6038192326675969,
-          "estimated_peak_stage_05EA002_range_m": [
-            1.5538192326675968,
-            1.653819232667597
-          ],
-          "starkey_max_effect_hours_from_now_central": 49.05040887109422,
-          "starkey_max_effect_hours_from_now_range": [
-            18.472147084857056,
-            81.18736699700925
-          ],
-          "projected_1_70_days_central": 1.14012144821342,
-          "projected_1_70_days_range": [
-            0.1401214482134201,
-            2.14012144821342
-          ],
-          "confidence": "low",
-          "threshold_flags": {
-            "departure_ge_0_05": true,
-            "delay_ge_2_days": true,
-            "credible_2_5_path": false,
-            "credible_3_0_path": false
-          },
-          "input_provenance": "carried_forward_last_valid_hrdps",
-          "carried_forward_from_generated_utc": "2026-08-14T03:18:28.538272+00:00",
-          "carried_forward_age_hours": 5.9949556
+          "storm_type": "lower_basin_concentrated",
+          "antecedent_168h_mm": 20.489618968645644,
+          "impact": "negligible or no material deterministic QPF",
+          "projected_1_70_days": 0.0,
+          "projected_1_70_date_utc": "2026-08-14"
         }
       },
       "later_windows": [
@@ -930,7 +717,7 @@
           "lower_mm": 1.1199999153614044,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.618,
+          "pre_stage_m": 1.5280013158870365,
           "feature_vector": {
             "basin_mm": 1.1199999153614044,
             "lower_ratio": 1.0,
@@ -938,7 +725,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 20.829618972221922,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.618
+            "pre_stage_m": 1.5280013158870365
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -950,25 +737,25 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.623320637601526,
-              6.640160223756608
+              5.74958778321066,
+              6.773930505851319
             ],
-            "nearest_distance": 5.623320637601526,
-            "departure_m": 0.05939883750634622,
+            "nearest_distance": 5.74958778321066,
+            "departure_m": 0.05936923961563701,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1350872844374824,
+            "days_lost": 1.1344980380450633,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 44.806055464740965,
+            "lag_h": 44.86875288169064,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1350872844374824,
+          "days_lost_central": 1.1344980380450633,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
-          "applied_before_threshold": true,
-          "applied_delay_days": 1.1350872844374824
+          "applied_before_threshold": false,
+          "applied_delay_days": 0.0
         },
         {
           "start_h": 120,
@@ -977,7 +764,7 @@
           "lower_mm": 36.79000008106232,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.5427307897242297,
+          "pre_stage_m": 1.398366305229196,
           "feature_vector": {
             "basin_mm": 36.79000008106232,
             "lower_ratio": 1.0,
@@ -985,7 +772,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 21.949618887583327,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.5427307897242297
+            "pre_stage_m": 1.398366305229196
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -997,21 +784,21 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              5.689558040241344,
-              6.833790825008584
+              5.905910147673046,
+              7.055797051891544
             ],
-            "nearest_distance": 5.689558040241344,
-            "departure_m": 0.05962114343271147,
+            "nearest_distance": 5.905910147673046,
+            "departure_m": 0.0595514479581656,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.1395130378268403,
+            "days_lost": 1.1381255130417949,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 44.33514328073964,
+            "lag_h": 44.48277968733495,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.1395130378268403,
+          "days_lost_central": 1.1381255130417949,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
@@ -1024,7 +811,7 @@
           "lower_mm": 0.9750022888183594,
           "upper_mm": 0.0,
           "duration_proxy_h": 72.0,
-          "pre_stage_m": 1.3276984691583038,
+          "pre_stage_m": 1.1884595489303413,
           "feature_vector": {
             "basin_mm": 0.9750022888183594,
             "lower_ratio": 1.0,
@@ -1032,7 +819,7 @@
             "duration_h": 72.0,
             "antecedent_168h_mm": 58.739618968645644,
             "basin_pct_gt_10mm": 0.0,
-            "pre_stage_m": 1.3276984691583038
+            "pre_stage_m": 1.1884595489303413
           },
           "analog_prediction": {
             "analog_event_ids": [
@@ -1044,133 +831,133 @@
               "upper_lake_chain_concentrated"
             ],
             "analog_distances": [
-              6.4917221657402635,
-              7.289239008539881
+              6.70615870926615,
+              7.517817095972561
             ],
-            "nearest_distance": 6.4917221657402635,
-            "departure_m": 0.05873495224037172,
+            "nearest_distance": 6.70615870926615,
+            "departure_m": 0.058713418682499824,
             "departure_m_min": 0.0437288021147654,
             "departure_m_max": 0.0706370840265866,
-            "days_lost": 1.121870396727508,
+            "days_lost": 1.1214416982294755,
             "days_lost_min": 0.8231220868399143,
             "days_lost_max": 1.358822694647254,
-            "lag_h": 46.21236822319033,
+            "lag_h": 46.25798290801935,
             "lag_h_min": 21.0,
             "lag_h_max": 78.0
           },
-          "days_lost_central": 1.121870396727508,
+          "days_lost_central": 1.1214416982294755,
           "days_lost_rmse": 1.0,
           "status": "quantified with low-confidence event analogues",
           "applied_before_threshold": false,
           "applied_delay_days": 0.0
         }
       ],
-      "total_applied_delay_days": 3.2752087326509023,
-      "model_delay_rmse_days": 1.0,
-      "projected_1_70_days": 3.2752087326509023,
-      "projected_1_70_date_utc": "2026-08-17",
+      "total_applied_delay_days": 0.0,
+      "model_delay_rmse_days": 0.0,
+      "projected_1_70_days": 0.0,
+      "projected_1_70_date_utc": "2026-08-14",
       "path_daily": [
         {
           "day": 0,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 2.14012144821342,
+          "stage_05EA002_m": 1.616,
+          "accrued_delay_days": 0.0,
           "effective_recession_days": 0.0
         },
         {
           "day": 1,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 2.14012144821342,
-          "effective_recession_days": 0.0
+          "stage_05EA002_m": 1.5718416012973258,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 1.0
         },
         {
           "day": 2,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 0.0
+          "stage_05EA002_m": 1.5280013158870365,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 2.0
         },
         {
           "day": 3,
-          "stage_05EA002_m": 1.618,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 0.0
+          "stage_05EA002_m": 1.484476852108433,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 3.0
         },
         {
           "day": 4,
-          "stage_05EA002_m": 1.5866779549454875,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 0.7247912673490977
+          "stage_05EA002_m": 1.4412659348097452,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 4.0
         },
         {
           "day": 5,
-          "stage_05EA002_m": 1.5427307897242297,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 1.7247912673490977
+          "stage_05EA002_m": 1.398366305229196,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 5.0
         },
         {
           "day": 6,
-          "stage_05EA002_m": 1.4991002160875904,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 2.7247912673490977
+          "stage_05EA002_m": 1.355775720876936,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 6.0
         },
         {
           "day": 7,
-          "stage_05EA002_m": 1.4557839533371226,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 3.7247912673490977
+          "stage_05EA002_m": 1.3134919554178184,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 7.0
         },
         {
           "day": 8,
-          "stage_05EA002_m": 1.4127797372043365,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 4.724791267349097
+          "stage_05EA002_m": 1.2715127985550223,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 8.0
         },
         {
           "day": 9,
-          "stage_05EA002_m": 1.3700853197323333,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 5.724791267349097
+          "stage_05EA002_m": 1.2298360559145136,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 9.0
         },
         {
           "day": 10,
-          "stage_05EA002_m": 1.3276984691583038,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 6.724791267349097
+          "stage_05EA002_m": 1.1884595489303413,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 10.0
         },
         {
           "day": 11,
-          "stage_05EA002_m": 1.2856169697968647,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 7.724791267349097
+          "stage_05EA002_m": 1.1473811147307544,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 11.0
         },
         {
           "day": 12,
-          "stage_05EA002_m": 1.24383862192424,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 8.724791267349097
+          "stage_05EA002_m": 1.1065986060251416,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 12.0
         },
         {
           "day": 13,
-          "stage_05EA002_m": 1.2023612416632716,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 9.724791267349097
+          "stage_05EA002_m": 1.0661098909917908,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 13.0
         },
         {
           "day": 14,
-          "stage_05EA002_m": 1.1611826608692672,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 10.724791267349097
+          "stage_05EA002_m": 1.0259128531664474,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 14.0
         },
         {
           "day": 15,
-          "stage_05EA002_m": 1.1203007270166583,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 11.724791267349097
+          "stage_05EA002_m": 0.9860053913316841,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 15.0
         },
         {
           "day": 16,
-          "stage_05EA002_m": 1.0797133030864883,
-          "accrued_delay_days": 3.2752087326509023,
-          "effective_recession_days": 12.724791267349097
+          "stage_05EA002_m": 0.9463854194070609,
+          "accrued_delay_days": 0.0,
+          "effective_recession_days": 16.0
         }
       ]
     }
