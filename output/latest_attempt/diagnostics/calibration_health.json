@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-14T05:14:17.119609+00:00",
+  "generated_utc": "2026-08-14T06:45:02.603976+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -89,7 +89,7 @@
     "interpretation": "A complete HRDPS scenario exists but a required rainfall-response feature vector is absent. Treat the feature assessment as unavailable, not favourable."
   },
   "hydrologic_memory_and_storage_proxies": {
-    "status": "elevated_residual_storage_signal",
+    "status": "high_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
     "target_change_24h_m": -0.031999999999999806,
     "antecedent_rain_mm": {
@@ -97,37 +97,37 @@
       "72h": 12.69083168500035,
       "168h": 19.23555609099631
     },
-    "elevated_signal_count": 2,
+    "elevated_signal_count": 3,
     "signals": [
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.07699999999999996,
-        "change_72h_m": 0.04699999999999882,
+        "change_24h_m": -0.06600000000000072,
+        "change_72h_m": 0.0519999999999996,
         "rising_24h": false,
-        "higher_than_72h_ago": false
+        "higher_than_72h_ago": true
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.031000000000000583,
-        "change_72h_m": -0.014000000000001123,
+        "change_24h_m": -0.03300000000000125,
+        "change_72h_m": -0.018000000000000682,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": 0.015000000000000013,
-        "change_72h_m": 0.010000000000000009,
+        "change_24h_m": 0.017000000000000015,
+        "change_72h_m": -0.01200000000000001,
         "rising_24h": true,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.030000000000000027,
-        "change_72h_m": 0.10200000000000004,
+        "change_24h_m": 0.03700000000000003,
+        "change_72h_m": 0.11000000000000004,
         "rising_24h": true,
         "higher_than_72h_ago": true
       }
@@ -135,14 +135,14 @@
   },
   "current_limb_rating_support": {
     "status": "target_inside_current_limb_fit_range",
-    "fit_r2": 0.9997915883504761,
-    "fit_rmse_m3s": 0.003954678005177182,
+    "fit_r2": 0.9998161739287933,
+    "fit_rmse_m3s": 0.0037446971986956124,
     "fit_hourly_points": 94,
     "observed_stage_range_m": [
-      1.6225,
-      1.7225000000000001
+      1.622,
+      1.722
     ],
-    "target_stage_m": 1.7004321401410787,
+    "target_stage_m": 1.7004824144991317,
     "extrapolation_distance_m": 0.0,
     "extrapolation_as_observed_span": 0.0,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
