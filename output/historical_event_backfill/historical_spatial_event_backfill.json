@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-13T14:11:09+00:00",
+  "generated_utc": "2026-08-14T14:04:40+00:00",
   "status": "historical_spatial_event_backfill_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "requested_months": 18,
@@ -7,9 +7,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-13T14:09:18+00:00",
+        "start_utc": "2025-02-14T14:03:17+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-13+14%3A09%3A18&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-14+14%3A03%3A17&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -436,17 +436,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-13T14:09:18+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-13+14%3A09%3A18",
+        "end_utc": "2026-08-14T14:03:17+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-14+14%3A03%3A17",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 472727,
+        "bytes_received": 510455,
         "availability": "data_returned",
-        "rows": 7215,
-        "stage_rows": 3602,
-        "discharge_rows": 3613,
+        "rows": 7791,
+        "stage_rows": 3890,
+        "discharge_rows": 3901,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-13T13:05:00+00:00",
+        "last_timestamp_utc": "2026-08-14T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -461,18 +461,18 @@
         ]
       }
     ],
-    "hourly_points": 9849,
+    "hourly_points": 9873,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-13T13:00:00+00:00"
+    "last_utc": "2026-08-14T13:00:00+00:00"
   },
   "continuous_rdpa_retrieval": {
-    "requested_periods": 2122,
-    "retrieved_periods": 2121,
-    "coverage_fraction": 0.9995287464655985,
+    "requested_periods": 2126,
+    "retrieved_periods": 2125,
+    "coverage_fraction": 0.9995296331138288,
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 999,
+      "periods_fetched_this_run": 1003,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -498,10 +498,10 @@
     }
   },
   "spatial_grid_retrieval": {
-    "requested_periods": 357,
-    "available_periods": 357,
+    "requested_periods": 362,
+    "available_periods": 362,
     "coverage_fraction": 1.0,
-    "retrieved_this_run": 357,
+    "retrieved_this_run": 362,
     "cache_hits": 0,
     "missing_examples": [],
     "cache_dir": "archive_cache/historical_rdpa_spatial_grids",
@@ -579,13 +579,13 @@
     "minimum_6h_basin_mm": 0.25,
     "minimum_event_basin_mm": 1.5,
     "join_gap_hours": 18,
-    "detected_events": 76,
-    "extracted_response_events": 57,
+    "detected_events": 77,
+    "extracted_response_events": 58,
     "uncensored_point_training_events": 1,
     "complete_recovery_events": 1,
     "storm_type_counts_all": {
       "widespread_basin": 20,
-      "upper_lake_chain_concentrated": 14,
+      "upper_lake_chain_concentrated": 15,
       "tributary_localized_carrot_creek": 9,
       "mixed_or_weak": 7,
       "lower_basin_concentrated": 3,
@@ -605,7 +605,7 @@
     },
     "discharge_fit": {
       "n": 762,
-      "intercept_per_day": -0.1308619100186822,
+      "intercept_per_day": -0.13086191001868225,
       "coefficient_per_day": -0.04316931352255193,
       "value_range": [
         0.076,
