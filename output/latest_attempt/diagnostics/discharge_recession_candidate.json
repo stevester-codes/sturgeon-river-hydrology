@@ -1,61 +1,19 @@
 {
-  "generated_utc": "2026-08-13T23:48:20.775224+00:00",
-  "status": "not_ready_for_extended_historical_testing",
+  "generated_utc": "2026-08-14T00:48:39.975577+00:00",
+  "status": "insufficient_dry_discharge_observations",
   "mode": "shadow_only_no_effect_on_operational_forecast",
   "target_discharge_m3s": 6.77,
-  "dry_hourly_points": 61,
+  "dry_hourly_points": 39,
   "data_range_utc": [
-    "2026-07-30T00:00:00+00:00",
-    "2026-08-13T23:00:00+00:00"
+    "2026-07-31T00:00:00+00:00",
+    "2026-08-14T00:00:00+00:00"
   ],
-  "candidate_fit": {
-    "type": "linear_rate_in_discharge",
-    "intercept_m3s_per_day": -2.6874978966851932,
-    "coefficient_per_day": 0.1978798586572455,
-    "n": 42,
-    "discharge_range_m3s": [
-      10.7,
-      11.6
-    ],
-    "rate_rmse_m3s_per_day": 0.14303091119857925
-  },
-  "holdout": {
-    "train_points": 42,
-    "test_points": 19,
-    "official_stage_recession_then_rating": {
-      "n": 19,
-      "rmse_m3s": 0.17296012770868696,
-      "mae_m3s": 0.11546318564953868,
-      "bias_m3s": -0.0956126572603915
-    },
-    "direct_discharge_candidate": {
-      "n": 19,
-      "rmse_m3s": 0.20012892162519172,
-      "mae_m3s": 0.15049062585793102,
-      "bias_m3s": -0.13443724151367822
-    },
-    "rmse_improvement_fraction": -0.15708125494833447,
-    "minimum_improvement_required": 0.1
-  },
-  "current_projection": {
-    "current_discharge_m3s": 6.115,
-    "candidate_rain_free": {
-      "reached": true,
-      "hours": 0,
-      "days": 0.0,
-      "path_daily": []
-    },
-    "official_stage_based_rain_free_days": 0.0,
-    "candidate_minus_official_days": 0.0,
-    "target_outside_candidate_fit_range": true
-  },
+  "candidate_fit": null,
+  "holdout": {},
+  "current_projection": {},
   "promotion_recommendation": {
     "recommended": false,
-    "automatic_promotion_enabled": false,
-    "holdout_improvement_check": false,
-    "bias_check": false,
-    "target_inside_fit_range_check": false,
-    "reason": "One or more holdout, bias, target-range or projection checks are not met."
+    "reason": "Insufficient dry discharge observations."
   },
   "limitations": [
     "WSC discharge is provisional and rating-derived from stage rather than independently measured each hour.",
