@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-14T17:35:17.127506+00:00",
+  "generated_utc": "2026-08-14T19:33:23.934415+00:00",
   "status": "diagnostic_only_no_automatic_recalibration",
   "overall": {
     "score_version": 3,
@@ -44,7 +44,7 @@
     "required_feature_count": 7,
     "outside_feature_count": 5,
     "materially_outside_feature_count": 2,
-    "nearest_analogue_distance": 7.778752335408219,
+    "nearest_analogue_distance": 7.783755746948064,
     "storm_type": "upper_lake_chain_concentrated",
     "horizon_h": 48,
     "run_time_utc": "2026-08-14T12:00:00+00:00",
@@ -118,58 +118,58 @@
       },
       {
         "feature": "pre_stage_m",
-        "current": 1.609,
+        "current": 1.605,
         "training_min": 2.723,
         "training_max": 3.01,
         "training_mean": 2.8665,
         "training_standard_deviation": 0.14349999999999996,
-        "z_score": -8.763066202090593,
-        "normalized_distance_outside_range": 3.8815331010452967,
+        "z_score": -8.790940766550523,
+        "normalized_distance_outside_range": 3.895470383275262,
         "status": "material_extrapolation"
       }
     ],
     "interpretation": "A complete HRDPS 48-hour rainfall scenario requires the calibrated rainfall-response model, so feature-envelope support is assessed."
   },
   "hydrologic_memory_and_storage_proxies": {
-    "status": "high_residual_storage_signal",
+    "status": "elevated_residual_storage_signal",
     "interpretation": "This is a gauge-trend proxy for water still stored in upstream lakes, wetlands, tributaries and floodplain. It is diagnostic only and is not yet an explicit routed storage state.",
-    "target_change_24h_m": -0.028000000000000025,
+    "target_change_24h_m": -0.030000000000000027,
     "antecedent_rain_mm": {
       "24h": 2.132903250698933,
       "72h": 11.133821640653895,
       "168h": 20.93608913751594
     },
-    "elevated_signal_count": 3,
+    "elevated_signal_count": 1,
     "signals": [
       {
         "name": "upper_lake_chain_05EA012",
         "station": "05EA012",
-        "change_24h_m": -0.026999999999999247,
-        "change_72h_m": 0.05000000000000071,
+        "change_24h_m": -0.019999999999999574,
+        "change_72h_m": 0.045999999999999375,
         "rising_24h": false,
-        "higher_than_72h_ago": true
+        "higher_than_72h_ago": false
       },
       {
         "name": "atim_big_lake_05EA011",
         "station": "05EA011",
-        "change_24h_m": -0.026999999999999247,
-        "change_72h_m": 0.014000000000001123,
+        "change_24h_m": -0.022999999999999687,
+        "change_72h_m": 0.018000000000000682,
         "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "middle_basin_05EA005",
         "station": "05EA005",
-        "change_24h_m": 0.01100000000000001,
-        "change_72h_m": -0.03400000000000003,
-        "rising_24h": true,
+        "change_24h_m": 0.008000000000000007,
+        "change_72h_m": -0.030000000000000027,
+        "rising_24h": false,
         "higher_than_72h_ago": false
       },
       {
         "name": "lower_tributary_05EA010",
         "station": "05EA010",
-        "change_24h_m": 0.050999999999999934,
-        "change_72h_m": 0.10499999999999998,
+        "change_24h_m": 0.04799999999999993,
+        "change_72h_m": 0.10199999999999998,
         "rising_24h": true,
         "higher_than_72h_ago": true
       }
@@ -177,14 +177,14 @@
   },
   "current_limb_rating_support": {
     "status": "target_inside_current_limb_fit_range",
-    "fit_r2": 0.9998575824763215,
-    "fit_rmse_m3s": 0.0035071365026539307,
+    "fit_r2": 0.9998425153613003,
+    "fit_rmse_m3s": 0.003737545887472529,
     "fit_hourly_points": 94,
     "observed_stage_range_m": [
-      1.6095000000000002,
+      1.605,
       1.714
     ],
-    "target_stage_m": 1.700696106848963,
+    "target_stage_m": 1.700721361409507,
     "extrapolation_distance_m": 0.0,
     "extrapolation_as_observed_span": 0.0,
     "warning": "Reported WSC discharge is itself rating-derived; a tight stage-discharge fit is an operational mapping, not independent proof that the provisional discharge rating is physically correct."
@@ -192,7 +192,7 @@
   "project_wse_transfer_support": {
     "status": "approximate_low_flow_anchor_plus_complete_design_profile",
     "score_out_of_10": 8.0,
-    "current_discharge_m3s": 5.93,
+    "current_discharge_m3s": 5.89,
     "target_discharge_m3s": 6.77,
     "constraint_discharges_m3s": [
       6.77,
@@ -252,39 +252,39 @@
   },
   "ensemble_date_spread": {
     "member_count": 21,
-    "standard_deviation_days": 2.220446049250313e-16,
+    "standard_deviation_days": 4.440892098500626e-16,
     "earliest": {
-      "days": 1.0724010154587313,
+      "days": 1.0724537353310186,
       "date_utc": "2026-08-15"
     },
     "latest": {
-      "days": 1.0724010154587313,
+      "days": 1.0724537353310186,
       "date_utc": "2026-08-15"
     },
     "quantiles": {
       "p10": {
         "quantile": 0.1,
-        "days": 1.0724010154587313,
+        "days": 1.0724537353310186,
         "date_utc": "2026-08-15"
       },
       "p25": {
         "quantile": 0.25,
-        "days": 1.0724010154587313,
+        "days": 1.0724537353310186,
         "date_utc": "2026-08-15"
       },
       "p50": {
         "quantile": 0.5,
-        "days": 1.0724010154587313,
+        "days": 1.0724537353310186,
         "date_utc": "2026-08-15"
       },
       "p75": {
         "quantile": 0.75,
-        "days": 1.0724010154587313,
+        "days": 1.0724537353310186,
         "date_utc": "2026-08-15"
       },
       "p90": {
         "quantile": 0.9,
-        "days": 1.0724010154587313,
+        "days": 1.0724537353310186,
         "date_utc": "2026-08-15"
       }
     },
