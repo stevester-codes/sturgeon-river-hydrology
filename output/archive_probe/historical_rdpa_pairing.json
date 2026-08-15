@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-08-14T14:02:28+00:00",
+  "generated_utc": "2026-08-15T13:17:51+00:00",
   "status": "historical_rdpa_pairing_complete",
   "mode": "shadow_only_no_automatic_promotion",
   "station": "05EA002",
@@ -8,9 +8,9 @@
   "wateroffice_retrieval": {
     "chunks": [
       {
-        "start_utc": "2025-02-14T14:02:15+00:00",
+        "start_utc": "2025-02-15T13:17:39+00:00",
         "end_utc": "2025-03-01T00:00:00+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-14+14%3A02%3A15&end_date=2025-03-01+00%3A00%3A00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2025-02-15+13%3A17%3A39&end_date=2025-03-01+00%3A00%3A00",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
         "bytes_received": 150,
@@ -437,17 +437,17 @@
       },
       {
         "start_utc": "2026-08-01T00:00:00+00:00",
-        "end_utc": "2026-08-14T14:02:15+00:00",
-        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-14+14%3A02%3A15",
+        "end_utc": "2026-08-15T13:17:39+00:00",
+        "request_url": "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations%5B%5D=05EA002&parameters%5B%5D=46&parameters%5B%5D=47&start_date=2026-08-01+00%3A00%3A00&end_date=2026-08-15+13%3A17%3A39",
         "status_code": 200,
         "content_type": "text/csv; charset=utf-8",
-        "bytes_received": 510455,
+        "bytes_received": 548183,
         "availability": "data_returned",
-        "rows": 7791,
-        "stage_rows": 3890,
-        "discharge_rows": 3901,
+        "rows": 8367,
+        "stage_rows": 4178,
+        "discharge_rows": 4189,
         "first_timestamp_utc": "2026-08-01T00:00:00+00:00",
-        "last_timestamp_utc": "2026-08-14T13:05:00+00:00",
+        "last_timestamp_utc": "2026-08-15T13:05:00+00:00",
         "error": null,
         "columns": [
           "ID",
@@ -462,22 +462,22 @@
         ]
       }
     ],
-    "hourly_points": 9873,
+    "hourly_points": 9897,
     "first_utc": "2025-03-01T07:00:00+00:00",
-    "last_utc": "2026-08-14T13:00:00+00:00"
+    "last_utc": "2026-08-15T13:00:00+00:00"
   },
   "rdpa_retrieval": {
     "product": "RDPA 6-hour 10 km WCS",
-    "requested_periods": 1189,
-    "retrieved_periods": 1188,
-    "missing_periods": 1,
-    "coverage_fraction": 0.9991589571068125,
+    "requested_periods": 1193,
+    "retrieved_periods": 1191,
+    "missing_periods": 2,
+    "coverage_fraction": 0.9983235540653814,
     "first_valid_utc": "2025-04-10T12:00:00+00:00",
-    "last_valid_utc": "2026-08-14T12:00:00+00:00",
+    "last_valid_utc": "2026-08-15T12:00:00+00:00",
     "retrieval_method": {
       "cache_path": "archive_cache/historical_rdpa_05EA002.csv",
       "cache_hits": 1123,
-      "periods_fetched_this_run": 66,
+      "periods_fetched_this_run": 70,
       "bbox_epsg4326": [
         -115.03992804099073,
         53.3788853386848,
@@ -503,20 +503,30 @@
     },
     "missing_examples": [
       {
-        "index": "2026-08-14 12:00:00+00:00",
+        "index": "2026-08-15 06:00:00+00:00",
         "status": "missing",
         "station": "05EA002",
         "precip_mm": NaN,
         "source_type": "wcs_official_basin_clip",
         "source_url": NaN,
         "valid_cells": 0,
-        "error": "RasterioIOError: '/vsimem/d0020aa8-5722-4c5b-a526-703249f63d11/d0020aa8-5722-4c5b-a526-703249f63d11.tif' not recognized as being in a supported file format."
+        "error": "RasterioIOError: '/vsimem/dc3bac45-25be-490c-ae53-0c207fbb859f/dc3bac45-25be-490c-ae53-0c207fbb859f.tif' not recognized as being in a supported file format."
+      },
+      {
+        "index": "2026-08-15 12:00:00+00:00",
+        "status": "missing",
+        "station": "05EA002",
+        "precip_mm": NaN,
+        "source_type": "wcs_official_basin_clip",
+        "source_url": NaN,
+        "valid_cells": 0,
+        "error": "RasterioIOError: '/vsimem/059926c5-3b55-40ac-afc5-8e345319f327/059926c5-3b55-40ac-afc5-8e345319f327.tif' not recognized as being in a supported file format."
       }
     ]
   },
   "pairing": {
-    "gauge_only_candidate_points": 1805,
-    "complete_168h_coverage_points": 1803,
+    "gauge_only_candidate_points": 1829,
+    "complete_168h_coverage_points": 1821,
     "strict_dry_points": 576,
     "moderate_dry_points": 827,
     "strict_thresholds_mm": {
@@ -534,17 +544,17 @@
   "models": {
     "gauge_only": {
       "label": "gauge_only_with_rdpa_metrics",
-      "points": 1805,
+      "points": 1829,
       "events": 23,
       "fit": {
-        "n": 1673,
-        "intercept_per_day": -0.11589659657407693,
-        "coefficient_per_day": -0.03986991082388276,
+        "n": 1697,
+        "intercept_per_day": -0.1151667033895016,
+        "coefficient_per_day": -0.03987112176617614,
         "value_range": [
           0.06,
           25.6
         ],
-        "rate_rmse_per_day": 0.19284276660092448
+        "rate_rmse_per_day": 0.19223379265977938
       },
       "projection": {
         "reached": true,
@@ -556,240 +566,240 @@
         "folds": [
           {
             "n": 35,
-            "rmse_per_day": 0.08266967131174335,
-            "mae_per_day": 0.06965327711943085,
-            "bias_per_day": 0.01040394629893615,
+            "rmse_per_day": 0.08257683044894507,
+            "mae_per_day": 0.06967777688727608,
+            "bias_per_day": 0.009616243684151302,
             "held_out_event": 8,
-            "train_points": 1395,
+            "train_points": 1419,
             "test_first_utc": "2025-05-18T14:00:00+00:00",
             "test_last_utc": "2025-05-20T06:00:00+00:00"
           },
           {
             "n": 30,
-            "rmse_per_day": 0.05437116680097665,
-            "mae_per_day": 0.04543591850968624,
-            "bias_per_day": -0.037288255211402485,
+            "rmse_per_day": 0.05491394906769395,
+            "mae_per_day": 0.04595930568476284,
+            "bias_per_day": -0.038075510011881905,
             "held_out_event": 11,
-            "train_points": 1400,
+            "train_points": 1424,
             "test_first_utc": "2025-06-03T03:00:00+00:00",
             "test_last_utc": "2025-06-04T12:00:00+00:00"
           },
           {
             "n": 53,
-            "rmse_per_day": 0.05480529588984641,
-            "mae_per_day": 0.0461695777170719,
-            "bias_per_day": -0.040979011271244384,
+            "rmse_per_day": 0.05392921244618061,
+            "mae_per_day": 0.04530211956998638,
+            "bias_per_day": -0.03979935230396208,
             "held_out_event": 13,
-            "train_points": 1377,
+            "train_points": 1401,
             "test_first_utc": "2025-06-17T07:00:00+00:00",
             "test_last_utc": "2025-06-19T11:00:00+00:00"
           },
           {
             "n": 29,
-            "rmse_per_day": 0.06240169550030058,
-            "mae_per_day": 0.056280617045831455,
-            "bias_per_day": 0.04495219588296565,
+            "rmse_per_day": 0.061881822552817184,
+            "mae_per_day": 0.05580549000618505,
+            "bias_per_day": 0.04422203301298978,
             "held_out_event": 15,
-            "train_points": 1401,
+            "train_points": 1425,
             "test_first_utc": "2025-06-22T07:00:00+00:00",
             "test_last_utc": "2025-06-23T11:00:00+00:00"
           },
           {
             "n": 29,
-            "rmse_per_day": 0.08562642663061458,
-            "mae_per_day": 0.08478778596610388,
-            "bias_per_day": -0.08478778596610388,
+            "rmse_per_day": 0.08641973406803356,
+            "mae_per_day": 0.08558863072360426,
+            "bias_per_day": -0.08558863072360426,
             "held_out_event": 17,
-            "train_points": 1401,
+            "train_points": 1425,
             "test_first_utc": "2025-07-03T12:00:00+00:00",
             "test_last_utc": "2025-07-04T17:00:00+00:00"
           },
           {
             "n": 117,
-            "rmse_per_day": 0.07612187399888784,
-            "mae_per_day": 0.0667814727426134,
-            "bias_per_day": -0.03972683688543933,
+            "rmse_per_day": 0.07540807352869075,
+            "mae_per_day": 0.06614537624718948,
+            "bias_per_day": -0.03834984026989367,
             "held_out_event": 19,
-            "train_points": 1313,
+            "train_points": 1337,
             "test_first_utc": "2025-07-07T18:00:00+00:00",
             "test_last_utc": "2025-07-13T11:00:00+00:00"
           },
           {
             "n": 47,
-            "rmse_per_day": 0.0947385066693721,
-            "mae_per_day": 0.09424156686594763,
-            "bias_per_day": -0.09424156686594763,
+            "rmse_per_day": 0.09347509832496322,
+            "mae_per_day": 0.09297144080385873,
+            "bias_per_day": -0.09297144080385873,
             "held_out_event": 20,
-            "train_points": 1383,
+            "train_points": 1407,
             "test_first_utc": "2025-07-14T18:00:00+00:00",
             "test_last_utc": "2025-07-16T18:00:00+00:00"
           },
           {
             "n": 52,
-            "rmse_per_day": 0.08290897832354226,
-            "mae_per_day": 0.08104054905004468,
-            "bias_per_day": -0.08104054905004468,
+            "rmse_per_day": 0.0816589760363421,
+            "mae_per_day": 0.07976146039296017,
+            "bias_per_day": -0.07976146039296017,
             "held_out_event": 22,
-            "train_points": 1378,
+            "train_points": 1402,
             "test_first_utc": "2025-07-21T05:00:00+00:00",
             "test_last_utc": "2025-07-23T08:00:00+00:00"
           },
           {
             "n": 28,
-            "rmse_per_day": 0.09643612993436104,
-            "mae_per_day": 0.09561575381954072,
-            "bias_per_day": -0.09561575381954072,
+            "rmse_per_day": 0.09540274331341161,
+            "mae_per_day": 0.09457341921141736,
+            "bias_per_day": -0.09457341921141736,
             "held_out_event": 24,
-            "train_points": 1402,
+            "train_points": 1426,
             "test_first_utc": "2025-07-28T07:00:00+00:00",
             "test_last_utc": "2025-07-29T10:00:00+00:00"
           },
           {
             "n": 37,
-            "rmse_per_day": 0.09753368070142948,
-            "mae_per_day": 0.09672802989608204,
-            "bias_per_day": -0.09672802989608204,
+            "rmse_per_day": 0.09647876582915654,
+            "mae_per_day": 0.09566422762376837,
+            "bias_per_day": -0.09566422762376837,
             "held_out_event": 25,
-            "train_points": 1393,
+            "train_points": 1417,
             "test_first_utc": "2025-08-05T01:00:00+00:00",
             "test_last_utc": "2025-08-06T13:00:00+00:00"
           },
           {
             "n": 42,
-            "rmse_per_day": 0.09521705313401327,
-            "mae_per_day": 0.09099911522128748,
-            "bias_per_day": -0.08975910249732214,
+            "rmse_per_day": 0.0940493783184617,
+            "mae_per_day": 0.08981856484417643,
+            "bias_per_day": -0.08851956517196644,
             "held_out_event": 42,
-            "train_points": 1388,
+            "train_points": 1412,
             "test_first_utc": "2025-10-29T04:00:00+00:00",
             "test_last_utc": "2025-10-31T09:00:00+00:00"
           },
           {
             "n": 341,
-            "rmse_per_day": 0.27341711615830444,
-            "mae_per_day": 0.21731158362961445,
-            "bias_per_day": 0.07936072384023189,
+            "rmse_per_day": 0.27362252467427334,
+            "mae_per_day": 0.21740277249659745,
+            "bias_per_day": 0.0800546407883976,
             "held_out_event": 45,
-            "train_points": 1089,
+            "train_points": 1113,
             "test_first_utc": "2026-04-26T11:00:00+00:00",
             "test_last_utc": "2026-05-11T11:00:00+00:00"
           },
           {
             "n": 34,
-            "rmse_per_day": 0.2415516778660012,
-            "mae_per_day": 0.19277669484307527,
-            "bias_per_day": 0.11666948000679696,
+            "rmse_per_day": 0.24142211225635063,
+            "mae_per_day": 0.19269894166177431,
+            "bias_per_day": 0.11639078301211749,
             "held_out_event": 46,
-            "train_points": 1396,
+            "train_points": 1420,
             "test_first_utc": "2026-05-12T20:00:00+00:00",
             "test_last_utc": "2026-05-14T05:00:00+00:00"
           },
           {
             "n": 31,
-            "rmse_per_day": 0.09811063430141387,
-            "mae_per_day": 0.0806533202926717,
-            "bias_per_day": 0.0069271389548601035,
+            "rmse_per_day": 0.09806057491788406,
+            "mae_per_day": 0.0808032843864304,
+            "bias_per_day": 0.006239428843948128,
             "held_out_event": 52,
-            "train_points": 1399,
+            "train_points": 1423,
             "test_first_utc": "2026-05-28T05:00:00+00:00",
             "test_last_utc": "2026-05-29T20:00:00+00:00"
           },
           {
             "n": 31,
-            "rmse_per_day": 0.2155871606516551,
-            "mae_per_day": 0.15539407101381741,
-            "bias_per_day": 0.11483861201201413,
+            "rmse_per_day": 0.2152626753463452,
+            "mae_per_day": 0.15514138355430226,
+            "bias_per_day": 0.1142423896717321,
             "held_out_event": 55,
-            "train_points": 1399,
+            "train_points": 1423,
             "test_first_utc": "2026-06-19T00:00:00+00:00",
             "test_last_utc": "2026-06-20T10:00:00+00:00"
           },
           {
             "n": 95,
-            "rmse_per_day": 0.4978775063737188,
-            "mae_per_day": 0.4115437124493423,
-            "bias_per_day": 0.1911777069144655,
+            "rmse_per_day": 0.49815441353257683,
+            "mae_per_day": 0.41186375062645925,
+            "bias_per_day": 0.19190038701860523,
             "held_out_event": 56,
-            "train_points": 1335,
+            "train_points": 1359,
             "test_first_utc": "2026-07-06T14:00:00+00:00",
             "test_last_utc": "2026-07-10T12:00:00+00:00"
           },
           {
             "n": 57,
-            "rmse_per_day": 0.3814411985041932,
-            "mae_per_day": 0.2857195779551762,
-            "bias_per_day": 0.2247172881085185,
+            "rmse_per_day": 0.38186105012718496,
+            "mae_per_day": 0.2861109682416124,
+            "bias_per_day": 0.22543101084124578,
             "held_out_event": 57,
-            "train_points": 1373,
+            "train_points": 1397,
             "test_first_utc": "2026-07-12T23:00:00+00:00",
             "test_last_utc": "2026-07-15T07:00:00+00:00"
           },
           {
             "n": 60,
-            "rmse_per_day": 0.301612305609467,
-            "mae_per_day": 0.2442996404845073,
-            "bias_per_day": -0.058739186304129845,
+            "rmse_per_day": 0.3013520599692861,
+            "mae_per_day": 0.24444108468755665,
+            "bias_per_day": -0.057522998499883356,
             "held_out_event": 58,
-            "train_points": 1370,
+            "train_points": 1394,
             "test_first_utc": "2026-07-16T13:00:00+00:00",
             "test_last_utc": "2026-07-19T02:00:00+00:00"
           },
           {
             "n": 81,
-            "rmse_per_day": 0.34589526851719,
-            "mae_per_day": 0.2971279990995193,
-            "bias_per_day": -0.10966264988541231,
+            "rmse_per_day": 0.3456208523566604,
+            "mae_per_day": 0.2969023813319479,
+            "bias_per_day": -0.10877359557799916,
             "held_out_event": 60,
-            "train_points": 1349,
+            "train_points": 1373,
             "test_first_utc": "2026-07-22T17:00:00+00:00",
             "test_last_utc": "2026-07-26T03:00:00+00:00"
           },
           {
             "n": 62,
-            "rmse_per_day": 0.29496244972675845,
-            "mae_per_day": 0.24473001949582268,
-            "bias_per_day": -0.15038772955919263,
+            "rmse_per_day": 0.29463438755101456,
+            "mae_per_day": 0.24434132344195814,
+            "bias_per_day": -0.1497544218728468,
             "held_out_event": 63,
-            "train_points": 1368,
+            "train_points": 1392,
             "test_first_utc": "2026-07-30T14:00:00+00:00",
             "test_last_utc": "2026-08-02T04:00:00+00:00"
           },
           {
             "n": 29,
-            "rmse_per_day": 0.26985666848105294,
-            "mae_per_day": 0.24250445217534872,
-            "bias_per_day": 0.0023860967467102573,
+            "rmse_per_day": 0.2698569489093148,
+            "mae_per_day": 0.24247024554544996,
+            "bias_per_day": 0.002718348293532921,
             "held_out_event": 64,
-            "train_points": 1401,
+            "train_points": 1425,
             "test_first_utc": "2026-08-03T23:00:00+00:00",
             "test_last_utc": "2026-08-05T04:00:00+00:00"
           },
           {
             "n": 69,
-            "rmse_per_day": 0.20199930253451195,
-            "mae_per_day": 0.1543791942161054,
-            "bias_per_day": 0.05443951507967712,
+            "rmse_per_day": 0.2022392760208113,
+            "mae_per_day": 0.15454539848803792,
+            "bias_per_day": 0.05532271044934938,
             "held_out_event": 65,
-            "train_points": 1361,
+            "train_points": 1385,
             "test_first_utc": "2026-08-06T09:00:00+00:00",
             "test_last_utc": "2026-08-09T08:00:00+00:00"
           },
           {
-            "n": 41,
-            "rmse_per_day": 0.12457413900376967,
-            "mae_per_day": 0.09755898793071952,
-            "bias_per_day": -0.07869429746304954,
+            "n": 65,
+            "rmse_per_day": 0.13230779486805483,
+            "mae_per_day": 0.10441421783758367,
+            "bias_per_day": -0.06940007289234537,
             "held_out_event": 67,
             "train_points": 1389,
             "test_first_utc": "2026-08-12T21:00:00+00:00",
-            "test_last_utc": "2026-08-14T13:00:00+00:00"
+            "test_last_utc": "2026-08-15T13:00:00+00:00"
           }
         ],
         "aggregate": {
-          "n": 1430,
-          "rmse_per_day": 0.25146755174721425,
-          "mae_per_day": 0.17889165321708442,
-          "bias_per_day": 0.01205809456976221
+          "n": 1454,
+          "rmse_per_day": 0.2500567250084005,
+          "mae_per_day": 0.1776601837718901,
+          "bias_per_day": 0.01161272786891631
         }
       },
       "event_sizes_hours": {
@@ -815,7 +825,7 @@
         "63": 62,
         "64": 29,
         "65": 69,
-        "67": 41
+        "67": 65
       }
     },
     "rdpa_strict": {
