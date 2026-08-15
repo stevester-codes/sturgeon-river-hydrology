@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-15T19:31:56+00:00  
-Run ID: `20260815T193156Z`
+Generated: 2026-08-15T21:36:33+00:00  
+Run ID: `20260815T213633Z`
 
 ## 1. Decision
 
@@ -9,23 +9,23 @@ Run ID: `20260815T193156Z`
 
 ## 2. Practical inspection window
 
-- **Practical risk-adjusted inspection window:** **2026-08-16 to 2026-08-20**
-- Official GEPS-integrated point forecast: **2026-08-16**
-- Core eligible-method window: **2026-08-16** (two method consensus)
-- Independent precipitation-screened direct-Q date: **2026-08-16**
-- Weather-ensemble upper date: **2026-08-16**
+- **Practical risk-adjusted inspection window:** **2026-08-17 to 2026-08-20**
+- Official GEPS-integrated point forecast: **2026-08-17**
+- Core eligible-method window: **2026-08-17** (two method consensus)
+- Independent precipitation-screened direct-Q date: **2026-08-17**
+- Weather-ensemble upper date: **2026-08-17**
 - Historical response risk bound: **2026-08-20**
 - Engineering schedule contingency: **2026-08-24** — sensitivity envelope, not a formal p90 probability.
 - Contractor rain-free projection: **2026-08-11** — counterfactual only and suspended from consensus (material_rainfall_breaks_rain_free_linear_recession_assumption).
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.573 m**, 24-hour change **-0.032 m**
-- 05EA002 discharge: **5.61 m³/s**
+- 05EA002 stage: **1.570 m**, 24-hour change **-0.036 m**
+- 05EA002 discharge: **5.58 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.45 h**
-- Provisional field-informed project WSE method span: **649.982–649.984 m**
-- Provisional depth above 650.20 m: **-0.218–-0.216 m**
+- Observation age: **0.53 h**
+- Provisional field-informed project WSE method span: **649.979–649.982 m**
+- Provisional depth above 650.20 m: **-0.221–-0.218 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
@@ -57,11 +57,11 @@ Aligned historical response: 4.29 d versus official 1.13 d; difference 3.16 d. I
 
 ## 7. What changed since the previous issued forecast
 
-- Official point-date movement: **0 day(s)**
-- Practical-window start movement: **0 day(s)**
+- Official point-date movement: **1 day(s)**
+- Practical-window start movement: **1 day(s)**
 - Practical-window end movement: **0 day(s)**
-- Stage change since previous run: **-0.001 m**
-- Discharge change since previous run: **-0.01 m³/s**
+- Stage change since previous run: **-0.003 m**
+- Discharge change since previous run: **-0.03 m³/s**
 - HRDPS 48-hour basin-rain change: **0.00 mm**
 
 These are observed changes, not a causal decomposition.
