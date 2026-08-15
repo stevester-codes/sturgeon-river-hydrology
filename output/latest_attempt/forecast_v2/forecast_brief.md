@@ -1,7 +1,7 @@
 # Sturgeon River Construction Forecast Brief
 
-Generated: 2026-08-15T08:47:25+00:00  
-Run ID: `20260815T084725Z`
+Generated: 2026-08-15T09:42:42+00:00  
+Run ID: `20260815T094242Z`
 
 ## 1. Decision
 
@@ -20,12 +20,12 @@ Run ID: `20260815T084725Z`
 
 ## 3. Current river and site state
 
-- 05EA002 stage: **1.586 m**, 24-hour change **-0.032 m**
-- 05EA002 discharge: **5.72 m³/s**
+- 05EA002 stage: **1.584 m**, 24-hour change **-0.033 m**
+- 05EA002 discharge: **5.70 m³/s**
 - Hydrograph limb: **falling**
-- Observation age: **0.71 h**
-- Provisional field-informed project WSE method span: **649.982–650.002 m**
-- Provisional depth above 650.20 m: **-0.218–-0.198 m**
+- Observation age: **0.63 h**
+- Provisional field-informed project WSE method span: **649.982–649.999 m**
+- Provisional depth above 650.20 m: **-0.218–-0.201 m**
 - No direct current construction-site measurement is available.
 
 ## 4. Expected rainfall and response
