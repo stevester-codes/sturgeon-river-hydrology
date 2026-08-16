@@ -1,64 +1,37 @@
 {
-  "generated_utc": "2026-08-16T07:53:11.875448+00:00",
+  "generated_utc": "2026-08-16T10:03:04.680190+00:00",
   "deterministic_scenarios": [
     {
       "model": "HRDPS",
       "horizon_h": 24,
-      "run_time_utc": "2026-08-16T00:00:00+00:00",
+      "run_time_utc": "2026-08-16T06:00:00+00:00",
       "complete_horizon": true,
-      "basin_mm": 0.0339553258816755,
-      "lower_mm": 0.0035228300856136,
-      "upper_mm": 0.1222100865033844,
-      "middle_mm": 0.0004327040723535,
-      "atim_mm": 1.4444444483766953e-05,
-      "carrot_mm": 0.0310641657561063,
-      "direct_local_mm": 0.0,
-      "basin_pct_gt_5mm": 0.0,
-      "basin_pct_gt_10mm": 0.0,
+      "basin_mm": 1.998104282120497,
+      "lower_mm": 1.0915168559955108,
+      "upper_mm": 0.7766912454468626,
+      "middle_mm": 3.1801201711002007,
+      "atim_mm": 0.0237595552130692,
+      "carrot_mm": 7.533823961857706,
+      "direct_local_mm": 0.4944024328294605,
+      "basin_pct_gt_5mm": 15.254237288135592,
+      "basin_pct_gt_10mm": 4.358353510895883,
       "basin_pct_gt_20mm": 0.0,
       "basin_pct_gt_30mm": 0.0,
       "forecast_timing": {
-        "first_wet_h": 24,
+        "first_wet_h": 18,
         "last_wet_h": 24,
-        "duration_h": 0
+        "duration_h": 6
       },
-      "storm_type": "upper_lake_chain_concentrated",
-      "antecedent_168h_mm": 20.30889374034205,
-      "impact": "negligible or no material deterministic QPF",
-      "projected_1_70_days": 0.0,
-      "projected_1_70_date_utc": "2026-08-16"
-    },
-    {
-      "model": "HRDPS",
-      "horizon_h": 48,
-      "run_time_utc": "2026-08-16T00:00:00+00:00",
-      "complete_horizon": true,
-      "basin_mm": 1.925331984003348,
-      "lower_mm": 1.5318172484518793,
-      "upper_mm": 2.419048002046316,
-      "middle_mm": 1.858546698113992,
-      "atim_mm": 1.5820878441380857,
-      "carrot_mm": 6.532582347961579,
-      "direct_local_mm": 0.2609732076356411,
-      "basin_pct_gt_5mm": 10.653753026634384,
-      "basin_pct_gt_10mm": 0.7263922518159807,
-      "basin_pct_gt_20mm": 0.0,
-      "basin_pct_gt_30mm": 0.0,
-      "forecast_timing": {
-        "first_wet_h": 24,
-        "last_wet_h": 36,
-        "duration_h": 12
-      },
-      "storm_type": "upper_lake_chain_concentrated",
+      "storm_type": "tributary_localized_carrot_creek",
       "antecedent_168h_mm": 20.30889374034205,
       "impact": "quantified from uncensored spatial analogues",
       "feature_vector": {
-        "basin_mm": 1.925331984003348,
-        "lower_ratio": 0.7956120093464439,
-        "upper_ratio": 1.2564316295293567,
-        "duration_h": 12.0,
+        "basin_mm": 1.998104282120497,
+        "lower_ratio": 0.5462762207972117,
+        "upper_ratio": 0.3887140688285777,
+        "duration_h": 6.0,
         "antecedent_168h_mm": 20.30889374034205,
-        "basin_pct_gt_10mm": 0.7263922518159807,
+        "basin_pct_gt_10mm": 4.358353510895883,
         "pre_stage_m": 1.553
       },
       "training_pool_event_count": 2,
@@ -73,54 +46,155 @@
           "upper_lake_chain_concentrated"
         ],
         "analog_distances": [
-          4.0194187131253845,
-          4.060387497473292
+          4.374182857180898,
+          5.06508856968588
         ],
-        "nearest_distance": 4.0194187131253845,
-        "departure_m": 0.05731937842914589,
+        "nearest_distance": 4.374182857180898,
+        "departure_m": 0.05914199417068083,
         "departure_m_min": 0.0437288021147654,
         "departure_m_max": 0.0706370840265866,
-        "days_lost": 1.0936885992588006,
+        "days_lost": 1.1299739467863419,
         "days_lost_min": 0.8231220868399143,
         "days_lost_max": 1.358822694647254,
-        "lag_h": 49.210988034900616,
+        "lag_h": 45.35012848214517,
+        "lag_h_min": 21.0,
+        "lag_h_max": 78.0
+      },
+      "similar_censored_event_lower_bounds": [],
+      "stage_departure_range_m": [
+        0.009141994170680824,
+        0.10914199417068082
+      ],
+      "estimated_days_lost_range": [
+        0.1299739467863419,
+        2.129973946786342
+      ],
+      "lag_to_max_effect_from_rain_start_h": [
+        16.850128482145173,
+        73.85012848214518
+      ],
+      "estimated_peak_stage_05EA002_m": 1.4980880391536318,
+      "estimated_peak_stage_05EA002_range_m": [
+        1.4480880391536317,
+        1.5480880391536318
+      ],
+      "starkey_max_effect_hours_from_now_central": 68.13013059049065,
+      "starkey_max_effect_hours_from_now_range": [
+        37.55186880425349,
+        100.2670887164057
+      ],
+      "projected_1_70_days_central": 1.1299739467863419,
+      "projected_1_70_days_range": [
+        0.1299739467863419,
+        2.129973946786342
+      ],
+      "confidence": "low",
+      "threshold_flags": {
+        "departure_ge_0_05": true,
+        "delay_ge_2_days": true,
+        "credible_2_5_path": false,
+        "credible_3_0_path": false
+      }
+    },
+    {
+      "model": "HRDPS",
+      "horizon_h": 48,
+      "run_time_utc": "2026-08-16T06:00:00+00:00",
+      "complete_horizon": true,
+      "basin_mm": 11.332392999864847,
+      "lower_mm": 9.224105479770342,
+      "upper_mm": 11.797810275495491,
+      "middle_mm": 12.209011160757784,
+      "atim_mm": 10.789043594806651,
+      "carrot_mm": 11.80424762872523,
+      "direct_local_mm": 7.15504586825825,
+      "basin_pct_gt_5mm": 98.30508474576273,
+      "basin_pct_gt_10mm": 50.60532687651331,
+      "basin_pct_gt_20mm": 6.053268765133172,
+      "basin_pct_gt_30mm": 0.0,
+      "forecast_timing": {
+        "first_wet_h": 18,
+        "last_wet_h": 48,
+        "duration_h": 30
+      },
+      "storm_type": "widespread_basin",
+      "antecedent_168h_mm": 20.30889374034205,
+      "impact": "quantified from uncensored spatial analogues",
+      "feature_vector": {
+        "basin_mm": 11.332392999864847,
+        "lower_ratio": 0.8139591946626235,
+        "upper_ratio": 1.0410696377751985,
+        "duration_h": 30.0,
+        "antecedent_168h_mm": 20.30889374034205,
+        "basin_pct_gt_10mm": 50.60532687651331,
+        "pre_stage_m": 1.553
+      },
+      "training_pool_event_count": 2,
+      "training_pool_storm_type_matched": false,
+      "analog_prediction": {
+        "analog_event_ids": [
+          5,
+          4
+        ],
+        "analog_storm_types": [
+          "widespread_basin",
+          "upper_lake_chain_concentrated"
+        ],
+        "analog_distances": [
+          3.395688731980011,
+          3.899524745688444
+        ],
+        "nearest_distance": 3.395688731980011,
+        "departure_m": 0.05903251228234957,
+        "departure_m_min": 0.0437288021147654,
+        "departure_m_max": 0.0706370840265866,
+        "days_lost": 1.1277943385038385,
+        "days_lost_min": 0.8231220868399143,
+        "days_lost_max": 1.358822694647254,
+        "lag_h": 45.58204472471063,
         "lag_h_min": 21.0,
         "lag_h_max": 78.0
       },
       "similar_censored_event_lower_bounds": [
         {
-          "event_id": 3,
-          "departure_m": 0.4107129420892197,
-          "days_lost": 7.987473582266229,
+          "event_id": 6,
+          "departure_m": 0.1015769615134445,
+          "days_lost": 1.9997309489228623,
+          "response_quality": "censored_lower_bound"
+        },
+        {
+          "event_id": 8,
+          "departure_m": 0.0885767870967919,
+          "days_lost": 1.8291829301077185,
           "response_quality": "censored_lower_bound"
         }
       ],
       "stage_departure_range_m": [
-        0.007319378429145887,
-        0.4607129420892197
+        0.009032512282349567,
+        0.15157696151344452
       ],
       "estimated_days_lost_range": [
-        0.09368859925880058,
-        8.98747358226623
+        0.12779433850383848,
+        2.9997309489228625
       ],
       "lag_to_max_effect_from_rain_start_h": [
-        20.710988034900616,
-        77.71098803490062
+        17.082044724710627,
+        74.08204472471063
       ],
-      "estimated_peak_stage_05EA002_m": 1.4783598548491246,
+      "estimated_peak_stage_05EA002_m": 1.4961855721148698,
       "estimated_peak_stage_05EA002_range_m": [
-        1.4283598548491245,
-        1.8817534185091984
+        1.4461855721148698,
+        1.5887300213459647
       ],
-      "starkey_max_effect_hours_from_now_central": 77.9909901432461,
+      "starkey_max_effect_hours_from_now_central": 68.3620468330561,
       "starkey_max_effect_hours_from_now_range": [
-        47.41272835700893,
-        110.12794826916114
+        37.78378504681894,
+        100.49900495897114
       ],
-      "projected_1_70_days_central": 1.0936885992588006,
+      "projected_1_70_days_central": 1.1277943385038385,
       "projected_1_70_days_range": [
-        0.09368859925880058,
-        8.98747358226623
+        0.12779433850383848,
+        2.9997309489228625
       ],
       "confidence": "low",
       "threshold_flags": {
